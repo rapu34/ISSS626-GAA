@@ -460,6 +460,8 @@ cycling_3414 <- cyclingpath %>%
 ```
 
 ```{r}
+library(units)
+
 buffer_cycling <- st_buffer(cycling_3414, dist = 5) %>%  # 5m
   st_make_valid()
 
