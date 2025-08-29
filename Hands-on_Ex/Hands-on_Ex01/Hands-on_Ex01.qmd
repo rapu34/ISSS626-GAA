@@ -260,13 +260,7 @@ In geospatial analytics, data often needs to be converted from a **geographic c
 
 For example, the preschool data frame is currently in **WGS84**. In this case, `st_set_crs()` is not appropriate because the data must be **mathematically reprojected**. Instead, the `st_transform()` function is used to convert the dataset from WGS84 to SVY21.
 
-Geometry set for 2290 features
-Geometry type: POINT
-Dimension: XYZ
-Bounding box: xmin: 103.6878 ymin: 1.247759 xmax: 103.9897 ymax: 1.462134
-z_range: zmin: 0 zmax: 0
-Geodetic CRS: WGS 84
-First 5 geometries:
+Geometry set for 2290 features Geometry type: POINT Dimension: XYZ Bounding box: xmin: 103.6878 ymin: 1.247759 xmax: 103.9897 ymax: 1.462134 z_range: zmin: 0 zmax: 0 Geodetic CRS: WGS 84 First 5 geometries:
 
 Let us perform the projection transformation by using the code chunk below.
 
@@ -360,7 +354,7 @@ glimpse(listings_sf)
 Table above shows the content of `listing_sf`. Notice that a new column called `geometry` has been added into the data frame. On the other hand, the `longitude` and `latitude` columns have been dropped from the data frame.
 
 ::: callout-note
-## DIY
+**DIY**
 
 Using the method you learned earlier, plot listing_sf layer on top of mpsz layer.
 :::
