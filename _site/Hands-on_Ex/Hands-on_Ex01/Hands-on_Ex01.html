@@ -143,8 +143,21 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#geospatial-data-science-with-r" id="toc-geospatial-data-science-with-r" class="nav-link active" data-scroll-target="#geospatial-data-science-with-r"><strong>1&nbsp;&nbsp;Geospatial Data Science with R</strong></a>
+  <ul class="collapse">
+  <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link" data-scroll-target="#learning-outcome"><strong>1.1&nbsp;Learning Outcome</strong></a></li>
+  <li><a href="#data-acquisition" id="toc-data-acquisition" class="nav-link" data-scroll-target="#data-acquisition"><strong>1.2&nbsp;Data Acquisition</strong></a>
+  <ul class="collapse">
+  <li><a href="#extracting-the-geospatial-data-sets" id="toc-extracting-the-geospatial-data-sets" class="nav-link" data-scroll-target="#extracting-the-geospatial-data-sets"><strong>1.2.1&nbsp;Extracting the geospatial data sets</strong></a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -166,6 +179,12 @@ ul.task-list li input[type="checkbox"] {
   </div>
     
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">August 29, 2025</p>
+    </div>
+  </div>
     
   </div>
   
@@ -174,8 +193,43 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="geospatial-data-science-with-r" class="level1">
+<h1><strong>1&nbsp;&nbsp;Geospatial Data Science with R</strong></h1>
+<section id="learning-outcome" class="level2">
+<h2 class="anchored" data-anchor-id="learning-outcome"><strong>1.1&nbsp;Learning Outcome</strong></h2>
+<p>By completing this hands-on exercise, you will learn how to:</p>
+<ul>
+<li><p>Install and load&nbsp;<strong>sf</strong>&nbsp;and&nbsp;<strong>tidyverse</strong>&nbsp;packages in R.</p></li>
+<li><p>Import&nbsp;<strong>geospatial data</strong>&nbsp;using&nbsp;<code>sf</code>&nbsp;functions.</p></li>
+<li><p>Import&nbsp;<strong>aspatial data</strong>&nbsp;using&nbsp;<code>readr</code>.</p></li>
+<li><p>Explore simple feature data frames with&nbsp;<strong>Base R</strong>&nbsp;and&nbsp;<strong>sf</strong>&nbsp;functions.</p></li>
+<li><p>Assign or transform&nbsp;<strong>coordinate systems</strong>&nbsp;using&nbsp;<code>sf</code>.</p></li>
+<li><p>Convert aspatial data into an&nbsp;<strong>sf data frame</strong>.</p></li>
+<li><p>Perform&nbsp;<strong>geoprocessing</strong>&nbsp;with&nbsp;<code>sf</code>.</p></li>
+<li><p>Perform&nbsp;<strong>data wrangling</strong>&nbsp;with&nbsp;<code>dplyr</code>.</p></li>
+<li><p>Conduct&nbsp;<strong>Exploratory Data Analysis (EDA)</strong>&nbsp;with&nbsp;<code>ggplot2</code>.</p></li>
+</ul>
+</section>
+<section id="data-acquisition" class="level2">
+<h2 class="anchored" data-anchor-id="data-acquisition"><strong>1.2&nbsp;Data Acquisition</strong></h2>
+<p>Data are key to data analytics including geospatial analytics. Hence, before analysing, we need to assemble the necessary data. In this hands-on exercise, you are required to extract the necessary data sets from the following sources:</p>
+<ul>
+<li><p>Master Plan 2014 Subzone Boundary (Web) from&nbsp;<a href="https://data.gov.sg/">data.gov.sg</a></p></li>
+<li><p>Pre-Schools Location from&nbsp;<a href="https://data.gov.sg/">data.gov.sg</a></p></li>
+<li><p>Cycling Path from&nbsp;<a href="https://www.mytransport.sg/content/mytransport/home/dataMall.html">LTADataMall</a></p></li>
+<li><p>Latest version of Singapore Airbnb listing data from&nbsp;<a href="http://insideairbnb.com/get-the-data.html">Inside Airbnb</a></p></li>
+</ul>
+<section id="extracting-the-geospatial-data-sets" class="level3">
+<h3 class="anchored" data-anchor-id="extracting-the-geospatial-data-sets"><strong>1.2.1&nbsp;Extracting the geospatial data sets</strong></h3>
+<p>To get started, create a new folder called&nbsp;<em>Hands-on_Ex</em>&nbsp;in a working directory.</p>
+<p>Next, create a new sub-folder called&nbsp;<em>Hands-on_ex01</em>&nbsp;in the newly created&nbsp;<em>Hands-on_Ex</em>&nbsp;folder.</p>
+<p>In the&nbsp;<code>Hands-on_Ex01</code>&nbsp;folder, create a sub-folder called&nbsp;<code>data</code>. Then, inside the&nbsp;<code>data</code>&nbsp;sub-folder, create two sub-folders and name them&nbsp;<code>geospatial</code>&nbsp;and&nbsp;<code>aspatial</code>&nbsp;respectively.</p>
+<p>Place&nbsp;<code>Master Plan 2014 Subzone Boundary (Web)</code>,&nbsp;<code>Pre-Schools Location</code>&nbsp;and&nbsp;<code>Cycling Path</code>zipped files into&nbsp;<code>geospatial</code>&nbsp;sub-folder and unzipped them. Copy the unzipped files from their respective sub-folders and place them inside&nbsp;<code>geospatial</code>&nbsp;sub-folder.</p>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

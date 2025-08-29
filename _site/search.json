@@ -12,5 +12,26 @@
     "title": "ISSS626-GAA",
     "section": "",
     "text": "Welcome to ISSS626-G1-Geospatial Analytics and Applications. In this website, you will find my coursework prepared for this course."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
+    "title": "Hands-on Exercise 1",
+    "section": "",
+    "text": "By completing this hands-on exercise, you will learn how to:\n\nInstall and load sf and tidyverse packages in R.\nImport geospatial data using sf functions.\nImport aspatial data using readr.\nExplore simple feature data frames with Base R and sf functions.\nAssign or transform coordinate systems using sf.\nConvert aspatial data into an sf data frame.\nPerform geoprocessing with sf.\nPerform data wrangling with dplyr.\nConduct Exploratory Data Analysis (EDA) with ggplot2.\n\n\n\n\nData are key to data analytics including geospatial analytics. Hence, before analysing, we need to assemble the necessary data. In this hands-on exercise, you are required to extract the necessary data sets from the following sources:\n\nMaster Plan 2014 Subzone Boundary (Web) from data.gov.sg\nPre-Schools Location from data.gov.sg\nCycling Path from LTADataMall\nLatest version of Singapore Airbnb listing data from Inside Airbnb\n\n\n\nTo get started, create a new folder called Hands-on_Ex in a working directory.\nNext, create a new sub-folder called Hands-on_ex01 in the newly created Hands-on_Ex folder.\nIn the Hands-on_Ex01 folder, create a sub-folder called data. Then, inside the data sub-folder, create two sub-folders and name them geospatial and aspatial respectively.\nPlace Master Plan 2014 Subzone Boundary (Web), Pre-Schools Location and Cycling Pathzipped files into geospatial sub-folder and unzipped them. Copy the unzipped files from their respective sub-folders and place them inside geospatial sub-folder."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#learning-outcome",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#learning-outcome",
+    "title": "Hands-on Exercise 1",
+    "section": "",
+    "text": "By completing this hands-on exercise, you will learn how to:\n\nInstall and load sf and tidyverse packages in R.\nImport geospatial data using sf functions.\nImport aspatial data using readr.\nExplore simple feature data frames with Base R and sf functions.\nAssign or transform coordinate systems using sf.\nConvert aspatial data into an sf data frame.\nPerform geoprocessing with sf.\nPerform data wrangling with dplyr.\nConduct Exploratory Data Analysis (EDA) with ggplot2."
+  },
+  {
+    "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#data-acquisition",
+    "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html#data-acquisition",
+    "title": "Hands-on Exercise 1",
+    "section": "",
+    "text": "Data are key to data analytics including geospatial analytics. Hence, before analysing, we need to assemble the necessary data. In this hands-on exercise, you are required to extract the necessary data sets from the following sources:\n\nMaster Plan 2014 Subzone Boundary (Web) from data.gov.sg\nPre-Schools Location from data.gov.sg\nCycling Path from LTADataMall\nLatest version of Singapore Airbnb listing data from Inside Airbnb\n\n\n\nTo get started, create a new folder called Hands-on_Ex in a working directory.\nNext, create a new sub-folder called Hands-on_ex01 in the newly created Hands-on_Ex folder.\nIn the Hands-on_Ex01 folder, create a sub-folder called data. Then, inside the data sub-folder, create two sub-folders and name them geospatial and aspatial respectively.\nPlace Master Plan 2014 Subzone Boundary (Web), Pre-Schools Location and Cycling Pathzipped files into geospatial sub-folder and unzipped them. Copy the unzipped files from their respective sub-folders and place them inside geospatial sub-folder."
   }
 ]
