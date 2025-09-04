@@ -8,3 +8,58 @@ execute:
   warning: false
   freeze: true
 ---
+
+# **4  First-order Spatial Point Patterns Analysis Methods**
+
+## **4.1 Overview**
+
+**Spatial Point Pattern Analysis (SPPA)** studies the distribution of point locations (e.g., crimes, accidents, shops, childcare centres) across a surface.
+
+-   **First-order SPPA (1st-SPPA):** Focuses on the *intensity or density* of points, showing how concentration varies over space. It identifies broad spatial trends without considering point-to-point interactions.
+
+**Key questions 1st-SPPA addresses:**
+
+-   Where are points most densely located?
+
+-   Is density uniform or varied across the study area?
+
+-   How spread out is the pattern?
+
+**Hands-on in this chapter:** Using [**spatstat**](https://cran.r-project.org/web/packages/spatstat/) to analyze childcare centres in Singapore, asking:
+
+1.  Are they randomly distributed?
+
+2.  If not, where are the areas of higher concentration?
+
+## **4.2 The data**
+
+To conduct the analysis, two datasets will be used:
+
+1.  **Child Care Services** (from *data.gov.sg*): point data containing the locations and attributes of childcare centres.
+
+2.  **Master Plan 2019 Subzone Boundary (No Sea)**: polygon data from URA defining the planning subzone boundaries.
+
+Both datasets are available in **KML** and **GeoJSON** formats, and students may choose either format for download.
+
+## **4.3 Installing and Loading the R packages**
+
+In this exercise, five R packages will be used:
+
+1.  **sf** – for importing, managing, and processing vector-based geospatial data.
+
+2.  **spatstat** – for spatial point pattern analysis (1st- and 2nd-order) and generating kernel density estimation (KDE) layers.
+
+3.  **terra** – a modern package for raster and vector data handling; here used to convert *spatstat* outputs into terra format.
+
+4.  **tmap** – for creating high-quality static or interactive maps.
+
+5.  **rvest** – for web scraping data from online sources.
+
+```{r}
+pacman::p_load(sf, terra, spatstat, 
+               tmap, rvest, tidyverse)
+```
+
+## **4.4 Importing and Wrangling Geospatial Data Sets**
+
+Import the two geospatial datasets into R using the methods from Hands-on Exercises 1 and 1a. Tidy the datasets and, if necessary, transform their projections. Validate that both datasets use the same projection. Ensure that the final outputs are stored in sf format.

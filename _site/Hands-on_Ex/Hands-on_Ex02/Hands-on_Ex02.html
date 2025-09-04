@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -151,8 +185,20 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#first-order-spatial-point-patterns-analysis-methods" id="toc-first-order-spatial-point-patterns-analysis-methods" class="nav-link active" data-scroll-target="#first-order-spatial-point-patterns-analysis-methods"><strong>4&nbsp;&nbsp;First-order Spatial Point Patterns Analysis Methods</strong></a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><strong>4.1&nbsp;Overview</strong></a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><strong>4.2&nbsp;The data</strong></a></li>
+  <li><a href="#installing-and-loading-the-r-packages" id="toc-installing-and-loading-the-r-packages" class="nav-link" data-scroll-target="#installing-and-loading-the-r-packages"><strong>4.3&nbsp;Installing and Loading the R packages</strong></a></li>
+  <li><a href="#importing-and-wrangling-geospatial-data-sets" id="toc-importing-and-wrangling-geospatial-data-sets" class="nav-link" data-scroll-target="#importing-and-wrangling-geospatial-data-sets"><strong>4.4&nbsp;Importing and Wrangling Geospatial Data Sets</strong></a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -188,8 +234,57 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="first-order-spatial-point-patterns-analysis-methods" class="level1">
+<h1><strong>4&nbsp;&nbsp;First-order Spatial Point Patterns Analysis Methods</strong></h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview"><strong>4.1&nbsp;Overview</strong></h2>
+<p><strong>Spatial Point Pattern Analysis (SPPA)</strong>&nbsp;studies the distribution of point locations (e.g., crimes, accidents, shops, childcare centres) across a surface.</p>
+<ul>
+<li><strong>First-order SPPA (1st-SPPA):</strong>&nbsp;Focuses on the&nbsp;<em>intensity or density</em>&nbsp;of points, showing how concentration varies over space. It identifies broad spatial trends without considering point-to-point interactions.</li>
+</ul>
+<p><strong>Key questions 1st-SPPA addresses:</strong></p>
+<ul>
+<li><p>Where are points most densely located?</p></li>
+<li><p>Is density uniform or varied across the study area?</p></li>
+<li><p>How spread out is the pattern?</p></li>
+</ul>
+<p><strong>Hands-on in this chapter:</strong>&nbsp;Using&nbsp;<a href="https://cran.r-project.org/web/packages/spatstat/"><strong>spatstat</strong></a>&nbsp;to analyze childcare centres in Singapore, asking:</p>
+<ol type="1">
+<li><p>Are they randomly distributed?</p></li>
+<li><p>If not, where are the areas of higher concentration?</p></li>
+</ol>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data"><strong>4.2&nbsp;The data</strong></h2>
+<p>To conduct the analysis, two datasets will be used:</p>
+<ol type="1">
+<li><p><strong>Child Care Services</strong>&nbsp;(from&nbsp;<em>data.gov.sg</em>): point data containing the locations and attributes of childcare centres.</p></li>
+<li><p><strong>Master Plan 2019 Subzone Boundary (No Sea)</strong>: polygon data from URA defining the planning subzone boundaries.</p></li>
+</ol>
+<p>Both datasets are available in&nbsp;<strong>KML</strong>&nbsp;and&nbsp;<strong>GeoJSON</strong>&nbsp;formats, and students may choose either format for download.</p>
+</section>
+<section id="installing-and-loading-the-r-packages" class="level2">
+<h2 class="anchored" data-anchor-id="installing-and-loading-the-r-packages"><strong>4.3&nbsp;Installing and Loading the R packages</strong></h2>
+<p>In this exercise, five R packages will be used:</p>
+<ol type="1">
+<li><p><strong>sf</strong>&nbsp;– for importing, managing, and processing vector-based geospatial data.</p></li>
+<li><p><strong>spatstat</strong>&nbsp;– for spatial point pattern analysis (1st- and 2nd-order) and generating kernel density estimation (KDE) layers.</p></li>
+<li><p><strong>terra</strong>&nbsp;– a modern package for raster and vector data handling; here used to convert&nbsp;<em>spatstat</em>&nbsp;outputs into terra format.</p></li>
+<li><p><strong>tmap</strong>&nbsp;– for creating high-quality static or interactive maps.</p></li>
+<li><p><strong>rvest</strong>&nbsp;– for web scraping data from online sources.</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(sf, terra, spatstat, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               tmap, rvest, tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="importing-and-wrangling-geospatial-data-sets" class="level2">
+<h2 class="anchored" data-anchor-id="importing-and-wrangling-geospatial-data-sets"><strong>4.4&nbsp;Importing and Wrangling Geospatial Data Sets</strong></h2>
+<p>Import the two geospatial datasets into R using the methods from Hands-on Exercises 1 and 1a. Tidy the datasets and, if necessary, transform their projections. Validate that both datasets use the same projection. Ensure that the final outputs are stored in sf format.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
