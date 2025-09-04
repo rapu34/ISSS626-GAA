@@ -426,7 +426,7 @@ By default, the kernel method used in *density.ppp()* is *gaussian*. But ther
 The code chunk below will be used to compute three more kernel density estimations by using these three kernel function.
 
 ```{r}
-par(mfrow=c(2,2))
+par(mfrow=c(2,2), mar=c(4,4,2,1))
 plot(density(childcareSG_ppp_km, 
              sigma=0.2959712, 
              edge=TRUE, 
@@ -506,4 +506,177 @@ class(kde_childcareSG_bw_terra)
 
 ```{r}
 kde_childcareSG_bw_terra
+```
+
+Notice that the crs property is empty.
+
+### **4.9.2 Assigning projection systems**
+
+In code chunk below, `crs()` of terra is used to assign the CRS information on *kde_childcareSG_bw_terra*layer.
+
+```{r}
+crs(kde_childcareSG_bw_terra) <- "EPSG:3414"
+```
+
+Let us take a look at the properties of *kde_childcareSG_bw_raster* RasterLayer.
+
+```{r}
+kde_childcareSG_bw_terra
+```
+
+::: callout-note
+Notice that the coordicates reference (i.e. coord. ref.) is in **SVY21** now.
+:::
+
+### **4.9.3 Plotting KDE map with tmap**
+
+Finally, we will display the raster in cartographic quality map using **tmap** package.
+
+```{r}
+tm_shape(kde_childcareSG_bw_terra) + 
+  tm_raster(col.scale = 
+              tm_scale_continuous(
+                values = "viridis"),
+            col.legend = tm_legend(
+            title = "Density values",
+            title.size = 0.7,
+            text.size = 0.7,
+            bg.color = "white",
+            bg.alpha = 0.7,
+            position = tm_pos_in(
+              "right", "bottom"),
+            frame = TRUE)) +
+  tm_graticules(labels.size = 0.7) +
+  tm_compass() +
+  tm_layout(scale = 1.0)
+```
+
+Notice that the raster values are encoded explicitly onto the raster pixel using the values in “layer.1” field.
+
+## **4.10 First Order SPPA at the Planning Subzone Level**
+
+In this section, we would like to further our analysis at the planning area level. For simplicity reason, we will focus on Punggol, Tampines Chua Chu Kand and Jurong West planning areas
+
+### **4.10.1 Geospatial data wrangling**
+
+#### 4.10.1.1 Extracting study area
+
+The code chunk below will be used to extract the target planning areas.
+
+```{r}
+pg <- mpsz_cl %>%
+  filter(PLN_AREA_N == "PUNGGOL")
+tm <- mpsz_cl %>%
+  filter(PLN_AREA_N == "TAMPINES")
+ck <- mpsz_cl %>%
+  filter(PLN_AREA_N == "CHOA CHU KANG")
+jw <- mpsz_cl %>%
+  filter(PLN_AREA_N == "JURONG WEST")
+```
+
+It is always a good practice to review the extracted areas. The code chunk below will be used to plot the extracted planning areas.
+
+```{r}
+par(mfrow=c(2,2), mar=c(4,4,2,1))
+plot(st_geometry(pg), main = "Ponggol")
+plot(st_geometry(tm), main = "Tampines")
+plot(st_geometry(ck), main = "Choa Chu Kang")
+plot(st_geometry(jw), main = "Jurong West")
+```
+
+#### 4.10.1.2 Creating ***owin*** object
+
+Now, we will convert these sf objects into owin objects that is required by **spatstat**.
+
+```{r}
+pg_owin = as.owin(pg)
+tm_owin = as.owin(tm)
+ck_owin = as.owin(ck)
+jw_owin = as.owin(jw)
+```
+
+#### 4.10.1.3 Combining point events object and owin object
+
+```{r}
+childcare_pg_ppp = childcare_ppp[pg_owin]
+childcare_tm_ppp = childcare_ppp[tm_owin]
+childcare_ck_ppp = childcare_ppp[ck_owin]
+childcare_jw_ppp = childcare_ppp[jw_owin]
+```
+
+Next, *rescale.ppp()* function is used to trasnform the unit of measurement from metre to kilometre.
+
+```{r}
+childcare_pg_ppp.km = rescale.ppp(childcare_pg_ppp, 1000, "km")
+childcare_tm_ppp.km = rescale.ppp(childcare_tm_ppp, 1000, "km")
+childcare_ck_ppp.km = rescale.ppp(childcare_ck_ppp, 1000, "km")
+childcare_jw_ppp.km = rescale.ppp(childcare_jw_ppp, 1000, "km")
+```
+
+The code chunk below is used to plot these four study areas and the locations of the childcare centres.
+
+```{r}
+par(mfrow=c(2,2), mar=c(4,4,2,1))
+plot(unmark(childcare_pg_ppp.km), 
+  main="Punggol")
+plot(unmark(childcare_tm_ppp.km), 
+  main="Tampines")
+plot(unmark(childcare_ck_ppp.km), 
+  main="Choa Chu Kang")
+plot(unmark(childcare_jw_ppp.km), 
+  main="Jurong West")
+```
+
+### **4.10.2 Clark and Evans Test**
+
+#### 4.10.2.1 Choa Chu Kang planning area
+
+In the code chunk below, [*clarkevans.test()*](https://rdrr.io/cran/spatstat/man/clarkevans.test.html) of **spatstat** is used to performs Clark-Evans test of aggregation for childcare centre in Choa Chu Kang planning area.
+
+```{r}
+clarkevans.test(childcare_ck_ppp,
+                correction="none",
+                clipregion=NULL,
+                alternative=c("two.sided"),
+                nsim=999)
+```
+
+#### 4.10.2.2 Tampines planning area
+
+In the code chunk below, the similar test is used to analyse the spatial point patterns of childcare centre in Tampines planning area.
+
+```{r}
+clarkevans.test(childcare_tm_ppp,
+                correction="none",
+                clipregion=NULL,
+                alternative=c("two.sided"),
+                nsim=999)
+```
+
+### **4.10.3 Computing KDE surfaces by planning area**
+
+The code chunk below will be used to compute the KDE of these four planning area. ***bw.diggle*** method is used to derive the bandwidth of each
+
+```{r}
+par(mfrow=c(2,2), mar=c(4,4,2,1))
+plot(density(childcare_pg_ppp.km, 
+             sigma=bw.diggle, 
+             edge=TRUE, 
+             kernel="gaussian"),
+     main="Punggol")
+plot(density(childcare_tm_ppp.km, 
+             sigma=bw.diggle, 
+             edge=TRUE, 
+             kernel="gaussian"),
+     main="Tempines")
+plot(density(childcare_ck_ppp.km, 
+             sigma=bw.diggle, 
+             edge=TRUE, 
+             kernel="gaussian"),
+     main="Choa Chu Kang")
+plot(density(childcare_jw_ppp.km, 
+             sigma=bw.diggle, 
+             edge=TRUE, 
+             kernel="gaussian"),
+     main="Jurong West")
 ```
