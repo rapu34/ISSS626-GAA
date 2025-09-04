@@ -3,11 +3,3 @@ title: "ISSS626-GAA"
 ---
 
 Welcome to **ISSS626-G1-Geospatial Analytics and Applications**. In this website, you will find my coursework prepared for this course.
-
-There is currently an issue with the **dropdown menu**.
-
--   When checked locally with `quarto render`, the dropdown works normally.
-
--   However, on the Netlify deployment, although the dropdown opens, each item must be clicked individually in order to work.
-
-In addition, all **Hands-on Exercises have been completed**.
