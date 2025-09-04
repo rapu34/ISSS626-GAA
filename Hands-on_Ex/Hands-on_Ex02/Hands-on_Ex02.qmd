@@ -577,7 +577,7 @@ jw <- mpsz_cl %>%
 It is always a good practice to review the extracted areas. The code chunk below will be used to plot the extracted planning areas.
 
 ```{r}
-par(mfrow=c(2,2), mar=c(4,4,2,1))
+par(mfrow=c(2,2),mar=c(4,4,2,1))
 plot(st_geometry(pg), main = "Ponggol")
 plot(st_geometry(tm), main = "Tampines")
 plot(st_geometry(ck), main = "Choa Chu Kang")
