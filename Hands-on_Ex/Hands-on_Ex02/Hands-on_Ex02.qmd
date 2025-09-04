@@ -426,8 +426,7 @@ By default, the kernel method used in *density.ppp()* is *gaussian*. But ther
 The code chunk below will be used to compute three more kernel density estimations by using these three kernel function.
 
 ```{r}
-par(mfrow=c(1,1))
-options(repr.plot.width=20, repr.plot.height=20)
+par(mfrow=c(2,2))
 plot(density(childcareSG_ppp_km, 
              sigma=0.2959712, 
              edge=TRUE, 
@@ -448,4 +447,63 @@ plot(density(childcareSG_ppp_km,
              edge=TRUE, 
              kernel="disc"), 
      main="Disc")
+```
+
+## **4.8 Fixed and Adaptive KDE**
+
+### **4.8.1 Computing KDE by using fixed bandwidth**
+
+Next, you will compute a KDE layer by defining a bandwidth of 600 meter. Notice that in the code chunk below, the sigma value used is 0.6. This is because the unit of measurement of ***childcareSG_ppp_km***object is in kilometer, hence the 600m is 0.6km.
+
+```{r}
+kde_childcareSG_fb <- density(childcareSG_ppp_km,
+                              sigma=0.6, 
+                              edge=TRUE,
+                              kernel="gaussian")
+plot(kde_childcareSG_fb)
+title("kde_childcareSG_fb")                # add title
+```
+
+### **4.8.2 Computing KDE by using adaptive bandwidth**
+
+Fixed bandwidth method is very sensitive to highly skew distribution of spatial point patterns over geographical units for example urban versus rural. One way to overcome this problem is by using adaptive bandwidth instead.
+
+In this section, you will learn how to derive adaptive kernel density estimation by using [*density.adaptive()*](https://rdrr.io/cran/spatstat/man/adaptive.density.html)of **spatstat**.
+
+```{r}
+kde_childcareSG_ab <- adaptive.density(
+  childcareSG_ppp_km, 
+  method="kernel")
+plot(kde_childcareSG_ab)
+title("kde_childcareSG_ab")                # add title
+```
+
+We can compare the fixed and adaptive kernel density estimation outputs by using the code chunk below.
+
+```{r}
+par(mfrow=c(1,2))
+plot(kde_childcareSG_fb, main = "Fixed bandwidth")
+plot(kde_childcareSG_ab, main = "Adaptive bandwidth")
+```
+
+## **4.9 Plotting cartographic quality KDE map**
+
+### **4.9.1 Converting gridded output into raster**
+
+Next, we will convert the im kernal density objects into **SpatRaster** object by using `rast()` of **terra**package.
+
+```{r}
+kde_childcareSG_bw_terra <- rast(kde_childcareSG_km)
+```
+
+Again, `class()` is used to verify if *kde_childcareSG_bw_terra* data are belong to **SpatRaster** class.
+
+```{r}
+class(kde_childcareSG_bw_terra)
+```
+
+*kde_childcareSG_bw_terra* below
+
+```{r}
+kde_childcareSG_bw_terra
 ```
