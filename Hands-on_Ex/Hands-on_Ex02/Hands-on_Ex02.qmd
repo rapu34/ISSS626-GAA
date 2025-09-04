@@ -1,0 +1,124 @@
+---
+title: "Hands-on Exercise 2"
+author: "Jeounghyun Kim"
+date-modified: "last-modified" 
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---
+
+# **2  Thematic Mapping and GeoVisualisation with R**
+
+## **2.1 Overview**
+
+-   **Thematic Mapping**
+
+    -   Uses map symbols to visualize properties of geographic features that are not directly visible.
+
+    -   Examples: population, temperature, crime rate, property prices, etc.
+
+-   **Geovisualisation**
+
+    -   The process of applying visual representations and cartographic techniques to explore, analyze, and communicate geospatial data.
+
+    -   Integrates **cartography, computer science, and information visualization**.
+
+    -   Aims to enhance spatial understanding and support knowledge discovery.
+
+### **2.1.1 Survival Tip**
+
+It is advisable for you to read the functional description of each function before using them.
+
+## **2.2 Getting Started**
+
+In this hands-on exercise, the key R package use is [**tmap**](https://cran.r-project.org/web/packages/tmap/) package in R. Beside **tmap** package, five other R packages will be used. They are:
+
+-   [**readr**](https://readr.tidyverse.org/) for importing delimited text file,
+
+-   [**tidyr**](https://tidyr.tidyverse.org/) for tidying data,
+
+-   [**dplyr**](https://dplyr.tidyverse.org/) for wrangling data and
+
+-   [**sf**](https://cran.r-project.org/web/packages/sf/index.html) for handling geospatial data.
+
+-   [**rvest**](https://rvest.tidyverse.org/) for scraping (or harvesting) data from web pages.
+
+Among the five packages, **readr**, **tidyr** and **dplyr** are part of **tidyverse** package.
+
+The code chunk below will be used to install and load these packages in RStudio.
+
+```{r}
+pacman::p_load(sf, tmap, tidyverse, rvest)
+```
+
+### 2.3 Importing Data into R
+
+#### 2.3.1 The Data
+
+Two datasets will be used to create the choropleth map:
+
+1.  **Master Plan 2019 Subzone Boundary (No Sea) (KML)**
+
+    -   Source: [data.gov.sg](https://data.gov.sg/?utm_source=chatgpt.com)
+
+    -   Type: **Geospatial data**
+
+    -   Description: Contains the geographical boundaries of Singapore at the planning subzone level, based on the URA Master Plan 2019.
+
+2.  **Singapore Residents by Planning Area/Subzone, Age Group, Sex, and Type of Dwelling, June 2024 (CSV)**
+
+    -   File name: `respopagesextod2024.csv`
+
+    -   Source: Department of Statistics, Singapore
+
+    -   Type: **Aspatial data**
+
+    -   Description: Contains demographic and dwelling data. Although it does not include coordinate values, the **PA**(Planning Area) and **SZ** (Subzone) fields serve as unique identifiers to link with the Master Plan 2019 Subzone Boundary data.
+
+#### **2.3.2 Importing Geospatial Data into R**
+
+The code chunk below uses the *st_read()* function of **sf** package to import `MP14_SUBZONE_WEB_PL`shapefile into R as a simple feature data frame called `mpsz`.
+
+```{r}
+mpsz <- st_read("data/Master_plan_2019/MasterPlan2019SubzoneBoundaryNoSeaKML.kml")
+```
+
+#### 2.3.2.1 Tidying data
+
+Function to extract values from the HTML description
+
+```{r}
+extract_kml_field <- function(html_text, field_name) {
+  if (is.na(html_text) || html_text == "") return(NA_character_)
+  
+  page <- read_html(html_text)
+  rows <- page %>% html_elements("tr")
+  
+  value <- rows %>%
+    keep(~ html_text2(html_element(.x, "th")) == field_name) %>%
+    html_element("td") %>%
+    html_text2()
+  
+  if (length(value) == 0) NA_character_ else value
+}
+```
+
+```{r}
+mpsz <- mpsz %>%
+  mutate(
+    REGION_N = map_chr(Description, extract_kml_field, "REGION_N"),
+    PLN_AREA_N = map_chr(Description, extract_kml_field, "PLN_AREA_N"),
+    SUBZONE_N = map_chr(Description, extract_kml_field, "SUBZONE_N"),
+    SUBZONE_C = map_chr(Description, extract_kml_field, "SUBZONE_C")
+  ) %>%
+  select(-Name, -Description) %>%
+  relocate(geometry, .after = last_col())
+```
+
+Let's examine mpsz
+
+```{r}
+mpsz
+```

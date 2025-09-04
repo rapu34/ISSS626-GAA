@@ -1,0 +1,15 @@
+{
+  "hash": "15fc469cf13a100a1d50abd4ed217db0",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Hands-on Exercise 2\"\nauthor: \"Jeounghyun Kim\"\ndate-modified: \"last-modified\" \nexecute:\n  echo: true\n  eval: true\n  warning: false\n  freeze: true\n---\n\n\n\n# **2  Thematic Mapping and GeoVisualisation with R**\n\n## **2.1 Overview**\n\n-   **Thematic Mapping**\n\n    -   Uses map symbols to visualize properties of geographic features that are not directly visible.\n\n    -   Examples: population, temperature, crime rate, property prices, etc.\n\n-   **Geovisualisation**\n\n    -   The process of applying visual representations and cartographic techniques to explore, analyze, and communicate geospatial data.\n\n    -   Integrates **cartography, computer science, and information visualization**.\n\n    -   Aims to enhance spatial understanding and support knowledge discovery.\n\n### **2.1.1 Survival Tip**\n\nIt is advisable for you to read the functional description of each function before using them.\n\n## **2.2 Getting Started**\n\nIn this hands-on exercise, the key R package use is [**tmap**](https://cran.r-project.org/web/packages/tmap/) package in R. Beside **tmap** package, five other R packages will be used. They are:\n\n-   [**readr**](https://readr.tidyverse.org/) for importing delimited text file,\n\n-   [**tidyr**](https://tidyr.tidyverse.org/) for tidying data,\n\n-   [**dplyr**](https://dplyr.tidyverse.org/) for wrangling data and\n\n-   [**sf**](https://cran.r-project.org/web/packages/sf/index.html) for handling geospatial data.\n\n-   [**rvest**](https://rvest.tidyverse.org/) for scraping (or harvesting) data from web pages.\n\nAmong the five packages, **readr**, **tidyr** and **dplyr** are part of **tidyverse** package.\n\nThe code chunk below will be used to install and load these packages in RStudio.\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(sf, tmap, tidyverse, rvest)\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
