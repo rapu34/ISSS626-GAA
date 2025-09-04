@@ -85,7 +85,7 @@ The code chunk below uses the *st_read()* function of **sf** package to impo
 mpsz <- st_read("data/Master_plan_2019/MasterPlan2019SubzoneBoundaryNoSeaKML.kml")
 ```
 
-#### 2.3.2.1 Tidying data
+##### 2.3.2.1 Tidying data
 
 Function to extract values from the HTML description
 
@@ -121,4 +121,87 @@ Let's examine mpsz
 
 ```{r}
 mpsz
+```
+
+Notice that only the first ten records will be displayed. Do you know why?
+
+Yes! This is because R only prints a preview of `sf` objects — by default it shows the first 10 rows to avoid flooding the console.
+
+#### **2.3.3 Importing Attribute Data into R**
+
+Next, we will import *respopagesextod2024.csv* file into RStudio and save the file into an tibble dataframe called *popdata*.
+
+The task will be performed by using *read_csv()* function of **readr** package as shown in the code chunk below.
+
+```{r}
+popdata <- read_csv("data/respopagesextod2024/respopagesextod2024.csv")
+head(popdata)
+```
+
+#### **2.3.4 Data Preparation**
+
+Before a thematic map can be prepared, you are required to prepare a data table with year 2020 values. The data table should include the variables PA, SZ, YOUNG, ECONOMY ACTIVE, AGED, TOTAL, DEPENDENCY.
+
+-   YOUNG: age group 0 to 4 until age groyup 20 to 24,
+
+-   ECONOMY ACTIVE: age group 25-29 until age group 60-64,
+
+-   AGED: age group 65 and above,
+
+-   TOTAL: all age group, and
+
+-   DEPENDENCY: the ratio between young and aged against economy active group
+
+##### 2.3.4.1 Data wrangling
+
+The following data wrangling and transformation functions will be used:
+
+-   *pivot_wider()* of **tidyr** package, and
+
+-   *mutate()*, *filter()*, *group_by()* and *select()* of **dplyr** package
+
+```{r}
+popdata2024 <- popdata %>%
+  group_by(PA, SZ, AG) %>%
+  summarise(`POP` = sum(`Pop`)) %>%
+  ungroup()%>%
+  pivot_wider(names_from=AG, 
+              values_from=POP) %>%
+  mutate(YOUNG = rowSums(.[3:6])
+         +rowSums(.[12])) %>%
+mutate(`ECONOMY ACTIVE` = rowSums(.[7:11])+
+rowSums(.[13:15]))%>%
+mutate(`AGED`=rowSums(.[16:21])) %>%
+mutate(`TOTAL`=rowSums(.[3:21])) %>%  
+mutate(`DEPENDENCY` = (`YOUNG` + `AGED`)
+/`ECONOMY ACTIVE`) %>%
+  select(`PA`, `SZ`, `YOUNG`, 
+       `ECONOMY ACTIVE`, `AGED`, 
+       `TOTAL`, `DEPENDENCY`)
+```
+
+##### 2.3.4.2 Joining the attribute data and geospatial data
+
+Before we can perform the georelational join, one extra step is required to convert the values in PA and SZ fields to uppercase. This is because the values of PA and SZ fields are made up of upper- and lowercase. On the other, hand the SUBZONE_N and PLN_AREA_N are in uppercase.
+
+```{r}
+popdata2024 <- popdata2024 %>%
+  mutate_at(.vars = vars(PA, SZ), 
+          .funs = list(toupper)) %>%
+  filter(`ECONOMY ACTIVE` > 0)
+```
+
+Next, *left_join()* of **dplyr** is used to join the geographical data and attribute table using planning subzone name e.g. *SUBZONE_N* and *SZ* as the common identifier.
+
+```{r}
+mpsz_pop2024 <- left_join(mpsz, popdata2024,
+                          by = c("SUBZONE_N" = "SZ"))
+```
+
+Thing to learn from the code chunk above:
+
+-   *left_join()* of **dplyr** package is used with `mpsz` simple feature data frame as the left data table is to ensure that the output will be a simple features data frame.
+
+```{r}
+write_rds(mpsz_pop2024, "data/mpsz_pop2024.rds")
 ```
