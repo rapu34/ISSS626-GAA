@@ -1,0 +1,10 @@
+---
+title: "Hands-on Exercise 3"
+author: "Jeounghyun Kim"
+date-modified: "last-modified" 
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
+---

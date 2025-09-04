@@ -238,7 +238,7 @@ Things to learn from the code chunk above:
 
 ### **2.4.2 Creating a choropleth map by using *tmap*’s elements**
 
-### Limitation of `qtm()`
+**Limitation of `qtm()`**
 
 -   **Advantage**: `qtm()` is quick and easy for drawing choropleth maps.
 
@@ -291,7 +291,7 @@ tm_shape(mpsz_pop2024)+
   tm_polygons(fill = "DEPENDENCY")
 ```
 
-#### Key Points from `tm_polygons()`
+**Key Points from `tm_polygons()`**
 
 -   **Default classification method**: uses the **“pretty”** interval binning.
 
@@ -320,7 +320,7 @@ tm_shape(mpsz_pop2024)+
   tm_borders()
 ```
 
-### Notes on `tm_borders()`
+**Notes on `tm_borders()`**
 
 -   **Default**: light-gray border lines are added around polygons.
 
