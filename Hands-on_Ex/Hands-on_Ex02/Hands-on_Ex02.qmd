@@ -426,7 +426,7 @@ By default, the kernel method used in *density.ppp()* is *gaussian*. But ther
 The code chunk below will be used to compute three more kernel density estimations by using these three kernel function.
 
 ```{r}
-par(mfrow=c(2,2), mar=c(4,4,2,1))
+par(mfrow=c(2,2), mar=c(3,3,2,1))
 plot(density(childcareSG_ppp_km, 
              sigma=0.2959712, 
              edge=TRUE, 
@@ -461,7 +461,6 @@ kde_childcareSG_fb <- density(childcareSG_ppp_km,
                               edge=TRUE,
                               kernel="gaussian")
 plot(kde_childcareSG_fb)
-title("kde_childcareSG_fb")                # add title
 ```
 
 ### **4.8.2 Computing KDE by using adaptive bandwidth**
@@ -475,7 +474,6 @@ kde_childcareSG_ab <- adaptive.density(
   childcareSG_ppp_km, 
   method="kernel")
 plot(kde_childcareSG_ab)
-title("kde_childcareSG_ab")                # add title
 ```
 
 We can compare the fixed and adaptive kernel density estimation outputs by using the code chunk below.
