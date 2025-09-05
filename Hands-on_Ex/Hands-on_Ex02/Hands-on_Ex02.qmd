@@ -353,7 +353,7 @@ bw <- bw.diggle(childcareSG_ppp)
 bw
 ```
 
-### **4.7.2 Rescalling KDE values**
+### **4.7.2** Rescaling **KDE values**
 
 In the code chunk below, *rescale.ppp()* is used to covert the unit of measurement from meter to kilometer.
 
@@ -380,7 +380,7 @@ title("kde_childcareSG_km")                # add title
 
 Notice that output image looks identical to the earlier version, the only changes in the data values (refer to the legend).
 
-### **4.7.3 Working with different automatic badwidth methods**
+### **4.7.3 Working with different automatic bandwidth methods**
 
 Beside *bw.diggle()*, there are three other **spatstat** functions can be used to determine the bandwidth, they are: *bw.CvL()*, *bw.scott()*, and *bw.ppl()*.
 
@@ -421,7 +421,7 @@ plot(kde_childcareSG.ppl, main = "bw.ppl")
 
 ### **4.7.4 Working with different kernel methods**
 
-By default, the kernel method used in *density.ppp()* is *gaussian*. But there are three other options, namely: Epanechnikov, Quartic and Dics.
+By default, the kernel method used in *density.ppp()* is *gaussian*. But there are three other options, namely: Epanechnikov, Quartic and Disc.
 
 The code chunk below will be used to compute three more kernel density estimations by using these three kernel function.
 
@@ -578,7 +578,7 @@ It is always a good practice to review the extracted areas. The code chunk below
 
 ```{r}
 par(mfrow=c(2,2),mar=c(4,4,2,1))
-plot(st_geometry(pg), main = "Ponggol")
+plot(st_geometry(pg), main = "Punggol")
 plot(st_geometry(tm), main = "Tampines")
 plot(st_geometry(ck), main = "Choa Chu Kang")
 plot(st_geometry(jw), main = "Jurong West")
