@@ -12,7 +12,7 @@ execute:
 
 # **6  Spatio-Temporal Point Patterns Analysis**
 
-## 6.1 Overview
+## **6.1 Overview**
 
 **Definition**\
 A spatio-temporal point process is a random collection of points where each point represents both the location and time of an event. It is also referred to as a space-time or spatial-temporal point process.
