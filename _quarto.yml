@@ -15,18 +15,20 @@ website:
         href: Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html
       - text: "Week2_Hands-on Exercise 2a"
         href: Hands-on_Ex/Hands-on_Ex02a/Hands-on_Ex02a.html
-      - text: "Week3_Hands-on Exercise 3"
+      - text: "Week3_Hands-on Exercise 3a"
         href: Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03.html
  
     - text: "In-class Exercise"
       menu:
-      - text: "In-class Exercise 1"
-        href: In-class_Ex1.html
+      - text: "In-class Exercise 3a"
+        href: In-class_Ex/In-class_Ex03a/In-class_Ex03a.html
+      - text: "In-class Exercise 3b"
+        href: In-class_Ex/In-class_Ex03b/In-class_Ex03b.html
         
     - text: "Take-home Exercise"
       menu:
       - text: "Take-home Exercise 1"
-        href: Take-home_Ex/Take-home_Ex1/Take-home_Ex1.html
+        href: Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html
 
      
     
