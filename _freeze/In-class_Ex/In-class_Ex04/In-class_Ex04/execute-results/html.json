@@ -1,0 +1,15 @@
+{
+  "hash": "06e7e0006e766cd4d4b3f918bcfd9faf",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"In-class_Ex04\"\nauthor: \"Jeounghyun Kim\"\ndate: \"September 20, 2025\"\ndate-modified: \"last-modified\"\nexecute: \n  eval: true\n  echo: true\n  warning: false\n  freeze: true\n---\n\n\n\n### The code\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman:::p_load(sf, ggstatsplot, tmap, tidyverse, knitr, GWmodel)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nhunan <- st_read(dsn = \"data/geospatial\", layer = \"Hunan\")\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\nReading layer `Hunan' from data source \n  `/Users/jay/Desktop/rapu34/ISSS626-GAA/In-class_Ex/In-class_Ex04/data/geospatial' \n  using driver `ESRI Shapefile'\nSimple feature collection with 88 features and 7 fields\nGeometry type: POLYGON\nDimension:     XY\nBounding box:  xmin: 108.7831 ymin: 24.6342 xmax: 114.2544 ymax: 30.12812\nGeodetic CRS:  WGS 84\n```\n\n\n:::\n:::\n\n\n\n### Importing Hunan_2012 table\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nhunan2012 <-read_csv(\"data/aspatial/hunan_2012.csv\")\n```\n:::\n\n\n\n### Joining Hunan and Hunan_2012\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nhunan <- left_join(hunan,hunan2012) %>% select(1:4, 7, 15)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nHunan_sp <- hunan %>% as_Spatial()\nHunan_sp\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\nclass       : SpatialPolygonsDataFrame \nfeatures    : 88 \nextent      : 108.7831, 114.2544, 24.6342, 30.12812  (xmin, xmax, ymin, ymax)\ncrs         : +proj=longlat +datum=WGS84 +no_defs \nvariables   : 6\nnames       :  NAME_2,  ID_3, NAME_3,         ENGTYPE_3, County, GDPPC \nmin values  : Changde, 21098,  Anhua, Autonomous County,  Anhua,  8497 \nmax values  : Zhuzhou, 21201, Zixing,          District, Zixing, 88656 \n```\n\n\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -96,6 +96,9 @@ biz_56111 = biz_56111 %>%
 **Saving the data**
 
 ```{r}
+#| eval: false
+#| echo: false
+
 write_rds(biz_56111, "data/rds/biz_56111.rds")
 ```
 
