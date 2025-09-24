@@ -2,7 +2,8 @@
 title: "Take-home Exercise 1: Geospatial Analytics for Public Good Spatial Patterns of New Businesses in Singapore"
 author: "Jeounghyun Kim"
 date: "September 12, 2025"
-date-modified: "last-modified"
+date-modified: "September 24, 2025"
+format: html
 execute: 
   eval: true
   echo: true
