@@ -847,11 +847,11 @@ print(regional_summary)
 
 The regional clustering pattern analysis reveals significant variations in clustering intensity across Singapore's six major regions. CBD exhibits the strongest clustering intensity (R = 0.146) with all three sectors demonstrating significant clustering, confirming its role as Singapore's primary business nucleus. Jurong (R = 0.370) and One-North (R = 0.412) also show strong clustering across all sectors, indicating well-developed business ecosystems. North region displays moderate clustering (R = 0.509) with only 2 out of 3 sectors clustered, while West (R = 0.525) and East (R = 0.553) demonstrate the weakest clustering patterns. The analysis confirms that all regions exhibit statistically significant clustering (p \< 0.05), supporting Singapore's polycentric development strategy with varying degrees of sectoral concentration across different regions.
 
-## **4. Temporal Pattern Analysis**
+# **4. Temporal Pattern Analysis**
 
 Spatio-temporal analysis examines how business location patterns evolve over time, revealing temporal trends, seasonal variations, and dynamic clustering behaviors. This analysis combines temporal data processing with spatial visualization to understand the temporal dimension of business formation patterns and their implications for urban development planning.
 
-### **4.1 Monthly Pattern Analysis**
+## **4.1 Monthly Pattern Analysis**
 
 Monthly pattern analysis reveals temporal trends in business registration across different sectors, enabling identification of seasonal patterns and temporal clustering behaviors. The `lubridate` package provides functions for temporal data manipulation, with `month()`, `year()`, and `quarter()` functions extracting temporal components from registration dates. The `month()` function with `label = TRUE` and `abbr = TRUE` parameters creates abbreviated month names for clear visualization. The `ggplot2` package creates temporal trend visualizations, with `geom_line()` for trend lines and `geom_point()` for data points, while `facet_wrap()` creates separate panels for each sector.
 
@@ -926,7 +926,7 @@ print(monthly_summary)
 
 The monthly analysis shows that Technology and Finance businesses register most frequently during spring (March-May), with sharp declines in summer (June-July). Technology peaked at 1,050 registrations in May, while Finance reached 900 in the same month. This pattern connects to the spatial clustering observed in CBD and North regions, as new businesses concentrate in already established business areas during peak seasons. R&D shows a different pattern, maintaining consistently low numbers (30-80 per month) throughout the year, reflecting its specialized nature. The spring surge in business registrations demonstrates Singapore's business ecosystem has distinct seasonal characteristics, with temporal patterns reinforcing spatial concentrations.
 
-### **4.2 Cumulative Business Registration Analysis**
+## **4.2 Cumulative Business Registration Analysis**
 
 Cumulative business registration analysis tracks the running totals of business formations over time, revealing growth trajectories and sector-specific development patterns. This analysis provides insights into the cumulative impact of business formation on Singapore's economic landscape. The `cumsum()` function calculates running totals for each sector, while `ggplot2` creates cumulative trend visualizations. The `geom_line()` function with `size = 2` creates prominent trend lines, and `geom_point()` with `size = 4` highlights data points. The `scale_x_continuous()` function with `breaks = 1:12` and `labels = month.abb` creates monthly axis labels, while `scale_color_manual()` assigns distinct colors to each sector for clear visual distinction.
 
@@ -974,11 +974,11 @@ print(cumulative_summary)
 
 The cumulative analysis reveals distinct long-term growth trajectories across Singapore's business sectors. Technology sector demonstrates the strongest cumulative growth, reaching approximately 7,800 registrations by December, followed closely by Finance sector at 7,500 registrations. Both sectors show consistent upward trends throughout the year, indicating sustained business formation activity and robust sectoral development. In contrast, R&D sector maintains a much lower cumulative total of approximately 500 registrations, reflecting its specialized nature and different growth patterns. The cumulative analysis complements the monthly pattern analysis by revealing that despite seasonal fluctuations, all sectors show positive long-term growth, suggesting Singapore's business ecosystem is expanding across all three sectors, albeit at different rates. This long-term perspective is crucial for urban planning as it indicates the need for sustained infrastructure development and policy support to accommodate continued business growth.
 
-## **5. Spatial Weights and Autocorrelation Analysis**
+# **5. Spatial Weights and Autocorrelation Analysis**
 
 Spatial weights and autocorrelation analysis examines spatial relationships between neighboring areas, identifying spatial clustering patterns and spatial dependence structures in business distribution data. This analysis employs spatial weights matrices to define neighborhood relationships and applies spatial autocorrelation statistics to quantify spatial clustering intensity and identify hotspots and coldspots in business distribution patterns.
 
-### **5.1 Creating Spatial Weights Matrix**
+## **5.1 Creating Spatial Weights Matrix**
 
 Spatial weights matrices define neighborhood relationships between spatial units, enabling analysis of spatial dependence and autocorrelation patterns. The `st_join()` function performs spatial joins to assign business data to subzone boundaries, while `st_drop_geometry()` removes spatial attributes for tabular analysis. The `count()` and `pivot_wider()` functions aggregate business counts by subzone and sector, creating a wide-format dataset suitable for spatial analysis. The `poly2nb()` function creates Queen contiguity weights matrices, defining neighbors as areas sharing boundaries or vertices. The `nb2listw()` function converts neighborhood lists to spatial weights objects, with `style = "W"` for row-standardized weights and `zero.policy = TRUE` to handle areas with no neighbors.
 
@@ -1100,7 +1100,7 @@ cat("  Distance:", round(mean(sapply(distance_weights, length)), 2), "\n")
 
 To analyze how the spatial clustering of individual businesses observed in Chapter 3 manifests at the regional level, spatial weights matrices were constructed. Queen contiguity (red) forms the densest network with 1,598 connections, suggesting that the strong clustering observed in CBD and Marina Bay in Chapter 3 translates into close interactions between neighboring regions. Rook contiguity (blue) shows moderate connectivity with 1,368 connections, indicating that regions share boundaries and exert mutual influence. Distance-based weights (green) with a 5km threshold show limited connectivity with 284 connections, indicating that the 5km distance criterion creates a more restrictive neighborhood definition compared to boundary-based contiguity methods. These results demonstrate that the spatial concentration of individual businesses extends into regional-level spatial interactions, forming Singapore's business ecosystem with varying degrees of connectivity across different spatial relationship definitions.
 
-### **5.2 Subzone-level Detailed Analysis**
+## **5.2 Subzone-level Detailed Analysis**
 
 Subzone-level detailed analysis provides granular examination of business distribution patterns at the finest administrative scale, combining density mapping with point overlay visualization for comprehensive spatial pattern identification. The `tm_polygons()` function creates choropleth maps with `style = "quantile"` and `n = 5` for quintile-based classification, while `palette = "Blues"` provides color schemes appropriate for density visualization. The `tm_symbols()` function overlays individual business points with `size = 0.3` for optimal visibility and `alpha = 0.7` for transparency. The `tmap_arrange()` function combines multiple sector maps into a single layout for comparative analysis, while `arrange()` and `head()` functions identify top-performing subzones for detailed examination.
 
@@ -1172,9 +1172,9 @@ print(rd_top)
 
 To examine how the spatial clustering of individual businesses observed in Chapter 3 manifests at the regional level, subzone-level density analysis was conducted. Technology and Finance sectors demonstrate remarkably similar spatial patterns, with Cecil and Raffles Place forming ultra-high density clusters of 4,150 and 4,249 businesses per km² respectively. This confirms that the strong spatial interaction between these sectors identified in Chapter 3's Cross-K function analysis persists at the subzone level. In contrast, R&D sector exhibits a fundamentally different pattern, with maximum density of only 295 businesses per km², representing just 1/14th of Technology/Finance levels. This confirms that R&D's dispersed distribution pattern observed in Chapter 3 continues at the subzone level, suggesting different locational preferences compared to Technology/Finance sectors. These results demonstrate how individual business analysis from Chapter 3 extends into regional-level spatial interactions, revealing the formation process of Singapore's business ecosystem through varying degrees of sectoral concentration across different subzones.
 
-# **7. Discussion**
+# **6. Discussion**
 
-## **7.1 Urban Planning Implications**
+## **6.1 Urban Planning Implications**
 
 The comprehensive spatial and spatio-temporal analysis of Singapore's new business establishments provides valuable insights for urban land use planning and management. The findings reveal distinct spatial patterns that can inform strategic planning decisions and policy development.
 
@@ -1210,14 +1210,14 @@ Based on these findings, several policy recommendations emerge for urban land us
 
 These findings provide a data-driven foundation for evidence-based urban planning decisions that can support Singapore's continued growth as a global business hub while ensuring sustainable and balanced development across the city-state. By recognizing the complex interplay between spatial clustering, temporal patterns, and sector-specific needs, Singapore can optimize its urban development strategy to maintain its competitive advantage while fostering inclusive economic growth.
 
-# **8. References**
+# **7. References**
 
-Park, S., Seo, H., & Koo, H. (2023). Exploring the spatio-temporal clusters of closed restaurants after the COVID-19 outbreak in Seoul using relative risk surfaces. *Scientific Reports*, 13, 13889. https://doi.org/10.1038/s41598-023-40937-5
+1.  Park, S., Seo, H., & Koo, H. (2023). Exploring the spatio-temporal clusters of closed restaurants after the COVID-19 outbreak in Seoul using relative risk surfaces. *Scientific Reports*, 13, 13889. https://doi.org/10.1038/s41598-023-40937-5
 
-Ben-Said, M. (2021). Spatial point-pattern analysis as a powerful tool in identifying pattern-process relationships in plant ecology: an updated review. *Ecological Processes*, 10, 56. https://doi.org/10.1186/s13717-021-00314-4
+2.  Ben-Said, M. (2021). Spatial point-pattern analysis as a powerful tool in identifying pattern-process relationships in plant ecology: an updated review. *Ecological Processes*, 10, 56. https://doi.org/10.1186/s13717-021-00314-4
 
-Kam, T. S. (2023). R for Geospatial Data Science and Analytics. Retrieved from https://r4gdsa.netlify.app/chap01.html
+3.  Kam, T. S. (2023). R for Geospatial Data Science and Analytics. Retrieved from https://r4gdsa.netlify.app/chap01.html
 
-Accounting and Corporate Regulatory Authority (ACRA). (2024). Information on Corporate Entities. Retrieved from https://data.gov.sg/
+4.  Accounting and Corporate Regulatory Authority (ACRA). (2024). Information on Corporate Entities. Retrieved from https://data.gov.sg/
 
-Department of Statistics Singapore. (2020). Singapore Standard Industrial Classification (SSIC) 2020. Retrieved from https://www.singstat.gov.sg/
+5.  Department of Statistics Singapore. (2020). Singapore Standard Industrial Classification (SSIC) 2020. Retrieved from https://www.singstat.gov.sg/
