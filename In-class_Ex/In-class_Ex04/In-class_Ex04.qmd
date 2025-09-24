@@ -164,22 +164,3 @@ tm_shape(hunan_gstat) +
             legend.width = 1.50,
             frame = TRUE)
 ```
-
-### The code
-
-```{r}
-#| eval: false
-#| include: false
-tm_shape(hunan_gstat) +
-  tm_fill("GDPPC_LM",
-          n = 5,
-          style = "quantile") +
-  tm_borders(alpha = 0.5) +
-  tm_layout(main.title = "Distribution of geographically wieghted mean",
-            main.title.position = "center",
-            main.title.size = 2.0,
-            legend.text.size = 1.2,
-            legend.height = 1.50, 
-            legend.width = 1.50,
-            frame = TRUE)
-```
