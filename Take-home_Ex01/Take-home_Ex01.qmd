@@ -3,7 +3,9 @@ title: "Take-home Exercise 1: Geospatial Analytics for Public Good Spatial Patte
 author: "Jeounghyun Kim"
 date: "September 12, 2025"
 date-modified: "September 24, 2025"
-format: html
+format: 
+  html:
+    embed-resources: false
 execute: 
   eval: true
   echo: true
@@ -588,46 +590,11 @@ tm_shape(singapore_subzones) +
 
 The point-based visualization reveals distinct spatial clustering patterns across Singapore's innovation sectors. Technology (blue) dominates with the highest density and widest distribution, particularly concentrated in central and southern urban areas. Finance (red) shows strong clustering in core business districts, often co-locating with Technology firms. R&D (green) exhibits the most dispersed pattern with fewer establishments, suggesting different locational preferences. The central-southern region emerges as the primary innovation hub, with significant sectoral co-location indicating strong agglomeration effects and shared infrastructure benefits.
 
-### **3.4.2 Interactive Maps**
-
-Interactive maps enable dynamic exploration of spatial data through web-based interfaces, allowing users to zoom, pan, and interact with individual data points for detailed information access. The `tmap_mode("view")` function switches tmap to interactive mode, utilizing Leaflet API for web-based mapping. The `tm_symbols()` function with `popup.vars` parameter creates interactive popups displaying company names, sectors, and registration dates when users click on individual business points. The `tmap_save()` function exports interactive maps to HTML format for web deployment, while `tmap_mode("plot")` returns to static plotting mode for subsequent analyses.
-
-```{r, fig.width=12, fig.height=8, dev="png"}
-# Set tmap to interactive mode
-tmap_mode("view")
-
-# Create interactive map showing all sectors
-interactive_all_sectors <- tm_shape(singapore_subzones) +
-      tm_polygons(col = "grey85", border.col = "grey40", lwd = 0.3) +
-  tm_shape(acra_innovation_sf) +
-  tm_symbols(size = 0.4, 
-             col = "sector", 
-             palette = c("Technology" = "blue", "Finance" = "red", "R&D" = "green"),
-             border.col = NA, 
-             shape = 16,
-             alpha = 0.7,
-             popup.vars = c("Company" = "company_name", 
-                           "Sector" = "sector", 
-                           "Registration Date" = "registration_incorporation_date",
-                           "SSIC Code" = "primary_ssic_code")) +
-  tm_layout(title = "Interactive Map: Singapore Business Distribution (2024-2025)")
-
-# Display interactive map
-interactive_all_sectors
-
-# Reset to plot mode for static outputs
-tmap_mode("plot")
-```
-
-**Figure 3.4.2 Interactive Map of Singapore Business Distribution**
-
-The interactive map reveals the same spatial clustering patterns as the static visualization, with Technology (blue) showing the highest density in central and southern regions, Finance (red) clustering in business districts, and R&D (green) displaying more dispersed distribution. The interactive functionality allows users to explore individual business details, confirming the strong agglomeration effects and sectoral co-location patterns identified in previous analyses.
-
-### **3.4.3 Individual Sector Point Maps**
+### **3.4.2 Individual Sector Point Maps**
 
 Individual sector point maps provide detailed visualization of each business sector's spatial distribution, enabling focused analysis of sector-specific patterns and clustering characteristics. Each map uses consistent styling with `tm_polygons()` for background boundaries and `tm_symbols()` for business points. The `size = 0.5` parameter ensures clear visibility of individual businesses, while `alpha = 0.8` provides transparency for overlapping points. The `tmap_arrange()` function combines multiple maps into a single layout for comparative analysis, with `ncol = 3` creating a horizontal arrangement of all three sector maps.
 
-```{r, fig.width=15, fig.height=5, dev="png"}
+```{r, fig.width=12, fig.height=4, dev="png"}
 # Create separate point maps for each sector
 tech_points <- tm_shape(singapore_subzones) +
   tm_polygons(col = "grey85", border.col = "grey40", lwd = 0.3) +
@@ -651,23 +618,19 @@ rd_points <- tm_shape(singapore_subzones) +
 tmap_arrange(tech_points, finance_points, rd_points, ncol = 3)
 ```
 
-**Figure 3.4.3: Individual Sector Point Maps**
+**Figure 3.4.2: Individual Sector Point Maps**
 
 The individual sector maps reveal distinct spatial distribution patterns for each business sector. Technology (left) shows the most widespread distribution across Singapore, with high density in southern and central regions, indicating broad market penetration and diverse locational preferences. Finance (center) exhibits strong centralization in the traditional CBD and southern coastal areas, reflecting the sector's preference for established financial districts and proximity to key institutions. R&D (right) displays a more specialized clustering pattern, with significant concentrations in western regions likely corresponding to research parks and industrial zones, while maintaining some presence in central areas. These distinct patterns highlight sector-specific locational strategies and the varying importance of agglomeration effects across different business types.
 
-### **3.4.4 Regional Analysis**
+### **3.4.3 Regional Analysis**
 
 Regional analysis examines business distribution patterns across Singapore's major administrative regions, providing insights into regional specialization and sector-specific clustering behaviors. The `case_when()` function creates categorical region assignments based on planning area names, while `st_join()` performs spatial joins to assign regional information to business points. The `count()` function aggregates business counts by sector and region, enabling comparative analysis of regional business concentrations and sectoral preferences across different areas of Singapore.
 
-```{r, fig.width=15, fig.height=10, dev="png"}
+```{r, fig.width=12, fig.height=8, dev="png"}
 # Regional analysis of business sectors
 #library(tidyverse)
 #library(sf)
 #library(tmap)
-
-# Load data
-acra_innovation_sf <- readRDS('data/rds/acra_innovation_sf.rds')
-singapore_subzones <- readRDS('data/rds/singapore_subzones.rds')
 
 # Define major regions in Singapore
 singapore_subzones <- singapore_subzones %>%
@@ -726,17 +689,17 @@ for (i in 1:length(top_regions)) {
 do.call(tmap_arrange, c(regional_maps, ncol = 3))
 ```
 
-**Figure 3.4.4: Top 3 Regional Business Distribution Analysis**
+**Figure 3.4.3: Top 3 Regional Business Distribution Analysis**
 
 The analysis focuses on Singapore's top 3 regions by business count: CBD, East, and North. CBD (left) demonstrates the highest business concentration with dense clusters of both Technology (blue) and Finance (red) sectors, reflecting its role as Singapore's financial nucleus and established business district. East region (center) shows a technology-dominated landscape with moderate Finance presence, indicating emerging tech clusters and suburban business development. North region (right) exhibits similar technology-focused patterns with scattered Finance distribution, suggesting residential-commercial mixed development. R&D (green) remains sparse across all regions, highlighting its specialized nature and preference for research parks or industrial zones. These patterns reveal CBD's dominance as the traditional business hub, while East and North regions show technology-driven suburban business growth, reflecting Singapore's polycentric development strategy.
 
-### **3.4.5 Regional Clustering Pattern Analysis**
+### **3.4.4 Regional Clustering Pattern Analysis**
 
 Regional clustering pattern analysis examines spatial concentration and dispersion patterns across Singapore's administrative regions, providing insights into regional specialization and sector-specific agglomeration effects. This analysis combines statistical testing with cartographic visualization to identify regions with distinct clustering characteristics.
 
 The `st_drop_geometry()` function removes spatial attributes for tabular analysis, while `count()` and `group_by()` functions aggregate business counts by region and sector. The `case_when()` function creates categorical clustering intensity levels based on sector density thresholds. The `clarkevans.test()` function applies spatial randomness testing within each region, with `correction = "none"` for unbiased estimation and `alternative = "clustered"` to test for clustering patterns. The `as.owin()` function creates region-specific observation windows for spatial analysis.
 
-```{r, fig.width=15, fig.height=12, dev="png"}
+```{r, fig.width=12, fig.height=10, dev="png"}
 # Regional clustering pattern analysis - spatial concentration and dispersion patterns
 #library(tidyverse)
 #library(sf)
@@ -878,7 +841,7 @@ regional_summary <- spatial_test_summary %>%
 print(regional_summary)
 ```
 
-**Figure 3.4.5: Regional Clustering Pattern Analysis**
+**Figure 3.4.4: Regional Clustering Pattern Analysis**
 
 The regional clustering pattern analysis reveals significant variations in clustering intensity across Singapore's six major regions. CBD exhibits the strongest clustering intensity (R = 0.146) with all three sectors demonstrating significant clustering, confirming its role as Singapore's primary business nucleus. Jurong (R = 0.370) and One-North (R = 0.412) also show strong clustering across all sectors, indicating well-developed business ecosystems. North region displays moderate clustering (R = 0.509) with only 2 out of 3 sectors clustered, while West (R = 0.525) and East (R = 0.553) demonstrate the weakest clustering patterns. The analysis confirms that all regions exhibit statistically significant clustering (p \< 0.05), supporting Singapore's polycentric development strategy with varying degrees of sectoral concentration across different regions.
 
@@ -891,9 +854,6 @@ Spatio-temporal analysis examines how business location patterns evolve over tim
 Monthly pattern analysis reveals temporal trends in business registration across different sectors, enabling identification of seasonal patterns and temporal clustering behaviors. The `lubridate` package provides functions for temporal data manipulation, with `month()`, `year()`, and `quarter()` functions extracting temporal components from registration dates. The `month()` function with `label = TRUE` and `abbr = TRUE` parameters creates abbreviated month names for clear visualization. The `ggplot2` package creates temporal trend visualizations, with `geom_line()` for trend lines and `geom_point()` for data points, while `facet_wrap()` creates separate panels for each sector.
 
 ```{r, fig.width=12, fig.height=8, dev="png"}
-# Load data
-acra_innovation_sf <- readRDS('data/rds/acra_innovation_sf.rds')
-
 # Extract month and year from registration date
 acra_innovation_sf <- acra_innovation_sf %>%
   mutate(
@@ -1021,10 +981,6 @@ Spatial weights and autocorrelation analysis examines spatial relationships betw
 Spatial weights matrices define neighborhood relationships between spatial units, enabling analysis of spatial dependence and autocorrelation patterns. The `st_join()` function performs spatial joins to assign business data to subzone boundaries, while `st_drop_geometry()` removes spatial attributes for tabular analysis. The `count()` and `pivot_wider()` functions aggregate business counts by subzone and sector, creating a wide-format dataset suitable for spatial analysis. The `poly2nb()` function creates Queen contiguity weights matrices, defining neighbors as areas sharing boundaries or vertices. The `nb2listw()` function converts neighborhood lists to spatial weights objects, with `style = "W"` for row-standardized weights and `zero.policy = TRUE` to handle areas with no neighbors.
 
 ```{r}
-# Load data
-acra_innovation_sf <- readRDS('data/rds/acra_innovation_sf.rds')
-singapore_subzones <- readRDS('data/rds/singapore_subzones.rds')
-
 # Create business density by subzone
 business_density <- acra_innovation_sf %>%
   st_join(singapore_subzones %>% select(SUBZONE_N, PLN_AREA_N), join = st_within) %>%
@@ -1089,7 +1045,7 @@ cat("Distance-based:", length(distance_weights), "subzones\n")
 
 Contiguity weights visualization displays the spatial neighborhood relationships defined by different contiguity criteria, enabling visual inspection of spatial weights matrix structures. The `st_centroid()` function calculates subzone centroids for connection visualization, while `st_coordinates()` extracts coordinate pairs for plotting. The `par(mfrow = c(1, 3))` function creates side-by-side plots for comparing three different contiguity types (Queen, Rook, and Distance-based). The `plot()` function with `st_geometry()` renders subzone boundaries, while `plot.nb()` overlays neighborhood connections as lines between centroids. The `col = "red"`, `col = "blue"`, and `col = "green"` parameters create visible but non-overwhelming connection lines for each contiguity type, enabling clear visualization of spatial neighborhood structures and comparative analysis across different spatial relationship definitions.
 
-```{r, fig.width=15, fig.height=10, dev="png"}
+```{r, fig.width=12, fig.height=8, dev="png"}
 # Calculate subzone centroids for visualization
 centroids <- st_centroid(singapore_subzones_density)
 coords <- st_coordinates(centroids)
@@ -1146,7 +1102,7 @@ To analyze how the spatial clustering of individual businesses observed in Chapt
 
 Subzone-level detailed analysis provides granular examination of business distribution patterns at the finest administrative scale, combining density mapping with point overlay visualization for comprehensive spatial pattern identification. The `tm_polygons()` function creates choropleth maps with `style = "quantile"` and `n = 5` for quintile-based classification, while `palette = "Blues"` provides color schemes appropriate for density visualization. The `tm_symbols()` function overlays individual business points with `size = 0.3` for optimal visibility and `alpha = 0.7` for transparency. The `tmap_arrange()` function combines multiple sector maps into a single layout for comparative analysis, while `arrange()` and `head()` functions identify top-performing subzones for detailed examination.
 
-```{r, fig.width=15, fig.height=10, dev="png"}
+```{r, fig.width=12, fig.height=8, dev="png"}
 # Technology sector subzone analysis
 tech_subzone_map <- tm_shape(singapore_subzones_density) +
   tm_polygons(col = "tech_density_per_km2", 
