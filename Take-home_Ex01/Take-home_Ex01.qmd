@@ -1029,7 +1029,7 @@ k1dists <- unlist(nbdists(k1, coords))
 summary(k1dists)
 
 # Create distance weights (using 5km threshold for Singapore)
-distance_weights <- dnearneigh(coords, 0, 5, longlat = FALSE)
+distance_weights <- dnearneigh(coords, 0, 5000, longlat = FALSE)
 summary(distance_weights)
 
 # Create row-standardized weights
@@ -1098,7 +1098,7 @@ cat("  Distance:", round(mean(sapply(distance_weights, length)), 2), "\n")
 
 **Figure 5.1.1: Spatial Weights Matrix Visualization**
 
-To analyze how the spatial clustering of individual businesses observed in Chapter 3 manifests at the regional level, spatial weights matrices were constructed. Queen contiguity (red) forms the densest network with 1,598 connections, suggesting that the strong clustering observed in CBD and Marina Bay in Chapter 3 translates into close interactions between neighboring regions. Rook contiguity (blue) shows moderate connectivity with 1,368 connections, indicating that regions share boundaries and exert mutual influence. Distance-based weights (green) with a 5km threshold show limited connectivity with 284 connections, indicating that the 5km distance criterion creates a more restrictive neighborhood definition compared to boundary-based contiguity methods. These results demonstrate that the spatial concentration of individual businesses extends into regional-level spatial interactions, forming Singapore's business ecosystem with varying degrees of connectivity across different spatial relationship definitions.
+To analyze how the spatial clustering of individual businesses observed in Chapter 3 manifests at the regional level, spatial weights matrices were constructed. Queen contiguity (red) forms the densest network with 1,598 connections, suggesting that the strong clustering observed in CBD and Marina Bay in Chapter 3 translates into close interactions between neighboring regions. Rook contiguity (blue) shows moderate connectivity with 1,368 connections, indicating that regions share boundaries and exert mutual influence. Distance-based weights (green) with a 5km threshold show extensive connectivity with 13,203 connections, indicating that the 5km distance criterion creates a dense neighborhood network with 46.49 average connections per subzone, much higher than boundary-based contiguity methods. These results demonstrate that the spatial concentration of individual businesses extends into regional-level spatial interactions, forming Singapore's business ecosystem with varying degrees of connectivity across different spatial relationship definitions.
 
 ## **5.2 Subzone-level Detailed Analysis**
 
