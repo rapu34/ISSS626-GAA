@@ -3,9 +3,7 @@ title: "Take-home Exercise 1: Geospatial Analytics for Public Good Spatial Patte
 author: "Jeounghyun Kim"
 date: "September 12, 2025"
 date-modified: "September 24, 2025"
-format: 
-  html:
-    embed-resources: false
+format: html
 execute: 
   eval: true
   echo: true
@@ -44,7 +42,7 @@ The specific objectives are as follows:
 In this exercise, we will use following packages:
 
 | Package | Description |
-|------------------------------------|------------------------------------|
+|----|----|
 | **sf** | Provides functions to manage, process, and manipulate Simple Features, a formal geospatial data standard that specifies a storage and access model of spatial geometries such as points, lines, and polygons. Essential for converting business addresses to spatial coordinates and handling geospatial data throughout the analysis. |
 | **spatstat** | Provides functions for spatial statistics with a strong focus on analyzing spatial point patterns. Used for performing kernel density estimation (KDE), G-function, K-function, and Cross-K function analysis to identify clustering patterns and spatial interactions between business sectors. |
 | **tidyverse** | Provides a collection of functions for performing data science tasks such as importing, tidying, wrangling data, and creating statistical visualizations. Essential for data preprocessing, filtering by SSIC codes, and creating temporal analysis plots. |
@@ -66,7 +64,7 @@ tmap_mode("plot")
 ## 2.2 Data
 
 | Dataset Name | Description | Format | Source |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | **ACRA – Information on Corporate Entities (2024–2025)** | Comprehensive business registration data from Singapore's Accounting and Corporate Regulatory Authority, containing detailed information about all registered corporate entities. The dataset includes company names, incorporation dates, registered addresses with postal codes, and primary SSIC (Singapore Standard Industrial Classification) codes. This dataset serves as the foundation for identifying and analyzing businesses in the technology (SSIC 62), finance (SSIC 64), and research & development (SSIC 72) sectors. The temporal coverage from January 2024 to June 2025 enables spatio-temporal analysis of new business formations. | CSV (27 files, alphabetically organized, merged) | [data.gov.sg](https://data.gov.sg/) |
 | **SSIC 2020 Classification** | Official industry classification reference published by Singapore's Department of Statistics, providing standardized codes and descriptions for all economic activities. This classification system enables precise identification and categorization of businesses by their primary economic activities. Specifically used to filter and classify firms into technology (62), finance (64), and R&D (72) sectors, ensuring accurate sector-based analysis and comparison. | Excel | Department of Statistics Singapore |
 | **Singapore Subzone Boundaries (Master Plan 2019)** | High-resolution geospatial dataset containing Singapore's administrative and planning subzone boundaries from the Urban Redevelopment Authority's Master Plan. This dataset provides detailed spatial units for mapping business clusters, conducting regional analysis, and performing spatial statistical tests. The subzone boundaries enable aggregation of business data at appropriate spatial scales for urban planning insights and identification of specialized business districts. | KML (converted to ESRI Shapefile) | Urban Redevelopment Authority (URA) / [data.gov.sg](https://data.gov.sg/) |
@@ -525,6 +523,10 @@ Cross-K function analysis examines spatial interactions between different busine
 The `Kcross()` function computes the cross-K function between two sector types, measuring the expected number of points of one type within a given distance of points of another type. The `rmax = 50` parameter limits analysis to 50km radius for computational efficiency. Values above the random expectation indicate attraction between sectors, while values below suggest repulsion or independence.
 
 ```{r}
+#| fig-width: 20
+#| fig-height: 7
+#| dev: "png"
+#| dpi: 300
 #| message: false
 #| warning: false
 # Create multitype point pattern for cross-K analysis
@@ -545,11 +547,11 @@ cross_K_tech_finance <- Kcross(all_points, "Tech", "Finance", rmax = 50)
 cross_K_tech_rd <- Kcross(all_points, "Tech", "R&D", rmax = 50)
 cross_K_finance_rd <- Kcross(all_points, "Finance", "R&D", rmax = 50)
 
-# Plot Cross-K functions
-par(mfrow = c(1, 3))
-plot(cross_K_tech_finance, . - r ~ r, main = "Tech-Finance Cross-K")
-plot(cross_K_tech_rd, . - r ~ r, main = "Tech-R&D Cross-K")
-plot(cross_K_finance_rd, . - r ~ r, main = "Finance-R&D Cross-K")
+# Plot Cross-K functions with optimized settings for better visibility
+par(mfrow = c(1, 3), mar = c(5, 5, 4, 2), cex.main = 1.2, cex.lab = 1.1, cex.axis = 1.0)
+plot(cross_K_tech_finance, . - r ~ r, main = "Tech-Finance Cross-K", cex.main = 1.3)
+plot(cross_K_tech_rd, . - r ~ r, main = "Tech-R&D Cross-K", cex.main = 1.3)
+plot(cross_K_finance_rd, . - r ~ r, main = "Finance-R&D Cross-K", cex.main = 1.3)
 ```
 
 **Figure 3.5: Cross-K Function Analysis for Inter-sectoral Spatial Interaction**
@@ -1207,3 +1209,15 @@ Based on these findings, several policy recommendations emerge for urban land us
 5.  **Regional Balance**: Continue supporting polycentric development while recognizing CBD's continued importance as Singapore's primary business hub.
 
 These findings provide a data-driven foundation for evidence-based urban planning decisions that can support Singapore's continued growth as a global business hub while ensuring sustainable and balanced development across the city-state. By recognizing the complex interplay between spatial clustering, temporal patterns, and sector-specific needs, Singapore can optimize its urban development strategy to maintain its competitive advantage while fostering inclusive economic growth.
+
+# **8. References**
+
+Park, S., Seo, H., & Koo, H. (2023). Exploring the spatio-temporal clusters of closed restaurants after the COVID-19 outbreak in Seoul using relative risk surfaces. *Scientific Reports*, 13, 13889. https://doi.org/10.1038/s41598-023-40937-5
+
+Ben-Said, M. (2021). Spatial point-pattern analysis as a powerful tool in identifying pattern-process relationships in plant ecology: an updated review. *Ecological Processes*, 10, 56. https://doi.org/10.1186/s13717-021-00314-4
+
+Kam, T. S. (2023). R for Geospatial Data Science and Analytics. Retrieved from https://r4gdsa.netlify.app/chap01.html
+
+Accounting and Corporate Regulatory Authority (ACRA). (2024). Information on Corporate Entities. Retrieved from https://data.gov.sg/
+
+Department of Statistics Singapore. (2020). Singapore Standard Industrial Classification (SSIC) 2020. Retrieved from https://www.singstat.gov.sg/
