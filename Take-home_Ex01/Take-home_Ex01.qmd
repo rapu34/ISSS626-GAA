@@ -377,8 +377,7 @@ The Clark-Evans test is a fundamental statistical test that determines whether o
 # Perform Clark-Evans test for overall spatial randomness
 clarkevans.test(acra_innovation_ppp,
                 correction = "none",
-                clipregion = singapore_owin,
-                alternative = c("clustered"))
+                alternative = "clustered")
 ```
 
 **Interpretation**: The Clark-Evans test shows strong evidence of spatial clustering (R = 0.221, p \< 0.001). This indicates that innovation businesses are significantly clustered rather than randomly distributed across Singapore, suggesting agglomeration effects and strategic business location patterns.
