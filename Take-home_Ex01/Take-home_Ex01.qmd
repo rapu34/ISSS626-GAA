@@ -42,7 +42,7 @@ The specific objectives are as follows:
 In this exercise, we will use following packages:
 
 | Package | Description |
-|----|----|
+|------------------------------------|------------------------------------|
 | **sf** | Provides functions to manage, process, and manipulate Simple Features, a formal geospatial data standard that specifies a storage and access model of spatial geometries such as points, lines, and polygons. Essential for converting business addresses to spatial coordinates and handling geospatial data throughout the analysis. |
 | **spatstat** | Provides functions for spatial statistics with a strong focus on analyzing spatial point patterns. Used for performing kernel density estimation (KDE), G-function, K-function, and Cross-K function analysis to identify clustering patterns and spatial interactions between business sectors. |
 | **tidyverse** | Provides a collection of functions for performing data science tasks such as importing, tidying, wrangling data, and creating statistical visualizations. Essential for data preprocessing, filtering by SSIC codes, and creating temporal analysis plots. |
@@ -64,7 +64,7 @@ tmap_mode("plot")
 ## 2.2 Data
 
 | Dataset Name | Description | Format | Source |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | **ACRA – Information on Corporate Entities (2024–2025)** | Comprehensive business registration data from Singapore's Accounting and Corporate Regulatory Authority, containing detailed information about all registered corporate entities. The dataset includes company names, incorporation dates, registered addresses with postal codes, and primary SSIC (Singapore Standard Industrial Classification) codes. This dataset serves as the foundation for identifying and analyzing businesses in the technology (SSIC 62), finance (SSIC 64), and research & development (SSIC 72) sectors. The temporal coverage from January 2024 to June 2025 enables spatio-temporal analysis of new business formations. | CSV (27 files, alphabetically organized, merged) | [data.gov.sg](https://data.gov.sg/) |
 | **SSIC 2020 Classification** | Official industry classification reference published by Singapore's Department of Statistics, providing standardized codes and descriptions for all economic activities. This classification system enables precise identification and categorization of businesses by their primary economic activities. Specifically used to filter and classify firms into technology (62), finance (64), and R&D (72) sectors, ensuring accurate sector-based analysis and comparison. | Excel | Department of Statistics Singapore |
 | **Singapore Subzone Boundaries (Master Plan 2019)** | High-resolution geospatial dataset containing Singapore's administrative and planning subzone boundaries from the Urban Redevelopment Authority's Master Plan. This dataset provides detailed spatial units for mapping business clusters, conducting regional analysis, and performing spatial statistical tests. The subzone boundaries enable aggregation of business data at appropriate spatial scales for urban planning insights and identification of specialized business districts. | KML (converted to ESRI Shapefile) | Urban Redevelopment Authority (URA) / [data.gov.sg](https://data.gov.sg/) |
