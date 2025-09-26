@@ -3,3 +3,9 @@ title: "ISSS626-GAA"
 ---
 
 Welcome to **ISSS626-G1-Geospatial Analytics and Applications**. In this website, you will find my coursework prepared for this course.
+
+**Notice**\
+I have completed the Week 5 Hands-on Exercise, but it is currently not showing up directly in the Hands-on Exercise view.\
+To access it, please click **Take-home Exercise** first and then go back to **Hands-on Exercise** — Week 5 should appear.
+
+I will fix this error shortly. Thank you for your understanding.
