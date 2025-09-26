@@ -2,7 +2,7 @@
 title: "Hands-on Exercise 5"
 author: "Jeounghyun Kim"
 date: "September 25, 2025"
-date-modified: "last-modified"
+date-modified: "September 25, 2025"
 execute:
   echo: true
   eval: true
