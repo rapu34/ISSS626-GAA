@@ -1,0 +1,15 @@
+{
+  "hash": "1af3ebefe236ff5246285ea26ad0a6eb",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"In-class Exercise 3b\"\nauthor: \"Jeounghyun Kim\"\ndate: \"September 13, 2025\"\ndate-modified: \"last-modified\"\nexecute: \n  eval: true\n  echo: true\n  warning: false\n  freeze: true\n---\n\n\n\n\n**Loading the R package**\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(tidyverse, sf, tmap, httr)\n```\n:::\n\n\n\n\n**Importing ACRA data**\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nfolder_path <- \"data/aspatial/acra\"\n\nfile_list <- list.files(path = folder_path,\n                        pattern = \"^ACRA.*\\\\.csv$\",\n                        full.names = TRUE)\n\nacra_data <- file_list %>% map_dfr(read_csv)\n```\n:::\n\n\n\n\n**Saving ACRA data**\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nwrite_rds(acra_data, \"data/rds/acra_data.rds\")\n```\n:::\n\n\n\n\n**Tidying ACRA data**\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nbiz_56111 <- acra_data %>%\n  select(1:24) %>%\n  filter(primary_ssic_code == 56111) %>%\n  rename(date = registration_incorporation_date) %>%\n  mutate(date = as.Date(date),\n         YEAR = year(date),\n         MONTH_NUM = month(date),\n         MONTH_ABBR = month(date,\n                            label = TRUE,\n                            abbr = TRUE)) %>%\n  mutate(postal_code = str_pad(postal_code,\n                               width = 6, side = \"left\", pad = \"0\")) %>%\n  filter(YEAR == 2025)\n```\n:::\n\n\n\n\n**Geocoding**\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\npostcodes <- unique(biz_56111$postal_code)\n\nurl <- \"https://onemap.gov.sg/api/common/elastic/search\"\n\nfound <- data.frame()\nnot_found <- data.frame(postcode = character())\n\nfor (pc in postcodes) {\n  query <- list(\n    searchVal = pc,\n    returnGeom = \"Y\",\n    getAddrDetails = \"Y\",\n    pageNum = \"1\"\n  )\n  \n  res <- GET(url, query = query)\n  json <- content(res)\n  \n  if (json$found != 0) {\n    df <- as.data.frame(json$results, stringsAsFactors = FALSE)\n    df$input_postcode <- pc\n    found <- bind_rows(found, df)\n  } else {\n    not_found <- bind_rows(not_found, data.frame(postcode = pc))\n  }\n}\n```\n:::\n\n\n\n\n**Appending the location information**\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nbiz_56111 = biz_56111 %>%\n  left_join(found,\n            by=c('postal_code' = \"POSTAL\"))\n```\n:::\n\n\n\n\n**Saving the data**\n\n\n\n\n::: {.cell}\n\n:::\n\n\n\n\n**Converting into SF data frame**\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nbiz_56111_sf <- st_as_sf(biz_56111,coords = c(\"X\",\"Y\"),crs=3414)\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

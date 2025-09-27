@@ -285,5 +285,12 @@
     "title": "In-class_Ex04",
     "section": "Geographically Weighted Summary Statistics with adaptive bandwidth",
     "text": "Geographically Weighted Summary Statistics with adaptive bandwidth"
+  },
+  {
+    "objectID": "In-class_Ex/In-class_Ex03b/In-class_Ex03b.html",
+    "href": "In-class_Ex/In-class_Ex03b/In-class_Ex03b.html",
+    "title": "In-class Exercise 3b",
+    "section": "",
+    "text": "Loading the R package\n\npacman::p_load(tidyverse, sf, tmap, httr)\n\nImporting ACRA data\n\nfolder_path &lt;- \"data/aspatial/acra\"\n\nfile_list &lt;- list.files(path = folder_path,\n                        pattern = \"^ACRA.*\\\\.csv$\",\n                        full.names = TRUE)\n\nacra_data &lt;- file_list %&gt;% map_dfr(read_csv)\n\nSaving ACRA data\n\nwrite_rds(acra_data, \"data/rds/acra_data.rds\")\n\nTidying ACRA data\n\nbiz_56111 &lt;- acra_data %&gt;%\n  select(1:24) %&gt;%\n  filter(primary_ssic_code == 56111) %&gt;%\n  rename(date = registration_incorporation_date) %&gt;%\n  mutate(date = as.Date(date),\n         YEAR = year(date),\n         MONTH_NUM = month(date),\n         MONTH_ABBR = month(date,\n                            label = TRUE,\n                            abbr = TRUE)) %&gt;%\n  mutate(postal_code = str_pad(postal_code,\n                               width = 6, side = \"left\", pad = \"0\")) %&gt;%\n  filter(YEAR == 2025)\n\nGeocoding\n\npostcodes &lt;- unique(biz_56111$postal_code)\n\nurl &lt;- \"https://onemap.gov.sg/api/common/elastic/search\"\n\nfound &lt;- data.frame()\nnot_found &lt;- data.frame(postcode = character())\n\nfor (pc in postcodes) {\n  query &lt;- list(\n    searchVal = pc,\n    returnGeom = \"Y\",\n    getAddrDetails = \"Y\",\n    pageNum = \"1\"\n  )\n  \n  res &lt;- GET(url, query = query)\n  json &lt;- content(res)\n  \n  if (json$found != 0) {\n    df &lt;- as.data.frame(json$results, stringsAsFactors = FALSE)\n    df$input_postcode &lt;- pc\n    found &lt;- bind_rows(found, df)\n  } else {\n    not_found &lt;- bind_rows(not_found, data.frame(postcode = pc))\n  }\n}\n\nAppending the location information\n\nbiz_56111 = biz_56111 %&gt;%\n  left_join(found,\n            by=c('postal_code' = \"POSTAL\"))\n\nSaving the data\nConverting into SF data frame\n\nbiz_56111_sf &lt;- st_as_sf(biz_56111,coords = c(\"X\",\"Y\"),crs=3414)"
   }
 ]
