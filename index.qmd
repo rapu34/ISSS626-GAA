@@ -6,6 +6,4 @@ Welcome to **ISSS626-G1-Geospatial Analytics and Applications**. In this website
 
 **Notice**\
 I have completed the In class Exercise 5, but it is currently not showing up directly in the Hands-on Exercise view.\
-To access it, please click any of in class exercise first and then go back to - In class exercise 5 - should appear.
-
-I will fix this error shortly. Thank you for your understanding.
+To access it, please click any of in class exercise first and then go back to - In class exercise 5 - should appear. I will fix this error shortly. Thank you for your understanding.
