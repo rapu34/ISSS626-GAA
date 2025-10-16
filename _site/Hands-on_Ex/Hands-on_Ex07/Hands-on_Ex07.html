@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jeounghyun Kim">
+<meta name="dcterms.date" content="2025-10-16">
 
-<title>Untitled – ISSS626 Coursework</title>
+<title>Hands-on Exercise 7 – ISSS626 Coursework</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -194,23 +230,88 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#calibrating-hedonic-pricing-model-for-private-highrise-property-with-gwr-method" id="toc-calibrating-hedonic-pricing-model-for-private-highrise-property-with-gwr-method" class="nav-link active" data-scroll-target="#calibrating-hedonic-pricing-model-for-private-highrise-property-with-gwr-method"><strong>13&nbsp;&nbsp;Calibrating Hedonic Pricing Model for Private Highrise Property with GWR Method</strong></a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><strong>13.1&nbsp;Overview</strong></a></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><strong>13.2&nbsp;The Data</strong></a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><strong>13.3&nbsp;Getting Started</strong></a></li>
+  <li><a href="#a-short-note-about-gwmodel" id="toc-a-short-note-about-gwmodel" class="nav-link" data-scroll-target="#a-short-note-about-gwmodel"><strong>13.4&nbsp;A short note about GWmodel</strong></a></li>
+  <li><a href="#geospatial-data-wrangling" id="toc-geospatial-data-wrangling" class="nav-link" data-scroll-target="#geospatial-data-wrangling"><strong>13.5&nbsp;Geospatial Data Wrangling</strong></a>
+  <ul class="collapse">
+  <li><a href="#importing-geospatial-data" id="toc-importing-geospatial-data" class="nav-link" data-scroll-target="#importing-geospatial-data"><strong>13.5.1&nbsp;Importing geospatial data</strong></a></li>
+  <li><a href="#updating-crs-information" id="toc-updating-crs-information" class="nav-link" data-scroll-target="#updating-crs-information"><strong>13.5.2&nbsp;Updating CRS information</strong></a></li>
+  </ul></li>
+  <li><a href="#aspatial-data-wrangling" id="toc-aspatial-data-wrangling" class="nav-link" data-scroll-target="#aspatial-data-wrangling"><strong>13.6&nbsp;Aspatial Data Wrangling</strong></a>
+  <ul class="collapse">
+  <li><a href="#importing-the-aspatial-data" id="toc-importing-the-aspatial-data" class="nav-link" data-scroll-target="#importing-the-aspatial-data"><strong>13.6.1&nbsp;Importing the aspatial data</strong></a></li>
+  <li><a href="#converting-aspatial-data-frame-into-a-sf-object" id="toc-converting-aspatial-data-frame-into-a-sf-object" class="nav-link" data-scroll-target="#converting-aspatial-data-frame-into-a-sf-object"><strong>13.6.2&nbsp;Converting aspatial data frame into a sf object</strong></a></li>
+  </ul></li>
+  <li><a href="#exploratory-data-analysis-eda" id="toc-exploratory-data-analysis-eda" class="nav-link" data-scroll-target="#exploratory-data-analysis-eda"><strong>13.7&nbsp;Exploratory Data Analysis (EDA)</strong></a>
+  <ul class="collapse">
+  <li><a href="#eda-using-statistical-graphics" id="toc-eda-using-statistical-graphics" class="nav-link" data-scroll-target="#eda-using-statistical-graphics"><strong>13.7.1&nbsp;EDA using statistical graphics</strong></a></li>
+  <li><a href="#multiple-histogram-plots-distribution-of-variables" id="toc-multiple-histogram-plots-distribution-of-variables" class="nav-link" data-scroll-target="#multiple-histogram-plots-distribution-of-variables"><strong>13.7.2&nbsp;Multiple Histogram Plots distribution of variables</strong></a></li>
+  <li><a href="#drawing-statistical-point-map" id="toc-drawing-statistical-point-map" class="nav-link" data-scroll-target="#drawing-statistical-point-map"><strong>13.7.3&nbsp;Drawing Statistical Point Map</strong></a></li>
+  </ul></li>
+  <li><a href="#hedonic-pricing-modelling-in-r" id="toc-hedonic-pricing-modelling-in-r" class="nav-link" data-scroll-target="#hedonic-pricing-modelling-in-r"><strong>13.8&nbsp;Hedonic Pricing Modelling in R</strong></a>
+  <ul class="collapse">
+  <li><a href="#simple-linear-regression-method" id="toc-simple-linear-regression-method" class="nav-link" data-scroll-target="#simple-linear-regression-method"><strong>13.8.1&nbsp;Simple Linear Regression Method</strong></a></li>
+  <li><a href="#multiple-linear-regression-method" id="toc-multiple-linear-regression-method" class="nav-link" data-scroll-target="#multiple-linear-regression-method"><strong>13.8.2&nbsp;Multiple Linear Regression Method</strong></a></li>
+  <li><a href="#building-a-hedonic-pricing-model-using-multiple-linear-regression-method" id="toc-building-a-hedonic-pricing-model-using-multiple-linear-regression-method" class="nav-link" data-scroll-target="#building-a-hedonic-pricing-model-using-multiple-linear-regression-method"><strong>13.8.3&nbsp;Building a hedonic pricing model using multiple linear regression method</strong></a></li>
+  <li><a href="#revising-the-model" id="toc-revising-the-model" class="nav-link" data-scroll-target="#revising-the-model"><strong>13.8.4&nbsp;Revising the model</strong></a></li>
+  <li><a href="#preparing-publication-quality-table-gtsummary-method" id="toc-preparing-publication-quality-table-gtsummary-method" class="nav-link" data-scroll-target="#preparing-publication-quality-table-gtsummary-method"><strong>13.8.5&nbsp;Preparing Publication Quality Table: gtsummary method</strong></a></li>
+  <li><a href="#regression-diagnostics" id="toc-regression-diagnostics" class="nav-link" data-scroll-target="#regression-diagnostics"><strong>13.8.6&nbsp;Regression Diagnostics</strong></a></li>
+  </ul></li>
+  <li><a href="#building-hedonic-pricing-models-using-gwmodel" id="toc-building-hedonic-pricing-models-using-gwmodel" class="nav-link" data-scroll-target="#building-hedonic-pricing-models-using-gwmodel"><strong>13.9&nbsp;Building Hedonic Pricing Models using GWmodel</strong></a>
+  <ul class="collapse">
+  <li><a href="#building-fixed-bandwidth-gwr-model" id="toc-building-fixed-bandwidth-gwr-model" class="nav-link" data-scroll-target="#building-fixed-bandwidth-gwr-model"><strong>13.9.1&nbsp;Building Fixed Bandwidth GWR Model</strong></a></li>
+  <li><a href="#building-adaptive-bandwidth-gwr-model" id="toc-building-adaptive-bandwidth-gwr-model" class="nav-link" data-scroll-target="#building-adaptive-bandwidth-gwr-model"><strong>13.9.2&nbsp;Building Adaptive Bandwidth GWR Model</strong></a></li>
+  <li><a href="#visualising-gwr-output" id="toc-visualising-gwr-output" class="nav-link" data-scroll-target="#visualising-gwr-output"><strong>13.9.3&nbsp;Visualising GWR Output</strong></a></li>
+  <li><a href="#converting-sdf-into-sf-data.frame" id="toc-converting-sdf-into-sf-data.frame" class="nav-link" data-scroll-target="#converting-sdf-into-sf-data.frame"><strong>13.9.4&nbsp;Converting SDF into&nbsp;<em>sf</em>&nbsp;data.frame</strong></a></li>
+  <li><a href="#visualising-local-r2" id="toc-visualising-local-r2" class="nav-link" data-scroll-target="#visualising-local-r2"><strong>13.9.5&nbsp;Visualising local R2</strong></a></li>
+  <li><a href="#visualising-coefficient-estimates" id="toc-visualising-coefficient-estimates" class="nav-link" data-scroll-target="#visualising-coefficient-estimates"><strong>13.9.6&nbsp;Visualising coefficient estimates</strong></a></li>
+  </ul></li>
+  <li><a href="#reference" id="toc-reference" class="nav-link" data-scroll-target="#reference"><strong>13.10&nbsp;Reference</strong></a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Untitled</h1>
+<h1 class="title">Hands-on Exercise 7</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jeounghyun Kim </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 16, 2025</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 17, 2025</p>
+    </div>
+  </div>
     
   </div>
   
@@ -219,8 +320,2599 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="calibrating-hedonic-pricing-model-for-private-highrise-property-with-gwr-method" class="level1">
+<h1><strong>13&nbsp;&nbsp;Calibrating Hedonic Pricing Model for Private Highrise Property with GWR Method</strong></h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview"><strong>13.1&nbsp;Overview</strong></h2>
+<ul>
+<li><p>A spatial technique for building&nbsp;<a href="https://www.investopedia.com/terms/h/hedonicpricing.asp">hedonic pricing</a>&nbsp;models&nbsp;that capture&nbsp;<strong>local variations</strong>&nbsp;in relationships between variables.</p></li>
+<li><p>Unlike&nbsp;<strong>OLS</strong>, GWR considers&nbsp;<strong>spatial non-stationarity</strong>, showing how factors affect prices differently across locations.</p></li>
+<li><p><strong>Application:</strong>&nbsp;Condominium resale prices (2015) using&nbsp;<strong>structural</strong>&nbsp;and&nbsp;<strong>locational</strong>&nbsp;variables.</p></li>
+</ul>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data"><strong>13.2&nbsp;The Data</strong></h2>
+<p>Two data sets will be used in this model building exercise, they are:</p>
+<ul>
+<li><p>URA Master Plan subzone boundary in shapefile format (i.e.&nbsp;<em>MP14_SUBZONE_WEB_PL</em>)</p></li>
+<li><p>condo_resale_2015 in csv format (i.e.&nbsp;<em>condo_resale_2015.csv</em>)</p></li>
+</ul>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started"><strong>13.3&nbsp;Getting Started</strong></h2>
+<p>Before we get started, it is important for us to install the necessary R packages into R and launch these R packages into R environment.</p>
+<p>The R packages needed for this exercise are as follows:</p>
+<ul>
+<li><p>R package for building OLS and performing diagnostics tests</p>
+<ul>
+<li><a href="https://olsrr.rsquaredacademy.com/"><strong>olsrr</strong></a></li>
+</ul></li>
+<li><p>R package for calibrating geographical weighted family of models</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/GWmodel/index.html"><strong>GWmodel</strong></a></li>
+</ul></li>
+<li><p>R package for multivariate data visualisation and analysis</p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html"><strong>corrplot</strong></a></li>
+</ul></li>
+<li><p>Spatial data handling</p>
+<ul>
+<li><strong>sf</strong></li>
+</ul></li>
+<li><p>Attribute data handling</p>
+<ul>
+<li><strong>tidyverse</strong>, especially&nbsp;<strong>readr</strong>,&nbsp;<strong>ggplot2</strong>&nbsp;and&nbsp;<strong>dplyr</strong></li>
+</ul></li>
+<li><p>Choropleth mapping</p>
+<ul>
+<li><strong>tmap</strong></li>
+</ul></li>
+</ul>
+<p>The code chunks below installs and launches these R packages into R environment.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(olsrr, corrplot, ggpubr, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               sf, sfdep, GWmodel, tmap, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               tidyverse, gtsummary,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>               performance, RColorBrewer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="a-short-note-about-gwmodel" class="level2">
+<h2 class="anchored" data-anchor-id="a-short-note-about-gwmodel"><strong>13.4&nbsp;A short note about GWmodel</strong></h2>
+<ul>
+<li><p><strong>GWmodel</strong>&nbsp;provides a suite of&nbsp;<strong>localized spatial analysis tools</strong>, including:</p>
+<ul>
+<li><p>Geographically Weighted (GW)&nbsp;<strong>summary statistics</strong>,</p></li>
+<li><p><strong>GW principal components analysis</strong>,</p></li>
+<li><p><strong>GW discriminant analysis</strong>,</p></li>
+<li><p>and various&nbsp;<strong>GW regression models</strong>&nbsp;(both basic and robust forms).</p></li>
+</ul></li>
+<li><p>It is mainly used as an&nbsp;<strong>exploratory spatial tool</strong>, where results (parameters or outputs) are&nbsp;<strong>mapped</strong>&nbsp;to visualize spatial variations.</p></li>
+<li><p>Such visualization often&nbsp;<strong>guides further, more advanced statistical analysis</strong>.</p></li>
+</ul>
+</section>
+<section id="geospatial-data-wrangling" class="level2">
+<h2 class="anchored" data-anchor-id="geospatial-data-wrangling"><strong>13.5&nbsp;Geospatial Data Wrangling</strong></h2>
+<section id="importing-geospatial-data" class="level3">
+<h3 class="anchored" data-anchor-id="importing-geospatial-data"><strong>13.5.1&nbsp;Importing geospatial data</strong></h3>
+<p>The geospatial data used in this hands-on exercise is called MP14_SUBZONE_WEB_PL. It is in ESRI shapefile format. The shapefile consists of URA Master Plan 2014’s planning subzone boundaries. Polygon features are used to represent these geographic boundaries. The GIS data is in svy21 projected coordinates systems.</p>
+<p>The code chunk below is used to import&nbsp;<em>MP_SUBZONE_WEB_PL</em>&nbsp;shapefile by using&nbsp;<code>st_read()</code>&nbsp;of&nbsp;<strong>sf</strong>&nbsp;packages.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mpsz <span class="ot">=</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"data/geospatial"</span>, </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">layer =</span> <span class="st">"MP14_SUBZONE_WEB_PL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `MP14_SUBZONE_WEB_PL' from data source 
+  `/Users/jay/Desktop/rapu34/ISSS626-GAA/Hands-on_Ex/Hands-on_Ex07/data/geospatial' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 323 features and 15 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 2667.538 ymin: 15748.72 xmax: 56396.44 ymax: 50256.33
+Projected CRS: SVY21</code></pre>
+</div>
+</div>
+<p>The report above shows that the R object used to contain the imported MP14_SUBZONE_WEB_PL shapefile is called&nbsp;<em>mpsz</em>&nbsp;and it is a simple feature object. The geometry type is&nbsp;<em>multipolygon</em>. it is also important to note that mpsz simple feature object does not have EPSG information.</p>
+</section>
+<section id="updating-crs-information" class="level3">
+<h3 class="anchored" data-anchor-id="updating-crs-information"><strong>13.5.2&nbsp;Updating CRS information</strong></h3>
+<p>The code chunk below updates the newly imported&nbsp;<em>mpsz</em>&nbsp;with the correct ESPG code (i.e.&nbsp;3414)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mpsz_svy21 <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(mpsz, <span class="dv">3414</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After transforming the projection metadata, you can varify the projection of the newly transformed&nbsp;<em>mpsz_svy21</em>&nbsp;by using&nbsp;<code>st_crs()</code>&nbsp;of&nbsp;<strong>sf</strong>&nbsp;package.</p>
+<p>The code chunk below will be used to verify the newly transformed&nbsp;<em>mpsz_svy21</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(mpsz_svy21)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Coordinate Reference System:
+  User input: EPSG:3414 
+  wkt:
+PROJCRS["SVY21 / Singapore TM",
+    BASEGEOGCRS["SVY21",
+        DATUM["SVY21",
+            ELLIPSOID["WGS 84",6378137,298.257223563,
+                LENGTHUNIT["metre",1]]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433]],
+        ID["EPSG",4757]],
+    CONVERSION["Singapore Transverse Mercator",
+        METHOD["Transverse Mercator",
+            ID["EPSG",9807]],
+        PARAMETER["Latitude of natural origin",1.36666666666667,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8801]],
+        PARAMETER["Longitude of natural origin",103.833333333333,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8802]],
+        PARAMETER["Scale factor at natural origin",1,
+            SCALEUNIT["unity",1],
+            ID["EPSG",8805]],
+        PARAMETER["False easting",28001.642,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8806]],
+        PARAMETER["False northing",38744.572,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8807]]],
+    CS[Cartesian,2],
+        AXIS["northing (N)",north,
+            ORDER[1],
+            LENGTHUNIT["metre",1]],
+        AXIS["easting (E)",east,
+            ORDER[2],
+            LENGTHUNIT["metre",1]],
+    USAGE[
+        SCOPE["Cadastre, engineering survey, topographic mapping."],
+        AREA["Singapore - onshore and offshore."],
+        BBOX[1.13,103.59,1.47,104.07]],
+    ID["EPSG",3414]]</code></pre>
+</div>
+</div>
+<p>Notice that the EPSG: is indicated as&nbsp;<em>3414</em>&nbsp;now.</p>
+<p>Next, you will reveal the extent of&nbsp;<em>mpsz_svy21</em>&nbsp;by using&nbsp;<code>st_bbox()</code>&nbsp;of sf package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_bbox</span>(mpsz_svy21)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     xmin      ymin      xmax      ymax 
+ 2667.538 15748.721 56396.440 50256.334 </code></pre>
+</div>
+</div>
+<p>The print above reports the extent of mpsz_svy21 layer by its lower and upper limits.</p>
+</section>
+</section>
+<section id="aspatial-data-wrangling" class="level2">
+<h2 class="anchored" data-anchor-id="aspatial-data-wrangling"><strong>13.6&nbsp;Aspatial Data Wrangling</strong></h2>
+<section id="importing-the-aspatial-data" class="level3">
+<h3 class="anchored" data-anchor-id="importing-the-aspatial-data"><strong>13.6.1&nbsp;Importing the aspatial data</strong></h3>
+<p>The&nbsp;<em>condo_resale_2015</em>&nbsp;is in csv file format. The codes chunk below uses&nbsp;<code>read_csv()</code>&nbsp;function of&nbsp;<strong>readr</strong>&nbsp;package to import&nbsp;<em>condo_resale_2015</em>&nbsp;into R as a tibble data frame called&nbsp;<em>condo_resale</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>condo_resale <span class="ot">=</span> <span class="fu">read_csv</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/aspatial/Condo_resale_2015.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After importing the data file into R, it is important for us to examine if the data file has been imported correctly.</p>
+<p>The codes chunks below uses&nbsp;<code>glimpse()</code>&nbsp;to display the data structure of will do the job.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(condo_resale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,436
+Columns: 23
+$ LATITUDE             &lt;dbl&gt; 1.287145, 1.328698, 1.313727, 1.308563, 1.321437,…
+$ LONGITUDE            &lt;dbl&gt; 103.7802, 103.8123, 103.7971, 103.8247, 103.9505,…
+$ POSTCODE             &lt;dbl&gt; 118635, 288420, 267833, 258380, 467169, 466472, 3…
+$ SELLING_PRICE        &lt;dbl&gt; 3000000, 3880000, 3325000, 4250000, 1400000, 1320…
+$ AREA_SQM             &lt;dbl&gt; 309, 290, 248, 127, 145, 139, 218, 141, 165, 168,…
+$ AGE                  &lt;dbl&gt; 30, 32, 33, 7, 28, 22, 24, 24, 27, 31, 17, 22, 6,…
+$ PROX_CBD             &lt;dbl&gt; 7.941259, 6.609797, 6.898000, 4.038861, 11.783402…
+$ PROX_CHILDCARE       &lt;dbl&gt; 0.16597932, 0.28027246, 0.42922669, 0.39473543, 0…
+$ PROX_ELDERLYCARE     &lt;dbl&gt; 2.5198118, 1.9333338, 0.5021395, 1.9910316, 1.121…
+$ PROX_URA_GROWTH_AREA &lt;dbl&gt; 6.618741, 7.505109, 6.463887, 4.906512, 6.410632,…
+$ PROX_HAWKER_MARKET   &lt;dbl&gt; 1.76542207, 0.54507614, 0.37789301, 1.68259969, 0…
+$ PROX_KINDERGARTEN    &lt;dbl&gt; 0.05835552, 0.61592412, 0.14120309, 0.38200076, 0…
+$ PROX_MRT             &lt;dbl&gt; 0.5607188, 0.6584461, 0.3053433, 0.6910183, 0.528…
+$ PROX_PARK            &lt;dbl&gt; 1.1710446, 0.1992269, 0.2779886, 0.9832843, 0.116…
+$ PROX_PRIMARY_SCH     &lt;dbl&gt; 1.6340256, 0.9747834, 1.4715016, 1.4546324, 0.709…
+$ PROX_TOP_PRIMARY_SCH &lt;dbl&gt; 3.3273195, 0.9747834, 1.4715016, 2.3006394, 0.709…
+$ PROX_SHOPPING_MALL   &lt;dbl&gt; 2.2102717, 2.9374279, 1.2256850, 0.3525671, 1.307…
+$ PROX_SUPERMARKET     &lt;dbl&gt; 0.9103958, 0.5900617, 0.4135583, 0.4162219, 0.581…
+$ PROX_BUS_STOP        &lt;dbl&gt; 0.10336166, 0.28673408, 0.28504777, 0.29872340, 0…
+$ NO_Of_UNITS          &lt;dbl&gt; 18, 20, 27, 30, 30, 31, 32, 32, 32, 32, 34, 34, 3…
+$ FAMILY_FRIENDLY      &lt;dbl&gt; 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0…
+$ FREEHOLD             &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1…
+$ LEASEHOLD_99YR       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(condo_resale<span class="sc">$</span>LONGITUDE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 103.7802 103.8123 103.7971 103.8247 103.9505 103.9386</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(condo_resale<span class="sc">$</span>LATITUDE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.287145 1.328698 1.313727 1.308563 1.321437 1.314198</code></pre>
+</div>
+</div>
+<p>The print above reveals that the values of&nbsp;<em>LONGITITUDE</em>&nbsp;and&nbsp;<em>LATITUDE</em>&nbsp;fields are in decimal degree. Most probably wgs84 geographic coordinate system is used.</p>
+<p>Next,&nbsp;<code>summary()</code>&nbsp;of base R is used to display the summary statistics of&nbsp;<em>cond_resale</em>tibble data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(condo_resale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    LATITUDE       LONGITUDE        POSTCODE      SELLING_PRICE     
+ Min.   :1.240   Min.   :103.7   Min.   : 18965   Min.   :  540000  
+ 1st Qu.:1.309   1st Qu.:103.8   1st Qu.:259849   1st Qu.: 1100000  
+ Median :1.328   Median :103.8   Median :469298   Median : 1383222  
+ Mean   :1.334   Mean   :103.8   Mean   :440439   Mean   : 1751211  
+ 3rd Qu.:1.357   3rd Qu.:103.9   3rd Qu.:589486   3rd Qu.: 1950000  
+ Max.   :1.454   Max.   :104.0   Max.   :828833   Max.   :18000000  
+    AREA_SQM          AGE           PROX_CBD       PROX_CHILDCARE    
+ Min.   : 34.0   Min.   : 0.00   Min.   : 0.3869   Min.   :0.004927  
+ 1st Qu.:103.0   1st Qu.: 5.00   1st Qu.: 5.5574   1st Qu.:0.174481  
+ Median :121.0   Median :11.00   Median : 9.3567   Median :0.258135  
+ Mean   :136.5   Mean   :12.14   Mean   : 9.3254   Mean   :0.326313  
+ 3rd Qu.:156.0   3rd Qu.:18.00   3rd Qu.:12.6661   3rd Qu.:0.368293  
+ Max.   :619.0   Max.   :37.00   Max.   :19.1804   Max.   :3.465726  
+ PROX_ELDERLYCARE  PROX_URA_GROWTH_AREA PROX_HAWKER_MARKET PROX_KINDERGARTEN 
+ Min.   :0.05451   Min.   :0.2145       Min.   :0.05182    Min.   :0.004927  
+ 1st Qu.:0.61254   1st Qu.:3.1643       1st Qu.:0.55245    1st Qu.:0.276345  
+ Median :0.94179   Median :4.6186       Median :0.90842    Median :0.413385  
+ Mean   :1.05351   Mean   :4.5981       Mean   :1.27987    Mean   :0.458903  
+ 3rd Qu.:1.35122   3rd Qu.:5.7550       3rd Qu.:1.68578    3rd Qu.:0.578474  
+ Max.   :3.94916   Max.   :9.1554       Max.   :5.37435    Max.   :2.229045  
+    PROX_MRT         PROX_PARK       PROX_PRIMARY_SCH  PROX_TOP_PRIMARY_SCH
+ Min.   :0.05278   Min.   :0.02906   Min.   :0.07711   Min.   :0.07711     
+ 1st Qu.:0.34646   1st Qu.:0.26211   1st Qu.:0.44024   1st Qu.:1.34451     
+ Median :0.57430   Median :0.39926   Median :0.63505   Median :1.88213     
+ Mean   :0.67316   Mean   :0.49802   Mean   :0.75471   Mean   :2.27347     
+ 3rd Qu.:0.84844   3rd Qu.:0.65592   3rd Qu.:0.95104   3rd Qu.:2.90954     
+ Max.   :3.48037   Max.   :2.16105   Max.   :3.92899   Max.   :6.74819     
+ PROX_SHOPPING_MALL PROX_SUPERMARKET PROX_BUS_STOP       NO_Of_UNITS    
+ Min.   :0.0000     Min.   :0.0000   Min.   :0.001595   Min.   :  18.0  
+ 1st Qu.:0.5258     1st Qu.:0.3695   1st Qu.:0.098356   1st Qu.: 188.8  
+ Median :0.9357     Median :0.5687   Median :0.151710   Median : 360.0  
+ Mean   :1.0455     Mean   :0.6141   Mean   :0.193974   Mean   : 409.2  
+ 3rd Qu.:1.3994     3rd Qu.:0.7862   3rd Qu.:0.220466   3rd Qu.: 590.0  
+ Max.   :3.4774     Max.   :2.2441   Max.   :2.476639   Max.   :1703.0  
+ FAMILY_FRIENDLY     FREEHOLD      LEASEHOLD_99YR  
+ Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+ 1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:0.0000  
+ Median :0.0000   Median :0.0000   Median :0.0000  
+ Mean   :0.4868   Mean   :0.4227   Mean   :0.4882  
+ 3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000  
+ Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  </code></pre>
+</div>
+</div>
+</section>
+<section id="converting-aspatial-data-frame-into-a-sf-object" class="level3">
+<h3 class="anchored" data-anchor-id="converting-aspatial-data-frame-into-a-sf-object"><strong>13.6.2&nbsp;Converting aspatial data frame into a sf object</strong></h3>
+<ul>
+<li><p>The&nbsp;<code>condo_resale</code>&nbsp;tibble is&nbsp;<strong>aspatial</strong>&nbsp;(no geographic information).</p></li>
+<li><p>It is converted into a&nbsp;<strong>simple feature (sf) object</strong>&nbsp;using the&nbsp;<code>st_as_sf()</code>&nbsp;function from the&nbsp;<strong>sf package</strong>, allowing spatial analysis and mapping.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>condo_resale.sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(condo_resale,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"LONGITUDE"</span>, <span class="st">"LATITUDE"</span>),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">crs=</span><span class="dv">4326</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="dv">3414</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that&nbsp;<code>st_transform()</code>&nbsp;of&nbsp;<strong>sf</strong>&nbsp;package is used to convert the coordinates from wgs84 (i.e.&nbsp;crs:4326) to svy21 (i.e.&nbsp;crs=3414).</p>
+</div>
+</div>
+<p>Next,&nbsp;<code>head()</code>&nbsp;is used to list the content of&nbsp;<em>condo_resale.sf</em>&nbsp;object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(condo_resale.sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 6 features and 21 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 22085.12 ymin: 29951.54 xmax: 41042.56 ymax: 34546.2
+Projected CRS: SVY21 / Singapore TM
+# A tibble: 6 × 22
+  POSTCODE SELLING_PRICE AREA_SQM   AGE PROX_CBD PROX_CHILDCARE PROX_ELDERLYCARE
+     &lt;dbl&gt;         &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;          &lt;dbl&gt;            &lt;dbl&gt;
+1   118635       3000000      309    30     7.94          0.166            2.52 
+2   288420       3880000      290    32     6.61          0.280            1.93 
+3   267833       3325000      248    33     6.90          0.429            0.502
+4   258380       4250000      127     7     4.04          0.395            1.99 
+5   467169       1400000      145    28    11.8           0.119            1.12 
+6   466472       1320000      139    22    10.3           0.125            0.789
+# ℹ 15 more variables: PROX_URA_GROWTH_AREA &lt;dbl&gt;, PROX_HAWKER_MARKET &lt;dbl&gt;,
+#   PROX_KINDERGARTEN &lt;dbl&gt;, PROX_MRT &lt;dbl&gt;, PROX_PARK &lt;dbl&gt;,
+#   PROX_PRIMARY_SCH &lt;dbl&gt;, PROX_TOP_PRIMARY_SCH &lt;dbl&gt;,
+#   PROX_SHOPPING_MALL &lt;dbl&gt;, PROX_SUPERMARKET &lt;dbl&gt;, PROX_BUS_STOP &lt;dbl&gt;,
+#   NO_Of_UNITS &lt;dbl&gt;, FAMILY_FRIENDLY &lt;dbl&gt;, FREEHOLD &lt;dbl&gt;,
+#   LEASEHOLD_99YR &lt;dbl&gt;, geometry &lt;POINT [m]&gt;</code></pre>
+</div>
+</div>
+<p>Notice that the output is in point feature data frame.</p>
+</section>
+</section>
+<section id="exploratory-data-analysis-eda" class="level2">
+<h2 class="anchored" data-anchor-id="exploratory-data-analysis-eda"><strong>13.7&nbsp;Exploratory Data Analysis (EDA)</strong></h2>
+<p>In the section, you will learn how to use statistical graphics functions of&nbsp;<strong>ggplot2</strong>package to perform EDA.</p>
+<section id="eda-using-statistical-graphics" class="level3">
+<h3 class="anchored" data-anchor-id="eda-using-statistical-graphics"><strong>13.7.1&nbsp;EDA using statistical graphics</strong></h3>
+<p>We can plot the distribution of&nbsp;<em>SELLING_PRICE</em>&nbsp;by using appropriate Exploratory Data Analysis (EDA) as shown in the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">SELLING_PRICE</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex07_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure above reveals a right skewed distribution. This means that more condominium units were transacted at relative lower prices.</p>
+<p>Statistically, the skewed dsitribution can be normalised by using log transformation. The code chunk below is used to derive a new variable called&nbsp;<em>LOG_SELLING_PRICE</em>&nbsp;by using a log transformation on the variable&nbsp;<em>SELLING_PRICE</em>. It is performed using&nbsp;<code>mutate()</code>&nbsp;of&nbsp;<strong>dplyr</strong>&nbsp;package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>condo_resale.sf <span class="ot">&lt;-</span> condo_resale.sf <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">LOG_SELLING_PRICE</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">log</span>(SELLING_PRICE))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, you can plot the&nbsp;<em>LOG_SELLING_PRICE</em>&nbsp;using the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">LOG_SELLING_PRICE</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex07_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice that the distribution is relatively less skewed after the transformation.</p>
+</section>
+<section id="multiple-histogram-plots-distribution-of-variables" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-histogram-plots-distribution-of-variables"><strong>13.7.2&nbsp;Multiple Histogram Plots distribution of variables</strong></h3>
+<p>In this section, you will learn how to draw a small multiple histograms (also known as trellis plot) by using&nbsp;<code>ggarrange()</code>&nbsp;of&nbsp;<a href="https://cran.r-project.org/web/packages/ggpubr/index.html"><strong>ggpubr</strong></a>&nbsp;package.</p>
+<p>The code chunk below is used to create 12 histograms. Then,&nbsp;<code>ggarrange()</code>&nbsp;is used to organised these histogram into a 3 columns by 4 rows small multiple plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>AREA_SQM <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">AREA_SQM</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>AGE <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">AGE</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>PROX_CBD <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_CBD</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>PROX_CHILDCARE <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_CHILDCARE</span><span class="st">`</span>)) <span class="sc">+</span> </span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>PROX_ELDERLYCARE <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_ELDERLYCARE</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>PROX_URA_GROWTH_AREA <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_URA_GROWTH_AREA</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>PROX_HAWKER_MARKET <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_HAWKER_MARKET</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>PROX_KINDERGARTEN <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_KINDERGARTEN</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a>PROX_MRT <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb24-50"><a href="#cb24-50" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_MRT</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb24-51"><a href="#cb24-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb24-52"><a href="#cb24-52" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb24-53"><a href="#cb24-53" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb24-54"><a href="#cb24-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-55"><a href="#cb24-55" aria-hidden="true" tabindex="-1"></a>PROX_PARK <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb24-56"><a href="#cb24-56" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_PARK</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb24-57"><a href="#cb24-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb24-58"><a href="#cb24-58" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb24-59"><a href="#cb24-59" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb24-60"><a href="#cb24-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-61"><a href="#cb24-61" aria-hidden="true" tabindex="-1"></a>PROX_PRIMARY_SCH <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb24-62"><a href="#cb24-62" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_PRIMARY_SCH</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb24-63"><a href="#cb24-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb24-64"><a href="#cb24-64" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb24-65"><a href="#cb24-65" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb24-66"><a href="#cb24-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-67"><a href="#cb24-67" aria-hidden="true" tabindex="-1"></a>PROX_TOP_PRIMARY_SCH <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb24-68"><a href="#cb24-68" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_TOP_PRIMARY_SCH</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb24-69"><a href="#cb24-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb24-70"><a href="#cb24-70" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb24-71"><a href="#cb24-71" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb24-72"><a href="#cb24-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-73"><a href="#cb24-73" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(AREA_SQM, AGE, PROX_CBD, PROX_CHILDCARE, </span>
+<span id="cb24-74"><a href="#cb24-74" aria-hidden="true" tabindex="-1"></a>          PROX_ELDERLYCARE, PROX_URA_GROWTH_AREA,</span>
+<span id="cb24-75"><a href="#cb24-75" aria-hidden="true" tabindex="-1"></a>          PROX_HAWKER_MARKET, PROX_KINDERGARTEN, PROX_MRT,</span>
+<span id="cb24-76"><a href="#cb24-76" aria-hidden="true" tabindex="-1"></a>          PROX_PARK, PROX_PRIMARY_SCH, PROX_TOP_PRIMARY_SCH,  </span>
+<span id="cb24-77"><a href="#cb24-77" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex07_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="drawing-statistical-point-map" class="level3">
+<h3 class="anchored" data-anchor-id="drawing-statistical-point-map"><strong>13.7.3&nbsp;Drawing Statistical Point Map</strong></h3>
+<p>Lastly, we want to reveal the geospatial distribution condominium resale prices in Singapore. The map will be prepared by using&nbsp;<strong>tmap</strong>&nbsp;package.</p>
+<p>First, we will turn on the interactive mode of tmap by using the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, the code chunks below is used to create an interactive point symbol map.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(mpsz_svy21)<span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>() <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(condo_resale.sf) <span class="sc">+</span>  </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">fill =</span> <span class="st">"SELLING_PRICE"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill_alpha =</span> <span class="fl">0.6</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill.scale =</span> <span class="fu">tm_scale_intervals</span>(</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">style=</span><span class="st">"quantile"</span>)) <span class="sc">+</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_view</span>(<span class="at">set_zoom_limits =</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex07_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice that&nbsp;<a href="https://www.rdocumentation.org/packages/tmap/versions/2.2/topics/tm_symbols"><code>tm_dots()</code></a>&nbsp;is used instead of&nbsp;<code>tm_bubbles()</code>.</p>
+<p><code>set_zoom_limits</code>&nbsp;argument of&nbsp;<code>tm_view()</code>&nbsp;sets the minimum and maximum zoom level to 11 and 14 respectively.</p>
+<p>Before moving on to the next section, the code below will be used to turn R display into&nbsp;<code>plot</code>&nbsp;mode.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="hedonic-pricing-modelling-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="hedonic-pricing-modelling-in-r"><strong>13.8&nbsp;Hedonic Pricing Modelling in R</strong></h2>
+<p>In this section, you will learn how to building hedonic pricing models for condominium resale units using&nbsp;<a href="https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/lm"><code>lm()</code></a>&nbsp;of R base.</p>
+<section id="simple-linear-regression-method" class="level3">
+<h3 class="anchored" data-anchor-id="simple-linear-regression-method"><strong>13.8.1&nbsp;Simple Linear Regression Method</strong></h3>
+<p>First, we will build a simple linear regression model by using&nbsp;<em>SELLING_PRICE</em>&nbsp;as the dependent variable and&nbsp;<em>AREA_SQM</em>&nbsp;as the independent variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>condo.slr <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula=</span>SELLING_PRICE <span class="sc">~</span> AREA_SQM, </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> condo_resale.sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>lm()</code>&nbsp;returns an object of class “lm” or for multiple responses of class c(“mlm”, “lm”).</p>
+<p>The functions&nbsp;<code>summary()</code>&nbsp;and&nbsp;<code>anova()</code>&nbsp;can be used to obtain and print a summary and analysis of variance table of the results. The generic accessor functions coefficients, effects, fitted.values and residuals extract various useful features of the value returned by&nbsp;<code>lm</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(condo.slr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = SELLING_PRICE ~ AREA_SQM, data = condo_resale.sf)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-3695815  -391764   -87517   258900 13503875 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -258121.1    63517.2  -4.064 5.09e-05 ***
+AREA_SQM      14719.0      428.1  34.381  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 942700 on 1434 degrees of freedom
+Multiple R-squared:  0.4518,    Adjusted R-squared:  0.4515 
+F-statistic:  1182 on 1 and 1434 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li><p>The regression equation is&nbsp;<strong>y = -258121.1 + 14719x₁</strong>, meaning that&nbsp;<strong>SELLING_PRICE</strong>&nbsp;increases by about&nbsp;<strong>14,719</strong>&nbsp;for each unit increase in&nbsp;<strong>AREA_SQM</strong>.</p></li>
+<li><p><strong>R² = 0.4518</strong>, indicating the model explains&nbsp;<strong>about 45% of the variance</strong>&nbsp;in resale prices.</p></li>
+<li><p>The&nbsp;<strong>p-value (&lt; 0.0001)</strong>&nbsp;shows the model is&nbsp;<strong>statistically significant</strong>, so we reject the null hypothesis that the mean alone predicts prices well.</p></li>
+<li><p>Both&nbsp;<strong>Intercept (B₀)</strong>&nbsp;and&nbsp;<strong>AREA_SQM (B₁)</strong>&nbsp;have&nbsp;<strong>p-values &lt; 0.001</strong>, confirming they are&nbsp;<strong>significant predictors</strong>.</p></li>
+<li><p>The&nbsp;<strong>best-fit line</strong>&nbsp;can be visualized in a scatterplot using&nbsp;<strong><code>geom_smooth(method = "lm")</code></strong>&nbsp;in&nbsp;<strong>ggplot2</strong>.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf,  </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">AREA_SQM</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">SELLING_PRICE</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex07_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Figure above reveals that there are a few statistical outliers with relatively high selling prices.</p>
+</section>
+<section id="multiple-linear-regression-method" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-linear-regression-method"><strong>13.8.2&nbsp;Multiple Linear Regression Method</strong></h3>
+<section id="visualising-the-relationships-of-the-independent-variables" class="level4">
+<h4 class="anchored" data-anchor-id="visualising-the-relationships-of-the-independent-variables">13.8.2.1&nbsp;Visualising the relationships of the independent variables</h4>
+<ul>
+<li><p>Before building a&nbsp;<strong>multiple regression model</strong>, it is essential to confirm that&nbsp;<strong>independent variables are not highly correlated</strong>.</p></li>
+<li><p><strong>High correlation</strong>&nbsp;among predictors can&nbsp;<strong>distort model accuracy</strong>&nbsp;— a problem known as&nbsp;<strong>multicollinearity</strong>.</p></li>
+<li><p>A&nbsp;<strong>correlation matrix</strong>&nbsp;helps visualize relationships between variables.</p></li>
+<li><p>In this exercise, the&nbsp;<strong><code>corrplot</code></strong>&nbsp;package (and&nbsp;<code>pairs()</code>&nbsp;in R) is used to&nbsp;<strong>plot a scatterplot matrix</strong>&nbsp;showing correlations among independent variables in&nbsp;<code>condo_resale</code>.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(condo_resale[, <span class="dv">5</span><span class="sc">:</span><span class="dv">23</span>]), </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">diag =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">order =</span> <span class="st">"AOE"</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">tl.pos =</span> <span class="st">"td"</span>, </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">tl.cex =</span> <span class="fl">0.5</span>, </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">"number"</span>, </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">type =</span> <span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex07_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Matrix reorder is very important for mining the hiden structure and patter in the matrix. There are four methods in corrplot (parameter order), named “AOE”, “FPC”, “hclust”, “alphabet”. In the code chunk above, AOE order is used. It orders the variables by using the&nbsp;<em>angular order of the eigenvectors</em>&nbsp;method suggested by&nbsp;<a href="https://www.datavis.ca/papers/corrgram.pdf">Michael Friendly</a>.</p>
+<p>From the scatterplot matrix, it is clear that&nbsp;<strong><em>Freehold</em></strong>&nbsp;is highly correlated to&nbsp;<strong><em>LEASE_99YEAR</em></strong>. In view of this, it is wiser to only include either one of them in the subsequent model building. As a result,&nbsp;<strong><em>LEASE_99YEAR</em></strong>&nbsp;is excluded in the subsequent model building.</p>
+</section>
+</section>
+<section id="building-a-hedonic-pricing-model-using-multiple-linear-regression-method" class="level3">
+<h3 class="anchored" data-anchor-id="building-a-hedonic-pricing-model-using-multiple-linear-regression-method"><strong>13.8.3&nbsp;Building a hedonic pricing model using multiple linear regression method</strong></h3>
+<p>The code chunk below using&nbsp;<code>lm()</code>&nbsp;to calibrate the multiple linear regression model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>condo.mlr <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> SELLING_PRICE <span class="sc">~</span> AREA_SQM <span class="sc">+</span> AGE  <span class="sc">+</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    PROX_CBD <span class="sc">+</span> PROX_CHILDCARE <span class="sc">+</span> PROX_ELDERLYCARE <span class="sc">+</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    PROX_URA_GROWTH_AREA <span class="sc">+</span> PROX_HAWKER_MARKET   <span class="sc">+</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    PROX_KINDERGARTEN   <span class="sc">+</span> PROX_MRT  <span class="sc">+</span> PROX_PARK <span class="sc">+</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    PROX_PRIMARY_SCH <span class="sc">+</span> PROX_TOP_PRIMARY_SCH <span class="sc">+</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    PROX_SHOPPING_MALL  <span class="sc">+</span> PROX_SUPERMARKET <span class="sc">+</span> </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    PROX_BUS_STOP   <span class="sc">+</span> NO_Of_UNITS <span class="sc">+</span> </span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    FAMILY_FRIENDLY <span class="sc">+</span> FREEHOLD, </span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>condo_resale.sf)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(condo.mlr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = SELLING_PRICE ~ AREA_SQM + AGE + PROX_CBD + PROX_CHILDCARE + 
+    PROX_ELDERLYCARE + PROX_URA_GROWTH_AREA + PROX_HAWKER_MARKET + 
+    PROX_KINDERGARTEN + PROX_MRT + PROX_PARK + PROX_PRIMARY_SCH + 
+    PROX_TOP_PRIMARY_SCH + PROX_SHOPPING_MALL + PROX_SUPERMARKET + 
+    PROX_BUS_STOP + NO_Of_UNITS + FAMILY_FRIENDLY + FREEHOLD, 
+    data = condo_resale.sf)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-3475964  -293923   -23069   241043 12260381 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)           481728.40  121441.01   3.967 7.65e-05 ***
+AREA_SQM               12708.32     369.59  34.385  &lt; 2e-16 ***
+AGE                   -24440.82    2763.16  -8.845  &lt; 2e-16 ***
+PROX_CBD              -78669.78    6768.97 -11.622  &lt; 2e-16 ***
+PROX_CHILDCARE       -351617.91  109467.25  -3.212  0.00135 ** 
+PROX_ELDERLYCARE      171029.42   42110.51   4.061 5.14e-05 ***
+PROX_URA_GROWTH_AREA   38474.53   12523.57   3.072  0.00217 ** 
+PROX_HAWKER_MARKET     23746.10   29299.76   0.810  0.41782    
+PROX_KINDERGARTEN     147468.99   82668.87   1.784  0.07466 .  
+PROX_MRT             -314599.68   57947.44  -5.429 6.66e-08 ***
+PROX_PARK             563280.50   66551.68   8.464  &lt; 2e-16 ***
+PROX_PRIMARY_SCH      180186.08   65237.95   2.762  0.00582 ** 
+PROX_TOP_PRIMARY_SCH    2280.04   20410.43   0.112  0.91107    
+PROX_SHOPPING_MALL   -206604.06   42840.60  -4.823 1.57e-06 ***
+PROX_SUPERMARKET      -44991.80   77082.64  -0.584  0.55953    
+PROX_BUS_STOP         683121.35  138353.28   4.938 8.85e-07 ***
+NO_Of_UNITS             -231.18      89.03  -2.597  0.00951 ** 
+FAMILY_FRIENDLY       140340.77   47020.55   2.985  0.00289 ** 
+FREEHOLD              359913.01   49220.22   7.312 4.38e-13 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 755800 on 1417 degrees of freedom
+Multiple R-squared:  0.6518,    Adjusted R-squared:  0.6474 
+F-statistic: 147.4 on 18 and 1417 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The code chunk above consists of two parts: -&nbsp;<code>lm()</code>&nbsp;of Base R is used to calibrate a multiple linear regression model. The model output is stored in an lm object called&nbsp;<em>condo.mlr</em>. -&nbsp;<code>summary()</code>&nbsp;is used to print the model output.</p>
+</div>
+</div>
+</section>
+<section id="revising-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="revising-the-model"><strong>13.8.4&nbsp;Revising the model</strong></h3>
+<p>With reference to the report above, it is clear that not all the independent variables are statistically significant. We will revised the model by removing those variables which are not statistically significant.</p>
+<p>Now, we are ready to calibrate the revised model by using the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>condo.mlr1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> SELLING_PRICE <span class="sc">~</span> AREA_SQM <span class="sc">+</span> AGE <span class="sc">+</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    PROX_CBD <span class="sc">+</span> PROX_CHILDCARE <span class="sc">+</span> PROX_MRT <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    PROX_ELDERLYCARE    <span class="sc">+</span> PROX_URA_GROWTH_AREA <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    PROX_PARK   <span class="sc">+</span> PROX_PRIMARY_SCH <span class="sc">+</span> </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    PROX_SHOPPING_MALL  <span class="sc">+</span> PROX_BUS_STOP <span class="sc">+</span> </span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    NO_Of_UNITS <span class="sc">+</span> FAMILY_FRIENDLY <span class="sc">+</span> FREEHOLD,</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>condo_resale.sf)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(condo.mlr1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = SELLING_PRICE ~ AREA_SQM + AGE + PROX_CBD + PROX_CHILDCARE + 
+    PROX_MRT + PROX_ELDERLYCARE + PROX_URA_GROWTH_AREA + PROX_PARK + 
+    PROX_PRIMARY_SCH + PROX_SHOPPING_MALL + PROX_BUS_STOP + NO_Of_UNITS + 
+    FAMILY_FRIENDLY + FREEHOLD, data = condo_resale.sf)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-3470778  -298119   -23481   248917 12234210 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)           527633.22  108183.22   4.877 1.20e-06 ***
+AREA_SQM               12777.52     367.48  34.771  &lt; 2e-16 ***
+AGE                   -24687.74    2754.84  -8.962  &lt; 2e-16 ***
+PROX_CBD              -77131.32    5763.12 -13.384  &lt; 2e-16 ***
+PROX_CHILDCARE       -318472.75  107959.51  -2.950 0.003231 ** 
+PROX_MRT             -294745.11   56916.37  -5.179 2.56e-07 ***
+PROX_ELDERLYCARE      185575.62   39901.86   4.651 3.61e-06 ***
+PROX_URA_GROWTH_AREA   39163.25   11754.83   3.332 0.000885 ***
+PROX_PARK             570504.81   65507.03   8.709  &lt; 2e-16 ***
+PROX_PRIMARY_SCH      159856.14   60234.60   2.654 0.008046 ** 
+PROX_SHOPPING_MALL   -220947.25   36561.83  -6.043 1.93e-09 ***
+PROX_BUS_STOP         682482.22  134513.24   5.074 4.42e-07 ***
+NO_Of_UNITS             -245.48      87.95  -2.791 0.005321 ** 
+FAMILY_FRIENDLY       146307.58   46893.02   3.120 0.001845 ** 
+FREEHOLD              350599.81   48506.48   7.228 7.98e-13 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 756000 on 1421 degrees of freedom
+Multiple R-squared:  0.6507,    Adjusted R-squared:  0.6472 
+F-statistic: 189.1 on 14 and 1421 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>The output above reveals that all explanatory variables are statistically significant at 95% confident level.</p>
+</section>
+<section id="preparing-publication-quality-table-gtsummary-method" class="level3">
+<h3 class="anchored" data-anchor-id="preparing-publication-quality-table-gtsummary-method"><strong>13.8.5&nbsp;Preparing Publication Quality Table: gtsummary method</strong></h3>
+<p>The&nbsp;<a href="https://www.danieldsjoberg.com/gtsummary/index.html"><strong>gtsummary</strong></a>&nbsp;package provides an elegant and flexible way to create publication-ready summary tables in R.</p>
+<p>In the code chunk below,&nbsp;<a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html"><code>tbl_regression()</code></a>&nbsp;is used to create a well formatted regression report.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(condo.mlr1, <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="hxyxaxgibj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hxyxaxgibj table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hxyxaxgibj thead, #hxyxaxgibj tbody, #hxyxaxgibj tfoot, #hxyxaxgibj tr, #hxyxaxgibj td, #hxyxaxgibj th {
+  border-style: none;
+}
+
+#hxyxaxgibj p {
+  margin: 0;
+  padding: 0;
+}
+
+#hxyxaxgibj .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hxyxaxgibj .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hxyxaxgibj .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hxyxaxgibj .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hxyxaxgibj .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hxyxaxgibj .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hxyxaxgibj .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hxyxaxgibj .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hxyxaxgibj .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hxyxaxgibj .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hxyxaxgibj .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hxyxaxgibj .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hxyxaxgibj .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hxyxaxgibj .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hxyxaxgibj .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hxyxaxgibj .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hxyxaxgibj .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hxyxaxgibj .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hxyxaxgibj .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hxyxaxgibj .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hxyxaxgibj .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hxyxaxgibj .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hxyxaxgibj .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hxyxaxgibj .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hxyxaxgibj .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hxyxaxgibj .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hxyxaxgibj .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hxyxaxgibj .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hxyxaxgibj .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hxyxaxgibj .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hxyxaxgibj .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hxyxaxgibj .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hxyxaxgibj .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hxyxaxgibj .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hxyxaxgibj .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hxyxaxgibj .gt_left {
+  text-align: left;
+}
+
+#hxyxaxgibj .gt_center {
+  text-align: center;
+}
+
+#hxyxaxgibj .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hxyxaxgibj .gt_font_normal {
+  font-weight: normal;
+}
+
+#hxyxaxgibj .gt_font_bold {
+  font-weight: bold;
+}
+
+#hxyxaxgibj .gt_font_italic {
+  font-style: italic;
+}
+
+#hxyxaxgibj .gt_super {
+  font-size: 65%;
+}
+
+#hxyxaxgibj .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hxyxaxgibj .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hxyxaxgibj .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hxyxaxgibj .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hxyxaxgibj .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hxyxaxgibj .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hxyxaxgibj .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hxyxaxgibj .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hxyxaxgibj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Beta</strong></th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">(Intercept)</td>
+<td class="gt_row gt_center" headers="estimate">527,633</td>
+<td class="gt_row gt_center" headers="conf.low">315,417, 739,849</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">AREA_SQM</td>
+<td class="gt_row gt_center" headers="estimate">12,778</td>
+<td class="gt_row gt_center" headers="conf.low">12,057, 13,498</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">AGE</td>
+<td class="gt_row gt_center" headers="estimate">-24,688</td>
+<td class="gt_row gt_center" headers="conf.low">-30,092, -19,284</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">PROX_CBD</td>
+<td class="gt_row gt_center" headers="estimate">-77,131</td>
+<td class="gt_row gt_center" headers="conf.low">-88,436, -65,826</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">PROX_CHILDCARE</td>
+<td class="gt_row gt_center" headers="estimate">-318,473</td>
+<td class="gt_row gt_center" headers="conf.low">-530,250, -106,696</td>
+<td class="gt_row gt_center" headers="p.value">0.003</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">PROX_MRT</td>
+<td class="gt_row gt_center" headers="estimate">-294,745</td>
+<td class="gt_row gt_center" headers="conf.low">-406,394, -183,096</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">PROX_ELDERLYCARE</td>
+<td class="gt_row gt_center" headers="estimate">185,576</td>
+<td class="gt_row gt_center" headers="conf.low">107,303, 263,849</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">PROX_URA_GROWTH_AREA</td>
+<td class="gt_row gt_center" headers="estimate">39,163</td>
+<td class="gt_row gt_center" headers="conf.low">16,105, 62,222</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">PROX_PARK</td>
+<td class="gt_row gt_center" headers="estimate">570,505</td>
+<td class="gt_row gt_center" headers="conf.low">442,004, 699,006</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">PROX_PRIMARY_SCH</td>
+<td class="gt_row gt_center" headers="estimate">159,856</td>
+<td class="gt_row gt_center" headers="conf.low">41,698, 278,014</td>
+<td class="gt_row gt_center" headers="p.value">0.008</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">PROX_SHOPPING_MALL</td>
+<td class="gt_row gt_center" headers="estimate">-220,947</td>
+<td class="gt_row gt_center" headers="conf.low">-292,668, -149,226</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">PROX_BUS_STOP</td>
+<td class="gt_row gt_center" headers="estimate">682,482</td>
+<td class="gt_row gt_center" headers="conf.low">418,616, 946,348</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">NO_Of_UNITS</td>
+<td class="gt_row gt_center" headers="estimate">-245</td>
+<td class="gt_row gt_center" headers="conf.low">-418, -73</td>
+<td class="gt_row gt_center" headers="p.value">0.005</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">FAMILY_FRIENDLY</td>
+<td class="gt_row gt_center" headers="estimate">146,308</td>
+<td class="gt_row gt_center" headers="conf.low">54,321, 238,295</td>
+<td class="gt_row gt_center" headers="p.value">0.002</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">FREEHOLD</td>
+<td class="gt_row gt_center" headers="estimate">350,600</td>
+<td class="gt_row gt_center" headers="conf.low">255,448, 445,752</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+</tbody><tfoot class="gt_footnotes">
+<tr class="even">
+<td colspan="4" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> CI = Confidence Interval</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+<p>With gtsummary package, model statistics can be included in the report by either appending them to the report table by using&nbsp;<a href="https://www.danieldsjoberg.com/gtsummary/reference/add_glance.html"><code>add_glance_table()</code></a>&nbsp;or adding as a table source note by using&nbsp;<a href="https://www.danieldsjoberg.com/gtsummary/reference/add_glance.html"><code>add_glance_source_note()</code></a>&nbsp;as shown in the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(condo.mlr1, </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">intercept =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_glance_source_note</span>(</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(sigma <span class="sc">~</span> <span class="st">"\U03C3"</span>),</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(r.squared, adj.r.squared, </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>                AIC, statistic,</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>                p.value, sigma))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="kfmozihkte" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#kfmozihkte table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#kfmozihkte thead, #kfmozihkte tbody, #kfmozihkte tfoot, #kfmozihkte tr, #kfmozihkte td, #kfmozihkte th {
+  border-style: none;
+}
+
+#kfmozihkte p {
+  margin: 0;
+  padding: 0;
+}
+
+#kfmozihkte .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#kfmozihkte .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#kfmozihkte .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kfmozihkte .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kfmozihkte .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kfmozihkte .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kfmozihkte .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kfmozihkte .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kfmozihkte .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kfmozihkte .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kfmozihkte .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kfmozihkte .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kfmozihkte .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#kfmozihkte .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#kfmozihkte .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#kfmozihkte .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kfmozihkte .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kfmozihkte .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kfmozihkte .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kfmozihkte .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#kfmozihkte .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#kfmozihkte .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#kfmozihkte .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kfmozihkte .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#kfmozihkte .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#kfmozihkte .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kfmozihkte .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kfmozihkte .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#kfmozihkte .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kfmozihkte .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#kfmozihkte .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kfmozihkte .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kfmozihkte .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kfmozihkte .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kfmozihkte .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kfmozihkte .gt_left {
+  text-align: left;
+}
+
+#kfmozihkte .gt_center {
+  text-align: center;
+}
+
+#kfmozihkte .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kfmozihkte .gt_font_normal {
+  font-weight: normal;
+}
+
+#kfmozihkte .gt_font_bold {
+  font-weight: bold;
+}
+
+#kfmozihkte .gt_font_italic {
+  font-style: italic;
+}
+
+#kfmozihkte .gt_super {
+  font-size: 65%;
+}
+
+#kfmozihkte .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#kfmozihkte .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#kfmozihkte .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#kfmozihkte .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#kfmozihkte .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#kfmozihkte .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#kfmozihkte .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#kfmozihkte .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#kfmozihkte div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span data-qmd-base64="PHN0cm9uZz5DaGFyYWN0ZXJpc3RpYzwvc3Ryb25nPg=="><span class="gt_from_md"><strong>Characteristic</strong></span></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span data-qmd-base64="PHN0cm9uZz5CZXRhPC9zdHJvbmc+"><span class="gt_from_md"><strong>Beta</strong></span></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span data-qmd-base64="PHN0cm9uZz45NSUgQ0k8L3N0cm9uZz4="><span class="gt_from_md"><strong>95% CI</strong></span></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span data-qmd-base64="PHN0cm9uZz5wLXZhbHVlPC9zdHJvbmc+"><span class="gt_from_md"><strong>p-value</strong></span></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">(Intercept)</td>
+<td headers="estimate" class="gt_row gt_center">527,633</td>
+<td headers="conf.low" class="gt_row gt_center">315,417, 739,849</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">AREA_SQM</td>
+<td headers="estimate" class="gt_row gt_center">12,778</td>
+<td headers="conf.low" class="gt_row gt_center">12,057, 13,498</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">AGE</td>
+<td headers="estimate" class="gt_row gt_center">-24,688</td>
+<td headers="conf.low" class="gt_row gt_center">-30,092, -19,284</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_CBD</td>
+<td headers="estimate" class="gt_row gt_center">-77,131</td>
+<td headers="conf.low" class="gt_row gt_center">-88,436, -65,826</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_CHILDCARE</td>
+<td headers="estimate" class="gt_row gt_center">-318,473</td>
+<td headers="conf.low" class="gt_row gt_center">-530,250, -106,696</td>
+<td headers="p.value" class="gt_row gt_center">0.003</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_MRT</td>
+<td headers="estimate" class="gt_row gt_center">-294,745</td>
+<td headers="conf.low" class="gt_row gt_center">-406,394, -183,096</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_ELDERLYCARE</td>
+<td headers="estimate" class="gt_row gt_center">185,576</td>
+<td headers="conf.low" class="gt_row gt_center">107,303, 263,849</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_URA_GROWTH_AREA</td>
+<td headers="estimate" class="gt_row gt_center">39,163</td>
+<td headers="conf.low" class="gt_row gt_center">16,105, 62,222</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_PARK</td>
+<td headers="estimate" class="gt_row gt_center">570,505</td>
+<td headers="conf.low" class="gt_row gt_center">442,004, 699,006</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_PRIMARY_SCH</td>
+<td headers="estimate" class="gt_row gt_center">159,856</td>
+<td headers="conf.low" class="gt_row gt_center">41,698, 278,014</td>
+<td headers="p.value" class="gt_row gt_center">0.008</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_SHOPPING_MALL</td>
+<td headers="estimate" class="gt_row gt_center">-220,947</td>
+<td headers="conf.low" class="gt_row gt_center">-292,668, -149,226</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_BUS_STOP</td>
+<td headers="estimate" class="gt_row gt_center">682,482</td>
+<td headers="conf.low" class="gt_row gt_center">418,616, 946,348</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">NO_Of_UNITS</td>
+<td headers="estimate" class="gt_row gt_center">-245</td>
+<td headers="conf.low" class="gt_row gt_center">-418, -73</td>
+<td headers="p.value" class="gt_row gt_center">0.005</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">FAMILY_FRIENDLY</td>
+<td headers="estimate" class="gt_row gt_center">146,308</td>
+<td headers="conf.low" class="gt_row gt_center">54,321, 238,295</td>
+<td headers="p.value" class="gt_row gt_center">0.002</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">FREEHOLD</td>
+<td headers="estimate" class="gt_row gt_center">350,600</td>
+<td headers="conf.low" class="gt_row gt_center">255,448, 445,752</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="4"><span data-qmd-base64="UsKyID0gMC42NTE7IEFkanVzdGVkIFLCsiA9IDAuNjQ3OyBBSUMgPSA0Miw5Njc7IFN0YXRpc3RpYyA9IDE4OTsgcC12YWx1ZSA9ICZsdDswLjAwMTsgz4MgPSA3NTUsOTU3"><span class="gt_from_md">R² = 0.651; Adjusted R² = 0.647; AIC = 42,967; Statistic = 189; p-value = &lt;0.001; σ = 755,957</span></span></td>
+    </tr>
+  </tfoot>
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span data-qmd-base64="Q0kgPSBDb25maWRlbmNlIEludGVydmFs"><span class="gt_from_md">CI = Confidence Interval</span></span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+<p>For more customisation options, refer to&nbsp;<a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html">Tutorial: tbl_regression</a></p>
+</section>
+<section id="regression-diagnostics" class="level3">
+<h3 class="anchored" data-anchor-id="regression-diagnostics"><strong>13.8.6&nbsp;Regression Diagnostics</strong></h3>
+<ul>
+<li><p><strong>Regression diagnostics</strong>&nbsp;are procedures to verify if a regression model meets key assumptions and fits the data properly.</p></li>
+<li><p>They help detect issues like&nbsp;<strong>non-linearity</strong>,&nbsp;<strong>non-normal errors</strong>,&nbsp;<strong>heteroskedasticity</strong>, and&nbsp;<strong>influential observations</strong>&nbsp;to ensure reliable results.</p></li>
+<li><p>The&nbsp;<strong><code>olsrr</code></strong>&nbsp;R package provides tools for performing OLS regression diagnostics, including:</p>
+<ul>
+<li><p>comprehensive regression output</p></li>
+<li><p>residual diagnostics</p></li>
+<li><p>measures of influence</p></li>
+<li><p>heteroskedasticity tests</p></li>
+<li><p>collinearity diagnostics</p></li>
+<li><p>model fit assessment</p></li>
+<li><p>variable contribution assessment</p></li>
+<li><p>variable selection procedures</p></li>
+</ul></li>
+</ul>
+<section id="multicollinearity-test" class="level4">
+<h4 class="anchored" data-anchor-id="multicollinearity-test">13.8.6.1&nbsp;Multicollinearity test</h4>
+<ul>
+<li><p><strong>Multicollinearity</strong>&nbsp;occurs when independent variables are&nbsp;<strong>highly correlated</strong>, meaning changes in one variable are linked to changes in another.</p></li>
+<li><p>This makes it difficult for the model to&nbsp;<strong>separate each variable’s effect</strong>&nbsp;on the dependent variable.</p></li>
+<li><p>High multicollinearity causes&nbsp;<strong>unstable and unreliable coefficients</strong>, which can lead to&nbsp;<strong>misleading interpretations</strong>.</p></li>
+<li><p>To detect it, the&nbsp;&nbsp;<a href="https://easystats.github.io/performance/reference/check_collinearity.html"><code>check_collinearity()</code></a>&nbsp;function from the&nbsp;<strong><code>performance</code></strong>&nbsp;package is used.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_collinearity</span>(condo.mlr1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Check for Multicollinearity
+
+Low Correlation
+
+                 Term  VIF   VIF 95% CI Increased SE Tolerance Tolerance 95% CI
+             AREA_SQM 1.15 [1.09, 1.23]         1.07      0.87     [0.81, 0.92]
+                  AGE 1.41 [1.33, 1.52]         1.19      0.71     [0.66, 0.75]
+             PROX_CBD 1.57 [1.47, 1.69]         1.25      0.64     [0.59, 0.68]
+       PROX_CHILDCARE 3.26 [3.00, 3.56]         1.81      0.31     [0.28, 0.33]
+             PROX_MRT 1.91 [1.78, 2.07]         1.38      0.52     [0.48, 0.56]
+     PROX_ELDERLYCARE 1.52 [1.42, 1.63]         1.23      0.66     [0.61, 0.70]
+ PROX_URA_GROWTH_AREA 1.33 [1.26, 1.43]         1.15      0.75     [0.70, 0.80]
+            PROX_PARK 1.21 [1.15, 1.29]         1.10      0.83     [0.77, 0.87]
+     PROX_PRIMARY_SCH 2.21 [2.05, 2.40]         1.49      0.45     [0.42, 0.49]
+   PROX_SHOPPING_MALL 1.48 [1.39, 1.60]         1.22      0.67     [0.63, 0.72]
+        PROX_BUS_STOP 2.85 [2.62, 3.10]         1.69      0.35     [0.32, 0.38]
+          NO_Of_UNITS 1.45 [1.36, 1.56]         1.20      0.69     [0.64, 0.73]
+      FAMILY_FRIENDLY 1.38 [1.30, 1.48]         1.17      0.72     [0.67, 0.77]
+             FREEHOLD 1.44 [1.36, 1.55]         1.20      0.69     [0.65, 0.74]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mlr.vif <span class="ot">&lt;-</span> <span class="fu">check_collinearity</span>(condo.mlr1)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mlr.vif)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex07_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Since the VIF of the independent variables are less than 10. We can safely conclude that there are no sign of multicollinearity among the independent variables.</p>
+</section>
+<section id="test-for-non-linearity" class="level4">
+<h4 class="anchored" data-anchor-id="test-for-non-linearity">13.8.6.2&nbsp;Test for Non-Linearity</h4>
+<p>In multiple linear regression, it is important for us to test the assumption that linearity and additivity of the relationship between dependent and independent variables.</p>
+<p>In the code chunk below, the&nbsp;<a href="https://olsrr.rsquaredacademy.com/reference/ols_plot_resid_fit.html"><code>ols_plot_resid_fit()</code></a>&nbsp;of&nbsp;<strong>olsrr</strong>&nbsp;package is used to perform linearity assumption test.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(condo.mlr1,</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">check =</span> <span class="st">"linearity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex07_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure above reveals that most of the data poitns are scattered around the 0 line, hence we can safely conclude that the relationships between the dependent variable and independent variables are linear.</p>
+</section>
+<section id="test-for-normality-assumption" class="level4">
+<h4 class="anchored" data-anchor-id="test-for-normality-assumption">13.8.6.3&nbsp;Test for Normality Assumption</h4>
+<p>The normality assumption test for multiple linear regression checks&nbsp;<strong>if the model’s residuals (the differences between observed and predicted values) are normally distributed</strong>. This is crucial for accurate hypothesis testing and confidence intervals. To test this, you can use visual methods like histograms and Q-Q plots of the residuals, or conduct statistical tests like Shapiro-Wilk test and Kolmogorov-Smirnov test.</p>
+<p>In the code chunk below,&nbsp;<code>check_normality()</code>&nbsp;of performance package is used to perform normality assumption test on condo.mlr1 model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_normality</span>(condo.mlr1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: Non-normality of residuals detected (p &lt; .001).</code></pre>
+</div>
+</div>
+<p>The print above reveals that the p-value of the normality assumption test is less than alpha value of 0.05. Hence we reject the normality assumption at 95% confident level.</p>
+<ul>
+<li><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><code>check_normality()</code>&nbsp;calls&nbsp;<em>stats::shapiro.test</em>&nbsp;and checks the standardized residuals (or studentized residuals for mixed models) for normal distribution.</p></li>
+<li><p>Note that this formal test almost always yields significant results for the distribution of residuals and visual inspection (e.g.&nbsp;Q-Q plots) are preferable.</p></li>
+</ul>
+</div>
+</div></li>
+</ul>
+<p>Instead of showing the test statistic,&nbsp;<code>plot()</code>&nbsp;of&nbsp;<strong>see</strong>&nbsp;package can be used to plot a the output of&nbsp;<code>check_normality()</code>&nbsp;for visual inspection as shown below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">check_normality</span>(condo.mlr1), </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"qq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex07_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Q-Q plot above below shows that majority of the data points are felt along the zero line.</p>
+<p>Another way to check for normality assumption visual is by using&nbsp;<a href="https://easystats.github.io/performance/reference/check_model.html"><code>check_model()</code></a>of performance package as shown in the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(condo.mlr1,</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">check=</span> <span class="st">"normality"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex07_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure reveals that the residual of the multiple linear regression model (i.e.&nbsp;condo.mlr1) is resemble normal distribution.</p>
+</section>
+<section id="testing-for-spatial-autocorrelation" class="level4">
+<h4 class="anchored" data-anchor-id="testing-for-spatial-autocorrelation">13.8.6.4&nbsp;Testing for Spatial Autocorrelation</h4>
+<p>The hedonic model we try to build are using geographically referenced data. Hence, it is crucial to check for spatial autocorrelation because its presence can produce unreliable and misleading results. Traditional regression models, such as ordinary least squares (OLS), assume that observations are independent of one another. However, spatial data often violates this assumption.</p>
+<p>Spatial autocorrelation is the correlation of a variable with itself across different spatial locations. Positive spatial autocorrelation means nearby features tend to be more similar, while negative autocorrelation means they tend to be more dissimilar. This phenomenon is based on the first law of geography: “Everything is related to everything else, but nearby things are more related than distant things”.</p>
+<p>Ignoring spatial autocorrelation in a regression model can lead to serious statistical issues:</p>
+<ul>
+<li><p>Biased and inefficient coefficient estimates: If autocorrelation is present, standard errors of the model coefficients can be wrong, leading to unreliable hypothesis tests (p-values). The model might appear more significant than it is.</p></li>
+<li><p>Misleading significance tests: Standard regression models cannot distinguish between true explanatory power and the influence of spatial patterns, resulting in inaccurate p-values.</p></li>
+<li><p>Model misspecification: Significant spatial autocorrelation in the regression residuals often signals that important explanatory variables are missing from the model. The spatial patterning of the residuals (over- and under-predictions) can provide clues about what these missing variables might be.</p></li>
+<li><p>Inflated Type I error rates: Researchers might incorrectly reject a true null.</p></li>
+</ul>
+<p>To test for spatial autocorrelation, We can run a Moran’s I test on the model’s residuals. Significant spatial autocorrelation in the residuals means the model is not capturing the full spatial story.</p>
+<p>In order to perform spatial autocorrelation test, we need to export the residual of the hedonic pricing model and save it as a data frame first.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>mlr.output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(condo.mlr1<span class="sc">$</span>residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we will join the newly created data frame with&nbsp;<em>condo_resale.sf</em>&nbsp;object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>condo_resale.sf <span class="ot">&lt;-</span> <span class="fu">cbind</span>(condo_resale.sf, </span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>                        condo.mlr1<span class="sc">$</span>residuals) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(<span class="st">`</span><span class="at">MLR_RES</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">condo.mlr1.residuals</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we will use&nbsp;<strong>tmap</strong>&nbsp;package to display the distribution of the residuals on an interactive map.</p>
+<p>The code churn below will turn on the interactive mode of tmap.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The code chunks below is used to create an interactive point symbol map.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(mpsz_svy21) <span class="sc">+</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill_alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(condo_resale.sf) <span class="sc">+</span>  </span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"MLR_RES"</span>,</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.7</span>,</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"black"</span>,</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill.scale =</span> <span class="fu">tm_scale</span>(</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="dv">10</span>,</span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">values =</span> <span class="fu">rev</span>(</span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">brewer.pal</span>(<span class="dv">11</span>, <span class="st">"RdBu"</span>)),</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">midpoint =</span> <span class="cn">NA</span>),</span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill.legend =</span> <span class="fu">tm_legend</span>(<span class="at">title =</span> <span class="st">"Residuals"</span>)</span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_title</span>(<span class="st">"LM Residuals (Quantile Classification)"</span>) <span class="sc">+</span></span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.outside =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_view</span>(<span class="at">set_zoom_limits =</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex07_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Remember to switch back to “plot” mode before continue.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The figure above reveal that there is sign of spatial autocorrelation.</p>
+<p>To proof that our observation is indeed true, Global Moran’s I test will be performed</p>
+<p>First, we will compute the distance-based weight matrix by using&nbsp;<a href="https://sfdep.josiahparry.com/reference/st_dist_band"><code>st_dist_band()</code></a>function of&nbsp;<strong>sfdep</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>condo_resale.sf <span class="ot">&lt;-</span> condo_resale.sf <span class="sc">%&gt;%</span> </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">nb =</span> <span class="fu">st_dist_band</span>(</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">st_geometry</span>(geometry), </span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">upper =</span> <span class="dv">1500</span>),</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">wt =</span> <span class="fu">st_weights</span>(</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>      nb, <span class="at">style =</span> <span class="st">"W"</span>),</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.before =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next,&nbsp;<a href="https://sfdep.josiahparry.com/reference/global_moran_perm"><code>global_moran_perm()</code></a>&nbsp;of&nbsp;<strong>sfdep</strong>&nbsp;package will be used to perform Moran’s I test for residual spatial autocorrelation</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">global_moran_perm</span>(</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  condo_resale.sf<span class="sc">$</span>MLR_RES, </span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">nb =</span> condo_resale.sf<span class="sc">$</span>nb, </span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">wt =</span> condo_resale.sf<span class="sc">$</span>wt,</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span>, </span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">nsim =</span> <span class="dv">499</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Monte-Carlo simulation of Moran I
+
+data:  x 
+weights: listw  
+number of simulations + 1: 500 
+
+statistic = 0.14389, observed rank = 500, p-value &lt; 2.2e-16
+alternative hypothesis: two.sided</code></pre>
+</div>
+</div>
+<p>The Global Moran’s I test for residual spatial autocorrelation shows that it’s p-value is less than 0.00000000000000022 which is less than the alpha value of 0.05. Hence, we will reject the null hypothesis that the residuals are randomly distributed.</p>
+<p>Since the Observed Global Moran I = 0.14389 which is greater than 0, we can infer than the residuals resemble cluster distribution.</p>
+</section>
+</section>
+</section>
+<section id="building-hedonic-pricing-models-using-gwmodel" class="level2">
+<h2 class="anchored" data-anchor-id="building-hedonic-pricing-models-using-gwmodel"><strong>13.9&nbsp;Building Hedonic Pricing Models using GWmodel</strong></h2>
+<p>In this section, you are going to learn how to modelling hedonic pricing using both the fixed and adaptive bandwidth schemes</p>
+<section id="building-fixed-bandwidth-gwr-model" class="level3">
+<h3 class="anchored" data-anchor-id="building-fixed-bandwidth-gwr-model"><strong>13.9.1&nbsp;Building Fixed Bandwidth GWR Model</strong></h3>
+<section id="computing-fixed-bandwith" class="level4">
+<h4 class="anchored" data-anchor-id="computing-fixed-bandwith">13.9.1.1&nbsp;Computing fixed bandwith</h4>
+<p>In the code chunk below&nbsp;<code>bw.gwr()</code>&nbsp;of GWModel package is used to determine the optimal fixed bandwidth to use in the model. Notice that the argument&nbsp;<strong><em>adaptive</em></strong>&nbsp;is set to&nbsp;<strong>FALSE</strong>&nbsp;indicates that we are interested to compute the fixed bandwidth.</p>
+<p>There are two possible approaches can be uused to determine the stopping rule, they are: CV cross-validation approach and AIC corrected (AICc) approach. We define the stopping rule using&nbsp;<strong><em>approach</em></strong>&nbsp;argeement.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>bw.fixed <span class="ot">&lt;-</span> <span class="fu">bw.gwr</span>(</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> SELLING_PRICE <span class="sc">~</span> AREA_SQM <span class="sc">+</span> AGE  <span class="sc">+</span> </span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    PROX_CBD <span class="sc">+</span> PROX_CHILDCARE <span class="sc">+</span> PROX_ELDERLYCARE    <span class="sc">+</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    PROX_URA_GROWTH_AREA <span class="sc">+</span> PROX_MRT <span class="sc">+</span> PROX_PARK <span class="sc">+</span> </span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    PROX_PRIMARY_SCH <span class="sc">+</span> PROX_SHOPPING_MALL   <span class="sc">+</span> </span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    PROX_BUS_STOP   <span class="sc">+</span> NO_Of_UNITS <span class="sc">+</span> FAMILY_FRIENDLY <span class="sc">+</span> </span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    FREEHOLD, </span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">approach=</span><span class="st">"CV"</span>, </span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel=</span><span class="st">"gaussian"</span>, </span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">adaptive=</span><span class="cn">FALSE</span>, </span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">longlat=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fixed bandwidth: 17660.96 CV score: 8.259118e+14 
+Fixed bandwidth: 10917.26 CV score: 7.970454e+14 
+Fixed bandwidth: 6749.419 CV score: 7.273273e+14 
+Fixed bandwidth: 4173.553 CV score: 6.300006e+14 
+Fixed bandwidth: 2581.58 CV score: 5.404958e+14 
+Fixed bandwidth: 1597.687 CV score: 4.857515e+14 
+Fixed bandwidth: 989.6077 CV score: 4.722431e+14 
+Fixed bandwidth: 613.7939 CV score: 1.379526e+16 
+Fixed bandwidth: 1221.873 CV score: 4.778717e+14 
+Fixed bandwidth: 846.0596 CV score: 4.791629e+14 
+Fixed bandwidth: 1078.325 CV score: 4.751406e+14 
+Fixed bandwidth: 934.7772 CV score: 4.72518e+14 
+Fixed bandwidth: 1023.495 CV score: 4.730305e+14 
+Fixed bandwidth: 968.6643 CV score: 4.721317e+14 
+Fixed bandwidth: 955.7206 CV score: 4.722072e+14 
+Fixed bandwidth: 976.6639 CV score: 4.721387e+14 
+Fixed bandwidth: 963.7202 CV score: 4.721484e+14 
+Fixed bandwidth: 971.7199 CV score: 4.721293e+14 
+Fixed bandwidth: 973.6083 CV score: 4.721309e+14 
+Fixed bandwidth: 970.5527 CV score: 4.721295e+14 
+Fixed bandwidth: 972.4412 CV score: 4.721296e+14 
+Fixed bandwidth: 971.2741 CV score: 4.721292e+14 
+Fixed bandwidth: 970.9985 CV score: 4.721293e+14 
+Fixed bandwidth: 971.4443 CV score: 4.721292e+14 
+Fixed bandwidth: 971.5496 CV score: 4.721293e+14 
+Fixed bandwidth: 971.3793 CV score: 4.721292e+14 
+Fixed bandwidth: 971.3391 CV score: 4.721292e+14 
+Fixed bandwidth: 971.3143 CV score: 4.721292e+14 
+Fixed bandwidth: 971.3545 CV score: 4.721292e+14 
+Fixed bandwidth: 971.3296 CV score: 4.721292e+14 
+Fixed bandwidth: 971.345 CV score: 4.721292e+14 
+Fixed bandwidth: 971.3355 CV score: 4.721292e+14 
+Fixed bandwidth: 971.3413 CV score: 4.721292e+14 
+Fixed bandwidth: 971.3377 CV score: 4.721292e+14 
+Fixed bandwidth: 971.34 CV score: 4.721292e+14 
+Fixed bandwidth: 971.3405 CV score: 4.721292e+14 
+Fixed bandwidth: 971.3396 CV score: 4.721292e+14 
+Fixed bandwidth: 971.3402 CV score: 4.721292e+14 
+Fixed bandwidth: 971.3398 CV score: 4.721292e+14 
+Fixed bandwidth: 971.34 CV score: 4.721292e+14 
+Fixed bandwidth: 971.3399 CV score: 4.721292e+14 
+Fixed bandwidth: 971.34 CV score: 4.721292e+14 </code></pre>
+</div>
+</div>
+<p>The result shows that the recommended bandwidth is 971.3405 metres.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>(Quiz: Do you know why it is in metre?)</p>
+<p>The&nbsp;<strong>bandwidth</strong>&nbsp;value is expressed in&nbsp;<strong>meters</strong>&nbsp;because it follows the&nbsp;<strong>coordinate system unit</strong>&nbsp;of the spatial dataset.<br>
+In this case, the dataset&nbsp;<code>condo_resale.sf</code>&nbsp;uses a&nbsp;<strong>projected coordinate system</strong>&nbsp;(such as&nbsp;<em>SVY21 / EPSG:3414</em>, used in Singapore), where distances are measured in meters.<br>
+Also, since the argument&nbsp;<code>longlat = FALSE</code>&nbsp;was specified in the&nbsp;<code>bw.gwr()</code>&nbsp;function, the model assumes a&nbsp;<strong>planar (Euclidean) distance</strong>, not geographic degrees.</p>
+<p>If&nbsp;<code>longlat = TRUE</code>&nbsp;were used instead, the data would be treated as&nbsp;<strong>longitude–latitude coordinates</strong>, and the bandwidth would be measured in&nbsp;<strong>degrees</strong>&nbsp;instead of meters.</p>
+</div>
+</div>
+</section>
+<section id="gwmodel-method---fixed-bandwith" class="level4">
+<h4 class="anchored" data-anchor-id="gwmodel-method---fixed-bandwith">13.9.1.2&nbsp;GWModel method - fixed bandwith</h4>
+<p>Now we can use the code chunk below to calibrate the gwr model using fixed bandwidth and gaussian kernel.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>gwr.fixed <span class="ot">&lt;-</span> <span class="fu">gwr.basic</span>(</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> SELLING_PRICE <span class="sc">~</span> AREA_SQM <span class="sc">+</span> AGE  <span class="sc">+</span> </span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    PROX_CBD <span class="sc">+</span> PROX_CHILDCARE <span class="sc">+</span> PROX_ELDERLYCARE    <span class="sc">+</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>    PROX_URA_GROWTH_AREA <span class="sc">+</span> PROX_MRT <span class="sc">+</span> PROX_PARK <span class="sc">+</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>    PROX_PRIMARY_SCH <span class="sc">+</span> PROX_SHOPPING_MALL   <span class="sc">+</span> </span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>    PROX_BUS_STOP   <span class="sc">+</span> NO_Of_UNITS <span class="sc">+</span> FAMILY_FRIENDLY <span class="sc">+</span> </span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>    FREEHOLD, </span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">bw=</span>bw.fixed, </span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel =</span> <span class="st">'gaussian'</span>, </span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">longlat =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The output is saved in a list of class “gwrm”. The code below can be used to display the model output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>gwr.fixed</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ***********************************************************************
+   *                       Package   GWmodel                             *
+   ***********************************************************************
+   Program starts at: 2025-10-17 02:29:21.012769 
+   Call:
+   gwr.basic(formula = SELLING_PRICE ~ AREA_SQM + AGE + PROX_CBD + 
+    PROX_CHILDCARE + PROX_ELDERLYCARE + PROX_URA_GROWTH_AREA + 
+    PROX_MRT + PROX_PARK + PROX_PRIMARY_SCH + PROX_SHOPPING_MALL + 
+    PROX_BUS_STOP + NO_Of_UNITS + FAMILY_FRIENDLY + FREEHOLD, 
+    data = condo_resale.sf, bw = bw.fixed, kernel = "gaussian", 
+    longlat = FALSE)
+
+   Dependent (y) variable:  SELLING_PRICE
+   Independent variables:  AREA_SQM AGE PROX_CBD PROX_CHILDCARE PROX_ELDERLYCARE PROX_URA_GROWTH_AREA PROX_MRT PROX_PARK PROX_PRIMARY_SCH PROX_SHOPPING_MALL PROX_BUS_STOP NO_Of_UNITS FAMILY_FRIENDLY FREEHOLD
+   Number of data points: 1436
+   ***********************************************************************
+   *                    Results of Global Regression                     *
+   ***********************************************************************
+
+   Call:
+    lm(formula = formula, data = data)
+
+   Residuals:
+     Min       1Q   Median       3Q      Max 
+-3470778  -298119   -23481   248917 12234210 
+
+   Coefficients:
+                          Estimate Std. Error t value Pr(&gt;|t|)    
+   (Intercept)           527633.22  108183.22   4.877 1.20e-06 ***
+   AREA_SQM               12777.52     367.48  34.771  &lt; 2e-16 ***
+   AGE                   -24687.74    2754.84  -8.962  &lt; 2e-16 ***
+   PROX_CBD              -77131.32    5763.12 -13.384  &lt; 2e-16 ***
+   PROX_CHILDCARE       -318472.75  107959.51  -2.950 0.003231 ** 
+   PROX_ELDERLYCARE      185575.62   39901.86   4.651 3.61e-06 ***
+   PROX_URA_GROWTH_AREA   39163.25   11754.83   3.332 0.000885 ***
+   PROX_MRT             -294745.11   56916.37  -5.179 2.56e-07 ***
+   PROX_PARK             570504.81   65507.03   8.709  &lt; 2e-16 ***
+   PROX_PRIMARY_SCH      159856.14   60234.60   2.654 0.008046 ** 
+   PROX_SHOPPING_MALL   -220947.25   36561.83  -6.043 1.93e-09 ***
+   PROX_BUS_STOP         682482.22  134513.24   5.074 4.42e-07 ***
+   NO_Of_UNITS             -245.48      87.95  -2.791 0.005321 ** 
+   FAMILY_FRIENDLY       146307.58   46893.02   3.120 0.001845 ** 
+   FREEHOLD              350599.81   48506.48   7.228 7.98e-13 ***
+
+   ---Significance stars
+   Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+   Residual standard error: 756000 on 1421 degrees of freedom
+   Multiple R-squared: 0.6507
+   Adjusted R-squared: 0.6472 
+   F-statistic: 189.1 on 14 and 1421 DF,  p-value: &lt; 2.2e-16 
+   ***Extra Diagnostic information
+   Residual sum of squares: 8.120609e+14
+   Sigma(hat): 752522.9
+   AIC:  42966.76
+   AICc:  42967.14
+   BIC:  41731.39
+   ***********************************************************************
+   *          Results of Geographically Weighted Regression              *
+   ***********************************************************************
+
+   *********************Model calibration information*********************
+   Kernel function: gaussian 
+   Fixed bandwidth: 971.34 
+   Regression points: the same locations as observations are used.
+   Distance metric: Euclidean distance metric is used.
+
+   ****************Summary of GWR coefficient estimates:******************
+                               Min.     1st Qu.      Median     3rd Qu.
+   Intercept            -3.5988e+07 -5.1998e+05  7.6780e+05  1.7412e+06
+   AREA_SQM              1.0003e+03  5.2758e+03  7.4740e+03  1.2301e+04
+   AGE                  -1.3475e+05 -2.0813e+04 -8.6260e+03 -3.7784e+03
+   PROX_CBD             -7.7047e+07 -2.3608e+05 -8.3599e+04  3.4646e+04
+   PROX_CHILDCARE       -6.0097e+06 -3.3667e+05 -9.7426e+04  2.9007e+05
+   PROX_ELDERLYCARE     -3.5001e+06 -1.5970e+05  3.1970e+04  1.9577e+05
+   PROX_URA_GROWTH_AREA -3.0170e+06 -8.2013e+04  7.0749e+04  2.2612e+05
+   PROX_MRT             -3.5282e+06 -6.5836e+05 -1.8833e+05  3.6922e+04
+   PROX_PARK            -1.2062e+06 -2.1732e+05  3.5383e+04  4.1335e+05
+   PROX_PRIMARY_SCH     -2.2695e+07 -1.7066e+05  4.8472e+04  5.1555e+05
+   PROX_SHOPPING_MALL   -7.2585e+06 -1.6684e+05 -1.0517e+04  1.5923e+05
+   PROX_BUS_STOP        -1.4676e+06 -4.5207e+04  3.7601e+05  1.1664e+06
+   NO_Of_UNITS          -1.3170e+03 -2.4822e+02 -3.0846e+01  2.5496e+02
+   FAMILY_FRIENDLY      -2.2749e+06 -1.1140e+05  7.6214e+03  1.6107e+05
+   FREEHOLD             -9.2067e+06  3.8074e+04  1.5169e+05  3.7528e+05
+                             Max.
+   Intercept            112794435
+   AREA_SQM                 21575
+   AGE                     434203
+   PROX_CBD               2704604
+   PROX_CHILDCARE         1654086
+   PROX_ELDERLYCARE      38867861
+   PROX_URA_GROWTH_AREA  78515805
+   PROX_MRT               3124325
+   PROX_PARK             18122439
+   PROX_PRIMARY_SCH       4637517
+   PROX_SHOPPING_MALL     1529953
+   PROX_BUS_STOP         11342209
+   NO_Of_UNITS              12907
+   FAMILY_FRIENDLY        1720745
+   FREEHOLD               6073642
+   ************************Diagnostic information*************************
+   Number of data points: 1436 
+   Effective number of parameters (2trace(S) - trace(S'S)): 438.3807 
+   Effective degrees of freedom (n-2trace(S) + trace(S'S)): 997.6193 
+   AICc (GWR book, Fotheringham, et al. 2002, p. 61, eq 2.33): 42263.61 
+   AIC (GWR book, Fotheringham, et al. 2002,GWR p. 96, eq. 4.22): 41632.36 
+   BIC (GWR book, Fotheringham, et al. 2002,GWR p. 61, eq. 2.34): 42515.71 
+   Residual sum of squares: 2.534069e+14 
+   R-square value:  0.8909912 
+   Adjusted R-square value:  0.8430418 
+
+   ***********************************************************************
+   Program stops at: 2025-10-17 02:29:21.919214 </code></pre>
+</div>
+</div>
+<p>The report shows that the AICc of the gwr is 42263.61 which is significantly smaller than the globel multiple linear regression model of 42967.1.</p>
+</section>
+</section>
+<section id="building-adaptive-bandwidth-gwr-model" class="level3">
+<h3 class="anchored" data-anchor-id="building-adaptive-bandwidth-gwr-model"><strong>13.9.2&nbsp;Building Adaptive Bandwidth GWR Model</strong></h3>
+<p>In this section, we will calibrate the gwr-based hedonic pricing model by using adaptive bandwidth approach.</p>
+<section id="computing-the-adaptive-bandwidth" class="level4">
+<h4 class="anchored" data-anchor-id="computing-the-adaptive-bandwidth">13.9.2.1&nbsp;Computing the adaptive bandwidth</h4>
+<p>Similar to the earlier section, we will first use&nbsp;<code>bw.gwr()</code>&nbsp;to determine the recommended data point to use.</p>
+<p>The code chunk used look very similar to the one used to compute the fixed bandwidth except the&nbsp;<code>adaptive</code>&nbsp;argument has changed to&nbsp;<strong>TRUE</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>bw.adaptive <span class="ot">&lt;-</span> <span class="fu">bw.gwr</span>(</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> SELLING_PRICE <span class="sc">~</span> AREA_SQM <span class="sc">+</span> AGE  <span class="sc">+</span> </span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>    PROX_CBD <span class="sc">+</span> PROX_CHILDCARE <span class="sc">+</span> PROX_ELDERLYCARE    <span class="sc">+</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>    PROX_URA_GROWTH_AREA <span class="sc">+</span> PROX_MRT <span class="sc">+</span> PROX_PARK <span class="sc">+</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>    PROX_PRIMARY_SCH <span class="sc">+</span> PROX_SHOPPING_MALL   <span class="sc">+</span> </span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a>    PROX_BUS_STOP   <span class="sc">+</span> NO_Of_UNITS <span class="sc">+</span> </span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>    FAMILY_FRIENDLY <span class="sc">+</span> FREEHOLD, </span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">approach=</span><span class="st">"CV"</span>, </span>
+<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel=</span><span class="st">"gaussian"</span>, </span>
+<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">adaptive=</span><span class="cn">TRUE</span>, </span>
+<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">longlat=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Adaptive bandwidth: 895 CV score: 7.952401e+14 
+Adaptive bandwidth: 561 CV score: 7.667364e+14 
+Adaptive bandwidth: 354 CV score: 6.953454e+14 
+Adaptive bandwidth: 226 CV score: 6.15223e+14 
+Adaptive bandwidth: 147 CV score: 5.674373e+14 
+Adaptive bandwidth: 98 CV score: 5.426745e+14 
+Adaptive bandwidth: 68 CV score: 5.168117e+14 
+Adaptive bandwidth: 49 CV score: 4.859631e+14 
+Adaptive bandwidth: 37 CV score: 4.646518e+14 
+Adaptive bandwidth: 30 CV score: 4.422088e+14 
+Adaptive bandwidth: 25 CV score: 4.430816e+14 
+Adaptive bandwidth: 32 CV score: 4.505602e+14 
+Adaptive bandwidth: 27 CV score: 4.462172e+14 
+Adaptive bandwidth: 30 CV score: 4.422088e+14 </code></pre>
+</div>
+</div>
+<p>The result shows that the 30 is the recommended data points to be used.</p>
+</section>
+<section id="constructing-the-adaptive-bandwidth-gwr-model" class="level4">
+<h4 class="anchored" data-anchor-id="constructing-the-adaptive-bandwidth-gwr-model">13.9.2.2&nbsp;Constructing the adaptive bandwidth gwr model</h4>
+<p>Now, we can go ahead to calibrate the gwr-based hedonic pricing model by using adaptive bandwidth and gaussian kernel as shown in the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>gwr.adaptive <span class="ot">&lt;-</span> <span class="fu">gwr.basic</span>(</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> SELLING_PRICE <span class="sc">~</span> AREA_SQM <span class="sc">+</span> AGE <span class="sc">+</span> </span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>    PROX_CBD <span class="sc">+</span> PROX_CHILDCARE <span class="sc">+</span> PROX_ELDERLYCARE <span class="sc">+</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>    PROX_URA_GROWTH_AREA <span class="sc">+</span> PROX_MRT <span class="sc">+</span> PROX_PARK <span class="sc">+</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>    PROX_PRIMARY_SCH <span class="sc">+</span> PROX_SHOPPING_MALL <span class="sc">+</span> PROX_BUS_STOP <span class="sc">+</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>    NO_Of_UNITS <span class="sc">+</span> FAMILY_FRIENDLY <span class="sc">+</span> FREEHOLD,</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">bw=</span>bw.adaptive, </span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel =</span> <span class="st">'gaussian'</span>, </span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">adaptive=</span><span class="cn">TRUE</span>, </span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">longlat =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The code below can be used to display the model output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>gwr.adaptive</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ***********************************************************************
+   *                       Package   GWmodel                             *
+   ***********************************************************************
+   Program starts at: 2025-10-17 02:29:29.244058 
+   Call:
+   gwr.basic(formula = SELLING_PRICE ~ AREA_SQM + AGE + PROX_CBD + 
+    PROX_CHILDCARE + PROX_ELDERLYCARE + PROX_URA_GROWTH_AREA + 
+    PROX_MRT + PROX_PARK + PROX_PRIMARY_SCH + PROX_SHOPPING_MALL + 
+    PROX_BUS_STOP + NO_Of_UNITS + FAMILY_FRIENDLY + FREEHOLD, 
+    data = condo_resale.sf, bw = bw.adaptive, kernel = "gaussian", 
+    adaptive = TRUE, longlat = FALSE)
+
+   Dependent (y) variable:  SELLING_PRICE
+   Independent variables:  AREA_SQM AGE PROX_CBD PROX_CHILDCARE PROX_ELDERLYCARE PROX_URA_GROWTH_AREA PROX_MRT PROX_PARK PROX_PRIMARY_SCH PROX_SHOPPING_MALL PROX_BUS_STOP NO_Of_UNITS FAMILY_FRIENDLY FREEHOLD
+   Number of data points: 1436
+   ***********************************************************************
+   *                    Results of Global Regression                     *
+   ***********************************************************************
+
+   Call:
+    lm(formula = formula, data = data)
+
+   Residuals:
+     Min       1Q   Median       3Q      Max 
+-3470778  -298119   -23481   248917 12234210 
+
+   Coefficients:
+                          Estimate Std. Error t value Pr(&gt;|t|)    
+   (Intercept)           527633.22  108183.22   4.877 1.20e-06 ***
+   AREA_SQM               12777.52     367.48  34.771  &lt; 2e-16 ***
+   AGE                   -24687.74    2754.84  -8.962  &lt; 2e-16 ***
+   PROX_CBD              -77131.32    5763.12 -13.384  &lt; 2e-16 ***
+   PROX_CHILDCARE       -318472.75  107959.51  -2.950 0.003231 ** 
+   PROX_ELDERLYCARE      185575.62   39901.86   4.651 3.61e-06 ***
+   PROX_URA_GROWTH_AREA   39163.25   11754.83   3.332 0.000885 ***
+   PROX_MRT             -294745.11   56916.37  -5.179 2.56e-07 ***
+   PROX_PARK             570504.81   65507.03   8.709  &lt; 2e-16 ***
+   PROX_PRIMARY_SCH      159856.14   60234.60   2.654 0.008046 ** 
+   PROX_SHOPPING_MALL   -220947.25   36561.83  -6.043 1.93e-09 ***
+   PROX_BUS_STOP         682482.22  134513.24   5.074 4.42e-07 ***
+   NO_Of_UNITS             -245.48      87.95  -2.791 0.005321 ** 
+   FAMILY_FRIENDLY       146307.58   46893.02   3.120 0.001845 ** 
+   FREEHOLD              350599.81   48506.48   7.228 7.98e-13 ***
+
+   ---Significance stars
+   Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+   Residual standard error: 756000 on 1421 degrees of freedom
+   Multiple R-squared: 0.6507
+   Adjusted R-squared: 0.6472 
+   F-statistic: 189.1 on 14 and 1421 DF,  p-value: &lt; 2.2e-16 
+   ***Extra Diagnostic information
+   Residual sum of squares: 8.120609e+14
+   Sigma(hat): 752522.9
+   AIC:  42966.76
+   AICc:  42967.14
+   BIC:  41731.39
+   ***********************************************************************
+   *          Results of Geographically Weighted Regression              *
+   ***********************************************************************
+
+   *********************Model calibration information*********************
+   Kernel function: gaussian 
+   Adaptive bandwidth: 30 (number of nearest neighbours)
+   Regression points: the same locations as observations are used.
+   Distance metric: Euclidean distance metric is used.
+
+   ****************Summary of GWR coefficient estimates:******************
+                               Min.     1st Qu.      Median     3rd Qu.
+   Intercept            -1.3487e+08 -2.4669e+05  7.7928e+05  1.6194e+06
+   AREA_SQM              3.3188e+03  5.6285e+03  7.7825e+03  1.2738e+04
+   AGE                  -9.6746e+04 -2.9288e+04 -1.4043e+04 -5.6119e+03
+   PROX_CBD             -2.5330e+06 -1.6256e+05 -7.7242e+04  2.6624e+03
+   PROX_CHILDCARE       -1.2790e+06 -2.0175e+05  8.7158e+03  3.7778e+05
+   PROX_ELDERLYCARE     -1.6212e+06 -9.2050e+04  6.1029e+04  2.8184e+05
+   PROX_URA_GROWTH_AREA -7.2686e+06 -3.0350e+04  4.5869e+04  2.4613e+05
+   PROX_MRT             -4.3781e+07 -6.7282e+05 -2.2115e+05 -7.4593e+04
+   PROX_PARK            -2.9020e+06 -1.6782e+05  1.1601e+05  4.6572e+05
+   PROX_PRIMARY_SCH     -8.6418e+05 -1.6627e+05 -7.7853e+03  4.3222e+05
+   PROX_SHOPPING_MALL   -1.8272e+06 -1.3175e+05 -1.4049e+04  1.3799e+05
+   PROX_BUS_STOP        -2.0579e+06 -7.1461e+04  4.1104e+05  1.2071e+06
+   NO_Of_UNITS          -2.1993e+03 -2.3685e+02 -3.4699e+01  1.1657e+02
+   FAMILY_FRIENDLY      -5.9879e+05 -5.0927e+04  2.6173e+04  2.2481e+05
+   FREEHOLD             -1.6340e+05  4.0765e+04  1.9023e+05  3.7960e+05
+                            Max.
+   Intercept            18758355
+   AREA_SQM                23064
+   AGE                     13303
+   PROX_CBD             11346650
+   PROX_CHILDCARE        2892127
+   PROX_ELDERLYCARE      2465671
+   PROX_URA_GROWTH_AREA  7384059
+   PROX_MRT              1186242
+   PROX_PARK             2588497
+   PROX_PRIMARY_SCH      3381462
+   PROX_SHOPPING_MALL   38038564
+   PROX_BUS_STOP        12081592
+   NO_Of_UNITS              1010
+   FAMILY_FRIENDLY       2072414
+   FREEHOLD              1813995
+   ************************Diagnostic information*************************
+   Number of data points: 1436 
+   Effective number of parameters (2trace(S) - trace(S'S)): 350.3088 
+   Effective degrees of freedom (n-2trace(S) + trace(S'S)): 1085.691 
+   AICc (GWR book, Fotheringham, et al. 2002, p. 61, eq 2.33): 41982.22 
+   AIC (GWR book, Fotheringham, et al. 2002,GWR p. 96, eq. 4.22): 41546.74 
+   BIC (GWR book, Fotheringham, et al. 2002,GWR p. 61, eq. 2.34): 41914.08 
+   Residual sum of squares: 2.528227e+14 
+   R-square value:  0.8912425 
+   Adjusted R-square value:  0.8561185 
+
+   ***********************************************************************
+   Program stops at: 2025-10-17 02:29:30.252033 </code></pre>
+</div>
+</div>
+<p>The report shows that the AICc the adaptive distance gwr is 41982.22 which is even smaller than the AICc of the fixed distance gwr of 42263.61.</p>
+</section>
+</section>
+<section id="visualising-gwr-output" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-gwr-output"><strong>13.9.3&nbsp;Visualising GWR Output</strong></h3>
+<ul>
+<li><p><strong>Condition Number:</strong>&nbsp;checks local multicollinearity; values &gt;30 indicate instability.</p></li>
+<li><p><strong>Local R²:</strong>&nbsp;measures local model fit (0–1 range); low values suggest poor local performance.</p></li>
+<li><p><strong>Predicted Values:</strong>&nbsp;fitted y-values estimated by GWR.</p></li>
+<li><p><strong>Residuals:</strong>&nbsp;difference between observed and predicted values; standardized residuals (mean = 0, SD = 1) can be mapped to visualize spatial error patterns.</p></li>
+<li><p><strong>Coefficient Standard Errors:</strong>&nbsp;indicate reliability of coefficient estimates; large errors may signal local collinearity.</p></li>
+<li><p>All results are stored in a&nbsp;<strong>SpatialPointsDataFrame/SpatialPolygonsDataFrame (SDF)</strong>, including fitted values, coefficients, standard errors, and t-values.</p></li>
+</ul>
+</section>
+<section id="converting-sdf-into-sf-data.frame" class="level3">
+<h3 class="anchored" data-anchor-id="converting-sdf-into-sf-data.frame"><strong>13.9.4&nbsp;Converting SDF into&nbsp;<em>sf</em>&nbsp;data.frame</strong></h3>
+<p>To visualise the fields in&nbsp;<strong>SDF</strong>, we need to first covert it into&nbsp;<strong>sf</strong>&nbsp;data.frame by using the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>condo_resale.sf.adaptive <span class="ot">&lt;-</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(gwr.adaptive<span class="sc">$</span>SDF) <span class="sc">%&gt;%</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="dv">3414</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next,&nbsp;<code>glimpse()</code>&nbsp;is used to display the content of&nbsp;<em>condo_resale.sf.adaptive</em>&nbsp;sf data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(condo_resale.sf.adaptive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,436
+Columns: 52
+$ Intercept               &lt;dbl&gt; 2050011.67, 1633128.24, 3433608.17, 234358.91,…
+$ AREA_SQM                &lt;dbl&gt; 9561.892, 16576.853, 13091.861, 20730.601, 672…
+$ AGE                     &lt;dbl&gt; -9514.634, -58185.479, -26707.386, -93308.988,…
+$ PROX_CBD                &lt;dbl&gt; -120681.94, -149434.22, -259397.77, 2426853.66…
+$ PROX_CHILDCARE          &lt;dbl&gt; 319266.925, 441102.177, -120116.816, 480825.28…
+$ PROX_ELDERLYCARE        &lt;dbl&gt; -393417.795, 325188.741, 535855.806, 314783.72…
+$ PROX_URA_GROWTH_AREA    &lt;dbl&gt; -159980.203, -142290.389, -253621.206, -267929…
+$ PROX_MRT                &lt;dbl&gt; -299742.96, -2510522.23, -936853.28, -2039479.…
+$ PROX_PARK               &lt;dbl&gt; -172104.47, 523379.72, 209099.85, -759153.26, …
+$ PROX_PRIMARY_SCH        &lt;dbl&gt; 242668.03, 1106830.66, 571462.33, 3127477.21, …
+$ PROX_SHOPPING_MALL      &lt;dbl&gt; 300881.390, -87693.378, -126732.712, -29593.34…
+$ PROX_BUS_STOP           &lt;dbl&gt; 1210615.44, 1843587.22, 1411924.90, 7225577.51…
+$ NO_Of_UNITS             &lt;dbl&gt; 104.8290640, -288.3441183, -9.5532945, -161.35…
+$ FAMILY_FRIENDLY         &lt;dbl&gt; -9075.370, 310074.664, 5949.746, 1556178.531, …
+$ FREEHOLD                &lt;dbl&gt; 303955.61, 396221.27, 168821.75, 1212515.58, 3…
+$ y                       &lt;dbl&gt; 3000000, 3880000, 3325000, 4250000, 1400000, 1…
+$ yhat                    &lt;dbl&gt; 2886531.8, 3466801.5, 3616527.2, 5435481.6, 13…
+$ residual                &lt;dbl&gt; 113468.16, 413198.52, -291527.20, -1185481.63,…
+$ CV_Score                &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+$ Stud_residual           &lt;dbl&gt; 0.38207013, 1.01433140, -0.83780678, -2.846146…
+$ Intercept_SE            &lt;dbl&gt; 516105.5, 488083.5, 963711.4, 444185.5, 211962…
+$ AREA_SQM_SE             &lt;dbl&gt; 823.2860, 825.2380, 988.2240, 617.4007, 1376.2…
+$ AGE_SE                  &lt;dbl&gt; 5889.782, 6226.916, 6510.236, 6010.511, 8180.3…
+$ PROX_CBD_SE             &lt;dbl&gt; 37411.22, 23615.06, 56103.77, 469337.41, 41064…
+$ PROX_CHILDCARE_SE       &lt;dbl&gt; 319111.1, 299705.3, 349128.5, 304965.2, 698720…
+$ PROX_ELDERLYCARE_SE     &lt;dbl&gt; 120633.34, 84546.69, 129687.07, 127150.69, 327…
+$ PROX_URA_GROWTH_AREA_SE &lt;dbl&gt; 56207.39, 76956.50, 95774.60, 470762.12, 47433…
+$ PROX_MRT_SE             &lt;dbl&gt; 185181.3, 281133.9, 275483.7, 279877.1, 363830…
+$ PROX_PARK_SE            &lt;dbl&gt; 205499.6, 229358.7, 314124.3, 227249.4, 364580…
+$ PROX_PRIMARY_SCH_SE     &lt;dbl&gt; 152400.7, 165150.7, 196662.6, 240878.9, 249087…
+$ PROX_SHOPPING_MALL_SE   &lt;dbl&gt; 109268.8, 98906.8, 119913.3, 177104.1, 301032.…
+$ PROX_BUS_STOP_SE        &lt;dbl&gt; 600668.6, 410222.1, 464156.7, 562810.8, 740922…
+$ NO_Of_UNITS_SE          &lt;dbl&gt; 218.1258, 208.9410, 210.9828, 361.7767, 299.50…
+$ FAMILY_FRIENDLY_SE      &lt;dbl&gt; 131474.73, 114989.07, 146607.22, 108726.62, 16…
+$ FREEHOLD_SE             &lt;dbl&gt; 115954.0, 130110.0, 141031.5, 138239.1, 210641…
+$ Intercept_TV            &lt;dbl&gt; 3.9720784, 3.3460017, 3.5629010, 0.5276150, 1.…
+$ AREA_SQM_TV             &lt;dbl&gt; 11.614302, 20.087361, 13.247868, 33.577223, 4.…
+$ AGE_TV                  &lt;dbl&gt; -1.6154474, -9.3441881, -4.1023685, -15.524301…
+$ PROX_CBD_TV             &lt;dbl&gt; -3.22582173, -6.32792021, -4.62353528, 5.17080…
+$ PROX_CHILDCARE_TV       &lt;dbl&gt; 1.000488185, 1.471786337, -0.344047555, 1.5766…
+$ PROX_ELDERLYCARE_TV     &lt;dbl&gt; -3.26126929, 3.84626245, 4.13191383, 2.4756745…
+$ PROX_URA_GROWTH_AREA_TV &lt;dbl&gt; -2.846248368, -1.848971738, -2.648105057, -5.6…
+$ PROX_MRT_TV             &lt;dbl&gt; -1.61864578, -8.92998600, -3.40075727, -7.2870…
+$ PROX_PARK_TV            &lt;dbl&gt; -0.83749312, 2.28192684, 0.66565951, -3.340617…
+$ PROX_PRIMARY_SCH_TV     &lt;dbl&gt; 1.59230221, 6.70194543, 2.90580089, 12.9836104…
+$ PROX_SHOPPING_MALL_TV   &lt;dbl&gt; 2.753588422, -0.886626400, -1.056869486, -0.16…
+$ PROX_BUS_STOP_TV        &lt;dbl&gt; 2.0154464, 4.4941192, 3.0419145, 12.8383775, 0…
+$ NO_Of_UNITS_TV          &lt;dbl&gt; 0.480589953, -1.380026395, -0.045279967, -0.44…
+$ FAMILY_FRIENDLY_TV      &lt;dbl&gt; -0.06902748, 2.69655779, 0.04058290, 14.312764…
+$ FREEHOLD_TV             &lt;dbl&gt; 2.6213469, 3.0452799, 1.1970499, 8.7711485, 1.…
+$ Local_R2                &lt;dbl&gt; 0.8846744, 0.8899773, 0.8947007, 0.9073605, 0.…
+$ geometry                &lt;POINT [m]&gt; POINT (22085.12 29951.54), POINT (25656.…</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gwr.adaptive<span class="sc">$</span>SDF<span class="sc">$</span>yhat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+  171347  1102001  1385528  1751842  1982307 13887901 </code></pre>
+</div>
+</div>
+</section>
+<section id="visualising-local-r2" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-local-r2"><strong>13.9.5&nbsp;Visualising local R2</strong></h3>
+<p>The code chunks below is used to create an interactive point symbol map.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(mpsz_svy21)<span class="sc">+</span></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill_alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(condo_resale.sf.adaptive) <span class="sc">+</span>  </span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"Local_R2"</span>,</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_view</span>(<span class="at">set.zoom.limits =</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex07_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="visualising-coefficient-estimates" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-coefficient-estimates"><strong>13.9.6&nbsp;Visualising coefficient estimates</strong></h3>
+<p>The code chunks below is used to create an interactive point symbol map.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>AREA_SQM_SE <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz_svy21)<span class="sc">+</span></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(condo_resale.sf.adaptive) <span class="sc">+</span>  </span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"AREA_SQM_SE"</span>,</span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_view</span>(<span class="at">set.zoom.limits =</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">14</span>))</span>
+<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a>AREA_SQM_TV <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz_svy21)<span class="sc">+</span></span>
+<span id="cb72-11"><a href="#cb72-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb72-12"><a href="#cb72-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(condo_resale.sf.adaptive) <span class="sc">+</span>  </span>
+<span id="cb72-13"><a href="#cb72-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"AREA_SQM_TV"</span>,</span>
+<span id="cb72-14"><a href="#cb72-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb72-15"><a href="#cb72-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb72-16"><a href="#cb72-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_view</span>(<span class="at">set.zoom.limits =</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">14</span>))</span>
+<span id="cb72-17"><a href="#cb72-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-18"><a href="#cb72-18" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(AREA_SQM_SE, AREA_SQM_TV, </span>
+<span id="cb72-19"><a href="#cb72-19" aria-hidden="true" tabindex="-1"></a>             <span class="at">asp=</span><span class="dv">1</span>, <span class="at">ncol=</span><span class="dv">2</span>,</span>
+<span id="cb72-20"><a href="#cb72-20" aria-hidden="true" tabindex="-1"></a>             <span class="at">sync =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex07_files/figure-html/unnamed-chunk-51-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="reference" class="level2">
+<h2 class="anchored" data-anchor-id="reference"><strong>13.10&nbsp;Reference</strong></h2>
+<p>Gollini I, Lu B, Charlton M, Brunsdon C, Harris P (2015) “GWmodel: an R Package for exploring Spatial Heterogeneity using Geographically Weighted Models”.&nbsp;<em>Journal of Statistical Software</em>, 63(17):1-50, http://www.jstatsoft.org/v63/i17/</p>
+<p>Lu B, Harris P, Charlton M, Brunsdon C (2014) “The GWmodel R Package: further topics for exploring Spatial Heterogeneity using GeographicallyWeighted Models”.&nbsp;<em>Geo-spatial Information Science</em>&nbsp;17(2): 85-101, http://www.tandfonline.com/doi/abs/10.1080/1009502.2014.917453</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

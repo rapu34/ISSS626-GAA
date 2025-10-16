@@ -1,12 +1,38 @@
-.Rproj.user
+# R / RStudio
+.Rproj.user/
 .Rhistory
 .RData
-.Ruserdata
 .Rdata
+.Ruserdata
+.Renviron
+.Rprofile
 .httr-oauth
-.DS_Store
-.quarto
 
-/.quarto/
+# OS
+.DS_Store
+
+# Quarto
+.quarto/
+_site/
+_freeze/
+*_cache/
+*_files/
+site_libs/
+
 
 data/
+In-class_Ex/**/data/
+Take-home_Ex01/data/
+Take-home_Ex02/data/
+Hands-on_Ex/**/data/
+
+*.RDataTmp*
+*.RdataTmp*
+*.zip
+*.rds
+*.csv
+
+*.log
+*.bak
+
+/.quarto/
