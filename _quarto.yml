@@ -6,7 +6,9 @@ website:
   navbar:
     left:
     - text: "Hands-on Exercise_7(week8)"
-    - href: Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html
+      menu:
+      - text: "Hands-on Exercise 7(week8)"
+      - href: Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html
   
     - text: "Hands-on Exercise"
       menu:
