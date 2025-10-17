@@ -13,11 +13,11 @@
 
 # Quarto
 .quarto/
-_site/
+#_site/
 _freeze/
 *_cache/
-*_files/
-site_libs/
+#*_files/
+#site_libs/
 
 
 data/
