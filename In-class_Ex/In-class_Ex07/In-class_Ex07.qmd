@@ -673,9 +673,7 @@ tampines_boundary <- mpsz_svy21 %>%
 
 
 tampines_dots <- st_intersection(condo_resale.sf.adaptive, tampines_boundary)
-
-### STEP 3: Visualize the Tampines area only ###
-tmap_mode("view") # Interactive (zoomable) mode
+tmap_mode("plot") # Interactive (zoomable) mode
 
 tm_shape(tampines_boundary) +
   tm_polygons(alpha = 0.1, border.col = "black") + # Draw the Tampines boundary
@@ -691,54 +689,28 @@ tm_shape(tampines_dots) +
 tm_basemap(server = "CartoDB.Positron") # Add a light background map
 ```
 
-**1. Selected Area: Tampines**
+This data represents the GWR model output for a single observation point within the Tampines Planning Area.
 
-The selected area for analysis is the ***Tampines Planning Area***, located in the eastern region of Singapore, immediately west of Changi Airport. Based on the mapped visualization, this area contains a dense cluster of observation points (blue dots), indicating numerous housing transactions and a strong representation of residential properties.
+#### 1. Model Goodness-of-Fit (Local R²)
 
-------------------------------------------------------------------------
+-   **Local_R²: 0.972431**
 
-**2. Local R² Distribution (Map Observation)**
+-   **Interpretation:** The Local R-squared value at this point is **0.972 (or 97.2%)**, which signifies an **exceptionally high**level of explanatory power. This means the GWR model successfully explains 97.2% of the variance in the housing price at this specific location.
 
-From the GWR output map, most points within the Tampines area exhibit deep blue colors in the *Local_R²* legend range of **0.80 to 0.85**, signifying high model explanatory power.\
-Compared to central urban regions (such as Downtown Core or Orchard), which show lighter blue shades (0.65–0.70), Tampines demonstrates much stronger local model performance.
+#### 2. Price Prediction and Residual
 
-This means that the Geographically Weighted Regression (GWR) model explains housing price variations in Tampines far more effectively than in other regions of Singapore.
+-   **Actual Price (y):** \$1,095,000
 
-------------------------------------------------------------------------
+-   **Predicted Price (yhat):** \$1,106,570
 
-**3. Detailed Local Observation**
+-   **Residual:** -\$11,570
 
-A representative observation point within Tampines provides detailed GWR coefficient outputs, summarized as follows:
+-   **Interpretation:** The model **over-predicted** the property's actual price by \$11,570. The negative residual indicates that the predicted value (yhat) was higher than the actual observed value (y).
 
--   **Local_R²:** 0.9753\
-    → The model explains **97.5%** of housing price variation at this location — an exceptionally high level of local fit, exceeding even the upper legend range.
+#### 3. Conclusion (Overall Interpretation)
 
--   **Actual Price (y):** \$1,600,000
+This observation point serves as an **excellent case study for the model's effectiveness.**
 
--   **Predicted Price (ŷ):** \$1,350,725
+The extremely high Local R² (97.2%) indicates that the model has captured the local price-determining factors almost perfectly.
 
--   **Residual:** \$249,275
-
-Despite the high R², the model underestimates the actual price by approximately \$250,000, possibly due to unobserved premium features such as interior design or scenic view advantages.
-
-------------------------------------------------------------------------
-
-**4. Interpretation of Key Local Variables**
-
-| Variable | Coefficient | Interpretation |
-|----|----|----|
-| **PROX_CHILDCARE** | +862,704 | Strongly positive influence — proximity to childcare centers significantly increases property value, reflecting Tampines’ family-oriented residential environment. |
-| **PROX_URA_GROWTH_AREA** | −838,652 | Strongly negative — proximity to URA growth areas may reduce property value due to ongoing construction noise or traffic congestion. |
-| **PROX_PARK** | −0.8 million | Unexpected negative effect — proximity to parks might be associated with specific local disamenities such as noise or overcrowding. |
-| **PROX_PRIMARY_SCH** | −361,854 | Negative impact — possibly due to school-related traffic congestion or lower school prestige in that area. |
-| **AGE** | −2,750 | Each additional year of building age slightly decreases the property price. |
-
-------------------------------------------------------------------------
-
-**5. Conclusion**
-
-The **Tampines Planning Area** demonstrates one of the **highest local R² values** across Singapore, indicating that the GWR model provides an exceptionally accurate explanation of property price patterns in this region (R² ≈ 0.975).
-
-While accessibility to childcare facilities strongly enhances housing value, proximity to URA growth zones, parks, and primary schools exerts a negative effect — suggesting that external factors such as noise, traffic, or environmental conditions play a more influential role than simple spatial proximity.
-
-Overall, Tampines exhibits a **highly interpretable and spatially consistent relationship** between housing prices and local environmental attributes, showcasing the GWR model’s strong performance in this eastern residential district.
+This conclusion is strongly supported by the **very low residual**. For a property valued at over \$1 million, the model's prediction was off by only \$11,570, representing a minimal error rate of just **1.06%**. This demonstrates that the model not only fit the data well (high R²) but was also **highly accurate** in its prediction for this location.
