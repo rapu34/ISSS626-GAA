@@ -30,7 +30,7 @@ Hands-on_Ex/**/data/
 *.RdataTmp*
 *.zip
 *.rds
-*.csv
+#*.csv
 
 *.log
 *.bak
