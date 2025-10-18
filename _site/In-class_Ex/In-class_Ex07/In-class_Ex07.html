@@ -1,0 +1,2595 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jeounghyun Kim">
+<meta name="dcterms.date" content="2025-10-18">
+
+<title>In-class_Ex7 – ISSS626 Coursework</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ISSS626 Coursework</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Hands-on Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html">
+ <span class="dropdown-text">Week1_Hands-on Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex01a/Hands-on_Ex01a.html">
+ <span class="dropdown-text">Week1_Hands-on Exercise 1a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html">
+ <span class="dropdown-text">Week2_Hands-on Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex02a/Hands-on_Ex02a.html">
+ <span class="dropdown-text">Week2_Hands-on Exercise 2a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03.html">
+ <span class="dropdown-text">Week3_Hands-on Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html">
+ <span class="dropdown-text">Week4_Hands-on Exercise 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html">
+ <span class="dropdown-text">Week5_Hands-on Exercise 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05a/Hands-on_Ex05a.html">
+ <span class="dropdown-text">Week5_Hands-on Exercise 5a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex06/Hands-on_Ex06.html">
+ <span class="dropdown-text">Week6_Hands-on Exercise 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html">
+ <span class="dropdown-text">Week8_Hands-on Exercise 7</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">In-class Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex03a/In-class_Ex03a.html">
+ <span class="dropdown-text">In-class Exercise 3a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex03b/In-class_Ex03b.html">
+ <span class="dropdown-text">In-class Exercise 3b</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex04/In-class_Ex04.html">
+ <span class="dropdown-text">In-class Exercise 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex05/In-class_Ex05.html">
+ <span class="dropdown-text">In-class Exercise 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex06/In-class_Ex06.html">
+ <span class="dropdown-text">In-class Exercise 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex07/In-class_Ex07.html">
+ <span class="dropdown-text">In-class Exercise 7</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex01/Take-home_Ex01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li class="dropdown-header">Take-home Exercise 2</li>
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#eda-using-statistical-graphics" id="toc-eda-using-statistical-graphics" class="nav-link active" data-scroll-target="#eda-using-statistical-graphics"><strong>13.7.1&nbsp;EDA using statistical graphics</strong></a></li>
+  <li><a href="#multiple-histogram-plots-distribution-of-variables" id="toc-multiple-histogram-plots-distribution-of-variables" class="nav-link" data-scroll-target="#multiple-histogram-plots-distribution-of-variables"><strong>13.7.2&nbsp;Multiple Histogram Plots distribution of variables</strong></a></li>
+  <li><a href="#drawing-statistical-point-map" id="toc-drawing-statistical-point-map" class="nav-link" data-scroll-target="#drawing-statistical-point-map"><strong>13.7.3&nbsp;Drawing Statistical Point Map</strong></a></li>
+  <li><a href="#hedonic-pricing-modelling-in-r" id="toc-hedonic-pricing-modelling-in-r" class="nav-link" data-scroll-target="#hedonic-pricing-modelling-in-r"><strong>13.8&nbsp;Hedonic Pricing Modelling in R</strong></a>
+  <ul class="collapse">
+  <li><a href="#simple-linear-regression-method" id="toc-simple-linear-regression-method" class="nav-link" data-scroll-target="#simple-linear-regression-method"><strong>13.8.1&nbsp;Simple Linear Regression Method</strong></a></li>
+  <li><a href="#multiple-linear-regression-method" id="toc-multiple-linear-regression-method" class="nav-link" data-scroll-target="#multiple-linear-regression-method"><strong>13.8.2&nbsp;Multiple Linear Regression Method</strong></a></li>
+  <li><a href="#building-a-hedonic-pricing-model-using-multiple-linear-regression-method" id="toc-building-a-hedonic-pricing-model-using-multiple-linear-regression-method" class="nav-link" data-scroll-target="#building-a-hedonic-pricing-model-using-multiple-linear-regression-method"><strong>13.8.3&nbsp;Building a hedonic pricing model using multiple linear regression method</strong></a></li>
+  <li><a href="#revising-the-model" id="toc-revising-the-model" class="nav-link" data-scroll-target="#revising-the-model"><strong>13.8.4&nbsp;Revising the model</strong></a></li>
+  <li><a href="#preparing-publication-quality-table-gtsummary-method" id="toc-preparing-publication-quality-table-gtsummary-method" class="nav-link" data-scroll-target="#preparing-publication-quality-table-gtsummary-method"><strong>13.8.5&nbsp;Preparing Publication Quality Table: gtsummary method</strong></a></li>
+  <li><a href="#regression-diagnostics" id="toc-regression-diagnostics" class="nav-link" data-scroll-target="#regression-diagnostics"><strong>13.8.6&nbsp;Regression Diagnostics</strong></a></li>
+  </ul></li>
+  <li><a href="#building-hedonic-pricing-models-using-gwmodel" id="toc-building-hedonic-pricing-models-using-gwmodel" class="nav-link" data-scroll-target="#building-hedonic-pricing-models-using-gwmodel"><strong>13.9&nbsp;Building Hedonic Pricing Models using GWmodel</strong></a>
+  <ul class="collapse">
+  <li><a href="#building-fixed-bandwidth-gwr-model" id="toc-building-fixed-bandwidth-gwr-model" class="nav-link" data-scroll-target="#building-fixed-bandwidth-gwr-model"><strong>13.9.1&nbsp;Building Fixed Bandwidth GWR Model</strong></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">In-class_Ex7</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jeounghyun Kim </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 18, 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 18, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(olsrr, corrplot, ggpubr, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               sf, sfdep, GWmodel, tmap, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               tidyverse, gtsummary,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>               performance, RColorBrewer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mpsz <span class="ot">=</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"data/geospatial"</span>, </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">layer =</span> <span class="st">"MP14_SUBZONE_WEB_PL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `MP14_SUBZONE_WEB_PL' from data source 
+  `/Users/jay/Desktop/rapu34/ISSS626-GAA/In-class_Ex/In-class_Ex07/data/geospatial' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 323 features and 15 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 2667.538 ymin: 15748.72 xmax: 56396.44 ymax: 50256.33
+Projected CRS: SVY21</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mpsz_svy21 <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(mpsz, <span class="dv">3414</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(mpsz_svy21)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Coordinate Reference System:
+  User input: EPSG:3414 
+  wkt:
+PROJCRS["SVY21 / Singapore TM",
+    BASEGEOGCRS["SVY21",
+        DATUM["SVY21",
+            ELLIPSOID["WGS 84",6378137,298.257223563,
+                LENGTHUNIT["metre",1]]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433]],
+        ID["EPSG",4757]],
+    CONVERSION["Singapore Transverse Mercator",
+        METHOD["Transverse Mercator",
+            ID["EPSG",9807]],
+        PARAMETER["Latitude of natural origin",1.36666666666667,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8801]],
+        PARAMETER["Longitude of natural origin",103.833333333333,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8802]],
+        PARAMETER["Scale factor at natural origin",1,
+            SCALEUNIT["unity",1],
+            ID["EPSG",8805]],
+        PARAMETER["False easting",28001.642,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8806]],
+        PARAMETER["False northing",38744.572,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8807]]],
+    CS[Cartesian,2],
+        AXIS["northing (N)",north,
+            ORDER[1],
+            LENGTHUNIT["metre",1]],
+        AXIS["easting (E)",east,
+            ORDER[2],
+            LENGTHUNIT["metre",1]],
+    USAGE[
+        SCOPE["Cadastre, engineering survey, topographic mapping."],
+        AREA["Singapore - onshore and offshore."],
+        BBOX[1.13,103.59,1.47,104.07]],
+    ID["EPSG",3414]]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_bbox</span>(mpsz_svy21)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     xmin      ymin      xmax      ymax 
+ 2667.538 15748.721 56396.440 50256.334 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>condo_resale <span class="ot">=</span> <span class="fu">read_csv</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/aspatial/Condo_resale_2015.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(condo_resale<span class="sc">$</span>LONGITUDE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 103.7802 103.8123 103.7971 103.8247 103.9505 103.9386</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(condo_resale<span class="sc">$</span>LATITUDE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.287145 1.328698 1.313727 1.308563 1.321437 1.314198</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>condo_resale.sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(condo_resale,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"LONGITUDE"</span>, <span class="st">"LATITUDE"</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">crs=</span><span class="dv">4326</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="at">crs=</span><span class="dv">3414</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="eda-using-statistical-graphics" class="level3">
+<h3 class="anchored" data-anchor-id="eda-using-statistical-graphics"><strong>13.7.1&nbsp;EDA using statistical graphics</strong></h3>
+<p>We can plot the distribution of&nbsp;<em>SELLING_PRICE</em>&nbsp;by using appropriate Exploratory Data Analysis (EDA) as shown in the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">SELLING_PRICE</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="In-class_Ex07_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure above reveals a right skewed distribution. This means that more condominium units were transacted at relative lower prices.</p>
+<p>Statistically, the skewed dsitribution can be normalised by using log transformation. The code chunk below is used to derive a new variable called&nbsp;<em>LOG_SELLING_PRICE</em>&nbsp;by using a log transformation on the variable&nbsp;<em>SELLING_PRICE</em>. It is performed using&nbsp;<code>mutate()</code>&nbsp;of&nbsp;<strong>dplyr</strong>&nbsp;package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>condo_resale.sf <span class="ot">&lt;-</span> condo_resale.sf <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">`</span><span class="at">LOG_SELLING_PRICE</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">log</span>(SELLING_PRICE))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, you can plot the&nbsp;<em>LOG_SELLING_PRICE</em>&nbsp;using the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">LOG_SELLING_PRICE</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="In-class_Ex07_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice that the distribution is relatively less skewed after the transformation.</p>
+</section>
+<section id="multiple-histogram-plots-distribution-of-variables" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-histogram-plots-distribution-of-variables"><strong>13.7.2&nbsp;Multiple Histogram Plots distribution of variables</strong></h3>
+<p>In this section, you will learn how to draw a small multiple histograms (also known as trellis plot) by using&nbsp;<code>ggarrange()</code>&nbsp;of&nbsp;<a href="https://cran.r-project.org/web/packages/ggpubr/index.html"><strong>ggpubr</strong></a>&nbsp;package.</p>
+<p>The code chunk below is used to create 12 histograms. Then,&nbsp;<code>ggarrange()</code>&nbsp;is used to organised these histogram into a 3 columns by 4 rows small multiple plot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>AREA_SQM <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">AREA_SQM</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>AGE <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">AGE</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>PROX_CBD <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_CBD</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>PROX_CHILDCARE <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_CHILDCARE</span><span class="st">`</span>)) <span class="sc">+</span> </span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>PROX_ELDERLYCARE <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_ELDERLYCARE</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>PROX_URA_GROWTH_AREA <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_URA_GROWTH_AREA</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>PROX_HAWKER_MARKET <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_HAWKER_MARKET</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>PROX_KINDERGARTEN <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_KINDERGARTEN</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>PROX_MRT <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_MRT</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>PROX_PARK <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_PARK</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>PROX_PRIMARY_SCH <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>                           <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_PRIMARY_SCH</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a>PROX_TOP_PRIMARY_SCH <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">aes</span>(<span class="at">x=</span> <span class="st">`</span><span class="at">PROX_TOP_PRIMARY_SCH</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>, </span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color=</span><span class="st">"black"</span>, </span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill=</span><span class="st">"light blue"</span>)</span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(AREA_SQM, AGE, PROX_CBD, PROX_CHILDCARE, </span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a>          PROX_ELDERLYCARE, PROX_URA_GROWTH_AREA,</span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a>          PROX_HAWKER_MARKET, PROX_KINDERGARTEN, PROX_MRT,</span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a>          PROX_PARK, PROX_PRIMARY_SCH, PROX_TOP_PRIMARY_SCH,  </span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="In-class_Ex07_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="drawing-statistical-point-map" class="level3">
+<h3 class="anchored" data-anchor-id="drawing-statistical-point-map"><strong>13.7.3&nbsp;Drawing Statistical Point Map</strong></h3>
+<p>Lastly, we want to reveal the geospatial distribution condominium resale prices in Singapore. The map will be prepared by using&nbsp;<strong>tmap</strong>&nbsp;package.</p>
+<p>First, we will turn on the interactive mode of tmap by using the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, the code chunks below is used to create an interactive point symbol map.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(mpsz_svy21)<span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>() <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(condo_resale.sf) <span class="sc">+</span>  </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">fill =</span> <span class="st">"SELLING_PRICE"</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill_alpha =</span> <span class="fl">0.6</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.5</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill.scale =</span> <span class="fu">tm_scale_intervals</span>(</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">style=</span><span class="st">"quantile"</span>)) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_view</span>(<span class="at">set_zoom_limits =</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="In-class_Ex07_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice that&nbsp;<a href="https://www.rdocumentation.org/packages/tmap/versions/2.2/topics/tm_symbols"><code>tm_dots()</code></a>&nbsp;is used instead of&nbsp;<code>tm_bubbles()</code>.</p>
+<p><code>set_zoom_limits</code>&nbsp;argument of&nbsp;<code>tm_view()</code>&nbsp;sets the minimum and maximum zoom level to 11 and 14 respectively.</p>
+<p>Before moving on to the next section, the code below will be used to turn R display into&nbsp;<code>plot</code>&nbsp;mode.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="hedonic-pricing-modelling-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="hedonic-pricing-modelling-in-r"><strong>13.8&nbsp;Hedonic Pricing Modelling in R</strong></h2>
+<p>In this section, you will learn how to building hedonic pricing models for condominium resale units using&nbsp;<a href="https://www.rdocumentation.org/packages/stats/versions/3.5.2/topics/lm"><code>lm()</code></a>&nbsp;of R base.</p>
+<section id="simple-linear-regression-method" class="level3">
+<h3 class="anchored" data-anchor-id="simple-linear-regression-method"><strong>13.8.1&nbsp;Simple Linear Regression Method</strong></h3>
+<p>First, we will build a simple linear regression model by using&nbsp;<em>SELLING_PRICE</em>&nbsp;as the dependent variable and&nbsp;<em>AREA_SQM</em>&nbsp;as the independent variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>condo.slr <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula=</span>SELLING_PRICE <span class="sc">~</span> AREA_SQM, </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> condo_resale.sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>lm()</code>&nbsp;returns an object of class “lm” or for multiple responses of class c(“mlm”, “lm”).</p>
+<p>The functions&nbsp;<code>summary()</code>&nbsp;and&nbsp;<code>anova()</code>&nbsp;can be used to obtain and print a summary and analysis of variance table of the results. The generic accessor functions coefficients, effects, fitted.values and residuals extract various useful features of the value returned by&nbsp;<code>lm</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(condo.slr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = SELLING_PRICE ~ AREA_SQM, data = condo_resale.sf)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-3695815  -391764   -87517   258900 13503875 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -258121.1    63517.2  -4.064 5.09e-05 ***
+AREA_SQM      14719.0      428.1  34.381  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 942700 on 1434 degrees of freedom
+Multiple R-squared:  0.4518,    Adjusted R-squared:  0.4515 
+F-statistic:  1182 on 1 and 1434 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li><p>The regression equation is&nbsp;<strong>y = -258121.1 + 14719x₁</strong>, meaning that&nbsp;<strong>SELLING_PRICE</strong>&nbsp;increases by about&nbsp;<strong>14,719</strong>&nbsp;for each unit increase in&nbsp;<strong>AREA_SQM</strong>.</p></li>
+<li><p><strong>R² = 0.4518</strong>, indicating the model explains&nbsp;<strong>about 45% of the variance</strong>&nbsp;in resale prices.</p></li>
+<li><p>The&nbsp;<strong>p-value (&lt; 0.0001)</strong>&nbsp;shows the model is&nbsp;<strong>statistically significant</strong>, so we reject the null hypothesis that the mean alone predicts prices well.</p></li>
+<li><p>Both&nbsp;<strong>Intercept (B₀)</strong>&nbsp;and&nbsp;<strong>AREA_SQM (B₁)</strong>&nbsp;have&nbsp;<strong>p-values &lt; 0.001</strong>, confirming they are&nbsp;<strong>significant predictors</strong>.</p></li>
+<li><p>The&nbsp;<strong>best-fit line</strong>&nbsp;can be visualized in a scatterplot using&nbsp;<strong><code>geom_smooth(method = "lm")</code></strong>&nbsp;in&nbsp;<strong>ggplot2</strong>.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>condo_resale.sf,  </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">AREA_SQM</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">SELLING_PRICE</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="In-class_Ex07_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Figure above reveals that there are a few statistical outliers with relatively high selling prices.</p>
+</section>
+<section id="multiple-linear-regression-method" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-linear-regression-method"><strong>13.8.2&nbsp;Multiple Linear Regression Method</strong></h3>
+<section id="visualising-the-relationships-of-the-independent-variables" class="level4">
+<h4 class="anchored" data-anchor-id="visualising-the-relationships-of-the-independent-variables">13.8.2.1&nbsp;Visualising the relationships of the independent variables</h4>
+<ul>
+<li><p>Before building a&nbsp;<strong>multiple regression model</strong>, it is essential to confirm that&nbsp;<strong>independent variables are not highly correlated</strong>.</p></li>
+<li><p><strong>High correlation</strong>&nbsp;among predictors can&nbsp;<strong>distort model accuracy</strong>&nbsp;— a problem known as&nbsp;<strong>multicollinearity</strong>.</p></li>
+<li><p>A&nbsp;<strong>correlation matrix</strong>&nbsp;helps visualize relationships between variables.</p></li>
+<li><p>In this exercise, the&nbsp;<strong><code>corrplot</code></strong>&nbsp;package (and&nbsp;<code>pairs()</code>&nbsp;in R) is used to&nbsp;<strong>plot a scatterplot matrix</strong>&nbsp;showing correlations among independent variables in&nbsp;<code>condo_resale</code>.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(condo_resale[, <span class="dv">5</span><span class="sc">:</span><span class="dv">23</span>]), </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">diag =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">order =</span> <span class="st">"AOE"</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">tl.pos =</span> <span class="st">"td"</span>, </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">tl.cex =</span> <span class="fl">0.5</span>, </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">"number"</span>, </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">type =</span> <span class="st">"upper"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="In-class_Ex07_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Matrix reorder is very important for mining the hiden structure and patter in the matrix. There are four methods in corrplot (parameter order), named “AOE”, “FPC”, “hclust”, “alphabet”. In the code chunk above, AOE order is used. It orders the variables by using the&nbsp;<em>angular order of the eigenvectors</em>&nbsp;method suggested by&nbsp;<a href="https://www.datavis.ca/papers/corrgram.pdf">Michael Friendly</a>.</p>
+<p>From the scatterplot matrix, it is clear that&nbsp;<strong><em>Freehold</em></strong>&nbsp;is highly correlated to&nbsp;<strong><em>LEASE_99YEAR</em></strong>. In view of this, it is wiser to only include either one of them in the subsequent model building. As a result,&nbsp;<strong><em>LEASE_99YEAR</em></strong>&nbsp;is excluded in the subsequent model building.</p>
+</section>
+</section>
+<section id="building-a-hedonic-pricing-model-using-multiple-linear-regression-method" class="level3">
+<h3 class="anchored" data-anchor-id="building-a-hedonic-pricing-model-using-multiple-linear-regression-method"><strong>13.8.3&nbsp;Building a hedonic pricing model using multiple linear regression method</strong></h3>
+<p>The code chunk below using&nbsp;<code>lm()</code>&nbsp;to calibrate the multiple linear regression model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>condo.mlr <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> SELLING_PRICE <span class="sc">~</span> AREA_SQM <span class="sc">+</span> AGE  <span class="sc">+</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    PROX_CBD <span class="sc">+</span> PROX_CHILDCARE <span class="sc">+</span> PROX_ELDERLYCARE <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    PROX_URA_GROWTH_AREA <span class="sc">+</span> PROX_HAWKER_MARKET   <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    PROX_KINDERGARTEN   <span class="sc">+</span> PROX_MRT  <span class="sc">+</span> PROX_PARK <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    PROX_PRIMARY_SCH <span class="sc">+</span> PROX_TOP_PRIMARY_SCH <span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    PROX_SHOPPING_MALL  <span class="sc">+</span> PROX_SUPERMARKET <span class="sc">+</span> </span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    PROX_BUS_STOP   <span class="sc">+</span> NO_Of_UNITS <span class="sc">+</span> </span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    FAMILY_FRIENDLY <span class="sc">+</span> FREEHOLD, </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>condo_resale.sf)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(condo.mlr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = SELLING_PRICE ~ AREA_SQM + AGE + PROX_CBD + PROX_CHILDCARE + 
+    PROX_ELDERLYCARE + PROX_URA_GROWTH_AREA + PROX_HAWKER_MARKET + 
+    PROX_KINDERGARTEN + PROX_MRT + PROX_PARK + PROX_PRIMARY_SCH + 
+    PROX_TOP_PRIMARY_SCH + PROX_SHOPPING_MALL + PROX_SUPERMARKET + 
+    PROX_BUS_STOP + NO_Of_UNITS + FAMILY_FRIENDLY + FREEHOLD, 
+    data = condo_resale.sf)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-3475964  -293923   -23069   241043 12260381 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)           481728.40  121441.01   3.967 7.65e-05 ***
+AREA_SQM               12708.32     369.59  34.385  &lt; 2e-16 ***
+AGE                   -24440.82    2763.16  -8.845  &lt; 2e-16 ***
+PROX_CBD              -78669.78    6768.97 -11.622  &lt; 2e-16 ***
+PROX_CHILDCARE       -351617.91  109467.25  -3.212  0.00135 ** 
+PROX_ELDERLYCARE      171029.42   42110.51   4.061 5.14e-05 ***
+PROX_URA_GROWTH_AREA   38474.53   12523.57   3.072  0.00217 ** 
+PROX_HAWKER_MARKET     23746.10   29299.76   0.810  0.41782    
+PROX_KINDERGARTEN     147468.99   82668.87   1.784  0.07466 .  
+PROX_MRT             -314599.68   57947.44  -5.429 6.66e-08 ***
+PROX_PARK             563280.50   66551.68   8.464  &lt; 2e-16 ***
+PROX_PRIMARY_SCH      180186.08   65237.95   2.762  0.00582 ** 
+PROX_TOP_PRIMARY_SCH    2280.04   20410.43   0.112  0.91107    
+PROX_SHOPPING_MALL   -206604.06   42840.60  -4.823 1.57e-06 ***
+PROX_SUPERMARKET      -44991.80   77082.64  -0.584  0.55953    
+PROX_BUS_STOP         683121.35  138353.28   4.938 8.85e-07 ***
+NO_Of_UNITS             -231.18      89.03  -2.597  0.00951 ** 
+FAMILY_FRIENDLY       140340.77   47020.55   2.985  0.00289 ** 
+FREEHOLD              359913.01   49220.22   7.312 4.38e-13 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 755800 on 1417 degrees of freedom
+Multiple R-squared:  0.6518,    Adjusted R-squared:  0.6474 
+F-statistic: 147.4 on 18 and 1417 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The code chunk above consists of two parts: -&nbsp;<code>lm()</code>&nbsp;of Base R is used to calibrate a multiple linear regression model. The model output is stored in an lm object called&nbsp;<em>condo.mlr</em>. -&nbsp;<code>summary()</code>&nbsp;is used to print the model output.</p>
+</div>
+</div>
+</section>
+<section id="revising-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="revising-the-model"><strong>13.8.4&nbsp;Revising the model</strong></h3>
+<p>With reference to the report above, it is clear that not all the independent variables are statistically significant. We will revised the model by removing those variables which are not statistically significant.</p>
+<p>Now, we are ready to calibrate the revised model by using the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>condo.mlr1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> SELLING_PRICE <span class="sc">~</span> AREA_SQM <span class="sc">+</span> AGE <span class="sc">+</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    PROX_CBD <span class="sc">+</span> PROX_CHILDCARE <span class="sc">+</span> PROX_MRT <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    PROX_ELDERLYCARE    <span class="sc">+</span> PROX_URA_GROWTH_AREA <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    PROX_PARK   <span class="sc">+</span> PROX_PRIMARY_SCH <span class="sc">+</span> </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    PROX_SHOPPING_MALL  <span class="sc">+</span> PROX_BUS_STOP <span class="sc">+</span> </span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    NO_Of_UNITS <span class="sc">+</span> FAMILY_FRIENDLY <span class="sc">+</span> FREEHOLD,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>condo_resale.sf)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(condo.mlr1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = SELLING_PRICE ~ AREA_SQM + AGE + PROX_CBD + PROX_CHILDCARE + 
+    PROX_MRT + PROX_ELDERLYCARE + PROX_URA_GROWTH_AREA + PROX_PARK + 
+    PROX_PRIMARY_SCH + PROX_SHOPPING_MALL + PROX_BUS_STOP + NO_Of_UNITS + 
+    FAMILY_FRIENDLY + FREEHOLD, data = condo_resale.sf)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-3470778  -298119   -23481   248917 12234210 
+
+Coefficients:
+                       Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)           527633.22  108183.22   4.877 1.20e-06 ***
+AREA_SQM               12777.52     367.48  34.771  &lt; 2e-16 ***
+AGE                   -24687.74    2754.84  -8.962  &lt; 2e-16 ***
+PROX_CBD              -77131.32    5763.12 -13.384  &lt; 2e-16 ***
+PROX_CHILDCARE       -318472.75  107959.51  -2.950 0.003231 ** 
+PROX_MRT             -294745.11   56916.37  -5.179 2.56e-07 ***
+PROX_ELDERLYCARE      185575.62   39901.86   4.651 3.61e-06 ***
+PROX_URA_GROWTH_AREA   39163.25   11754.83   3.332 0.000885 ***
+PROX_PARK             570504.81   65507.03   8.709  &lt; 2e-16 ***
+PROX_PRIMARY_SCH      159856.14   60234.60   2.654 0.008046 ** 
+PROX_SHOPPING_MALL   -220947.25   36561.83  -6.043 1.93e-09 ***
+PROX_BUS_STOP         682482.22  134513.24   5.074 4.42e-07 ***
+NO_Of_UNITS             -245.48      87.95  -2.791 0.005321 ** 
+FAMILY_FRIENDLY       146307.58   46893.02   3.120 0.001845 ** 
+FREEHOLD              350599.81   48506.48   7.228 7.98e-13 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 756000 on 1421 degrees of freedom
+Multiple R-squared:  0.6507,    Adjusted R-squared:  0.6472 
+F-statistic: 189.1 on 14 and 1421 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>The output above reveals that all explanatory variables are statistically significant at 95% confident level.</p>
+</section>
+<section id="preparing-publication-quality-table-gtsummary-method" class="level3">
+<h3 class="anchored" data-anchor-id="preparing-publication-quality-table-gtsummary-method"><strong>13.8.5&nbsp;Preparing Publication Quality Table: gtsummary method</strong></h3>
+<p>The&nbsp;<a href="https://www.danieldsjoberg.com/gtsummary/index.html"><strong>gtsummary</strong></a>&nbsp;package provides an elegant and flexible way to create publication-ready summary tables in R.</p>
+<p>In the code chunk below,&nbsp;<a href="https://www.danieldsjoberg.com/gtsummary/reference/tbl_regression.html"><code>tbl_regression()</code></a>&nbsp;is used to create a well formatted regression report.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(condo.mlr1, <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="xzofuonbwf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xzofuonbwf table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#xzofuonbwf thead, #xzofuonbwf tbody, #xzofuonbwf tfoot, #xzofuonbwf tr, #xzofuonbwf td, #xzofuonbwf th {
+  border-style: none;
+}
+
+#xzofuonbwf p {
+  margin: 0;
+  padding: 0;
+}
+
+#xzofuonbwf .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xzofuonbwf .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xzofuonbwf .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xzofuonbwf .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xzofuonbwf .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xzofuonbwf .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xzofuonbwf .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xzofuonbwf .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xzofuonbwf .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xzofuonbwf .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xzofuonbwf .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xzofuonbwf .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xzofuonbwf .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#xzofuonbwf .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xzofuonbwf .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xzofuonbwf .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xzofuonbwf .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xzofuonbwf .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xzofuonbwf .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzofuonbwf .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xzofuonbwf .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xzofuonbwf .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#xzofuonbwf .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzofuonbwf .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xzofuonbwf .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xzofuonbwf .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xzofuonbwf .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzofuonbwf .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xzofuonbwf .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xzofuonbwf .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xzofuonbwf .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xzofuonbwf .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xzofuonbwf .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzofuonbwf .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xzofuonbwf .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xzofuonbwf .gt_left {
+  text-align: left;
+}
+
+#xzofuonbwf .gt_center {
+  text-align: center;
+}
+
+#xzofuonbwf .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xzofuonbwf .gt_font_normal {
+  font-weight: normal;
+}
+
+#xzofuonbwf .gt_font_bold {
+  font-weight: bold;
+}
+
+#xzofuonbwf .gt_font_italic {
+  font-style: italic;
+}
+
+#xzofuonbwf .gt_super {
+  font-size: 65%;
+}
+
+#xzofuonbwf .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#xzofuonbwf .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xzofuonbwf .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xzofuonbwf .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xzofuonbwf .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xzofuonbwf .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xzofuonbwf .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#xzofuonbwf .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#xzofuonbwf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Beta</strong></th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">(Intercept)</td>
+<td class="gt_row gt_center" headers="estimate">527,633</td>
+<td class="gt_row gt_center" headers="conf.low">315,417, 739,849</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">AREA_SQM</td>
+<td class="gt_row gt_center" headers="estimate">12,778</td>
+<td class="gt_row gt_center" headers="conf.low">12,057, 13,498</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">AGE</td>
+<td class="gt_row gt_center" headers="estimate">-24,688</td>
+<td class="gt_row gt_center" headers="conf.low">-30,092, -19,284</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">PROX_CBD</td>
+<td class="gt_row gt_center" headers="estimate">-77,131</td>
+<td class="gt_row gt_center" headers="conf.low">-88,436, -65,826</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">PROX_CHILDCARE</td>
+<td class="gt_row gt_center" headers="estimate">-318,473</td>
+<td class="gt_row gt_center" headers="conf.low">-530,250, -106,696</td>
+<td class="gt_row gt_center" headers="p.value">0.003</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">PROX_MRT</td>
+<td class="gt_row gt_center" headers="estimate">-294,745</td>
+<td class="gt_row gt_center" headers="conf.low">-406,394, -183,096</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">PROX_ELDERLYCARE</td>
+<td class="gt_row gt_center" headers="estimate">185,576</td>
+<td class="gt_row gt_center" headers="conf.low">107,303, 263,849</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">PROX_URA_GROWTH_AREA</td>
+<td class="gt_row gt_center" headers="estimate">39,163</td>
+<td class="gt_row gt_center" headers="conf.low">16,105, 62,222</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">PROX_PARK</td>
+<td class="gt_row gt_center" headers="estimate">570,505</td>
+<td class="gt_row gt_center" headers="conf.low">442,004, 699,006</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">PROX_PRIMARY_SCH</td>
+<td class="gt_row gt_center" headers="estimate">159,856</td>
+<td class="gt_row gt_center" headers="conf.low">41,698, 278,014</td>
+<td class="gt_row gt_center" headers="p.value">0.008</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">PROX_SHOPPING_MALL</td>
+<td class="gt_row gt_center" headers="estimate">-220,947</td>
+<td class="gt_row gt_center" headers="conf.low">-292,668, -149,226</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">PROX_BUS_STOP</td>
+<td class="gt_row gt_center" headers="estimate">682,482</td>
+<td class="gt_row gt_center" headers="conf.low">418,616, 946,348</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">NO_Of_UNITS</td>
+<td class="gt_row gt_center" headers="estimate">-245</td>
+<td class="gt_row gt_center" headers="conf.low">-418, -73</td>
+<td class="gt_row gt_center" headers="p.value">0.005</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">FAMILY_FRIENDLY</td>
+<td class="gt_row gt_center" headers="estimate">146,308</td>
+<td class="gt_row gt_center" headers="conf.low">54,321, 238,295</td>
+<td class="gt_row gt_center" headers="p.value">0.002</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">FREEHOLD</td>
+<td class="gt_row gt_center" headers="estimate">350,600</td>
+<td class="gt_row gt_center" headers="conf.low">255,448, 445,752</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+</tbody><tfoot class="gt_footnotes">
+<tr class="even">
+<td colspan="4" class="gt_footnote"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> CI = Confidence Interval</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+<p>With gtsummary package, model statistics can be included in the report by either appending them to the report table by using&nbsp;<a href="https://www.danieldsjoberg.com/gtsummary/reference/add_glance.html"><code>add_glance_table()</code></a>&nbsp;or adding as a table source note by using&nbsp;<a href="https://www.danieldsjoberg.com/gtsummary/reference/add_glance.html"><code>add_glance_source_note()</code></a>&nbsp;as shown in the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tbl_regression</span>(condo.mlr1, </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">intercept =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_glance_source_note</span>(</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="fu">list</span>(sigma <span class="sc">~</span> <span class="st">"\U03C3"</span>),</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">include =</span> <span class="fu">c</span>(r.squared, adj.r.squared, </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>                AIC, statistic,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>                p.value, sigma))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="ewhookgehe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ewhookgehe table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#ewhookgehe thead, #ewhookgehe tbody, #ewhookgehe tfoot, #ewhookgehe tr, #ewhookgehe td, #ewhookgehe th {
+  border-style: none;
+}
+
+#ewhookgehe p {
+  margin: 0;
+  padding: 0;
+}
+
+#ewhookgehe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ewhookgehe .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#ewhookgehe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ewhookgehe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ewhookgehe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ewhookgehe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ewhookgehe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ewhookgehe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ewhookgehe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ewhookgehe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ewhookgehe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ewhookgehe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ewhookgehe .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#ewhookgehe .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#ewhookgehe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ewhookgehe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ewhookgehe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ewhookgehe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ewhookgehe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ewhookgehe .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ewhookgehe .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ewhookgehe .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#ewhookgehe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ewhookgehe .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ewhookgehe .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ewhookgehe .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ewhookgehe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ewhookgehe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ewhookgehe .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ewhookgehe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ewhookgehe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ewhookgehe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ewhookgehe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ewhookgehe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ewhookgehe .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ewhookgehe .gt_left {
+  text-align: left;
+}
+
+#ewhookgehe .gt_center {
+  text-align: center;
+}
+
+#ewhookgehe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ewhookgehe .gt_font_normal {
+  font-weight: normal;
+}
+
+#ewhookgehe .gt_font_bold {
+  font-weight: bold;
+}
+
+#ewhookgehe .gt_font_italic {
+  font-style: italic;
+}
+
+#ewhookgehe .gt_super {
+  font-size: 65%;
+}
+
+#ewhookgehe .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#ewhookgehe .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ewhookgehe .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ewhookgehe .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ewhookgehe .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ewhookgehe .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ewhookgehe .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#ewhookgehe .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#ewhookgehe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span data-qmd-base64="PHN0cm9uZz5DaGFyYWN0ZXJpc3RpYzwvc3Ryb25nPg=="><span class="gt_from_md"><strong>Characteristic</strong></span></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span data-qmd-base64="PHN0cm9uZz5CZXRhPC9zdHJvbmc+"><span class="gt_from_md"><strong>Beta</strong></span></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span data-qmd-base64="PHN0cm9uZz45NSUgQ0k8L3N0cm9uZz4="><span class="gt_from_md"><strong>95% CI</strong></span></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span data-qmd-base64="PHN0cm9uZz5wLXZhbHVlPC9zdHJvbmc+"><span class="gt_from_md"><strong>p-value</strong></span></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">(Intercept)</td>
+<td headers="estimate" class="gt_row gt_center">527,633</td>
+<td headers="conf.low" class="gt_row gt_center">315,417, 739,849</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">AREA_SQM</td>
+<td headers="estimate" class="gt_row gt_center">12,778</td>
+<td headers="conf.low" class="gt_row gt_center">12,057, 13,498</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">AGE</td>
+<td headers="estimate" class="gt_row gt_center">-24,688</td>
+<td headers="conf.low" class="gt_row gt_center">-30,092, -19,284</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_CBD</td>
+<td headers="estimate" class="gt_row gt_center">-77,131</td>
+<td headers="conf.low" class="gt_row gt_center">-88,436, -65,826</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_CHILDCARE</td>
+<td headers="estimate" class="gt_row gt_center">-318,473</td>
+<td headers="conf.low" class="gt_row gt_center">-530,250, -106,696</td>
+<td headers="p.value" class="gt_row gt_center">0.003</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_MRT</td>
+<td headers="estimate" class="gt_row gt_center">-294,745</td>
+<td headers="conf.low" class="gt_row gt_center">-406,394, -183,096</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_ELDERLYCARE</td>
+<td headers="estimate" class="gt_row gt_center">185,576</td>
+<td headers="conf.low" class="gt_row gt_center">107,303, 263,849</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_URA_GROWTH_AREA</td>
+<td headers="estimate" class="gt_row gt_center">39,163</td>
+<td headers="conf.low" class="gt_row gt_center">16,105, 62,222</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_PARK</td>
+<td headers="estimate" class="gt_row gt_center">570,505</td>
+<td headers="conf.low" class="gt_row gt_center">442,004, 699,006</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_PRIMARY_SCH</td>
+<td headers="estimate" class="gt_row gt_center">159,856</td>
+<td headers="conf.low" class="gt_row gt_center">41,698, 278,014</td>
+<td headers="p.value" class="gt_row gt_center">0.008</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_SHOPPING_MALL</td>
+<td headers="estimate" class="gt_row gt_center">-220,947</td>
+<td headers="conf.low" class="gt_row gt_center">-292,668, -149,226</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">PROX_BUS_STOP</td>
+<td headers="estimate" class="gt_row gt_center">682,482</td>
+<td headers="conf.low" class="gt_row gt_center">418,616, 946,348</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">NO_Of_UNITS</td>
+<td headers="estimate" class="gt_row gt_center">-245</td>
+<td headers="conf.low" class="gt_row gt_center">-418, -73</td>
+<td headers="p.value" class="gt_row gt_center">0.005</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">FAMILY_FRIENDLY</td>
+<td headers="estimate" class="gt_row gt_center">146,308</td>
+<td headers="conf.low" class="gt_row gt_center">54,321, 238,295</td>
+<td headers="p.value" class="gt_row gt_center">0.002</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">FREEHOLD</td>
+<td headers="estimate" class="gt_row gt_center">350,600</td>
+<td headers="conf.low" class="gt_row gt_center">255,448, 445,752</td>
+<td headers="p.value" class="gt_row gt_center">&lt;0.001</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="4"><span data-qmd-base64="UsKyID0gMC42NTE7IEFkanVzdGVkIFLCsiA9IDAuNjQ3OyBBSUMgPSA0Miw5Njc7IFN0YXRpc3RpYyA9IDE4OTsgcC12YWx1ZSA9ICZsdDswLjAwMTsgz4MgPSA3NTUsOTU3"><span class="gt_from_md">R² = 0.651; Adjusted R² = 0.647; AIC = 42,967; Statistic = 189; p-value = &lt;0.001; σ = 755,957</span></span></td>
+    </tr>
+  </tfoot>
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span data-qmd-base64="Q0kgPSBDb25maWRlbmNlIEludGVydmFs"><span class="gt_from_md">CI = Confidence Interval</span></span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</div>
+</div>
+<p>For more customisation options, refer to&nbsp;<a href="https://www.danieldsjoberg.com/gtsummary/articles/tbl_regression.html">Tutorial: tbl_regression</a></p>
+</section>
+<section id="regression-diagnostics" class="level3">
+<h3 class="anchored" data-anchor-id="regression-diagnostics"><strong>13.8.6&nbsp;Regression Diagnostics</strong></h3>
+<ul>
+<li><p><strong>Regression diagnostics</strong>&nbsp;are procedures to verify if a regression model meets key assumptions and fits the data properly.</p></li>
+<li><p>They help detect issues like&nbsp;<strong>non-linearity</strong>,&nbsp;<strong>non-normal errors</strong>,&nbsp;<strong>heteroskedasticity</strong>, and&nbsp;<strong>influential observations</strong>&nbsp;to ensure reliable results.</p></li>
+<li><p>The&nbsp;<strong><code>olsrr</code></strong>&nbsp;R package provides tools for performing OLS regression diagnostics, including:</p>
+<ul>
+<li><p>comprehensive regression output</p></li>
+<li><p>residual diagnostics</p></li>
+<li><p>measures of influence</p></li>
+<li><p>heteroskedasticity tests</p></li>
+<li><p>collinearity diagnostics</p></li>
+<li><p>model fit assessment</p></li>
+<li><p>variable contribution assessment</p></li>
+<li><p>variable selection procedures</p></li>
+</ul></li>
+</ul>
+<section id="multicollinearity-test" class="level4">
+<h4 class="anchored" data-anchor-id="multicollinearity-test">13.8.6.1&nbsp;Multicollinearity test</h4>
+<ul>
+<li><p><strong>Multicollinearity</strong>&nbsp;occurs when independent variables are&nbsp;<strong>highly correlated</strong>, meaning changes in one variable are linked to changes in another.</p></li>
+<li><p>This makes it difficult for the model to&nbsp;<strong>separate each variable’s effect</strong>&nbsp;on the dependent variable.</p></li>
+<li><p>High multicollinearity causes&nbsp;<strong>unstable and unreliable coefficients</strong>, which can lead to&nbsp;<strong>misleading interpretations</strong>.</p></li>
+<li><p>To detect it, the&nbsp;&nbsp;<a href="https://easystats.github.io/performance/reference/check_collinearity.html"><code>check_collinearity()</code></a>&nbsp;function from the&nbsp;<strong><code>performance</code></strong>&nbsp;package is used.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_collinearity</span>(condo.mlr1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Check for Multicollinearity
+
+Low Correlation
+
+                 Term  VIF   VIF 95% CI Increased SE Tolerance Tolerance 95% CI
+             AREA_SQM 1.15 [1.09, 1.23]         1.07      0.87     [0.81, 0.92]
+                  AGE 1.41 [1.33, 1.52]         1.19      0.71     [0.66, 0.75]
+             PROX_CBD 1.57 [1.47, 1.69]         1.25      0.64     [0.59, 0.68]
+       PROX_CHILDCARE 3.26 [3.00, 3.56]         1.81      0.31     [0.28, 0.33]
+             PROX_MRT 1.91 [1.78, 2.07]         1.38      0.52     [0.48, 0.56]
+     PROX_ELDERLYCARE 1.52 [1.42, 1.63]         1.23      0.66     [0.61, 0.70]
+ PROX_URA_GROWTH_AREA 1.33 [1.26, 1.43]         1.15      0.75     [0.70, 0.80]
+            PROX_PARK 1.21 [1.15, 1.29]         1.10      0.83     [0.77, 0.87]
+     PROX_PRIMARY_SCH 2.21 [2.05, 2.40]         1.49      0.45     [0.42, 0.49]
+   PROX_SHOPPING_MALL 1.48 [1.39, 1.60]         1.22      0.67     [0.63, 0.72]
+        PROX_BUS_STOP 2.85 [2.62, 3.10]         1.69      0.35     [0.32, 0.38]
+          NO_Of_UNITS 1.45 [1.36, 1.56]         1.20      0.69     [0.64, 0.73]
+      FAMILY_FRIENDLY 1.38 [1.30, 1.48]         1.17      0.72     [0.67, 0.77]
+             FREEHOLD 1.44 [1.36, 1.55]         1.20      0.69     [0.65, 0.74]</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>mlr.vif <span class="ot">&lt;-</span> <span class="fu">check_collinearity</span>(condo.mlr1)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mlr.vif)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="In-class_Ex07_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Since the VIF of the independent variables are less than 10. We can safely conclude that there are no sign of multicollinearity among the independent variables.</p>
+</section>
+<section id="test-for-non-linearity" class="level4">
+<h4 class="anchored" data-anchor-id="test-for-non-linearity">13.8.6.2&nbsp;Test for Non-Linearity</h4>
+<p>In multiple linear regression, it is important for us to test the assumption that linearity and additivity of the relationship between dependent and independent variables.</p>
+<p>In the code chunk below, the&nbsp;<a href="https://olsrr.rsquaredacademy.com/reference/ols_plot_resid_fit.html"><code>ols_plot_resid_fit()</code></a>&nbsp;of&nbsp;<strong>olsrr</strong>&nbsp;package is used to perform linearity assumption test.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(condo.mlr1,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">check =</span> <span class="st">"linearity"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="In-class_Ex07_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure above reveals that most of the data poitns are scattered around the 0 line, hence we can safely conclude that the relationships between the dependent variable and independent variables are linear.</p>
+</section>
+<section id="test-for-normality-assumption" class="level4">
+<h4 class="anchored" data-anchor-id="test-for-normality-assumption">13.8.6.3&nbsp;Test for Normality Assumption</h4>
+<p>The normality assumption test for multiple linear regression checks&nbsp;<strong>if the model’s residuals (the differences between observed and predicted values) are normally distributed</strong>. This is crucial for accurate hypothesis testing and confidence intervals. To test this, you can use visual methods like histograms and Q-Q plots of the residuals, or conduct statistical tests like Shapiro-Wilk test and Kolmogorov-Smirnov test.</p>
+<p>In the code chunk below,&nbsp;<code>check_normality()</code>&nbsp;of performance package is used to perform normality assumption test on condo.mlr1 model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_normality</span>(condo.mlr1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: Non-normality of residuals detected (p &lt; .001).</code></pre>
+</div>
+</div>
+<p>The print above reveals that the p-value of the normality assumption test is less than alpha value of 0.05. Hence we reject the normality assumption at 95% confident level.</p>
+<ul>
+<li><div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><code>check_normality()</code>&nbsp;calls&nbsp;<em>stats::shapiro.test</em>&nbsp;and checks the standardized residuals (or studentized residuals for mixed models) for normal distribution.</p></li>
+<li><p>Note that this formal test almost always yields significant results for the distribution of residuals and visual inspection (e.g.&nbsp;Q-Q plots) are preferable.</p></li>
+</ul>
+</div>
+</div></li>
+</ul>
+<p>Instead of showing the test statistic,&nbsp;<code>plot()</code>&nbsp;of&nbsp;<strong>see</strong>&nbsp;package can be used to plot a the output of&nbsp;<code>check_normality()</code>&nbsp;for visual inspection as shown below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">check_normality</span>(condo.mlr1), </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"qq"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="In-class_Ex07_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Q-Q plot above below shows that majority of the data points are felt along the zero line.</p>
+<p>Another way to check for normality assumption visual is by using&nbsp;<a href="https://easystats.github.io/performance/reference/check_model.html"><code>check_model()</code></a>of performance package as shown in the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">check_model</span>(condo.mlr1,</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">check=</span> <span class="st">"normality"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="In-class_Ex07_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure reveals that the residual of the multiple linear regression model (i.e.&nbsp;condo.mlr1) is resemble normal distribution.</p>
+</section>
+<section id="testing-for-spatial-autocorrelation" class="level4">
+<h4 class="anchored" data-anchor-id="testing-for-spatial-autocorrelation">13.8.6.4&nbsp;Testing for Spatial Autocorrelation</h4>
+<p>The hedonic model we try to build are using geographically referenced data. Hence, it is crucial to check for spatial autocorrelation because its presence can produce unreliable and misleading results. Traditional regression models, such as ordinary least squares (OLS), assume that observations are independent of one another. However, spatial data often violates this assumption.</p>
+<p>Spatial autocorrelation is the correlation of a variable with itself across different spatial locations. Positive spatial autocorrelation means nearby features tend to be more similar, while negative autocorrelation means they tend to be more dissimilar. This phenomenon is based on the first law of geography: “Everything is related to everything else, but nearby things are more related than distant things”.</p>
+<p>Ignoring spatial autocorrelation in a regression model can lead to serious statistical issues:</p>
+<ul>
+<li><p>Biased and inefficient coefficient estimates: If autocorrelation is present, standard errors of the model coefficients can be wrong, leading to unreliable hypothesis tests (p-values). The model might appear more significant than it is.</p></li>
+<li><p>Misleading significance tests: Standard regression models cannot distinguish between true explanatory power and the influence of spatial patterns, resulting in inaccurate p-values.</p></li>
+<li><p>Model misspecification: Significant spatial autocorrelation in the regression residuals often signals that important explanatory variables are missing from the model. The spatial patterning of the residuals (over- and under-predictions) can provide clues about what these missing variables might be.</p></li>
+<li><p>Inflated Type I error rates: Researchers might incorrectly reject a true null.</p></li>
+</ul>
+<p>To test for spatial autocorrelation, We can run a Moran’s I test on the model’s residuals. Significant spatial autocorrelation in the residuals means the model is not capturing the full spatial story.</p>
+<p>In order to perform spatial autocorrelation test, we need to export the residual of the hedonic pricing model and save it as a data frame first.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>mlr.output <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(condo.mlr1<span class="sc">$</span>residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we will join the newly created data frame with&nbsp;<em>condo_resale.sf</em>&nbsp;object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>condo_resale.sf <span class="ot">&lt;-</span> <span class="fu">cbind</span>(condo_resale.sf, </span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>                        condo.mlr1<span class="sc">$</span>residuals) <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(<span class="st">`</span><span class="at">MLR_RES</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">condo.mlr1.residuals</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we will use&nbsp;<strong>tmap</strong>&nbsp;package to display the distribution of the residuals on an interactive map.</p>
+<p>The code churn below will turn on the interactive mode of tmap.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The code chunks below is used to create an interactive point symbol map.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(mpsz_svy21) <span class="sc">+</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill_alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(condo_resale.sf) <span class="sc">+</span>  </span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"MLR_RES"</span>,</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.7</span>,</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"black"</span>,</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill.scale =</span> <span class="fu">tm_scale</span>(</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">n =</span> <span class="dv">10</span>,</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">values =</span> <span class="fu">rev</span>(</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">brewer.pal</span>(<span class="dv">11</span>, <span class="st">"RdBu"</span>)),</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">midpoint =</span> <span class="cn">NA</span>),</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill.legend =</span> <span class="fu">tm_legend</span>(<span class="at">title =</span> <span class="st">"Residuals"</span>)</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_title</span>(<span class="st">"LM Residuals (Quantile Classification)"</span>) <span class="sc">+</span></span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">legend.outside =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_view</span>(<span class="at">set_zoom_limits =</span> <span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">14</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="In-class_Ex07_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Remember to switch back to “plot” mode before continue.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The figure above reveal that there is sign of spatial autocorrelation.</p>
+<p>To proof that our observation is indeed true, Global Moran’s I test will be performed</p>
+<p>First, we will compute the distance-based weight matrix by using&nbsp;<a href="https://sfdep.josiahparry.com/reference/st_dist_band"><code>st_dist_band()</code></a>function of&nbsp;<strong>sfdep</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>condo_resale.sf <span class="ot">&lt;-</span> condo_resale.sf <span class="sc">%&gt;%</span> </span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">nb =</span> <span class="fu">st_dist_band</span>(</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">st_geometry</span>(geometry), </span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">upper =</span> <span class="dv">1500</span>),</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">wt =</span> <span class="fu">st_weights</span>(</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>      nb, <span class="at">style =</span> <span class="st">"W"</span>),</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.before =</span> <span class="dv">1</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next,&nbsp;<a href="https://sfdep.josiahparry.com/reference/global_moran_perm"><code>global_moran_perm()</code></a>&nbsp;of&nbsp;<strong>sfdep</strong>&nbsp;package will be used to perform Moran’s I test for residual spatial autocorrelation</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">global_moran_perm</span>(</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  condo_resale.sf<span class="sc">$</span>MLR_RES, </span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">nb =</span> condo_resale.sf<span class="sc">$</span>nb, </span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">wt =</span> condo_resale.sf<span class="sc">$</span>wt,</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span>, </span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">nsim =</span> <span class="dv">499</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Monte-Carlo simulation of Moran I
+
+data:  x 
+weights: listw  
+number of simulations + 1: 500 
+
+statistic = 0.14389, observed rank = 500, p-value &lt; 2.2e-16
+alternative hypothesis: two.sided</code></pre>
+</div>
+</div>
+<p>The Global Moran’s I test for residual spatial autocorrelation shows that it’s p-value is less than 0.00000000000000022 which is less than the alpha value of 0.05. Hence, we will reject the null hypothesis that the residuals are randomly distributed.</p>
+<p>Since the Observed Global Moran I = 0.14389 which is greater than 0, we can infer than the residuals resemble cluster distribution.</p>
+</section>
+</section>
+</section>
+<section id="building-hedonic-pricing-models-using-gwmodel" class="level2">
+<h2 class="anchored" data-anchor-id="building-hedonic-pricing-models-using-gwmodel"><strong>13.9&nbsp;Building Hedonic Pricing Models using GWmodel</strong></h2>
+<p>In this section, you are going to learn how to modelling hedonic pricing using both the fixed and adaptive bandwidth schemes</p>
+<section id="building-fixed-bandwidth-gwr-model" class="level3">
+<h3 class="anchored" data-anchor-id="building-fixed-bandwidth-gwr-model"><strong>13.9.1&nbsp;Building Fixed Bandwidth GWR Model</strong></h3>
+<section id="computing-fixed-bandwith" class="level4">
+<h4 class="anchored" data-anchor-id="computing-fixed-bandwith">13.9.1.1&nbsp;Computing fixed bandwith</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>bw.fixed <span class="ot">&lt;-</span> <span class="fu">bw.gwr</span>(</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">formula =</span> SELLING_PRICE <span class="sc">~</span> AREA_SQM <span class="sc">+</span> AGE  <span class="sc">+</span> </span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    PROX_CBD <span class="sc">+</span> PROX_CHILDCARE <span class="sc">+</span> PROX_ELDERLYCARE    <span class="sc">+</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>    PROX_URA_GROWTH_AREA <span class="sc">+</span> PROX_MRT <span class="sc">+</span> PROX_PARK <span class="sc">+</span> </span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    PROX_PRIMARY_SCH <span class="sc">+</span> PROX_SHOPPING_MALL   <span class="sc">+</span> </span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>    PROX_BUS_STOP   <span class="sc">+</span> NO_Of_UNITS <span class="sc">+</span> FAMILY_FRIENDLY <span class="sc">+</span> </span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>    FREEHOLD, </span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data=</span>condo_resale.sf, </span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">approach=</span><span class="st">"AIC"</span>, <span class="co">#Use AIC</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel=</span><span class="st">"gaussian"</span>, </span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">adaptive=</span><span class="cn">FALSE</span>, </span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">longlat=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fixed bandwidth: 17660.96 AICc value: 42937.77 
+Fixed bandwidth: 10917.26 AICc value: 42886.26 
+Fixed bandwidth: 6749.419 AICc value: 42757.54 
+Fixed bandwidth: 4173.553 AICc value: 42565.01 
+Fixed bandwidth: 2581.58 AICc value: 42368.05 
+Fixed bandwidth: 1597.687 AICc value: 42256.42 
+Fixed bandwidth: 989.6077 AICc value: 42262.3 
+Fixed bandwidth: 1973.501 AICc value: 42279.95 
+Fixed bandwidth: 1365.421 AICc value: 42254.72 
+Fixed bandwidth: 1221.873 AICc value: 42255.41 
+Fixed bandwidth: 1454.139 AICc value: 42254.82 
+Fixed bandwidth: 1310.591 AICc value: 42254.84 
+Fixed bandwidth: 1399.309 AICc value: 42254.71 
+Fixed bandwidth: 1420.252 AICc value: 42254.73 
+Fixed bandwidth: 1386.365 AICc value: 42254.7 
+Fixed bandwidth: 1378.365 AICc value: 42254.71 
+Fixed bandwidth: 1391.309 AICc value: 42254.7 </code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
