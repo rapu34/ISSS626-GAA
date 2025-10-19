@@ -13,25 +13,25 @@
 
 # Quarto
 .quarto/
-#_site/
+_site/
 _freeze/
 *_cache/
-#*_files/
-#site_libs/
+*_files/
+site_libs/
 
-
+# Data folders
 data/
 In-class_Ex/**/data/
 Take-home_Ex01/data/
 Take-home_Ex02/data/
 Hands-on_Ex/**/data/
 
+# Temporary and backup files
 *.RDataTmp*
 *.RdataTmp*
 *.zip
 *.rds
-#*.csv
-
+*.csv
 *.log
 *.bak
 
