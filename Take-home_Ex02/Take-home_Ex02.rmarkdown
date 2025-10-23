@@ -11,6 +11,10 @@ execute:
   freeze: false
 ---
 
+
+
+
+
 # 1. Overview
 
 Efficient urban mobility is critical to Singapore’s economic vitality and quality of life.\
@@ -86,9 +90,17 @@ This study integrates multiple datasets to enable spatial and temporal analysis 
 
 The analysis was conducted in **R (version 4.4.1)** using the following packages:
 
+
+
+
+
 ```{r}
 pacman::p_load(sf, tmap, tidyverse, rvest, spdep, sfdep, Kendall)
 ```
+
+
+
+
 
 -   **sf** — for handling geospatial vector data and spatial operations.
 
@@ -141,6 +153,10 @@ Next, the LTA **Bus Stop shapefile** was loaded and reprojected to the same CR
 Only bus stops within Singapore’s land boundary were retained using a spatial intersection with the Master Plan polygon.\
 This ensured that subsequent trip mapping was geographically consistent and excluded offshore or null points.
 
+
+
+
+
 ```{r}
 # URA MP2019 Subzone Boundary (KML)
 mp19_raw <- sf::st_read("data/geospatial/MasterPlan2019SubzoneBoundaryNoSeaKML.kml")
@@ -178,6 +194,10 @@ mp19_3414 <- st_transform(mp19, 3414)
 bus_stop_3414 <- st_transform(bus_stop_sf, 3414)
 ```
 
+
+
+
+
 ### 3.3.2 Create a 375 m hexagon grid
 
 The task requires creating a hexagonal grid where each cell has an **apothegm of 375 m**. The apothegm is the perpendicular distance from the center of the hexagon to any of its sides.
@@ -189,6 +209,10 @@ The geometric relationship between the apothegm (a) and the flat-to-flat distanc
 Therefore, to create a hexagon grid with an apothegm of 375 m, we must set the `cellsize` parameter to: `cellsize = 2 × 375 m = 750 m`
 
 This calculation ensures each hexagon has the correct area of approximately **0.487 km²** (Area=23​×a2), providing a suitable Traffic Analysis Zone (TAZ) size that balances neighborhood-level resolution and computational efficiency.
+
+
+
+
 
 ```{r}
 # Disable spherical geometry engine to ensure planar calculations (SVY21 projection)
@@ -234,6 +258,10 @@ summary(as.numeric(units::set_units(st_area(hexagon), "km^2")))
 
 ```
 
+
+
+
+
 ### 3.3.3 Import OD table and prepare time slots
 
 The aspatial OD dataset (`origin_destination_bus_202509.csv`) was imported next.\
@@ -250,6 +278,10 @@ A helper function was applied to classify each trip record into one of three tim
 -   `WKND_11_20`: Weekend/holiday period
 
 Invalid or missing records were removed to ensure clean aggregation.
+
+
+
+
 
 ```{r}
 # 1) Read CSV (quiet)
@@ -312,12 +344,20 @@ od <- od %>%
 
 ```
 
+
+
+
+
 ### 3.3.4 Map Bus Stops to Hexagons and Aggregate Trips
 
 Each bus stop was spatially joined to its corresponding hexagon using `st_intersects()`, ensuring that even stops located along hexagon boundaries were properly included.\
 This spatial join allowed all origin points to inherit a `hex_id`.\
 Trip counts were then aggregated by `hex_id` and `slot` using `dplyr`, while preserving zero-count hexagons to maintain full spatial coverage.\
 The resulting dataset provides a hexagon-level summary of total passenger boardings per time slot, forming the foundation for subsequent **Exploratory Spatial Data Analysis (ESDA)**, **Global and Local Spatial Autocorrelation**, and **Emerging Hot Spot Analysis** in later sections.
+
+
+
+
 
 ```{r}
 stopifnot(exists("hexagon"), exists("od"))
@@ -414,6 +454,10 @@ summary(hex_counts$tap_on)
 sum(hex_counts$tap_on > 0)
 ```
 
+
+
+
+
 A quick validation confirmed that 99.9% of bus stops were successfully matched to hexagons, and all OD records received valid `hex_id` assignments.\
 The aggregated trip counts ranged from 1 to 421,361, indicating a highly skewed distribution where most hexagons have relatively low boarding volumes, while a few central zones exhibit very high concentrations.\
 Out of all hexagons, 2,455 recorded at least one boarding, confirming that zero-preserving aggregation worked as intended. Together, these checks confirm that the dataset is spatially complete, internally consistent, and ready for subsequent spatial analysis.
@@ -426,6 +470,10 @@ After completing the data wrangling, I first visualized how passenger boardings 
 This step focuses on understanding spatial patterns before moving into formal spatial statistics.
 
 By mapping aggregated `tap_on` values across different time slots, it becomes easier to see which areas consistently show higher boarding activity and how those patterns differ between weekday peaks and weekends.
+
+
+
+
 
 ```{r}
 tmap_mode("plot")
@@ -444,6 +492,10 @@ tm_shape(subset(hex_counts_sf, tap_on > 0)) +
 
 ```
 
+
+
+
+
 The visualization shows clear spatial differences in boarding activity across Singapore.\
 **Darker blue areas indicate higher passenger volumes**, especially around major transport hubs such as the **CBD**, **Tampines**, **Woodlands**, and **Jurong East**, reflecting key commuting corridors.\
 **Lighter blue or grey zones** represent areas with low or no boardings, often corresponding to **residential or peripheral regions**.\
@@ -457,6 +509,10 @@ or if the pattern appears more random or dispersed.
 
 A significantly positive Moran’s I value indicates that similar values (e.g., high boardings) are spatially clustered,\
 while a value close to zero suggests randomness, and a negative value implies a dispersed pattern.
+
+
+
+
 
 ```{r}
 sf::sf_use_s2(FALSE)
@@ -504,6 +560,10 @@ knitr::kable(global_moran_results, digits = c(NA, 4, 16),
 
 ```
 
+
+
+
+
 To assess the overall spatial clustering across the entire study area, Global Moran’s I was calculated for each time slot.
 
 **Statistical Significance:** All three time slots show extremely small p-values (≈ 0 or \< 2.2e−16), indicating that the observed bus boarding patterns are not random and possess a statistically significant spatial structure.
@@ -522,7 +582,7 @@ To assess the overall spatial clustering across the entire study area, Global Mo
 (Minor “no neighbours” warnings are expected due to offshore islands and are handled using `zero.policy = TRUE`.)
 :::
 
-## 4.3 Local Measures of Spatial Autocorrelation (LMSA)
+## **4.3 Local Measures of Spatial Autocorrelation (LMSA)**
 
 While the Global Moran’s I test confirmed the overall presence of spatial clustering, it does not reveal where these clusters occur. To gain deeper insight into the spatial distribution of passenger boardings, **Local Measures of Spatial Autocorrelation (LMSA)** were applied.
 
@@ -531,6 +591,10 @@ These methods — including *Local Moran’s I (LISA)*, *Local Geary’s C*, and
 ### 4.3.1 Local Moran’s I (LISA)
 
 Local Moran’s I (LISA) identifies individual hexagons that form statistically significant local clusters — either High–High (hot spots), where high boarding volumes are surrounded by similarly high values, or Low–Low (cold spots), where low-volume areas cluster together. Transitional patterns such as High–Low or Low–High indicate spatial outliers.
+
+
+
+
 
 ```{r}
 plot_lisa_one_slot <- function(sf_all, slot_label, var = "tap_on", alpha = 0.05) {
@@ -616,6 +680,10 @@ slots <- c("WKDY_AM_06_09","WKDY_PM_17_20","WKND_11_20")
 for (s in slots) print(plot_lisa_one_slot(hex_counts_sf, s))
 ```
 
+
+
+
+
 **Weekday AM Peak (06–09):**\
 The LISA map for the morning peak reveals extensive **High–High clusters** (red) concentrated around Singapore’s key employment and interchange areas, such as the **Central Business District, Tampines, Woodlands, and Jurong East**. These locations indicate high boarding volumes surrounded by other high values, reflecting strong spatial clustering of commuter demand during morning hours. A few **Low–High outliers** (blue) are observed near residential zones adjacent to these hubs, where local boarding intensity is relatively low despite being near high-demand areas.
 
@@ -628,6 +696,10 @@ During the weekend, **High–High clusters** reappear around both central and 
 ### 4.3.2 Local Geary’s C
 
 Building upon the LISA findings, Local Geary’s C further examines how similar or dissimilar each hexagon is compared to its neighbours, revealing subtle transitions within and between clusters.
+
+
+
+
 
 ```{r}
 sf::sf_use_s2(FALSE)
@@ -683,6 +755,10 @@ for (s in slots) print(plot_geary_one_slot(hex_counts_sf, s))
 
 ```
 
+
+
+
+
 Although the spatial patterns revealed by Local Geary’s C are broadly consistent with those identified by the Local Moran’s I (LISA) analysis, the Geary’s C maps display slightly wider red regions indicating strong local similarity. This difference arises from the conceptual focus of the two statistics.
 
 LISA emphasizes the **direction of spatial association**, identifying where high or low values cluster together (e.g., High–High or Low–Low regions). In contrast, Local Geary’s C measures the **degree of local dissimilarity**, capturing how similar or different each area is compared to its neighbors. As a result, areas with very similar values—regardless of whether they are high or low—exhibit low Geary’s C values and are shown in red.
@@ -696,6 +772,10 @@ Consequently, Geary’s C not only reaffirms the key clusters detected by LISA (
 While the previous measures emphasized spatial association and similarity between neighboring hexagons, Gi\* highlights the **strength and persistence of clustering**, revealing statistically significant hot and cold spots across different time periods.
 
 This helps reveal whether certain regions consistently experience high passenger activity (hot spots) or low activity (cold spots) during each time period.
+
+
+
+
 
 ```{r}
 sf::sf_use_s2(FALSE)
@@ -775,6 +855,10 @@ for (s in slots) {
 
 ```
 
+
+
+
+
 The Getis–Ord Gi\* statistic highlights clusters where high passenger activity is concentrated across different regions.
 
 During **weekday mornings (06–09)**, hot spots appear mainly in **northern (Woodlands, Yishun)** and **eastern (Tampines, Pasir Ris)** areas, reflecting strong outbound commuting from residential zones toward central business districts.\
@@ -785,6 +869,10 @@ By contrast, the **weekend (11–20)** pattern becomes more spatially balanced, 
 
 In this study, EHSA was applied to analyse how passenger boarding hot spots have evolved across three time intervals — weekday morning, weekday evening, and weekend.\
 By integrating the Getis-Ord Gi\* statistic and the Mann-Kendall trend test, this method reveals whether passenger demand in each hexagon is intensifying, diminishing, or remaining stable over time.
+
+
+
+
 
 ```{r}
 # Function: Read and standardize monthly OD data 
@@ -1117,13 +1205,11 @@ knitr::kable(ehsa_summary, caption = "Significant EHSA Classifications by Time S
 
 ```
 
-The Emerging Hot Spot Analysis (EHSA) was performed to examine temporal changes in bus passenger demand across three periods: weekday morning (6–9 AM), weekday evening (5–8 PM), and weekend/holiday (11 AM–8 PM). Local Gi\* statistics were first computed at the 375 m hexagon level to detect spatial clusters of high and low trip volumes. These Gi\* values were then evaluated using the Mann–Kendall test to identify intensifying or diminishing hotspot trends over time.
 
-The analysis found **no statistically significant (p \< 0.05) temporal trends** across all three time periods, indicating that bus travel patterns remained **stable from July to September 2025**. Most hexagons were classified as “No Pattern” or “Sporadic,” showing minimal spatial change in passenger concentration. High-demand zones such as the CBD, Tampines, and Jurong East continued to dominate, while peripheral regions maintained low activity.
 
-Overall, the EHSA results suggest a **mature and steady urban mobility structure**, where commuting flows are well-established and consistent. This implies that existing transport services are effectively meeting current demand, and that future adjustments should focus on **minor operational refinements rather than major route changes**.
 
-# 5. Conclusion
+
+# **5. Conclusion**
 
 This study analyzed Singapore’s bus boarding patterns from July to September 2025 using a 375m hexagonal grid, aiming to uncover fine-grained spatial and temporal trends in passenger activity. By systematically applying both Local Measures of Spatial Autocorrelation (LMSA) and Emerging Hot Spot Analysis (EHSA), the study identified localized clustering and temporal change patterns that could not be captured through global statistics alone.
 
@@ -1146,3 +1232,4 @@ In conclusion, the integrated use of LMSA and EHSA provides a robust data-driven
 1.  **Kam, Tin Seong.** (2025). *Geospatial Analytics and Applications (ISSS626)*. Retrieved from <https://r4gdsa.netlify.app>
 
 2.  **Manafe, Christover.** (2025). *Take-home Exercise 2: Spatial and Temporal Analysis of Thailand’s Tourism Economy.* Retrieved from <https://isss626-camanafe.netlify.app/take_home_ex/take_home_ex02/take_home_ex02#conclusion>
+
