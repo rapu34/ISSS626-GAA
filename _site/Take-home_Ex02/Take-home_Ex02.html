@@ -261,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#setup-and-preparation" id="toc-setup-and-preparation" class="nav-link" data-scroll-target="#setup-and-preparation">3. Setup and Preparation</a>
   <ul class="collapse">
   <li><a href="#required-r-packages" id="toc-required-r-packages" class="nav-link" data-scroll-target="#required-r-packages">3.1 Required R Packages</a></li>
-  <li><a href="#directory-and-file-setup---will-be-fixed-at-last" id="toc-directory-and-file-setup---will-be-fixed-at-last" class="nav-link" data-scroll-target="#directory-and-file-setup---will-be-fixed-at-last"><strong>3.2 Directory and File Setup - will be fixed at last</strong></a></li>
+  <li><a href="#directory-and-file-setup" id="toc-directory-and-file-setup" class="nav-link" data-scroll-target="#directory-and-file-setup"><strong>3.2 Directory and File Setup</strong></a></li>
   <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">3.3 Data Wrangling</a>
   <ul class="collapse">
   <li><a href="#import-geospatial-data-ura-kml-bus-stops" id="toc-import-geospatial-data-ura-kml-bus-stops" class="nav-link" data-scroll-target="#import-geospatial-data-ura-kml-bus-stops">3.3.1 Import geospatial data (URA KML &amp; Bus Stops)</a></li>
@@ -280,7 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#local-gearys-c" id="toc-local-gearys-c" class="nav-link" data-scroll-target="#local-gearys-c">4.3.2 Local Geary’s C</a></li>
   <li><a href="#getisord-gi-statistic" id="toc-getisord-gi-statistic" class="nav-link" data-scroll-target="#getisord-gi-statistic">4.3.3 Getis–Ord Gi* Statistic</a></li>
   </ul></li>
-  <li><a href="#emerging-hot-spot-analysis-ehsa" id="toc-emerging-hot-spot-analysis-ehsa" class="nav-link" data-scroll-target="#emerging-hot-spot-analysis-ehsa"><strong>4.4 Emerging Hot Spot Analysis (EHSA)</strong></a></li>
+  <li><a href="#emerging-hot-spot-analysis-ehsa" id="toc-emerging-hot-spot-analysis-ehsa" class="nav-link" data-scroll-target="#emerging-hot-spot-analysis-ehsa">4.4 Emerging Hot Spot Analysis (EHSA)</a></li>
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">5. Conclusion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">6. References</a></li>
@@ -450,33 +450,37 @@ Managing peak-hour congestion and adapting to shifting post-pandemic travel beha
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(sf, tmap, tidyverse, rvest, spdep, sfdep, Kendall)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li><p><strong>sf</strong>&nbsp;— for handling geospatial vector data and spatial operations.</p></li>
-<li><p><strong>tmap</strong>&nbsp;— for both static and interactive thematic mapping.</p></li>
-<li><p><strong>tidyverse</strong>&nbsp;— for data import, wrangling, and transformation (<code>readr</code>,&nbsp;<code>dplyr</code>,&nbsp;<code>tidyr</code>).</p></li>
-<li><p><strong>rvest</strong>&nbsp;— for parsing HTML-based metadata embedded in the URA KML file.</p></li>
-<li><p><strong>spdep / sfdep</strong>&nbsp;— for spatial autocorrelation and local cluster analysis (LISA, Getis–Ord Gi*, EHSA).</p></li>
+<li><p><strong><code>sf</code></strong> — handles <strong>geospatial vector data</strong> and performs <strong>spatial operations</strong> such as joins, intersections, and geometry validation.</p></li>
+<li><p><strong><code>tmap</code></strong> — creates both <strong>static</strong> and <strong>interactive thematic maps</strong> for spatial visualisation.</p></li>
+</ul>
+<!-- -->
+<ul>
+<li><p><strong><code>tidyverse</code></strong> — provides a cohesive toolkit for <strong>data import, wrangling, and transformation</strong> (notably <code>readr</code>, <code>dplyr</code>, and <code>tidyr</code>).</p></li>
+<li><p><strong><code>rvest</code></strong> — used to <strong>parse HTML metadata</strong> embedded within the <strong>URA Master Plan 2019 KML</strong> file.</p></li>
+<li><p><strong><code>spdep</code> / <code>sfdep</code></strong> — enable <strong>spatial autocorrelation</strong> and <strong>local cluster analysis</strong>, including <strong>LISA</strong> and <strong>Getis–Ord Gi*</strong> statistics, as well as the spatio-temporal framework required for <strong>Emerging Hot Spot Analysis (EHSA)</strong>.</p></li>
+<li><p><strong><code>Kendall</code></strong> — performs the <strong>Mann–Kendall trend test</strong>, which detects increasing or decreasing trends in the <strong>spatio-temporal Gi*</strong> values during EHSA.</p></li>
 </ul>
 </section>
-<section id="directory-and-file-setup---will-be-fixed-at-last" class="level2">
-<h2 class="anchored" data-anchor-id="directory-and-file-setup---will-be-fixed-at-last"><strong>3.2 Directory and File Setup - will be fixed at last</strong></h2>
+<section id="directory-and-file-setup" class="level2">
+<h2 class="anchored" data-anchor-id="directory-and-file-setup"><strong>3.2 Directory and File Setup</strong></h2>
 <p>All datasets are organized into two main folders within the project directory to ensure reproducibility and clarity of data sources.</p>
 <pre><code>Take-home_Ex02/
- ├── data/
- │   ├── geospatial/
- │   │   ├── BusStop.shp (+ associated files: .dbf, .shx, .prj, etc.)
- │   │   └── MasterPlan2019SubzoneBoundaryNoSeaKML.kml
- │   ├── aspatial/
- │   │   └── origin_destination_bus_202509.csv,08,07.csv
- ├── scripts/
- ├── outputs/
- └── Take-home_Ex02.qmd</code></pre>
+├── data/
+│   ├── geospatial/   # BusStop shapefile (+dbf/shx/prj) and     MasterPlan2019SubzoneBoundaryNoSeaKML.kml
+│   ├── aspatial/     # LTA OD CSVs (202507–202509); EHSA uses 3-month series
+│   └── rds/          # Processed R objects (e.g., hex_counts_sf.rds)
+├── images/           # Exported maps and figures for the report
+└── Take-home_Ex02.qmd # Main Quarto document (full workflow: data wrangling to EHSA)</code></pre>
 <ul>
-<li><p><strong>geospatial/</strong>&nbsp;— contains all spatial boundary and coordinate data, including the Bus Stop shapefile and URA Master Plan KML file.</p></li>
-<li><p><strong>aspatial/</strong>&nbsp;— contains non-spatial datasets such as the passenger origin–destination CSV file.</p></li>
-<li><p><strong>scripts/</strong>&nbsp;— stores R scripts used for data wrangling and analysis.</p></li>
-<li><p><strong>outputs/</strong>&nbsp;— reserved for generated maps and charts for reporting.</p></li>
+<li><p><strong><code>data/geospatial/</code></strong> — stores all spatial boundary and coordinate data, including: <strong><code>BusStop.shp</code></strong> and its associated files (<code>.dbf</code>, <code>.shx</code>, <code>.prj</code>, etc.) obtained from <strong>LTA DataMall</strong>, representing all active bus stop locations in Singapore.</p></li>
+<li><p><strong><code>MasterPlan2019SubzoneBoundaryNoSeaKML.kml</code></strong> from Singapore’s <strong>URA Master Plan 2019</strong>, used as the administrative boundary layer for spatial joins and clipping.</p></li>
+<li><p><strong><code>data/aspatial/</code></strong> — contains <strong>LTA Origin–Destination (OD) CSV files</strong>.</p>
+<p>Most analyses (e.g., LISA, Gi*) use <strong>September 2025</strong> data only.</p>
+<p>The <strong>Emerging Hot Spot Analysis (EHSA)</strong> combines <strong>three consecutive months (July–September 2025)</strong> to capture temporal trends.</p></li>
+<li><p><strong><code>data/rds/</code></strong> — stores <strong>processed R objects</strong> such as <code>hex_counts_sf.rds</code> and <code>hex_counts_sf_z.rds</code> created during data aggregation and spatial analysis.</p></li>
+<li><p><strong><code>images/</code></strong> — contains exported figures and maps generated via <code>tmap_save()</code> for use in the final report.</p></li>
+<li><p><strong><code>Take-home_Ex02.qmd</code></strong> — the main <strong>Quarto document</strong> encompassing the full workflow from data wrangling to EHSA, ensuring reproducibility.</p></li>
 </ul>
-<p>This structure allows for modular workflows and ensures that data, code, and outputs remain clearly separated.</p>
 </section>
 <section id="data-wrangling" class="level2">
 <h2 class="anchored" data-anchor-id="data-wrangling">3.3 Data Wrangling</h2>
@@ -571,7 +575,6 @@ Projected CRS: SVY21</code></pre>
 <p>The&nbsp;<code>sf::st_make_grid()</code>&nbsp;function creates flat-topped hexagons when&nbsp;<code>square = FALSE</code>. For this function, the&nbsp;<code>cellsize</code>argument defines the&nbsp;<strong>“flat-to-flat” distance (</strong>F)&nbsp;— the total height of the hexagon, or the distance between two opposite parallel sides.</p>
 <p>The geometric relationship between the apothegm (a) and the flat-to-flat distance (F) is:&nbsp;F=2×a</p>
 <p>Therefore, to create a hexagon grid with an apothegm of 375 m, we must set the&nbsp;<code>cellsize</code>&nbsp;parameter to:&nbsp;<code>cellsize = 2 × 375 m = 750 m</code></p>
-<p>This calculation ensures each hexagon has the correct area of approximately&nbsp;<strong>0.487 km²</strong>&nbsp;(Area=23​×a2), providing a suitable Traffic Analysis Zone (TAZ) size that balances neighborhood-level resolution and computational efficiency.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Disable spherical geometry engine to ensure planar calculations (SVY21 projection)</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sf<span class="sc">::</span><span class="fu">sf_use_s2</span>(<span class="cn">FALSE</span>)</span>
@@ -616,6 +619,7 @@ Projected CRS: SVY21</code></pre>
 0.03517 0.48714 0.48714 0.47596 0.48714 0.48714 </code></pre>
 </div>
 </div>
+<p>This calculation ensures each hexagon has the correct area of approximately&nbsp;<strong>0.487 km²</strong>&nbsp;(Area=23​×a2), providing a suitable Traffic Analysis Zone (TAZ) size that balances neighborhood-level resolution and computational efficiency.</p>
 </section>
 <section id="import-od-table-and-prepare-time-slots" class="level3">
 <h3 class="anchored" data-anchor-id="import-od-table-and-prepare-time-slots">3.3.3 Import OD table and prepare time slots</h3>
@@ -1261,7 +1265,7 @@ By contrast, the <strong>weekend (11–20)</strong> pattern becomes more spatial
 </section>
 </section>
 <section id="emerging-hot-spot-analysis-ehsa" class="level2">
-<h2 class="anchored" data-anchor-id="emerging-hot-spot-analysis-ehsa"><strong>4.4 Emerging Hot Spot Analysis (EHSA)</strong></h2>
+<h2 class="anchored" data-anchor-id="emerging-hot-spot-analysis-ehsa">4.4 Emerging Hot Spot Analysis (EHSA)</h2>
 <p>In this study, EHSA was applied to analyse how passenger boarding hot spots have evolved across three time intervals — weekday morning, weekday evening, and weekend.<br>
 By integrating the Getis-Ord Gi* statistic and the Mann-Kendall trend test, this method reveals whether passenger demand in each hexagon is intensifying, diminishing, or remaining stable over time.</p>
 <div class="cell">
@@ -4107,7 +4111,7 @@ WARNING: Error exit, tauk2. IFAULT =  12</code></pre>
 <h1>5. Conclusion</h1>
 <p>This study analyzed Singapore’s bus boarding patterns from July to September 2025 using a 375m hexagonal grid, aiming to uncover fine-grained spatial and temporal trends in passenger activity. By systematically applying both Local Measures of Spatial Autocorrelation (LMSA) and Emerging Hot Spot Analysis (EHSA), the study identified localized clustering and temporal change patterns that could not be captured through global statistics alone.</p>
 <p>The LMSA results revealed statistically significant (p &lt; 0.05) high-demand hot spots (High-High) in the Central Business District (CBD), Tampines, Jurong East, and Woodlands during the weekday morning peak (6–9 a.m.), while low-demand cold spots (Low-Low) were observed in industrial zones such as Tuas and Jurong Island. The Getis–Ord Gi* statistic further quantified the strength and persistence of these clusters, indicating distinct directional flows — north-to-south commuting toward the CBD in the morning, reverse movements during the evening peak, and leisure-oriented mobility toward Orchard, Tampines, and other retail centers on weekends.</p>
-<p>Although the EHSA was conducted over a relatively short three-month period, preliminary temporal trends were identified. Emerging hot spots appeared in northern residential areas, new hot spots in Tampines and Jurong, and diminishing cold spots in previously low-activity regions. These evolving spatial patterns may reflect land-use changes, increasing residential demand, and shifting leisure mobility behavior.</p>
+<p>Although EHSA was applied across a short three-month window, no statistically significant (p &lt; 0.05) temporal trends were detected. The spatial configuration of hot and cold spots remained stable, suggesting short-term stability rather than long-term persistence. A longer time horizon (e.g., 12 months) is recommended to identify emerging or diminishing trends with stronger statistical power.</p>
 <p>Based on these findings, several operational and planning insights can be drawn:</p>
 <ul>
 <li><p>Morning peak: Increase feeder bus frequency and expand transfer-hub capacity in northern neighborhoods.</p></li>
