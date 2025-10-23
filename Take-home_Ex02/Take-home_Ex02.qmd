@@ -3,7 +3,6 @@ title: "Take-home Exercise 2"
 author: "Jeounghyun Kim"
 date: "Oct 18, 2025"
 date-modified: "last-modified" 
-format: html
 execute: 
   eval: true
   echo: true
