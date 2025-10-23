@@ -103,7 +103,7 @@ pacman::p_load(sf, tmap, tidyverse, rvest, spdep, sfdep, Kendall)
 
 -   **`Kendall`** — performs the **Mann–Kendall trend test**, which detects increasing or decreasing trends in the **spatio-temporal Gi\*** values during EHSA.
 
-## **3.2 Directory and File Setup**
+## 3.2 Directory and File Setup
 
 All datasets are organized into two main folders within the project directory to ensure reproducibility and clarity of data sources.
 
@@ -639,61 +639,74 @@ Building upon the LISA findings, Local Geary’s C further examines how similar 
 sf::sf_use_s2(FALSE)
 tmap_mode("plot")
 
-plot_geary_one_slot <- function(sf_all, slot_label, var = "tap_on", alpha = 0.05) {
-  # 1) Select target slot and validate geometry
+plot_geary_one_slot <- function(sf_all, slot_label, var = "tap_on",
+                                alpha = 0.05, nsim = 499) {
+  # 1) Filter target slot and validate geometries
   df <- sf_all %>%
-    filter(slot == slot_label) %>%
-    st_make_valid() %>%
-    filter(!is.na(.data[[var]]))
+    dplyr::filter(slot == slot_label) %>%
+    sf::st_make_valid() %>%
+    dplyr::filter(!is.na(.data[[var]]))
 
-  # Skip if not enough variation
+  # Skip if there is no variation
   if (nrow(df) == 0 || length(unique(df[[var]])) <= 1) {
     message(sprintf("[GearyC] '%s' slot: insufficient variation, skipped.", slot_label))
     return(NULL)
   }
 
-  # 2) Build neighborhood structure (Queen contiguity + snap)
-  nb <- poly2nb(df, queen = TRUE, snap = 2)
-  no_neigh <- card(nb) == 0
-  if (any(no_neigh)) {
-    keep_idx <- which(!no_neigh)
-    df <- df[keep_idx, ]
-    nb <- subset(nb, !no_neigh)
+  # 2) Build neighbors & weights with sfdep (what local_c_perm expects)
+  nb <- sfdep::st_contiguity(df)                # queen contiguity
+  iso <- spdep::card(nb) == 0                   # drop isolates if any
+  if (any(iso)) {
+    df <- df[!iso, ]
+    nb <- sfdep::st_contiguity(df)
   }
-  lw <- nb2listw(nb, style = "W", zero.policy = TRUE)
+  wt <- sfdep::st_weights(nb, style = "W", allow_zero = TRUE)
 
-  # 3) Compute Local Geary’s C
-  lc <- localC(df[[var]], lw, zero.policy = TRUE)
-  df$localC <- lc
+  # 3) Local Geary's C with permutation p-values
+  x  <- as.numeric(df[[var]])
+  lc <- sfdep::local_c_perm(x = x, nb = nb, wt = wt,
+                            nsim = nsim, alternative = "two.sided")
+  lc_df <- as.data.frame(lc)                    # ci, p_ci, p_ci_sim, ...
 
-  # 4) Standardize results (Z-score approximation)
-  z_lc <- scale(lc)
-  df$z_score <- as.numeric(z_lc)
-  df$sig <- ifelse(abs(z_lc) > qnorm(1 - alpha/2), "Significant", "Not Sig")
+  df$geary <- lc_df$ci
+  df$pval  <- lc_df$p_ci_sim                    # or use p_ci
 
-  # 5) Visualization
-  tm_shape(df) +
-    tm_polygons("z_score",
-                style = "quantile",
-                n = 5,
-                palette = "RdBu",
-                title = "Local Geary’s C (Z-score)") +
-    tm_borders(col = "gray60") +
-    tm_layout(main.title = paste("Local Geary’s C —", slot_label),
-              legend.outside = TRUE)
+  # 4) Keep only significant cells (p < 0.05)
+  df_sig <- dplyr::filter(df, !is.na(pval) & pval < alpha)
+
+  # 5) Plot: grey background; color only significant cells
+  if (nrow(df_sig) == 0) {
+    return(
+      tmap::tm_shape(df) +
+        tmap::tm_polygons(col = "grey95", border.alpha = 0) +
+        tmap::tm_title(paste0("Local Geary’s C — ", slot_label, " (no significant cells)")) +
+        tmap::tm_layout(legend.outside = TRUE)
+    )
+  } else {
+    return(
+      tmap::tm_shape(df) +
+        tmap::tm_polygons(col = "grey95", border.alpha = 0) +
+      tmap::tm_shape(df_sig) +
+        tmap::tm_polygons("geary",
+                          palette = "RdBu", style = "quantile", n = 5,
+                          title = "Local Geary’s C (p < 0.05)") +
+        tmap::tm_layout(main.title = paste("Local Geary’s C —", slot_label),
+                        legend.outside = TRUE)
+    )
+  }
 }
 
 # Run for all three time slots
 slots <- c("WKDY_AM_06_09", "WKDY_PM_17_20", "WKND_11_20")
-for (s in slots) print(plot_geary_one_slot(hex_counts_sf, s))
+for (s in slots) print(plot_geary_one_slot(hex_counts_sf, s, nsim = 499))
 
 ```
 
-Although the spatial patterns revealed by Local Geary’s C are broadly consistent with those identified by the Local Moran’s I (LISA) analysis, the Geary’s C maps display slightly wider red regions indicating strong local similarity. This difference arises from the conceptual focus of the two statistics.
+Although the spatial patterns revealed by the Local Geary’s C are generally consistent with those identified by the Local Moran’s I (LISA) analysis, the Geary’s C maps—filtered for statistically significant (p \< 0.05) cells—display slightly broader clusters of red and blue hexagons, indicating zones of strong local similarity or dissimilarity.
 
-LISA emphasizes the **direction of spatial association**, identifying where high or low values cluster together (e.g., High–High or Low–Low regions). In contrast, Local Geary’s C measures the **degree of local dissimilarity**, capturing how similar or different each area is compared to its neighbors. As a result, areas with very similar values—regardless of whether they are high or low—exhibit low Geary’s C values and are shown in red.
+Unlike LISA, which emphasizes the *direction* of spatial association by identifying whether high or low values cluster together (e.g., High–High or Low–Low regions), Local Geary’s C focuses on the *intensity* of local variation between each cell and its neighbors. Low Geary’s C values (red areas) represent strong local homogeneity (similar values among adjacent hexagons), while high values (blue areas) reflect greater local contrast (dissimilar values).
 
-Consequently, Geary’s C not only reaffirms the key clusters detected by LISA (e.g., CBD, Tampines, Jurong East) but also highlights transitional zones and boundary regions where spatial similarity gradually changes. Together, the two measures provide a more comprehensive understanding of both **cluster strength and internal homogeneity** within Singapore’s urban mobility patterns.
+Consequently, Geary’s C not only reconfirms the key clusters highlighted by LISA — such as CBD, Tampines, and Jurong East — but also exposes subtle transitional and boundary zones where spatial similarity gradually changes. Together, the two statistics provide a more comprehensive understanding of both the *strength of clustering* and the *internal consistency* of Singapore’s urban mobility patterns.
 
 ### 4.3.3 Getis–Ord Gi\* Statistic
 
@@ -1131,9 +1144,9 @@ Overall, the EHSA results suggest a **mature and steady urban mobility structure
 
 # 5. Conclusion
 
-This study analyzed Singapore’s bus boarding patterns from July to September 2025 using a 375m hexagonal grid, aiming to uncover fine-grained spatial and temporal trends in passenger activity. By systematically applying both Local Measures of Spatial Autocorrelation (LMSA) and Emerging Hot Spot Analysis (EHSA), the study identified localized clustering and temporal change patterns that could not be captured through global statistics alone.
+This study analyzed Singapore’s bus boarding patterns from July to September 2025 using a 375 m hexagonal grid, aiming to uncover fine-grained spatial and temporal trends in passenger activity. By systematically applying both Local Measures of Spatial Autocorrelation (LMSA) and Emerging Hot Spot Analysis (EHSA), the study identified localized clustering and temporal change patterns that could not be captured through global statistics alone.
 
-The LMSA results revealed statistically significant (p \< 0.05) high-demand hot spots (High-High) in the Central Business District (CBD), Tampines, Jurong East, and Woodlands during the weekday morning peak (6–9 a.m.), while low-demand cold spots (Low-Low) were observed in industrial zones such as Tuas and Jurong Island. The Getis–Ord Gi\* statistic further quantified the strength and persistence of these clusters, indicating distinct directional flows — north-to-south commuting toward the CBD in the morning, reverse movements during the evening peak, and leisure-oriented mobility toward Orchard, Tampines, and other retail centers on weekends.
+The LMSA results revealed statistically significant (p \< 0.05) high-demand hot spots (High–High) in the Central Business District (CBD), Tampines, Jurong East, and Woodlands during the weekday morning peak (6–9 a.m.), while low-demand cold spots (Low–Low) were observed in industrial zones such as Tuas and Jurong Island. **Local Geary’s C further captured strong local similarity and boundary transitions, highlighting homogeneity within clusters and subtle changes at their edges.** The Getis–Ord Gi\* statistic quantified the strength and persistence of these clusters, indicating distinct directional flows — north-to-south commuting toward the CBD in the morning, reverse movements during the evening peak, and leisure-oriented mobility toward Orchard, Tampines, and other retail centers on weekends.
 
 Although EHSA was applied across a short three-month window, no statistically significant (p \< 0.05) temporal trends were detected. The spatial configuration of hot and cold spots remained stable, suggesting short-term stability rather than long-term persistence. A longer time horizon (e.g., 12 months) is recommended to identify emerging or diminishing trends with stronger statistical power.
 
@@ -1145,7 +1158,7 @@ Based on these findings, several operational and planning insights can be drawn:
 
 -   Long-term strategy: Monitor demand growth in former cold-spot regions and prioritize proactive infrastructure investment.
 
-In conclusion, the integrated use of LMSA and EHSA provides a robust data-driven framework for precise demand forecasting and adaptive public transport service design in Singapore. Future studies could extend the analysis to a longer time frame and incorporate additional datasets, such as alighting and smart-card records, to capture the full journey dynamics of urban mobility.
+In conclusion, the integrated use of **LISA, Geary’s C, Gi\***, and **EHSA** provides a robust data-driven framework for precise demand forecasting and adaptive public transport service design in Singapore. Future studies could extend the analysis to a longer time frame and incorporate additional datasets, such as alighting and smart-card records, to capture the full journey dynamics of urban mobility.
 
 # 6. References
 

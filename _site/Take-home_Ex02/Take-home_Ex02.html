@@ -261,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#setup-and-preparation" id="toc-setup-and-preparation" class="nav-link" data-scroll-target="#setup-and-preparation">3. Setup and Preparation</a>
   <ul class="collapse">
   <li><a href="#required-r-packages" id="toc-required-r-packages" class="nav-link" data-scroll-target="#required-r-packages">3.1 Required R Packages</a></li>
-  <li><a href="#directory-and-file-setup" id="toc-directory-and-file-setup" class="nav-link" data-scroll-target="#directory-and-file-setup"><strong>3.2 Directory and File Setup</strong></a></li>
+  <li><a href="#directory-and-file-setup" id="toc-directory-and-file-setup" class="nav-link" data-scroll-target="#directory-and-file-setup">3.2 Directory and File Setup</a></li>
   <li><a href="#data-wrangling" id="toc-data-wrangling" class="nav-link" data-scroll-target="#data-wrangling">3.3 Data Wrangling</a>
   <ul class="collapse">
   <li><a href="#import-geospatial-data-ura-kml-bus-stops" id="toc-import-geospatial-data-ura-kml-bus-stops" class="nav-link" data-scroll-target="#import-geospatial-data-ura-kml-bus-stops">3.3.1 Import geospatial data (URA KML &amp; Bus Stops)</a></li>
@@ -462,7 +462,7 @@ Managing peak-hour congestion and adapting to shifting post-pandemic travel beha
 </ul>
 </section>
 <section id="directory-and-file-setup" class="level2">
-<h2 class="anchored" data-anchor-id="directory-and-file-setup"><strong>3.2 Directory and File Setup</strong></h2>
+<h2 class="anchored" data-anchor-id="directory-and-file-setup">3.2 Directory and File Setup</h2>
 <p>All datasets are organized into two main folders within the project directory to ensure reproducibility and clarity of data sources.</p>
 <pre><code>Take-home_Ex02/
 ├── data/
@@ -1083,53 +1083,66 @@ During the weekend,&nbsp;<strong>High–High clusters</strong>&nbsp;reappear aro
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>sf<span class="sc">::</span><span class="fu">sf_use_s2</span>(<span class="cn">FALSE</span>)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>plot_geary_one_slot <span class="ot">&lt;-</span> <span class="cf">function</span>(sf_all, slot_label, <span class="at">var =</span> <span class="st">"tap_on"</span>, <span class="at">alpha =</span> <span class="fl">0.05</span>) {</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1) Select target slot and validate geometry</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> sf_all <span class="sc">%&gt;%</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(slot <span class="sc">==</span> slot_label) <span class="sc">%&gt;%</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(.data[[var]]))</span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Skip if not enough variation</span></span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(df) <span class="sc">==</span> <span class="dv">0</span> <span class="sc">||</span> <span class="fu">length</span>(<span class="fu">unique</span>(df[[var]])) <span class="sc">&lt;=</span> <span class="dv">1</span>) {</span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">message</span>(<span class="fu">sprintf</span>(<span class="st">"[GearyC] '%s' slot: insufficient variation, skipped."</span>, slot_label))</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2) Build neighborhood structure (Queen contiguity + snap)</span></span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>  nb <span class="ot">&lt;-</span> <span class="fu">poly2nb</span>(df, <span class="at">queen =</span> <span class="cn">TRUE</span>, <span class="at">snap =</span> <span class="dv">2</span>)</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>  no_neigh <span class="ot">&lt;-</span> <span class="fu">card</span>(nb) <span class="sc">==</span> <span class="dv">0</span></span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">any</span>(no_neigh)) {</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    keep_idx <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="sc">!</span>no_neigh)</span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> df[keep_idx, ]</span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    nb <span class="ot">&lt;-</span> <span class="fu">subset</span>(nb, <span class="sc">!</span>no_neigh)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>plot_geary_one_slot <span class="ot">&lt;-</span> <span class="cf">function</span>(sf_all, slot_label, <span class="at">var =</span> <span class="st">"tap_on"</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">alpha =</span> <span class="fl">0.05</span>, <span class="at">nsim =</span> <span class="dv">499</span>) {</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1) Filter target slot and validate geometries</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> sf_all <span class="sc">%&gt;%</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(slot <span class="sc">==</span> slot_label) <span class="sc">%&gt;%</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    sf<span class="sc">::</span><span class="fu">st_make_valid</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(.data[[var]]))</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Skip if there is no variation</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(df) <span class="sc">==</span> <span class="dv">0</span> <span class="sc">||</span> <span class="fu">length</span>(<span class="fu">unique</span>(df[[var]])) <span class="sc">&lt;=</span> <span class="dv">1</span>) {</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">message</span>(<span class="fu">sprintf</span>(<span class="st">"[GearyC] '%s' slot: insufficient variation, skipped."</span>, slot_label))</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2) Build neighbors &amp; weights with sfdep (what local_c_perm expects)</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>  nb <span class="ot">&lt;-</span> sfdep<span class="sc">::</span><span class="fu">st_contiguity</span>(df)                <span class="co"># queen contiguity</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>  iso <span class="ot">&lt;-</span> spdep<span class="sc">::</span><span class="fu">card</span>(nb) <span class="sc">==</span> <span class="dv">0</span>                   <span class="co"># drop isolates if any</span></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">any</span>(iso)) {</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> df[<span class="sc">!</span>iso, ]</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>    nb <span class="ot">&lt;-</span> sfdep<span class="sc">::</span><span class="fu">st_contiguity</span>(df)</span>
 <span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>  lw <span class="ot">&lt;-</span> <span class="fu">nb2listw</span>(nb, <span class="at">style =</span> <span class="st">"W"</span>, <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>  wt <span class="ot">&lt;-</span> sfdep<span class="sc">::</span><span class="fu">st_weights</span>(nb, <span class="at">style =</span> <span class="st">"W"</span>, <span class="at">allow_zero =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3) Compute Local Geary’s C</span></span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>  lc <span class="ot">&lt;-</span> <span class="fu">localC</span>(df[[var]], lw, <span class="at">zero.policy =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>localC <span class="ot">&lt;-</span> lc</span>
-<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 4) Standardize results (Z-score approximation)</span></span>
-<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>  z_lc <span class="ot">&lt;-</span> <span class="fu">scale</span>(lc)</span>
-<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>z_score <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(z_lc)</span>
-<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>sig <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">abs</span>(z_lc) <span class="sc">&gt;</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> alpha<span class="sc">/</span><span class="dv">2</span>), <span class="st">"Significant"</span>, <span class="st">"Not Sig"</span>)</span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3) Local Geary's C with permutation p-values</span></span>
+<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>  x  <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df[[var]])</span>
+<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a>  lc <span class="ot">&lt;-</span> sfdep<span class="sc">::</span><span class="fu">local_c_perm</span>(<span class="at">x =</span> x, <span class="at">nb =</span> nb, <span class="at">wt =</span> wt,</span>
+<span id="cb33-30"><a href="#cb33-30" aria-hidden="true" tabindex="-1"></a>                            <span class="at">nsim =</span> nsim, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span>
+<span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>  lc_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(lc)                    <span class="co"># ci, p_ci, p_ci_sim, ...</span></span>
+<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>geary <span class="ot">&lt;-</span> lc_df<span class="sc">$</span>ci</span>
+<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>pval  <span class="ot">&lt;-</span> lc_df<span class="sc">$</span>p_ci_sim                    <span class="co"># or use p_ci</span></span>
 <span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 5) Visualization</span></span>
-<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(df) <span class="sc">+</span></span>
-<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_polygons</span>(<span class="st">"z_score"</span>,</span>
-<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>                <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>                <span class="at">n =</span> <span class="dv">5</span>,</span>
-<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>                <span class="at">palette =</span> <span class="st">"RdBu"</span>,</span>
-<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>                <span class="at">title =</span> <span class="st">"Local Geary’s C (Z-score)"</span>) <span class="sc">+</span></span>
-<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">"gray60"</span>) <span class="sc">+</span></span>
-<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_layout</span>(<span class="at">main.title =</span> <span class="fu">paste</span>(<span class="st">"Local Geary’s C —"</span>, slot_label),</span>
-<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>              <span class="at">legend.outside =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Run for all three time slots</span></span>
-<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>slots <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"WKDY_AM_06_09"</span>, <span class="st">"WKDY_PM_17_20"</span>, <span class="st">"WKND_11_20"</span>)</span>
-<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> slots) <span class="fu">print</span>(<span class="fu">plot_geary_one_slot</span>(hex_counts_sf, s))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 4) Keep only significant cells (p &lt; 0.05)</span></span>
+<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a>  df_sig <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(df, <span class="sc">!</span><span class="fu">is.na</span>(pval) <span class="sc">&amp;</span> pval <span class="sc">&lt;</span> alpha)</span>
+<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 5) Plot: grey background; color only significant cells</span></span>
+<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(df_sig) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(</span>
+<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a>      tmap<span class="sc">::</span><span class="fu">tm_shape</span>(df) <span class="sc">+</span></span>
+<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a>        tmap<span class="sc">::</span><span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">"grey95"</span>, <span class="at">border.alpha =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a>        tmap<span class="sc">::</span><span class="fu">tm_title</span>(<span class="fu">paste0</span>(<span class="st">"Local Geary’s C — "</span>, slot_label, <span class="st">" (no significant cells)"</span>)) <span class="sc">+</span></span>
+<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a>        tmap<span class="sc">::</span><span class="fu">tm_layout</span>(<span class="at">legend.outside =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(</span>
+<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>      tmap<span class="sc">::</span><span class="fu">tm_shape</span>(df) <span class="sc">+</span></span>
+<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a>        tmap<span class="sc">::</span><span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">"grey95"</span>, <span class="at">border.alpha =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>      tmap<span class="sc">::</span><span class="fu">tm_shape</span>(df_sig) <span class="sc">+</span></span>
+<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>        tmap<span class="sc">::</span><span class="fu">tm_polygons</span>(<span class="st">"geary"</span>,</span>
+<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a>                          <span class="at">palette =</span> <span class="st">"RdBu"</span>, <span class="at">style =</span> <span class="st">"quantile"</span>, <span class="at">n =</span> <span class="dv">5</span>,</span>
+<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a>                          <span class="at">title =</span> <span class="st">"Local Geary’s C (p &lt; 0.05)"</span>) <span class="sc">+</span></span>
+<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a>        tmap<span class="sc">::</span><span class="fu">tm_layout</span>(<span class="at">main.title =</span> <span class="fu">paste</span>(<span class="st">"Local Geary’s C —"</span>, slot_label),</span>
+<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a>                        <span class="at">legend.outside =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-61"><a href="#cb33-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Run for all three time slots</span></span>
+<span id="cb33-62"><a href="#cb33-62" aria-hidden="true" tabindex="-1"></a>slots <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"WKDY_AM_06_09"</span>, <span class="st">"WKDY_PM_17_20"</span>, <span class="st">"WKND_11_20"</span>)</span>
+<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (s <span class="cf">in</span> slots) <span class="fu">print</span>(<span class="fu">plot_geary_one_slot</span>(hex_counts_sf, s, <span class="at">nsim =</span> <span class="dv">499</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1152,9 +1165,9 @@ During the weekend,&nbsp;<strong>High–High clusters</strong>&nbsp;reappear aro
 </div>
 </div>
 </div>
-<p>Although the spatial patterns revealed by Local Geary’s C are broadly consistent with those identified by the Local Moran’s I (LISA) analysis, the Geary’s C maps display slightly wider red regions indicating strong local similarity. This difference arises from the conceptual focus of the two statistics.</p>
-<p>LISA emphasizes the <strong>direction of spatial association</strong>, identifying where high or low values cluster together (e.g., High–High or Low–Low regions). In contrast, Local Geary’s C measures the <strong>degree of local dissimilarity</strong>, capturing how similar or different each area is compared to its neighbors. As a result, areas with very similar values—regardless of whether they are high or low—exhibit low Geary’s C values and are shown in red.</p>
-<p>Consequently, Geary’s C not only reaffirms the key clusters detected by LISA (e.g., CBD, Tampines, Jurong East) but also highlights transitional zones and boundary regions where spatial similarity gradually changes. Together, the two measures provide a more comprehensive understanding of both <strong>cluster strength and internal homogeneity</strong> within Singapore’s urban mobility patterns.</p>
+<p>Although the spatial patterns revealed by the Local Geary’s C are generally consistent with those identified by the Local Moran’s I (LISA) analysis, the Geary’s C maps—filtered for statistically significant (p &lt; 0.05) cells—display slightly broader clusters of red and blue hexagons, indicating zones of strong local similarity or dissimilarity.</p>
+<p>Unlike LISA, which emphasizes the <em>direction</em> of spatial association by identifying whether high or low values cluster together (e.g., High–High or Low–Low regions), Local Geary’s C focuses on the <em>intensity</em> of local variation between each cell and its neighbors. Low Geary’s C values (red areas) represent strong local homogeneity (similar values among adjacent hexagons), while high values (blue areas) reflect greater local contrast (dissimilar values).</p>
+<p>Consequently, Geary’s C not only reconfirms the key clusters highlighted by LISA — such as CBD, Tampines, and Jurong East — but also exposes subtle transitional and boundary zones where spatial similarity gradually changes. Together, the two statistics provide a more comprehensive understanding of both the <em>strength of clustering</em> and the <em>internal consistency</em> of Singapore’s urban mobility patterns.</p>
 </section>
 <section id="getisord-gi-statistic" class="level3">
 <h3 class="anchored" data-anchor-id="getisord-gi-statistic">4.3.3 Getis–Ord Gi* Statistic</h3>
@@ -4109,8 +4122,8 @@ WARNING: Error exit, tauk2. IFAULT =  12</code></pre>
 </section>
 <section id="conclusion" class="level1">
 <h1>5. Conclusion</h1>
-<p>This study analyzed Singapore’s bus boarding patterns from July to September 2025 using a 375m hexagonal grid, aiming to uncover fine-grained spatial and temporal trends in passenger activity. By systematically applying both Local Measures of Spatial Autocorrelation (LMSA) and Emerging Hot Spot Analysis (EHSA), the study identified localized clustering and temporal change patterns that could not be captured through global statistics alone.</p>
-<p>The LMSA results revealed statistically significant (p &lt; 0.05) high-demand hot spots (High-High) in the Central Business District (CBD), Tampines, Jurong East, and Woodlands during the weekday morning peak (6–9 a.m.), while low-demand cold spots (Low-Low) were observed in industrial zones such as Tuas and Jurong Island. The Getis–Ord Gi* statistic further quantified the strength and persistence of these clusters, indicating distinct directional flows — north-to-south commuting toward the CBD in the morning, reverse movements during the evening peak, and leisure-oriented mobility toward Orchard, Tampines, and other retail centers on weekends.</p>
+<p>This study analyzed Singapore’s bus boarding patterns from July to September 2025 using a 375 m hexagonal grid, aiming to uncover fine-grained spatial and temporal trends in passenger activity. By systematically applying both Local Measures of Spatial Autocorrelation (LMSA) and Emerging Hot Spot Analysis (EHSA), the study identified localized clustering and temporal change patterns that could not be captured through global statistics alone.</p>
+<p>The LMSA results revealed statistically significant (p &lt; 0.05) high-demand hot spots (High–High) in the Central Business District (CBD), Tampines, Jurong East, and Woodlands during the weekday morning peak (6–9 a.m.), while low-demand cold spots (Low–Low) were observed in industrial zones such as Tuas and Jurong Island. <strong>Local Geary’s C further captured strong local similarity and boundary transitions, highlighting homogeneity within clusters and subtle changes at their edges.</strong> The Getis–Ord Gi* statistic quantified the strength and persistence of these clusters, indicating distinct directional flows — north-to-south commuting toward the CBD in the morning, reverse movements during the evening peak, and leisure-oriented mobility toward Orchard, Tampines, and other retail centers on weekends.</p>
 <p>Although EHSA was applied across a short three-month window, no statistically significant (p &lt; 0.05) temporal trends were detected. The spatial configuration of hot and cold spots remained stable, suggesting short-term stability rather than long-term persistence. A longer time horizon (e.g., 12 months) is recommended to identify emerging or diminishing trends with stronger statistical power.</p>
 <p>Based on these findings, several operational and planning insights can be drawn:</p>
 <ul>
@@ -4118,7 +4131,7 @@ WARNING: Error exit, tauk2. IFAULT =  12</code></pre>
 <li><p>Weekend periods: Introduce shuttle services connecting suburban areas to regional shopping centers.</p></li>
 <li><p>Long-term strategy: Monitor demand growth in former cold-spot regions and prioritize proactive infrastructure investment.</p></li>
 </ul>
-<p>In conclusion, the integrated use of LMSA and EHSA provides a robust data-driven framework for precise demand forecasting and adaptive public transport service design in Singapore. Future studies could extend the analysis to a longer time frame and incorporate additional datasets, such as alighting and smart-card records, to capture the full journey dynamics of urban mobility.</p>
+<p>In conclusion, the integrated use of <strong>LISA, Geary’s C, Gi*</strong>, and <strong>EHSA</strong> provides a robust data-driven framework for precise demand forecasting and adaptive public transport service design in Singapore. Future studies could extend the analysis to a longer time frame and incorporate additional datasets, such as alighting and smart-card records, to capture the full journey dynamics of urban mobility.</p>
 </section>
 <section id="references" class="level1">
 <h1>6. References</h1>
