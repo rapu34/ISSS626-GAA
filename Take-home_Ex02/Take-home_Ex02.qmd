@@ -41,7 +41,7 @@ This study integrates multiple datasets to enable spatial and temporal analysis 
 ## **2.1 Data Sources**
 
 | Dataset | Description | Source |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | **LTA Passenger Volume by Origin–Destination Bus Stops** | Monthly record of boarding and alighting passenger counts aggregated by bus stop pairs. Used to estimate passenger origins. | LTA DataMall |
 | **Bus Stop Location** | Geospatial coordinates (WGS84) of each bus stop. Used to spatially link OD data. | LTA DataMall |
 | **URA Master Plan 2019 Subzone Boundary (No Sea)** | KML polygon layer defining Singapore’s subzones. Used for contextual mapping. | data.gov.sg |
@@ -62,7 +62,7 @@ This study integrates multiple datasets to enable spatial and temporal analysis 
 ## **2.3 Derived Variables**
 
 | Variable | Description |
-|----|----|
+|------------------------------------|------------------------------------|
 | **tap_on** | Total passenger boardings per hexagon per time slot. |
 | **density_norm** *(defined but not used in final models)* | Normalized passenger volume by area or number of stops. |
 | **region** *(defined but not used in final models)* | Regional label derived from URA Master Plan. |
@@ -780,7 +780,7 @@ During **weekday mornings (06–09)**, hot spots appear mainly in **northern (Wo
 In the **weekday evening period (17–20)**, the clusters shift toward **downtown and western employment hubs (Jurong East, Boon Lay)**, showing return trips during the homebound hours.\
 By contrast, the **weekend (11–20)** pattern becomes more spatially balanced, with clusters around **Orchard, Tampines, and Jurong**, indicating leisure-oriented movements rather than work-based travel. Overall, the Gi\* results reinforce the LISA findings but place greater emphasis on **the intensity and persistence of high-demand clusters**, showing how passenger activity levels vary across time slots.
 
-## **4.4 Emerging Hot Spot Analysis (EHSA)**
+## 4.4 Emerging Hot Spot Analysis (EHSA)
 
 In this study, EHSA was applied to analyse how passenger boarding hot spots have evolved across three time intervals — weekday morning, weekday evening, and weekend.\
 By integrating the Getis-Ord Gi\* statistic and the Mann-Kendall trend test, this method reveals whether passenger demand in each hexagon is intensifying, diminishing, or remaining stable over time.
