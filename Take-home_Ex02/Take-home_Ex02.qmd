@@ -1119,7 +1119,7 @@ knitr::kable(ehsa_summary, caption = "Significant EHSA Classifications by Time S
 
 # **5. Conclusion**
 
-This study analyzed Singapore’s bus boarding patterns from July to September 2025 using a 375 m hexagonal grid, aiming to uncover fine-grained spatial and temporal trends in passenger activity. By systematically applying both Local Measures of Spatial Autocorrelation (LMSA) and Emerging Hot Spot Analysis (EHSA), the study identified localized clustering and temporal change patterns that could not be captured through global statistics alone.
+This study analyzed Singapore’s bus boarding patterns from July to September 2025 using a 375m hexagonal grid, aiming to uncover fine-grained spatial and temporal trends in passenger activity. By systematically applying both Local Measures of Spatial Autocorrelation (LMSA) and Emerging Hot Spot Analysis (EHSA), the study identified localized clustering and temporal change patterns that could not be captured through global statistics alone.
 
 The LMSA results revealed statistically significant (p \< 0.05) high-demand hot spots (High-High) in the Central Business District (CBD), Tampines, Jurong East, and Woodlands during the weekday morning peak (6–9 a.m.), while low-demand cold spots (Low-Low) were observed in industrial zones such as Tuas and Jurong Island. The Getis–Ord Gi\* statistic further quantified the strength and persistence of these clusters, indicating distinct directional flows — north-to-south commuting toward the CBD in the morning, reverse movements during the evening peak, and leisure-oriented mobility toward Orchard, Tampines, and other retail centers on weekends.
 
