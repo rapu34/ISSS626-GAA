@@ -1,0 +1,16 @@
+---
+title: "Hands-on Exercise 8"
+author: "Jeounghyun Kim"
+date: "October 23, 2025"
+date-modified: "last-modified"
+execute:
+  cache: true
+  echo: true
+  eval: true
+  warning: false
+  freeze: false
+---
+
+# **14  Geographically Weighted Predictive Models**
+
+## **14.1 Overview**
