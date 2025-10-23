@@ -42,7 +42,7 @@ This study integrates multiple datasets to enable spatial and temporal analysis 
 ## **2.1 Data Sources**
 
 | Dataset | Description | Source |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | **LTA Passenger Volume by Origin–Destination Bus Stops** | Monthly record of boarding and alighting passenger counts aggregated by bus stop pairs. Used to estimate passenger origins. | LTA DataMall |
 | **Bus Stop Location** | Geospatial coordinates (WGS84) of each bus stop. Used to spatially link OD data. | LTA DataMall |
 | **URA Master Plan 2019 Subzone Boundary (No Sea)** | KML polygon layer defining Singapore’s subzones. Used for contextual mapping. | data.gov.sg |
@@ -63,7 +63,7 @@ This study integrates multiple datasets to enable spatial and temporal analysis 
 ## **2.3 Derived Variables**
 
 | Variable | Description |
-|------------------------------------|------------------------------------|
+|----|----|
 | **tap_on** | Total passenger boardings per hexagon per time slot. |
 | **density_norm** *(defined but not used in final models)* | Normalized passenger volume by area or number of stops. |
 | **region** *(defined but not used in final models)* | Regional label derived from URA Master Plan. |
