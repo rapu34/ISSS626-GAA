@@ -278,6 +278,8 @@ write_rds(gwr_bw_test_adaptive,
 ### **14.8.5 Computing predicted values of the test data**
 
 ```{r}
+#| eval: false
+#| include: false
 gwr_pred <- gwr.predict(
   formula = resale_price ~ floor_area_sqm + 
     storey_order + remaining_lease_mths + 
@@ -294,7 +296,7 @@ gwr_pred <- gwr.predict(
   longlat = FALSE)
 
 write_rds(gwr_pred, 
-          "chap14/data/model/gwr_pred.rds")
+          "data/model/gwr_pred.rds")
 ```
 
 ## **14.9 Calibrating Random Forest Model**
@@ -337,6 +339,8 @@ test_data_nogeom <- test_data %>%
 ### **14.9.3 Calibrating a non-spatial random forest model**
 
 ```{r}
+knitr::opts_chunk$set(cache=TRUE, cache.lazy=FALSE)
+
 set.seed(1234)
 rf <- ranger(
   formula = resale_price ~ floor_area_sqm +
