@@ -17,6 +17,8 @@ _freeze/
 *_cache/
 site_libs/
 
+# Test comment for git push
+
 # Data folders
 data/
 In-class_Ex/**/data/
