@@ -1,0 +1,4633 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jeounghyun Kim">
+<meta name="dcterms.date" content="2025-11-07">
+
+<title>Hands-on Exercise 9 – ISSS626 Coursework</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ISSS626 Coursework</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../../Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09.html" aria-current="page"> 
+<span class="menu-text">Week10_Hands-on Exercise 9</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Hands-on Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html">
+ <span class="dropdown-text">Week1_Hands-on Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex01a/Hands-on_Ex01a.html">
+ <span class="dropdown-text">Week1_Hands-on Exercise 1a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html">
+ <span class="dropdown-text">Week2_Hands-on Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex02a/Hands-on_Ex02a.html">
+ <span class="dropdown-text">Week2_Hands-on Exercise 2a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex03/Hands-on_Ex03.html">
+ <span class="dropdown-text">Week3_Hands-on Exercise 3</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04.html">
+ <span class="dropdown-text">Week4_Hands-on Exercise 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05.html">
+ <span class="dropdown-text">Week5_Hands-on Exercise 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex05a/Hands-on_Ex05a.html">
+ <span class="dropdown-text">Week5_Hands-on Exercise 5a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex06/Hands-on_Ex06.html">
+ <span class="dropdown-text">Week6_Hands-on Exercise 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex07/Hands-on_Ex07.html">
+ <span class="dropdown-text">Week8_Hands-on Exercise 7</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08.html">
+ <span class="dropdown-text">Week9_Hands-on Exercise 8</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09.html">
+ <span class="dropdown-text">Week10_Hands-on Exercise 9</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">In-class Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex03a/In-class_Ex03a.html">
+ <span class="dropdown-text">In-class Exercise 3a</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex03b/In-class_Ex03b.html">
+ <span class="dropdown-text">In-class Exercise 3b</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex04/In-class_Ex04.html">
+ <span class="dropdown-text">In-class Exercise 4</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex05/In-class_Ex05.html">
+ <span class="dropdown-text">In-class Exercise 5</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex06/In-class_Ex06.html">
+ <span class="dropdown-text">In-class Exercise 6</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex07/In-class_Ex07.html">
+ <span class="dropdown-text">In-class Exercise 7</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex08/In-class_Ex08.html">
+ <span class="dropdown-text">In-class Exercise 8</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex01/Take-home_Ex01.html">
+ <span class="dropdown-text">Take-home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex02/Take-home_Ex02.html">
+ <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex03/Take-home_Ex03.html">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#modelling-geographical-accessibility" id="toc-modelling-geographical-accessibility" class="nav-link active" data-scroll-target="#modelling-geographical-accessibility"><strong>17&nbsp;&nbsp;Modelling Geographical Accessibility</strong></a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><strong>17.1&nbsp;Introduction</strong></a>
+  <ul class="collapse">
+  <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link" data-scroll-target="#learning-outcome"><strong>17.1.1&nbsp;Learning Outcome</strong></a></li>
+  </ul></li>
+  <li><a href="#the-data" id="toc-the-data" class="nav-link" data-scroll-target="#the-data"><strong>17.2&nbsp;The data</strong></a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><strong>17.3&nbsp;Getting Started</strong></a></li>
+  <li><a href="#geospatial-data-wrangling" id="toc-geospatial-data-wrangling" class="nav-link" data-scroll-target="#geospatial-data-wrangling"><strong>17.4&nbsp;Geospatial Data Wrangling</strong></a>
+  <ul class="collapse">
+  <li><a href="#importing-geospatial-data" id="toc-importing-geospatial-data" class="nav-link" data-scroll-target="#importing-geospatial-data"><strong>17.4.1&nbsp;Importing geospatial data</strong></a></li>
+  <li><a href="#updating-crs-information" id="toc-updating-crs-information" class="nav-link" data-scroll-target="#updating-crs-information"><strong>17.4.2&nbsp;Updating CRS information</strong></a></li>
+  <li><a href="#cleaning-and-updating-attribute-fields-of-the-geospatial-data" id="toc-cleaning-and-updating-attribute-fields-of-the-geospatial-data" class="nav-link" data-scroll-target="#cleaning-and-updating-attribute-fields-of-the-geospatial-data"><strong>17.4.3&nbsp;Cleaning and updating attribute fields of the geospatial data</strong></a></li>
+  </ul></li>
+  <li><a href="#apsaital-data-handling-and-wrangling" id="toc-apsaital-data-handling-and-wrangling" class="nav-link" data-scroll-target="#apsaital-data-handling-and-wrangling"><strong>17.5&nbsp;Apsaital Data Handling and Wrangling</strong></a>
+  <ul class="collapse">
+  <li><a href="#importing-distance-matrix" id="toc-importing-distance-matrix" class="nav-link" data-scroll-target="#importing-distance-matrix"><strong>17.5.1&nbsp;Importing Distance Matrix</strong></a></li>
+  <li><a href="#tidying-distance-matrix" id="toc-tidying-distance-matrix" class="nav-link" data-scroll-target="#tidying-distance-matrix"><strong>17.5.2&nbsp;Tidying distance matrix</strong></a></li>
+  </ul></li>
+  <li><a href="#modelling-and-visualising-accessibility-using-hansen-method" id="toc-modelling-and-visualising-accessibility-using-hansen-method" class="nav-link" data-scroll-target="#modelling-and-visualising-accessibility-using-hansen-method"><strong>17.6&nbsp;Modelling and Visualising Accessibility using Hansen Method</strong></a>
+  <ul class="collapse">
+  <li><a href="#computing-hansens-accessibility" id="toc-computing-hansens-accessibility" class="nav-link" data-scroll-target="#computing-hansens-accessibility"><strong>17.6.1&nbsp;Computing Hansen’s accessibility</strong></a></li>
+  <li><a href="#visualising-hansens-accessibility" id="toc-visualising-hansens-accessibility" class="nav-link" data-scroll-target="#visualising-hansens-accessibility"><strong>17.6.2&nbsp;Visualising Hansen’s accessibility</strong></a></li>
+  <li><a href="#statistical-graphic-visualisation" id="toc-statistical-graphic-visualisation" class="nav-link" data-scroll-target="#statistical-graphic-visualisation"><strong>17.6.3&nbsp;Statistical graphic visualisation</strong></a></li>
+  </ul></li>
+  <li><a href="#modelling-and-visualising-accessibility-using-kd2sfca-method" id="toc-modelling-and-visualising-accessibility-using-kd2sfca-method" class="nav-link" data-scroll-target="#modelling-and-visualising-accessibility-using-kd2sfca-method"><strong>17.7&nbsp;Modelling and Visualising Accessibility using KD2SFCA Method</strong></a>
+  <ul class="collapse">
+  <li><a href="#computing-kd2sfcas-accessibility" id="toc-computing-kd2sfcas-accessibility" class="nav-link" data-scroll-target="#computing-kd2sfcas-accessibility"><strong>17.7.1&nbsp;Computing KD2SFCA’s accessibility</strong></a></li>
+  <li><a href="#visualising-kd2sfcas-accessibility" id="toc-visualising-kd2sfcas-accessibility" class="nav-link" data-scroll-target="#visualising-kd2sfcas-accessibility"><strong>17.7.2&nbsp;Visualising KD2SFCA’s accessibility</strong></a></li>
+  <li><a href="#statistical-graphic-visualisation-1" id="toc-statistical-graphic-visualisation-1" class="nav-link" data-scroll-target="#statistical-graphic-visualisation-1"><strong>17.7.3&nbsp;Statistical graphic visualisation</strong></a></li>
+  </ul></li>
+  <li><a href="#modelling-and-visualising-accessibility-using-spatial-accessibility-measure-sam-method" id="toc-modelling-and-visualising-accessibility-using-spatial-accessibility-measure-sam-method" class="nav-link" data-scroll-target="#modelling-and-visualising-accessibility-using-spatial-accessibility-measure-sam-method"><strong>17.8&nbsp;Modelling and Visualising Accessibility using Spatial Accessibility Measure (SAM) Method</strong></a>
+  <ul class="collapse">
+  <li><a href="#computing-sam-accessibility" id="toc-computing-sam-accessibility" class="nav-link" data-scroll-target="#computing-sam-accessibility"><strong>17.8.1&nbsp;Computing SAM accessibility</strong></a></li>
+  <li><a href="#visualising-sams-accessibility" id="toc-visualising-sams-accessibility" class="nav-link" data-scroll-target="#visualising-sams-accessibility"><strong>17.8.2&nbsp;Visualising SAM’s accessibility</strong></a></li>
+  <li><a href="#statistical-graphic-visualisation-2" id="toc-statistical-graphic-visualisation-2" class="nav-link" data-scroll-target="#statistical-graphic-visualisation-2"><strong>17.8.3&nbsp;Statistical graphic visualisation</strong></a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Hands-on Exercise 9</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jeounghyun Kim </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 7, 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 7, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="modelling-geographical-accessibility" class="level1">
+<h1><strong>17&nbsp;&nbsp;Modelling Geographical Accessibility</strong></h1>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction"><strong>17.1&nbsp;Introduction</strong></h2>
+<p>In this hands-on exercise, you will gain hands-on experience on how to model geographical accessibility by using R’s geospatial analysis packages.</p>
+<section id="learning-outcome" class="level3">
+<h3 class="anchored" data-anchor-id="learning-outcome"><strong>17.1.1&nbsp;Learning Outcome</strong></h3>
+<p>By the end of this hands-on exercise, you will be able:</p>
+<ul>
+<li><p>to import GIS polygon data into R and save them as simple feature data frame by using appropriate functions of sf package of R;</p></li>
+<li><p>to import aspatial data into R and save them as simple feature data frame by using appropriate functions of sf package of R;</p></li>
+<li><p>to computer accessibility measure by using Hansen’s potential model and Spatial Accessibility Measure (SAM); and</p></li>
+<li><p>to visualise the accessibility measures by using tmap and ggplot2 packages.</p></li>
+</ul>
+</section>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data"><strong>17.2&nbsp;The data</strong></h2>
+<p>Four data sets will be used in this hands-on exercise, they are:</p>
+<ul>
+<li><p><code>MP14_SUBZONE_NO_SEA_PL</code>: URA Master Plan 2014 subzone boundary GIS data. This data set is downloaded from data.gov.sg.</p></li>
+<li><p><code>hexagons</code>: A 250m radius hexagons GIS data. This data set was created by using&nbsp;<a href="https://r-spatial.github.io/sf/reference/st_make_grid.html"><em>st_make_grid()</em></a>&nbsp;of sf package. It is in ESRI shapefile format.</p></li>
+<li><p><code>ELDERCARE</code>: GIS data showing location of eldercare service.&nbsp;<a href="https://data.gov.sg/dataset/eldercare-services">This data</a>&nbsp;is downloaded from data.gov.sg. There are two versions. One in ESRI shapefile format. The other one in Google kml file format. For the purpose of this hands-on exercise, ESRI shapefile format is provided.</p></li>
+<li><p><code>OD_Matrix</code>: a distance matrix in csv format. There are six fields in the data file. They are:</p>
+<ul>
+<li><p><code>origin_id</code>: the unique id values of the origin (i.e.&nbsp;<code>fid</code>&nbsp;of hexagon data set.),</p></li>
+<li><p><code>destination_id</code>: the unique id values of the destination (i.e.&nbsp;<code>fid</code>&nbsp;of&nbsp;<code>ELDERCARE</code>&nbsp;data set.),</p></li>
+<li><p><code>entry_cost</code>: the perpendicular distance between the origins and the nearest road),</p></li>
+<li><p><code>network_cost</code>: the actual network distance from the origin and destination,</p></li>
+<li><p><code>exit_cost</code>: the perpendicular distance between the destination and the nearest road), and</p></li>
+<li><p><code>total_cost</code>: the summation of&nbsp;<code>entry_cost</code>,&nbsp;<code>network_cost</code>&nbsp;and&nbsp;<code>exit_cost</code>.</p></li>
+</ul></li>
+</ul>
+<p>All the values of the cost related fields are in&nbsp;<strong>metres</strong>.</p>
+<p><strong>Reminder:</strong>&nbsp;<em>Except&nbsp;<code>MP14_SUBZONE_NO_SEA_PL</code>&nbsp;data set, the other three data set are specially prepared by Prof.&nbsp;Kam for teaching and research purpose. Students taking IS415 Geospatial Analytics and Applications are allowed to use them for hands-on exercise purpose. Please obtain formal approval from Prof.&nbsp;Kam if you want to use them for other courses or usage.</em></p>
+</section>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started"><strong>17.3&nbsp;Getting Started</strong></h2>
+<p>Before we getting started, it is important for us to install the necessary R packages and launch them into RStudio environment.</p>
+<p>The R packages need for this exercise are as follows:</p>
+<ul>
+<li><p>Spatial data handling</p>
+<ul>
+<li>sf</li>
+</ul></li>
+<li><p>Modelling geographical accessibility</p>
+<ul>
+<li>spatialAcc</li>
+</ul></li>
+<li><p>Attribute data handling</p>
+<ul>
+<li>tidyverse, especially readr and dplyr</li>
+</ul></li>
+<li><p>thematic mapping</p>
+<ul>
+<li>tmap</li>
+</ul></li>
+<li><p>Staistical graphic</p>
+<ul>
+<li>ggplot2</li>
+</ul></li>
+<li><p>Statistical analysis</p>
+<ul>
+<li>ggstatsplot</li>
+</ul></li>
+</ul>
+<p>The code chunk below installs and launches these R packages into RStudio environment.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tmap, SpatialAcc, sf, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>               ggstatsplot, reshape2,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>               tidyverse,knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Notice that with tidyverse, we do not have to install readr, dplyr and ggplots packages separately. In fact, tidyverse also installs other R packages such as tidyr, stringr, forcats, tibble, purrr and magrittr.</p>
+</div>
+</div>
+</section>
+<section id="geospatial-data-wrangling" class="level2">
+<h2 class="anchored" data-anchor-id="geospatial-data-wrangling"><strong>17.4&nbsp;Geospatial Data Wrangling</strong></h2>
+<section id="importing-geospatial-data" class="level3">
+<h3 class="anchored" data-anchor-id="importing-geospatial-data"><strong>17.4.1&nbsp;Importing geospatial data</strong></h3>
+<p>Three geospatial data will be imported from the&nbsp;<em>data/geospatial</em>&nbsp;sub-folder. They are MP14_SUBZONE_NO_SEA_PL, hexagons and ELDERCARE.</p>
+<p>The code chunk below is used to import these three data sets shapefile by using&nbsp;<em>st_read()</em>&nbsp;of&nbsp;<strong>sf</strong>&nbsp;packages.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mpsz <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"data/geospatial"</span>, <span class="at">layer =</span> <span class="st">"MP14_SUBZONE_NO_SEA_PL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `MP14_SUBZONE_NO_SEA_PL' from data source 
+  `/Users/jay/Desktop/rapu34/ISSS626-GAA/Hands-on_Ex/Hands-on_Ex09/data/geospatial' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 323 features and 15 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 2667.538 ymin: 15748.72 xmax: 56396.44 ymax: 50256.33
+Projected CRS: SVY21</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>hexagons <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"data/geospatial"</span>, <span class="at">layer =</span> <span class="st">"hexagons"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `hexagons' from data source 
+  `/Users/jay/Desktop/rapu34/ISSS626-GAA/Hands-on_Ex/Hands-on_Ex09/data/geospatial' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 3125 features and 6 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 2667.538 ymin: 21506.33 xmax: 50010.26 ymax: 50256.33
+Projected CRS: SVY21 / Singapore TM</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>eldercare <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"data/geospatial"</span>, <span class="at">layer =</span> <span class="st">"ELDERCARE"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `ELDERCARE' from data source 
+  `/Users/jay/Desktop/rapu34/ISSS626-GAA/Hands-on_Ex/Hands-on_Ex09/data/geospatial' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 120 features and 19 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 14481.92 ymin: 28218.43 xmax: 41665.14 ymax: 46804.9
+Projected CRS: SVY21 / Singapore TM</code></pre>
+</div>
+</div>
+<p>The report above shows that the R object used to contain the imported MP14_SUBZONE_WEB_PL shapefile is called&nbsp;<em>mpsz</em>&nbsp;and it is a simple feature object. The geometry type is&nbsp;<em>multipolygon</em>. it is also important to note that mpsz simple feature object does not have EPSG information.</p>
+</section>
+<section id="updating-crs-information" class="level3">
+<h3 class="anchored" data-anchor-id="updating-crs-information"><strong>17.4.2&nbsp;Updating CRS information</strong></h3>
+<p>The code chunk below updates the newly imported&nbsp;<em>mpsz</em>&nbsp;with the correct ESPG code (i.e.&nbsp;3414)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mpsz <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(mpsz, <span class="dv">3414</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>eldercare <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(eldercare, <span class="dv">3414</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>hexagons <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(hexagons, <span class="dv">3414</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After transforming the projection metadata, you can verify the projection of the newly transformed&nbsp;<em>mpsz_svy21</em>&nbsp;by using&nbsp;<em>st_crs()</em>&nbsp;of sf package.</p>
+<p>The code chunk below will be used to verify the newly transformed&nbsp;<em>mpsz_svy21</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(mpsz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Coordinate Reference System:
+  User input: EPSG:3414 
+  wkt:
+PROJCRS["SVY21 / Singapore TM",
+    BASEGEOGCRS["SVY21",
+        DATUM["SVY21",
+            ELLIPSOID["WGS 84",6378137,298.257223563,
+                LENGTHUNIT["metre",1]]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433]],
+        ID["EPSG",4757]],
+    CONVERSION["Singapore Transverse Mercator",
+        METHOD["Transverse Mercator",
+            ID["EPSG",9807]],
+        PARAMETER["Latitude of natural origin",1.36666666666667,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8801]],
+        PARAMETER["Longitude of natural origin",103.833333333333,
+            ANGLEUNIT["degree",0.0174532925199433],
+            ID["EPSG",8802]],
+        PARAMETER["Scale factor at natural origin",1,
+            SCALEUNIT["unity",1],
+            ID["EPSG",8805]],
+        PARAMETER["False easting",28001.642,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8806]],
+        PARAMETER["False northing",38744.572,
+            LENGTHUNIT["metre",1],
+            ID["EPSG",8807]]],
+    CS[Cartesian,2],
+        AXIS["northing (N)",north,
+            ORDER[1],
+            LENGTHUNIT["metre",1]],
+        AXIS["easting (E)",east,
+            ORDER[2],
+            LENGTHUNIT["metre",1]],
+    USAGE[
+        SCOPE["Cadastre, engineering survey, topographic mapping."],
+        AREA["Singapore - onshore and offshore."],
+        BBOX[1.13,103.59,1.47,104.07]],
+    ID["EPSG",3414]]</code></pre>
+</div>
+</div>
+<p>Notice that the EPSG: is indicated as&nbsp;<em>3414</em>&nbsp;now.</p>
+</section>
+<section id="cleaning-and-updating-attribute-fields-of-the-geospatial-data" class="level3">
+<h3 class="anchored" data-anchor-id="cleaning-and-updating-attribute-fields-of-the-geospatial-data"><strong>17.4.3&nbsp;Cleaning and updating attribute fields of the geospatial data</strong></h3>
+<p>There are many redundant fields in the data tables of both&nbsp;<code>eldercare</code>&nbsp;and&nbsp;<code>hexagons</code>. The code chunks below will be used to exclude those redundant fields. At the same time, a new field called&nbsp;<code>demand</code>&nbsp;and a new field called&nbsp;<code>capacity</code>&nbsp;will be added into the data table of&nbsp;<code>hexagons</code>&nbsp;and&nbsp;<code>eldercare</code>&nbsp;sf data frame respectively. Both fields are derive using&nbsp;<em>mutate()</em>&nbsp;of&nbsp;<strong>dplyr</strong>&nbsp;package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>eldercare <span class="ot">&lt;-</span> eldercare <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(fid, ADDRESSPOS) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">capacity =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>hexagons <span class="ot">&lt;-</span> hexagons <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(fid) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">demand =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that for the purpose of this hands-on exercise, a constant value of 100 is used. In practice, actual demand of the hexagon and capacity of the eldercare centre should be used.</p>
+</section>
+</section>
+<section id="apsaital-data-handling-and-wrangling" class="level2">
+<h2 class="anchored" data-anchor-id="apsaital-data-handling-and-wrangling"><strong>17.5&nbsp;Apsaital Data Handling and Wrangling</strong></h2>
+<section id="importing-distance-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="importing-distance-matrix"><strong>17.5.1&nbsp;Importing Distance Matrix</strong></h3>
+<p>The code chunk below uses&nbsp;<em>read_cvs()</em>&nbsp;of&nbsp;<strong>readr</strong>&nbsp;package to import&nbsp;<code>OD_Matrix.csv</code>&nbsp;into RStudio. The imported object is a tibble data.frame called&nbsp;<code>ODMatrix</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ODMatrix <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/aspatial/OD_Matrix.csv"</span>, <span class="at">skip =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tidying-distance-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="tidying-distance-matrix"><strong>17.5.2&nbsp;Tidying distance matrix</strong></h3>
+<p>The imported ODMatrix organised the distance matrix columnwise.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ODMatrix <span class="sc">%&gt;%</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 6
+   origin_id destination_id entry_cost network_cost exit_cost total_cost
+       &lt;dbl&gt;          &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+ 1         1              1       668.       19847.      47.6     20562.
+ 2         1              2       668.       45027.      31.9     45727.
+ 3         1              3       668.       17644.     173.      18486.
+ 4         1              4       668.       36010.      92.2     36770.
+ 5         1              5       668.       31068.      64.6     31801.
+ 6         1              6       668.       31195.     117.      31980.
+ 7         1              8       668.       32475.      55.1     33198.
+ 8         1              9       668.       22267.      28.4     22963.
+ 9         1             10       668.       45220.      55.1     45943.
+10         1             11       668.       34898.      27.5     35593.</code></pre>
+</div>
+</div>
+<p>On the other hands, most of the modelling packages in R is expecting a matrix look similar to the figure below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert from long to wide format (prevent printing intermediate objects)</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>distmat_wide <span class="ot">&lt;-</span> ODMatrix <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(origin_id, destination_id, total_cost) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(origin_id, destination_id) <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from  =</span> destination_id,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> total_cost,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_sort  =</span> <span class="cn">TRUE</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Set origin_id as row names to create a matrix-like numeric table</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>distmat_mat <span class="ot">&lt;-</span> distmat_wide <span class="sc">%&gt;%</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">column_to_rownames</span>(<span class="st">"origin_id"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Display as a single formatted table (same layout as shown in lecture slides)</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="fu">head</span>(distmat_mat, <span class="dv">10</span>)[ , <span class="dv">1</span><span class="sc">:</span><span class="fu">min</span>(<span class="dv">10</span>, <span class="fu">ncol</span>(distmat_mat))], <span class="dv">2</span>),</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">align =</span> <span class="st">"r"</span>,</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Preview of total-cost O–D matrix (10×10)"</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Preview of total-cost O–D matrix (10×10)</caption>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">1</th>
+<th style="text-align: right;">2</th>
+<th style="text-align: right;">3</th>
+<th style="text-align: right;">4</th>
+<th style="text-align: right;">5</th>
+<th style="text-align: right;">6</th>
+<th style="text-align: right;">8</th>
+<th style="text-align: right;">9</th>
+<th style="text-align: right;">10</th>
+<th style="text-align: right;">11</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">20562.45</td>
+<td style="text-align: right;">45726.57</td>
+<td style="text-align: right;">18485.58</td>
+<td style="text-align: right;">36769.69</td>
+<td style="text-align: right;">31800.65</td>
+<td style="text-align: right;">31979.63</td>
+<td style="text-align: right;">33197.79</td>
+<td style="text-align: right;">22962.85</td>
+<td style="text-align: right;">45943.00</td>
+<td style="text-align: right;">35593.39</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">23069.02</td>
+<td style="text-align: right;">48233.13</td>
+<td style="text-align: right;">20992.14</td>
+<td style="text-align: right;">39276.25</td>
+<td style="text-align: right;">34307.21</td>
+<td style="text-align: right;">34486.19</td>
+<td style="text-align: right;">35704.35</td>
+<td style="text-align: right;">25469.42</td>
+<td style="text-align: right;">48449.56</td>
+<td style="text-align: right;">38099.96</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">23590.12</td>
+<td style="text-align: right;">48754.23</td>
+<td style="text-align: right;">21513.24</td>
+<td style="text-align: right;">39797.35</td>
+<td style="text-align: right;">34828.31</td>
+<td style="text-align: right;">35007.29</td>
+<td style="text-align: right;">36225.45</td>
+<td style="text-align: right;">25990.52</td>
+<td style="text-align: right;">48970.66</td>
+<td style="text-align: right;">38621.06</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">24069.22</td>
+<td style="text-align: right;">49233.34</td>
+<td style="text-align: right;">21992.35</td>
+<td style="text-align: right;">40276.46</td>
+<td style="text-align: right;">35307.42</td>
+<td style="text-align: right;">35486.40</td>
+<td style="text-align: right;">36704.56</td>
+<td style="text-align: right;">26469.62</td>
+<td style="text-align: right;">49449.77</td>
+<td style="text-align: right;">39100.16</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">24241.17</td>
+<td style="text-align: right;">49405.29</td>
+<td style="text-align: right;">22164.30</td>
+<td style="text-align: right;">40448.41</td>
+<td style="text-align: right;">35479.37</td>
+<td style="text-align: right;">35658.34</td>
+<td style="text-align: right;">36876.51</td>
+<td style="text-align: right;">26641.57</td>
+<td style="text-align: right;">49621.72</td>
+<td style="text-align: right;">39272.11</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">24605.20</td>
+<td style="text-align: right;">49769.32</td>
+<td style="text-align: right;">22528.33</td>
+<td style="text-align: right;">40812.44</td>
+<td style="text-align: right;">35843.39</td>
+<td style="text-align: right;">36022.37</td>
+<td style="text-align: right;">37240.54</td>
+<td style="text-align: right;">27005.60</td>
+<td style="text-align: right;">49985.75</td>
+<td style="text-align: right;">39636.14</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19375.66</td>
+<td style="text-align: right;">44539.77</td>
+<td style="text-align: right;">17298.78</td>
+<td style="text-align: right;">35582.89</td>
+<td style="text-align: right;">30613.85</td>
+<td style="text-align: right;">30792.83</td>
+<td style="text-align: right;">32010.99</td>
+<td style="text-align: right;">21776.06</td>
+<td style="text-align: right;">44756.20</td>
+<td style="text-align: right;">34406.60</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">19662.06</td>
+<td style="text-align: right;">44826.17</td>
+<td style="text-align: right;">17585.18</td>
+<td style="text-align: right;">35869.29</td>
+<td style="text-align: right;">30900.25</td>
+<td style="text-align: right;">31079.23</td>
+<td style="text-align: right;">32297.39</td>
+<td style="text-align: right;">22062.46</td>
+<td style="text-align: right;">45042.60</td>
+<td style="text-align: right;">34693.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">19944.57</td>
+<td style="text-align: right;">45108.69</td>
+<td style="text-align: right;">17867.70</td>
+<td style="text-align: right;">36151.81</td>
+<td style="text-align: right;">31182.77</td>
+<td style="text-align: right;">31361.75</td>
+<td style="text-align: right;">32579.91</td>
+<td style="text-align: right;">22344.97</td>
+<td style="text-align: right;">45325.12</td>
+<td style="text-align: right;">34975.51</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20330.54</td>
+<td style="text-align: right;">45494.66</td>
+<td style="text-align: right;">18253.67</td>
+<td style="text-align: right;">36537.78</td>
+<td style="text-align: right;">31568.73</td>
+<td style="text-align: right;">31747.71</td>
+<td style="text-align: right;">32965.88</td>
+<td style="text-align: right;">22730.94</td>
+<td style="text-align: right;">45711.09</td>
+<td style="text-align: right;">35361.48</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The rows represent&nbsp;<strong>origins</strong>&nbsp;(i.e.&nbsp;also know as&nbsp;<strong>from</strong>&nbsp;field) and the columns represent&nbsp;<strong>destination</strong>&nbsp;(i.e.&nbsp;also known as&nbsp;<strong>to</strong>&nbsp;field.)</p>
+<p>The code chunk below uses&nbsp;<em>spread()</em>&nbsp;of&nbsp;<strong>tidyr</strong>&nbsp;package is used to transform the O-D matrix from a thin format into a fat format.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>distmat <span class="ot">&lt;-</span> ODMatrix <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(origin_id, destination_id, total_cost) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(destination_id, total_cost)<span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">'origin_id'</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note: Since tidyr version 1.0 a new function called&nbsp;<a href="https://tidyr.tidyverse.org/reference/pivot_wider.html"><em>pivot_wider()</em></a>&nbsp;is introduce. You should use&nbsp;<em>pivot_wider()</em>instead of&nbsp;<em>spread()</em></p>
+</div>
+</div>
+<p>Currently, the distance is measured in metre because SVY21 projected coordinate system is used. The code chunk below will be used to convert the unit f measurement from metre to kilometre.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>distmat_km <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(distmat<span class="sc">/</span><span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="modelling-and-visualising-accessibility-using-hansen-method" class="level2">
+<h2 class="anchored" data-anchor-id="modelling-and-visualising-accessibility-using-hansen-method"><strong>17.6&nbsp;Modelling and Visualising Accessibility using Hansen Method</strong></h2>
+<section id="computing-hansens-accessibility" class="level3">
+<h3 class="anchored" data-anchor-id="computing-hansens-accessibility"><strong>17.6.1&nbsp;Computing Hansen’s accessibility</strong></h3>
+<p>Now, we ready to compute Hansen’s accessibility by using&nbsp;<em>ac()</em>&nbsp;of&nbsp;<a href="https://cran.r-project.org/web/packages/SpatialAcc/index.html"><strong>SpatialAcc</strong></a>&nbsp;package. Before getting started, you are encourage to read the&nbsp;<a href="https://cran.r-project.org/web/packages/SpatialAcc/SpatialAcc.pdf">arguments</a>&nbsp;of the function at least once in order to ensure that the required inputs are available.</p>
+<p>The code chunk below calculates Hansen’s accessibility using&nbsp;<em>ac()</em>&nbsp;of&nbsp;<strong>SpatialAcc</strong>&nbsp;and&nbsp;<em>data.frame()</em>&nbsp;is used to save the output in a data frame called&nbsp;<code>acc_Handsen</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>acc_Hansen <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">ac</span>(hexagons<span class="sc">$</span>demand,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                            eldercare<span class="sc">$</span>capacity,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                            distmat_km, </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#d0 = 50,</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">power =</span> <span class="dv">2</span>, </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"Hansen"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Memory issue show n=10 </span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>acc_Hansen <span class="sc">%&gt;%</span> <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   ac.hexagons.demand..eldercare.capacity..distmat_km..power...2..
+1                                                     1.648313e-14
+2                                                     1.096143e-16
+3                                                     3.865857e-17
+4                                                     1.482856e-17
+5                                                     1.051348e-17
+6                                                     5.076391e-18
+7                                                     1.769616e-13
+8                                                     9.979647e-14
+9                                                     5.671831e-14
+10                                                    2.621063e-14</code></pre>
+</div>
+</div>
+<p>The default field name is very messy, we will rename it to&nbsp;<code>accHansen</code>&nbsp;by using the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(acc_Hansen) <span class="ot">&lt;-</span> <span class="st">"accHansen"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that the field name is much more tidier now.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>        accHansen
+1    1.648313e-14
+2    1.096143e-16
+3    3.865857e-17
+4    1.482856e-17
+5    1.051348e-17
+6    5.076391e-18
+7    1.769616e-13
+8    9.979647e-14
+9    5.671831e-14
+10   2.621063e-14
+11   9.680463e-15
+12   1.163178e-15
+13   1.514268e-16
+14   5.560405e-17
+15   2.835234e-17
+16   1.209447e-17
+17   9.598875e-19
+18   3.655429e-13
+19   4.041648e-13
+20   6.642489e-19
+21   1.412014e-18
+22   3.890256e-18
+23   1.057032e-17
+24   3.263541e-17
+25   8.752503e-17
+26   2.394157e-16
+27   7.036005e-19
+28   4.844109e-17
+29   4.904610e-18
+30   2.402359e-18
+31   9.617864e-19
+32   2.179419e-11
+33   3.078774e-13
+34   1.165627e-12
+35   6.799241e-13
+36   2.791035e-13
+37   1.071932e-13
+38   2.232836e-17
+39   3.996875e-18
+40   1.073118e-17
+41   6.691684e-19
+42   2.869784e-10
+43   1.580648e-10
+44   3.271671e-11
+45   1.707155e-11
+46   2.606225e-11
+47   2.174157e-13
+48   4.608664e-13
+49   7.743083e-13
+50   6.971377e-15
+51   8.247737e-14
+52   7.458007e-18
+53   1.548522e-17
+54   2.892075e-18
+55   9.356321e-19
+56   9.240159e-10
+57   2.105125e-09
+58   3.324414e-10
+59   6.223108e-10
+60   3.473455e-10
+61   1.601486e-11
+62   1.178190e-11
+63   5.757281e-12
+64   2.384479e-12
+65   4.675212e-13
+66   3.940602e-13
+67   1.623251e-13
+68   6.748163e-14
+69   3.950406e-18
+70   1.082507e-18
+71   1.967915e-18
+72   4.061993e-19
+73   3.657159e-21
+74   7.699442e-09
+75   1.143924e-08
+76   4.705118e-10
+77   4.236187e-12
+78   7.496701e-10
+79   4.176133e-11
+80   8.233601e-11
+81   1.204262e-10
+82   1.219695e-11
+83   4.712425e-14
+84   1.181636e-13
+85   2.914151e-13
+86   7.060125e-13
+87   2.673223e-14
+88   5.570533e-14
+89   4.969214e-15
+90   2.736315e-18
+91   5.124139e-19
+92   3.435380e-19
+93   1.644482e-19
+94   3.727114e-08
+95   3.515806e-10
+96   5.343528e-09
+97   2.212160e-08
+98   3.215943e-08
+99   7.478860e-11
+100  2.932354e-08
+101  2.833765e-08
+102  2.309330e-09
+103  2.209483e-11
+104  3.456343e-11
+105  5.511270e-11
+106  1.024002e-11
+107  6.802685e-12
+108  2.712896e-12
+109  1.070612e-12
+110  1.944454e-13
+111  1.063500e-14
+112  2.179654e-14
+113  2.338231e-15
+114  2.013597e-19
+115  3.608818e-19
+116  1.287202e-19
+117  6.429570e-20
+118  2.389902e-08
+119  1.042775e-07
+120  3.040148e-09
+121  3.869781e-09
+122  3.871467e-08
+123  1.958356e-11
+124  1.653133e-08
+125  6.692161e-08
+126  3.774397e-10
+127  2.758154e-11
+128  4.107611e-12
+129  1.535822e-14
+130  3.753608e-14
+131  9.843187e-14
+132  8.862176e-16
+133  8.862176e-16
+134  3.626636e-14
+135  2.296160e-15
+136  9.985937e-16
+137  9.068512e-20
+138  8.326334e-20
+139  4.791469e-20
+140  4.552365e-09
+141  8.799879e-09
+142  5.445724e-08
+143  2.158706e-07
+144  1.805968e-08
+145  5.306028e-08
+146  2.296649e-07
+147  7.634985e-12
+148  4.836099e-09
+149  1.408848e-07
+150  8.864952e-12
+151  7.981436e-14
+152  2.556335e-12
+153  9.668251e-15
+154  2.398087e-14
+155  5.953301e-14
+156  3.655230e-20
+157  6.496911e-20
+158  3.063592e-20
+159  1.777190e-20
+160  8.140914e-10
+161  1.764858e-09
+162  3.208261e-09
+163  2.847678e-08
+164  1.151185e-07
+165  4.708998e-07
+166  6.286314e-07
+167  1.175293e-07
+168  4.807668e-07
+169  8.615922e-07
+170  1.040330e-06
+171  1.571173e-12
+172  6.117698e-15
+173  5.394226e-16
+174  1.079336e-16
+175  1.127167e-20
+176  1.445936e-10
+177  3.252617e-10
+178  6.644709e-10
+179  1.181572e-09
+180  1.397911e-08
+181  5.974463e-08
+182  2.430782e-07
+183  1.001093e-06
+184  4.051066e-06
+185  2.113309e-07
+186  3.623555e-06
+187  3.261503e-06
+188  1.415608e-16
+189  5.829260e-11
+190  1.258379e-10
+191  2.478442e-10
+192  4.349393e-10
+193  5.616425e-09
+194  3.053536e-08
+195  1.259866e-07
+196  4.917793e-07
+197  2.065387e-06
+198  8.144242e-06
+199  1.932030e-06
+200  8.969149e-06
+201  1.447799e-06
+202  5.229066e-10
+203  3.980669e-07
+204  4.284862e-13
+205  3.625872e-16
+206  1.042998e-18
+207  2.121721e-06
+208  4.491662e-06
+209  9.194907e-06
+210  1.529312e-05
+211  2.379084e-05
+212  3.109572e-05
+213  6.514815e-08
+214  2.455393e-07
+215  9.875341e-07
+216  4.289851e-06
+217  1.762618e-05
+218  1.001377e-06
+219  1.076619e-05
+220  8.647067e-06
+221  5.551839e-06
+222  3.143476e-06
+223  7.628132e-07
+224  2.048144e-07
+225  9.057447e-13
+226  7.420204e-13
+227  1.455452e-12
+228  1.836149e-12
+229  5.281765e-15
+230  5.281765e-15
+231  5.281765e-15
+232  5.500339e-06
+233  1.185578e-05
+234  2.431627e-05
+235  4.140226e-05
+236  6.424073e-05
+237  7.425865e-05
+238  7.066052e-05
+239  4.515062e-07
+240  2.219755e-06
+241  9.120549e-06
+242  3.831083e-05
+243  8.310714e-05
+244  5.427915e-05
+245  2.569563e-05
+246  8.514257e-06
+247  1.323574e-06
+248  3.702346e-07
+249  8.695918e-08
+250  2.714042e-12
+251  3.338084e-12
+252  1.918892e-12
+253  1.174174e-12
+254  6.148913e-12
+255  2.169732e-12
+256  6.241332e-15
+257  6.241332e-15
+258  6.241332e-15
+259  6.241332e-15
+260  6.241332e-15
+261  6.241332e-15
+262  6.241332e-15
+263  1.338479e-05
+264  3.026067e-05
+265  6.330484e-05
+266  1.156989e-04
+267  1.724661e-04
+268  1.794772e-04
+269  2.041406e-04
+270  3.332139e-04
+271  2.815305e-04
+272  4.246383e-04
+273  6.063434e-05
+274  7.930250e-05
+275  7.331095e-05
+276  2.438015e-05
+277  2.693382e-05
+278  1.394316e-07
+279  5.681627e-08
+280  6.401001e-08
+281  8.124927e-12
+282  4.381936e-12
+283  8.282269e-12
+284  1.490712e-11
+285  1.201754e-12
+286  4.533780e-12
+287  1.183278e-12
+288  6.276233e-14
+289  1.805387e-16
+290  1.805387e-16
+291  1.805387e-16
+292  1.805387e-16
+293  1.805387e-16
+294  1.805387e-16
+295  1.805387e-16
+296  3.516200e-05
+297  5.798238e-05
+298  7.751050e-05
+299  1.704126e-04
+300  3.319731e-04
+301  4.380518e-04
+302  3.925921e-04
+303  8.810632e-04
+304  6.872025e-04
+305  1.059379e-03
+306  1.153651e-04
+307  3.301217e-04
+308  2.554023e-04
+309  1.093251e-04
+310  5.075182e-05
+311  2.254096e-08
+312  2.436362e-11
+313  1.068606e-11
+314  2.850953e-11
+315  5.787449e-12
+316  4.410651e-11
+317  3.046624e-14
+318  3.480721e-12
+319  9.194718e-13
+320  2.451244e-13
+321  5.246444e-14
+322  3.177838e-09
+323  3.276204e-11
+324  3.276204e-11
+325  3.276204e-11
+326  3.276204e-11
+327  3.276204e-11
+328  3.276204e-11
+329  3.276204e-11
+330  3.276204e-11
+331  3.276204e-11
+332  1.124807e-04
+333  1.829198e-04
+334  2.484250e-04
+335  4.463519e-04
+336  8.938023e-04
+337  9.957366e-04
+338  9.660220e-04
+339  2.391437e-03
+340  1.365254e-03
+341  8.490933e-06
+342  7.177061e-08
+343  6.935006e-05
+344  3.748612e-04
+345  1.416472e-04
+346  9.050330e-05
+347  4.208434e-07
+348  5.200249e-11
+349  8.685849e-11
+350  6.782551e-12
+351  4.710485e-11
+352  1.059112e-10
+353  5.351791e-14
+354  2.029624e-13
+355  2.385843e-12
+356  5.997704e-13
+357  1.933702e-13
+358  1.793371e-14
+359  6.327286e-09
+360  7.262665e-09
+361  7.483763e-09
+362  7.715413e-11
+363  7.715413e-11
+364  7.715413e-11
+365  7.715413e-11
+366  7.715413e-11
+367  7.715413e-11
+368  7.715413e-11
+369  7.715413e-11
+370  1.585186e-04
+371  3.516521e-04
+372  6.033912e-04
+373  8.970781e-04
+374  1.218001e-03
+375  2.837313e-03
+376  2.673025e-03
+377  3.680990e-03
+378  8.262435e-04
+379  1.761416e-03
+380  5.760932e-03
+381  3.624010e-03
+382  1.450618e-03
+383  5.547930e-04
+384  2.132521e-04
+385  1.308401e-06
+386  1.308401e-06
+387  1.119248e-10
+388  1.322718e-10
+389  1.318463e-10
+390  3.943399e-10
+391  3.702255e-11
+392  2.819666e-11
+393  1.588004e-11
+394  2.625789e-13
+395  1.022243e-12
+396  7.759215e-15
+397  2.947274e-14
+398  3.623491e-14
+399  1.071192e-14
+400  9.982315e-11
+401  1.701997e-08
+402  1.759474e-08
+403  1.782072e-08
+404  1.837234e-10
+405  1.837234e-10
+406  1.837234e-10
+407  1.837234e-10
+408  1.837234e-10
+409  1.837234e-10
+410  1.837234e-10
+411  1.837234e-10
+412  3.370475e-04
+413  1.154573e-03
+414  1.986239e-03
+415  3.127345e-03
+416  3.708975e-03
+417  7.488678e-03
+418  7.019368e-03
+419  3.056960e-04
+420  1.369116e-04
+421  1.974337e-02
+422  3.624522e-03
+423  1.452546e-03
+424  1.184683e-04
+425  7.984448e-04
+426  4.149868e-04
+427  6.360277e-11
+428  1.039471e-10
+429  7.333210e-10
+430  1.182005e-09
+431  1.238112e-11
+432  3.807795e-13
+433  1.536035e-12
+434  3.416711e-13
+435  4.951562e-13
+436  1.747920e-13
+437  2.228687e-14
+438  1.511631e-14
+439  2.703886e-10
+440  1.826609e-08
+441  4.079371e-08
+442  4.210160e-08
+443  3.791805e-08
+444  3.909175e-10
+445  3.909175e-10
+446  3.909175e-10
+447  3.909175e-10
+448  3.909175e-10
+449  3.909175e-10
+450  3.909175e-10
+451  9.509520e-04
+452  2.549111e-03
+453  2.695151e-03
+454  4.885399e-03
+455  1.009054e-02
+456  1.173792e-02
+457  1.193498e-02
+458  1.020917e-04
+459  3.420058e-02
+460  4.571528e-02
+461  3.588706e-02
+462  1.646252e-02
+463  1.621671e-03
+464  2.119054e-03
+465  2.236558e-04
+466  1.177013e-04
+467  1.429139e-04
+468  2.488364e-11
+469  4.177982e-11
+470  1.545152e-09
+471  7.484551e-13
+472  1.643499e-12
+473  2.267876e-15
+474  6.426934e-15
+475  6.566088e-15
+476  7.303246e-10
+477  1.530153e-08
+478  5.407447e-08
+479  1.016378e-07
+480  9.943415e-08
+481  6.374878e-08
+482  6.572204e-10
+483  6.572204e-10
+484  6.572204e-10
+485  6.572204e-10
+486  6.572204e-10
+487  9.641356e-05
+488  9.950778e-07
+489  2.153235e-03
+490  6.929029e-03
+491  4.841540e-03
+492  9.022167e-03
+493  2.909561e-02
+494  8.293081e-02
+495  3.356268e-05
+496  1.150850e-01
+497  1.703693e-01
+498  9.451325e-02
+499  5.870873e-02
+500  7.775283e-04
+501  5.057892e-03
+502  3.947429e-03
+503  7.754700e-04
+504  5.999245e-04
+505  1.383995e-05
+506  1.572421e-11
+507  1.994130e-09
+508  1.218828e-08
+509  2.372524e-15
+510  1.956055e-09
+511  1.292900e-09
+512  4.445241e-08
+513  1.600941e-07
+514  2.479572e-07
+515  1.836202e-07
+516  3.058695e-06
+517  3.156845e-08
+518  3.156845e-08
+519  3.156845e-08
+520  7.247936e-06
+521  3.926111e-04
+522  1.656358e-04
+523  1.709516e-06
+524  3.609715e-03
+525  6.648122e-02
+526  2.572728e-01
+527  2.892391e-03
+528  2.671373e-01
+529  3.776595e-01
+530  4.717041e-01
+531  2.797711e-01
+532  1.809359e-01
+533  1.790640e-01
+534  7.691753e-02
+535  1.481880e-03
+536  3.489879e-03
+537  5.201022e-03
+538  6.127533e-09
+539  1.735330e-08
+540  1.347988e-10
+541  1.811112e-08
+542  7.561650e-09
+543  5.725829e-09
+544  3.765095e-09
+545  3.723609e-08
+546  1.292098e-07
+547  4.785886e-07
+548  5.070985e-07
+549  1.874636e-06
+550  7.864264e-06
+551  4.128812e-06
+552  6.711843e-05
+553  2.969888e-05
+554  9.112519e-04
+555  2.064429e-03
+556  4.211772e-03
+557  4.623481e-03
+558  2.039328e-02
+559  7.877046e-02
+560  3.281183e-02
+561  9.885465e-01
+562  1.532618e+00
+563  1.602888e+00
+564  1.715427e+00
+565  1.021491e+00
+566  3.256890e-01
+567  3.309207e-01
+568  6.469846e-02
+569  9.410020e-03
+570  2.531923e-03
+571  1.897189e-07
+572  4.296990e-08
+573  2.876917e-08
+574  6.496854e-08
+575  3.404081e-08
+576  2.449332e-08
+577  7.244135e-09
+578  1.224378e-08
+579  1.126249e-08
+580  4.287519e-08
+581  1.078879e-07
+582  3.757304e-07
+583  6.682401e-07
+584  2.981348e-06
+585  8.733534e-06
+586  1.900171e-05
+587  4.343488e-05
+588  1.003041e-04
+589  2.229232e-04
+590  5.076822e-04
+591  1.143644e-03
+592  4.967195e-03
+593  1.265771e-03
+594  3.230620e-03
+595  1.183486e-01
+596  1.206621e+00
+597  2.088069e+00
+598  1.408994e+00
+599  2.347248e+00
+600  2.328965e+00
+601  1.886697e+00
+602  1.030559e+00
+603  4.735218e-01
+604  1.724986e-02
+605  3.875392e-02
+606  2.001067e-03
+607  4.207816e-04
+608  3.462268e-07
+609  5.148133e-07
+610  1.314548e-07
+611  2.290312e-07
+612  1.786729e-08
+613  4.150071e-08
+614  6.785270e-09
+615  1.748904e-08
+616  4.363716e-08
+617  5.202662e-08
+618  9.430000e-08
+619  1.144861e-07
+620  2.470307e-08
+621  1.536030e-08
+622  3.187581e-06
+623  4.160070e-06
+624  9.729195e-06
+625  2.409471e-05
+626  5.446838e-05
+627  1.235006e-04
+628  1.249981e-03
+629  3.576892e-03
+630  2.646969e-03
+631  9.028659e-03
+632  1.122679e-01
+633  2.214223e+00
+634  3.504728e+00
+635  4.700206e+00
+636  1.236812e+01
+637  4.567324e+00
+638  2.881548e-01
+639  2.599253e+00
+640  1.854512e+00
+641  1.369173e-02
+642  5.497482e-02
+643  1.724739e-03
+644  3.438118e-02
+645  6.035484e-03
+646  2.042716e-04
+647  1.595099e-04
+648  9.505015e-07
+649  1.327140e-06
+650  5.195458e-07
+651  5.793595e-09
+652  1.489372e-08
+653  2.550286e-09
+654  9.288985e-09
+655  3.716134e-08
+656  3.840719e-08
+657  1.125512e-07
+658  7.902385e-08
+659  6.538952e-08
+660  2.072350e-08
+661  8.948555e-09
+662  1.669863e-06
+663  1.595311e-06
+664  5.894386e-06
+665  1.344586e-05
+666  3.013991e-05
+667  7.424599e-03
+668  1.494771e-02
+669  2.413154e-02
+670  4.129000e-03
+671  3.760251e-01
+672  4.797151e-03
+673  3.932357e+00
+674  1.420889e+01
+675  1.643657e+01
+676  2.054151e+01
+677  1.328537e+01
+678  9.911277e+00
+679  3.931969e+00
+680  1.826627e+00
+681  1.636869e-01
+682  3.077078e-01
+683  1.003308e-01
+684  4.048397e-04
+685  1.965205e-06
+686  2.737591e-06
+687  4.765284e-08
+688  7.940742e-08
+689  2.114818e-09
+690  6.216381e-09
+691  1.398835e-08
+692  4.681593e-08
+693  3.537882e-07
+694  2.151080e-07
+695  2.967778e-08
+696  5.775848e-08
+697  2.178991e-08
+698  8.145658e-09
+699  7.080054e-07
+700  7.307156e-09
+701  7.307156e-09
+702  7.307156e-09
+703  7.307156e-09
+704  2.415478e-02
+705  5.050734e-02
+706  1.333556e-03
+707  1.066904e-01
+708  8.136526e-01
+709  1.548577e-02
+710  2.411955e+00
+711  3.522086e+01
+712  4.707232e+01
+713  2.102168e+01
+714  2.952339e+01
+715  7.926474e+00
+716  5.508036e+00
+717  5.884135e-01
+718  1.991601e-01
+719  7.304811e-02
+720  5.630252e-05
+721  9.045322e-04
+722  3.512384e-04
+723  4.403817e-06
+724  7.470562e-06
+725  2.278593e-06
+726  1.044497e-09
+727  1.378410e-09
+728  5.290192e-09
+729  1.619456e-08
+730  5.450774e-07
+731  4.979153e-07
+732  4.800190e-07
+733  2.154866e-07
+734  8.945064e-08
+735  3.243145e-08
+736  1.180612e-08
+737  7.559033e-12
+738  7.559033e-12
+739  7.559033e-12
+740  7.559033e-12
+741  4.243046e-02
+742  6.726088e-04
+743  7.849712e-02
+744  1.758985e-01
+745  2.570109e-02
+746  2.780824e+00
+747  5.722148e-03
+748  4.487730e+01
+749  1.875315e+01
+750  2.584910e+01
+751  8.469004e+01
+752  3.454800e+01
+753  1.599743e+01
+754  5.773283e+00
+755  1.978196e+00
+756  8.000061e-01
+757  1.916853e-03
+758  3.857407e-05
+759  2.514329e-04
+760  3.460240e-05
+761  3.444391e-06
+762  1.748045e-06
+763  9.767506e-07
+764  3.589629e-10
+765  6.217974e-10
+766  2.815466e-09
+767  4.042262e-09
+768  1.592602e-07
+769  1.813511e-06
+770  1.653317e-06
+771  3.371512e-07
+772  1.585692e-07
+773  3.597695e-08
+774  1.586070e-08
+775  8.731388e-12
+776  8.731388e-12
+777  8.731388e-12
+778  8.731388e-12
+779  8.731388e-12
+780  1.197051e-01
+781  3.284022e-01
+782  3.807256e-01
+783  1.257736e-02
+784  1.585625e-01
+785  4.579113e-01
+786  2.603590e+01
+787  2.683889e+01
+788  1.498753e+01
+789  3.212562e+01
+790  1.645973e+02
+791  5.314439e+01
+792  1.536146e+01
+793  1.959097e-01
+794  4.898590e-01
+795  5.910733e-01
+796  1.416237e-03
+797  4.120071e-05
+798  6.808231e-06
+799  9.841321e-06
+800  1.009795e-05
+801  6.514932e-07
+802  3.982043e-07
+803  1.051000e-07
+804  1.333301e-09
+805  9.545292e-06
+806  1.764814e-05
+807  1.012938e-05
+808  2.777330e-07
+809  5.142124e-07
+810  1.035677e-07
+811  5.539028e-08
+812  1.757626e-08
+813  6.547261e-09
+814  4.691096e-13
+815  4.691096e-13
+816  4.691096e-13
+817  4.691096e-13
+818  4.691096e-13
+819  4.631383e-01
+820  1.164091e+00
+821  6.097706e-03
+822  3.592602e-03
+823  5.275831e-01
+824  1.673110e+00
+825  5.805102e+01
+826  6.111757e+01
+827  3.379097e+01
+828  4.059699e+01
+829  6.412679e+01
+830  1.251272e+01
+831  2.378501e+00
+832  5.699136e-03
+833  5.699136e-03
+834  1.681910e-01
+835  4.029930e-04
+836  4.000698e-05
+837  2.702645e-05
+838  3.830278e-06
+839  3.940142e-06
+840  2.142010e-07
+841  1.304618e-07
+842  4.809643e-08
+843  1.092300e-05
+844  1.464815e-05
+845  4.076837e-05
+846  2.349167e-05
+847  3.220676e-06
+848  2.555986e-07
+849  1.753738e-07
+850  5.248169e-08
+851  2.646555e-08
+852  1.029741e-08
+853  7.378070e-13
+854  7.378070e-13
+855  7.378070e-13
+856  7.378070e-13
+857  7.378070e-13
+858  4.082791e+00
+859  3.705163e+00
+860  2.116289e-03
+861  1.803451e-03
+862  4.012683e-01
+863  1.336827e+00
+864  4.839885e+00
+865  4.157184e+01
+866  9.178896e+00
+867  1.413958e+01
+868  2.811495e+01
+869  1.681923e+01
+870  1.000881e-02
+871  5.628338e-01
+872  5.833496e-03
+873  1.238415e-02
+874  7.053807e-03
+875  2.596700e-03
+876  2.237618e-07
+877  9.215650e-07
+878  1.245473e-06
+879  1.223384e-07
+880  6.292989e-08
+881  5.553748e-05
+882  9.026090e-05
+883  2.224203e-05
+884  1.780402e-08
+885  4.839294e-08
+886  5.946267e-08
+887  2.539156e-08
+888  1.073104e-08
+889  2.296162e-01
+890  6.834100e-01
+891  3.166535e+00
+892  1.195135e-03
+893  1.195135e-03
+894  1.265720e+00
+895  8.085497e-04
+896  5.837273e+00
+897  3.444306e+00
+898  7.453782e-01
+899  1.538327e+00
+900  1.475445e+00
+901  1.234971e+01
+902  2.758207e+01
+903  1.897384e+01
+904  1.044262e+01
+905  3.296563e+00
+906  1.916126e-02
+907  2.917508e-01
+908  2.022257e-02
+909  1.534818e-02
+910  1.956947e-02
+911  1.496872e-02
+912  3.191437e-07
+913  2.039728e-07
+914  2.804237e-04
+915  1.316317e-04
+916  4.824811e-05
+917  2.005955e-08
+918  2.633936e-08
+919  4.878347e-04
+920  1.478935e-04
+921  5.854152e-01
+922  2.468867e+00
+923  1.220923e+00
+924  8.601560e+00
+925  6.210286e+00
+926  4.093669e+00
+927  3.220580e+01
+928  8.208312e+00
+929  6.469378e+00
+930  9.206126e-01
+931  1.585484e+00
+932  4.565484e+00
+933  2.126221e+00
+934  2.585857e+01
+935  3.866581e+01
+936  1.843222e+01
+937  3.415684e+00
+938  3.079336e+00
+939  1.024151e-01
+940  4.896219e-02
+941  1.232335e-02
+942  1.827051e-03
+943  8.220182e-03
+944  6.199434e-03
+945  1.005986e-07
+946  1.004589e-07
+947  5.122698e-04
+948  1.891828e-04
+949  2.523797e-03
+950  2.172378e-03
+951  1.427479e-03
+952  4.404879e-04
+953  9.685615e-05
+954  1.574077e+00
+955  4.805518e+00
+956  1.512674e+01
+957  5.794407e+00
+958  5.912860e+00
+959  2.375827e+01
+960  5.783346e+01
+961  2.889286e+01
+962  1.315964e+01
+963  1.603393e+00
+964  3.855812e+00
+965  9.140642e+00
+966  2.147099e+01
+967  1.449748e+01
+968  1.958116e+01
+969  1.222669e+01
+970  3.326706e+00
+971  7.543880e-02
+972  5.408169e-02
+973  3.563555e-02
+974  1.088731e-02
+975  3.597188e-03
+976  1.118941e-02
+977  3.026709e-03
+978  3.887822e-04
+979  1.263459e-03
+980  1.366442e-03
+981  1.645855e-03
+982  7.461398e-03
+983  7.098713e-02
+984  2.958869e-01
+985  3.706998e-04
+986  5.390024e-08
+987  7.683845e+00
+988  9.350158e+00
+989  5.095407e+01
+990  1.971311e+01
+991  2.331084e+01
+992  3.032458e+01
+993  4.298069e+01
+994  1.249993e+01
+995  5.443995e+00
+996  3.200972e+00
+997  6.771195e+00
+998  7.188540e+00
+999  5.879040e+01
+1000 2.007339e-01
+1001 1.750680e+01
+1002 6.261254e+00
+1003 9.710103e-01
+1004 5.689464e-01
+1005 1.116505e-01
+1006 1.069412e-01
+1007 2.750906e-02
+1008 6.749846e-03
+1009 3.196641e-02
+1010 9.491530e-04
+1011 3.620958e-03
+1012 5.598552e-03
+1013 1.516828e-02
+1014 1.478906e-02
+1015 3.300726e-02
+1016 3.618650e-01
+1017 1.130573e+00
+1018 4.233317e+00
+1019 4.578748e+00
+1020 3.107647e+01
+1021 1.326459e+01
+1022 2.169127e+01
+1023 2.884149e+01
+1024 6.718308e+01
+1025 1.781452e+01
+1026 1.510342e+01
+1027 3.139201e+00
+1028 4.102305e+00
+1029 1.243410e+01
+1030 2.557848e+01
+1031 5.476675e+01
+1032 5.436091e-01
+1033 3.978731e+00
+1034 1.392709e+00
+1035 8.399463e-01
+1036 1.731085e-01
+1037 1.298406e-01
+1038 6.827707e-02
+1039 6.727511e-02
+1040 6.528333e-02
+1041 2.620653e-02
+1042 6.950919e-03
+1043 7.920876e-03
+1044 3.036126e-02
+1045 8.918944e-03
+1046 2.796636e-02
+1047 8.980724e-02
+1048 2.870348e-01
+1049 5.512306e-01
+1050 4.181897e+00
+1051 6.006662e+00
+1052 9.080243e+00
+1053 3.300503e+00
+1054 6.555229e+01
+1055 7.866517e+01
+1056 3.020602e+01
+1057 9.129161e+00
+1058 4.025468e+00
+1059 3.042650e+00
+1060 6.104277e+00
+1061 1.039585e+01
+1062 3.296191e+01
+1063 5.052274e+01
+1064 2.051612e+00
+1065 1.623826e+00
+1066 3.507262e-01
+1067 5.740050e-01
+1068 9.384740e-02
+1069 1.313335e-01
+1070 1.798113e-01
+1071 2.295492e-01
+1072 1.469314e-02
+1073 6.040702e-03
+1074 8.802419e-03
+1075 4.625054e-03
+1076 1.152153e-02
+1077 4.004330e-02
+1078 6.428570e-02
+1079 2.151756e-01
+1080 7.723506e-02
+1081 5.854891e-02
+1082 1.892211e-01
+1083 5.314856e-01
+1084 1.356440e+00
+1085 2.603794e+00
+1086 1.155786e+00
+1087 2.373153e+00
+1088 5.471100e+01
+1089 3.189079e+01
+1090 7.693733e+00
+1091 2.888806e+00
+1092 4.624487e-01
+1093 9.025333e-01
+1094 1.186402e+01
+1095 3.121209e+01
+1096 2.121631e+01
+1097 1.622114e+01
+1098 7.585470e-01
+1099 1.566012e+00
+1100 1.834633e+00
+1101 1.240111e+00
+1102 1.521022e+00
+1103 2.657933e-01
+1104 7.146225e-01
+1105 3.384375e-03
+1106 3.628213e-03
+1107 2.382244e-02
+1108 1.203097e-02
+1109 4.851796e-03
+1110 1.151156e-02
+1111 3.923450e-01
+1112 4.946296e-01
+1113 2.006919e-02
+1114 1.904223e-02
+1115 8.817658e-03
+1116 1.216097e-01
+1117 7.373893e-02
+1118 6.761604e-01
+1119 4.756628e-05
+1120 1.025526e+00
+1121 2.742585e+00
+1122 1.556925e+00
+1123 1.028700e+01
+1124 8.380943e-01
+1125 2.648008e-01
+1126 9.630297e-01
+1127 2.606763e+00
+1128 1.363953e+01
+1129 2.099966e+01
+1130 1.436798e+01
+1131 1.556767e+01
+1132 2.768248e-01
+1133 2.341663e+00
+1134 2.233284e+00
+1135 5.431513e+00
+1136 4.787927e+00
+1137 7.198302e-01
+1138 1.721140e+00
+1139 1.001433e-01
+1140 2.590508e-02
+1141 3.029491e-02
+1142 8.785343e-03
+1143 2.029938e+00
+1144 2.084167e+00
+1145 1.100599e-08
+1146 1.552516e+00
+1147 2.094247e-01
+1148 7.401354e-02
+1149 1.712456e-02
+1150 2.305652e-02
+1151 4.211426e-02
+1152 2.013805e-02
+1153 7.289690e-05
+1154 1.756212e-04
+1155 9.980826e-01
+1156 3.548884e+00
+1157 3.187045e+00
+1158 5.473976e-01
+1159 1.094787e+00
+1160 7.198008e-01
+1161 1.471854e+00
+1162 5.553885e-01
+1163 9.803842e-01
+1164 1.502884e+01
+1165 6.105221e+00
+1166 1.211899e+01
+1167 2.509184e+00
+1168 1.774535e+00
+1169 2.284641e+00
+1170 1.313816e+01
+1171 9.619688e+00
+1172 1.050732e+00
+1173 4.136199e+00
+1174 1.373919e+00
+1175 2.580923e-01
+1176 7.134327e-02
+1177 1.291456e-02
+1178 1.717397e-03
+1179 3.500168e-06
+1180 5.101645e+00
+1181 1.785469e+00
+1182 3.147698e-01
+1183 1.113711e+00
+1184 2.705653e-01
+1185 9.798026e-03
+1186 2.497000e-02
+1187 1.559594e-02
+1188 6.215126e-03
+1189 1.558500e-03
+1190 2.348515e-04
+1191 3.528941e-01
+1192 5.798609e-01
+1193 2.208353e+00
+1194 1.191857e+00
+1195 4.805835e-01
+1196 2.779251e-01
+1197 9.023562e-01
+1198 7.556176e-01
+1199 1.023938e+00
+1200 2.832848e+00
+1201 1.471085e+01
+1202 1.948333e+01
+1203 2.082322e+01
+1204 3.465211e-01
+1205 9.517147e-01
+1206 1.279168e+01
+1207 2.443774e+01
+1208 7.369830e+00
+1209 5.312502e+01
+1210 6.056912e-01
+1211 3.137553e-01
+1212 3.693297e-01
+1213 2.946342e-01
+1214 4.363183e-03
+1215 6.022187e-04
+1216 1.633175e+01
+1217 2.488833e+01
+1218 3.001609e+01
+1219 1.290222e+01
+1220 4.962462e+00
+1221 4.072234e-01
+1222 7.200585e-03
+1223 1.943052e-02
+1224 6.330228e-02
+1225 2.106498e-02
+1226 6.249063e-03
+1227 2.055288e-03
+1228 5.140541e-04
+1229 1.198717e-01
+1230 1.783689e-01
+1231 2.820567e-01
+1232 2.648875e-01
+1233 1.267164e-01
+1234 3.081538e-01
+1235 2.176228e-01
+1236 9.588155e-01
+1237 1.065232e+00
+1238 3.499903e+00
+1239 2.294464e+01
+1240 7.531373e+01
+1241 5.300116e-01
+1242 2.907482e-01
+1243 5.467004e-01
+1244 8.469513e-01
+1245 1.238386e+01
+1246 2.399109e+01
+1247 7.948188e+00
+1248 3.624273e+00
+1249 6.427911e-01
+1250 2.134822e-01
+1251 1.099420e-01
+1252 2.414885e-02
+1253 7.862484e-03
+1254 1.548530e-03
+1255 8.981401e+00
+1256 2.268649e+01
+1257 1.265939e+02
+1258 1.343180e+01
+1259 6.087988e+00
+1260 1.093564e+00
+1261 1.940341e-03
+1262 4.956505e-03
+1263 1.370971e-03
+1264 1.612572e-02
+1265 1.226604e-03
+1266 3.470027e-03
+1267 1.385290e-02
+1268 3.445848e-03
+1269 1.050110e-02
+1270 5.895258e-03
+1271 3.809888e-03
+1272 1.302838e-01
+1273 1.024049e-01
+1274 9.313771e-02
+1275 6.170650e-03
+1276 7.739188e-01
+1277 1.980541e+00
+1278 5.379270e+00
+1279 2.277232e+01
+1280 1.993254e-01
+1281 1.215285e+00
+1282 1.418893e+00
+1283 1.882818e+00
+1284 2.334691e+00
+1285 5.728356e+00
+1286 1.043065e+01
+1287 3.459265e+00
+1288 1.307951e+00
+1289 2.520659e-01
+1290 1.005724e-01
+1291 3.696724e-02
+1292 8.348538e-03
+1293 7.919051e+00
+1294 3.151475e+01
+1295 3.076944e+01
+1296 1.367068e+01
+1297 6.933224e+00
+1298 5.872193e+00
+1299 1.610252e-02
+1300 1.036010e-02
+1301 1.896176e-03
+1302 9.936297e-03
+1303 3.910034e-03
+1304 9.420047e-04
+1305 6.681821e-03
+1306 1.244975e-02
+1307 2.884840e-03
+1308 9.179357e-03
+1309 3.320976e-02
+1310 5.812322e-03
+1311 2.489254e-02
+1312 5.985183e-02
+1313 1.843296e-02
+1314 5.365049e-03
+1315 1.021878e+00
+1316 1.392826e+00
+1317 3.694590e-05
+1318 8.542152e+00
+1319 2.471803e+00
+1320 7.789942e-01
+1321 3.781265e-01
+1322 1.234551e+00
+1323 6.531969e-01
+1324 5.535014e+00
+1325 8.831611e+00
+1326 3.706450e-01
+1327 6.737600e-01
+1328 3.832673e-01
+1329 4.687385e-02
+1330 1.170609e-02
+1331 4.071030e-03
+1332 4.512691e-01
+1333 1.618481e+00
+1334 1.203297e+01
+1335 1.577074e+01
+1336 3.070080e+01
+1337 1.008141e+01
+1338 8.474859e-03
+1339 2.251303e-03
+1340 3.901902e-03
+1341 8.533829e-03
+1342 2.804058e-03
+1343 1.096494e-03
+1344 6.386031e-04
+1345 4.483549e-03
+1346 5.189403e-03
+1347 2.364758e-03
+1348 1.291738e-03
+1349 2.339496e-03
+1350 7.442424e-03
+1351 2.444151e-02
+1352 1.160557e-03
+1353 5.760965e-03
+1354 3.157653e-03
+1355 1.465400e-02
+1356 8.380923e-05
+1357 2.424433e-01
+1358 1.717802e+00
+1359 7.403911e-01
+1360 2.752497e-01
+1361 5.545467e-01
+1362 1.564027e+00
+1363 1.891383e+00
+1364 2.425542e+01
+1365 1.265636e+01
+1366 1.014812e+00
+1367 5.938316e-05
+1368 3.558609e-02
+1369 2.158011e-02
+1370 2.872960e-01
+1371 1.672645e-03
+1372 3.397305e-06
+1373 3.397305e-06
+1374 3.419382e-01
+1375 1.229400e+00
+1376 3.126803e+00
+1377 1.346542e+01
+1378 1.365523e+01
+1379 2.056172e+01
+1380 4.721940e-01
+1381 3.015031e-03
+1382 6.771620e-03
+1383 1.458402e-02
+1384 5.165125e-03
+1385 9.018823e-04
+1386 4.567915e-04
+1387 1.638225e-03
+1388 2.202661e-03
+1389 2.054002e-03
+1390 5.001763e-04
+1391 8.830085e-04
+1392 1.038865e-03
+1393 7.998948e-03
+1394 2.774576e-04
+1395 2.825377e-03
+1396 1.381742e-02
+1397 2.006453e-02
+1398 5.265246e-02
+1399 2.005706e-01
+1400 5.900351e-01
+1401 2.703209e-01
+1402 2.154406e-01
+1403 5.302085e-01
+1404 1.391794e+00
+1405 1.195441e+00
+1406 2.810412e+00
+1407 1.478865e+01
+1408 6.252894e+00
+1409 2.302117e+00
+1410 9.155880e-01
+1411 9.402450e-02
+1412 1.880821e-01
+1413 7.704190e-01
+1414 2.535806e-01
+1415 1.334727e-06
+1416 1.334727e-06
+1417 9.376156e-02
+1418 3.906133e-02
+1419 6.980549e-02
+1420 1.219662e+00
+1421 3.027757e+00
+1422 9.460695e+00
+1423 3.298108e+01
+1424 6.223548e+01
+1425 1.516674e+00
+1426 1.012914e-02
+1427 2.566829e-02
+1428 2.736529e-03
+1429 1.290976e-03
+1430 5.246310e-04
+1431 2.012495e-04
+1432 8.690632e-04
+1433 9.472895e-04
+1434 6.343718e-04
+1435 3.204818e-04
+1436 4.318952e-04
+1437 2.410415e-03
+1438 8.941479e-05
+1439 2.237629e-03
+1440 8.874448e-03
+1441 6.172524e-05
+1442 2.688914e-02
+1443 4.324132e-02
+1444 5.337580e-02
+1445 7.237098e-02
+1446 2.086748e-01
+1447 2.594637e-01
+1448 2.164359e-01
+1449 2.803994e+00
+1450 2.116339e+00
+1451 2.047857e+01
+1452 3.376608e+00
+1453 2.223170e+00
+1454 1.282481e+00
+1455 3.658840e-01
+1456 8.220227e-02
+1457 7.836310e-01
+1458 1.623497e+00
+1459 1.467226e-06
+1460 5.299155e-01
+1461 1.853558e-02
+1462 1.776185e-01
+1463 4.364862e-02
+1464 2.577736e+00
+1465 4.236437e+00
+1466 1.734365e+01
+1467 3.058922e+01
+1468 1.948424e+01
+1469 4.771227e+00
+1470 5.471679e-02
+1471 1.225396e-03
+1472 6.545436e-04
+1473 3.689487e-04
+1474 2.193688e-04
+1475 6.925367e-04
+1476 3.896987e-04
+1477 3.694501e-04
+1478 1.185957e-04
+1479 1.659933e-04
+1480 1.814112e-04
+1481 1.734199e-03
+1482 1.562470e-03
+1483 4.493465e-03
+1484 7.503019e-05
+1485 2.324007e-04
+1486 2.508765e-04
+1487 2.975926e-02
+1488 2.165201e-02
+1489 6.413242e-02
+1490 1.991594e-01
+1491 1.720977e-01
+1492 8.885314e-01
+1493 6.537782e+00
+1494 2.152896e+01
+1495 1.818575e+01
+1496 1.223991e+00
+1497 7.178402e-01
+1498 1.520940e+00
+1499 1.372178e-01
+1500 2.328145e+00
+1501 1.853565e+00
+1502 2.642263e+00
+1503 1.078666e+00
+1504 3.387183e-02
+1505 6.744262e-02
+1506 1.042499e-01
+1507 1.147714e+00
+1508 2.063927e+00
+1509 7.112917e+00
+1510 5.640486e+00
+1511 1.097896e+01
+1512 1.346674e+00
+1513 1.813378e-04
+1514 1.780029e-01
+1515 1.123319e-01
+1516 1.458320e-04
+1517 3.257073e-03
+1518 1.862828e-03
+1519 8.421416e-04
+1520 7.212341e-05
+1521 3.503519e-05
+1522 6.380481e-05
+1523 7.667902e-05
+1524 6.507196e-04
+1525 7.496459e-04
+1526 1.936691e-05
+1527 5.790041e-05
+1528 1.707613e-04
+1529 5.839207e-04
+1530 2.366847e-02
+1531 1.273568e-03
+1532 5.408639e-02
+1533 3.202866e-02
+1534 7.669342e-02
+1535 4.961234e-01
+1536 1.891146e+00
+1537 9.322983e+00
+1538 5.348343e+01
+1539 3.560207e+01
+1540 5.825801e+00
+1541 9.600384e+00
+1542 5.692862e+00
+1543 2.152122e+01
+1544 6.217044e+00
+1545 3.583940e+00
+1546 9.002896e+00
+1547 5.270778e+00
+1548 1.546985e-03
+1549 1.957895e-03
+1550 3.300054e-03
+1551 9.804106e-02
+1552 6.446447e-01
+1553 2.473173e+00
+1554 1.192494e+00
+1555 6.646201e+00
+1556 4.251730e+00
+1557 1.106157e-04
+1558 4.247583e-04
+1559 1.693965e-01
+1560 3.577955e-02
+1561 9.325730e-03
+1562 4.945389e-03
+1563 2.069376e-03
+1564 2.061953e-04
+1565 9.447619e-05
+1566 6.672903e-04
+1567 3.704233e-04
+1568 1.802473e-04
+1569 4.108158e-06
+1570 1.114481e-05
+1571 3.223136e-05
+1572 8.588324e-05
+1573 2.819181e-04
+1574 1.151604e-03
+1575 1.197713e-02
+1576 1.898888e-02
+1577 3.280604e-02
+1578 4.542334e-02
+1579 1.206400e-01
+1580 3.099671e-01
+1581 9.429098e-01
+1582 4.329796e+00
+1583 2.111679e-01
+1584 2.237423e+01
+1585 7.752495e+01
+1586 9.518736e+01
+1587 5.833089e+01
+1588 2.807332e-01
+1589 1.267094e+01
+1590 2.117172e+01
+1591 1.132589e+01
+1592 2.981630e+00
+1593 1.434971e-08
+1594 5.566854e-03
+1595 1.823017e-02
+1596 1.488694e-02
+1597 2.301989e-01
+1598 9.515880e-01
+1599 7.705269e-01
+1600 2.121117e+00
+1601 2.360780e+00
+1602 1.319689e+00
+1603 2.360732e-04
+1604 1.373714e-03
+1605 5.757840e-04
+1606 3.177036e-02
+1607 1.168985e-02
+1608 2.018270e-03
+1609 5.894965e-04
+1610 2.363326e-04
+1611 1.794132e-03
+1612 9.573679e-04
+1613 4.326830e-04
+1614 6.802502e-02
+1615 1.609436e-02
+1616 1.532023e-05
+1617 3.854676e-05
+1618 1.369008e-04
+1619 5.534701e-04
+1620 1.045782e-03
+1621 3.212471e-03
+1622 7.677624e-03
+1623 1.171112e-02
+1624 1.717758e-02
+1625 1.746839e-01
+1626 4.903501e-02
+1627 6.188182e-01
+1628 1.320619e+00
+1629 3.158254e-01
+1630 8.061528e-02
+1631 4.987078e+01
+1632 4.944936e+01
+1633 3.895388e+01
+1634 5.257774e+00
+1635 4.476229e+01
+1636 1.065416e+01
+1637 3.559016e+00
+1638 2.362760e-09
+1639 1.170121e-03
+1640 5.787807e-03
+1641 3.742200e-02
+1642 1.516001e-02
+1643 1.518300e-01
+1644 1.365689e-01
+1645 5.894598e-01
+1646 6.578867e-01
+1647 7.356742e-01
+1648 6.833741e-04
+1649 1.852778e-03
+1650 3.565123e-02
+1651 6.982789e-04
+1652 1.395438e-02
+1653 6.071412e-03
+1654 1.644588e-03
+1655 5.388175e-04
+1656 4.762673e-03
+1657 2.446857e-03
+1658 1.111510e-03
+1659 1.297012e-01
+1660 1.450861e-01
+1661 4.354231e-02
+1662 5.498468e-02
+1663 6.109665e-02
+1664 3.774062e-04
+1665 2.808989e-05
+1666 2.808989e-05
+1667 1.093968e-02
+1668 8.070206e-03
+1669 2.702601e-02
+1670 5.192603e-02
+1671 4.304009e-01
+1672 1.060765e-02
+1673 8.982839e-01
+1674 2.038230e+00
+1675 2.504142e+00
+1676 5.005318e+01
+1677 4.942334e+01
+1678 9.021143e+01
+1679 5.551166e-02
+1680 1.170460e+01
+1681 2.223032e+01
+1682 1.188089e+01
+1683 7.887488e-09
+1684 5.492910e-03
+1685 7.597811e-03
+1686 1.691291e-02
+1687 1.496712e-01
+1688 1.186377e-01
+1689 6.262684e-02
+1690 1.810149e-01
+1691 2.040504e-01
+1692 3.702616e-02
+1693 1.330176e-03
+1694 4.830852e-03
+1695 1.170355e-02
+1696 4.314804e-03
+1697 1.121396e-02
+1698 1.603173e-02
+1699 1.246399e-03
+1700 1.368114e-02
+1701 6.609914e-03
+1702 2.547412e-03
+1703 3.072334e-01
+1704 3.778394e-01
+1705 7.020283e-02
+1706 1.173301e-01
+1707 1.416775e-01
+1708 1.309091e-01
+1709 2.555795e-11
+1710 2.555795e-11
+1711 2.555795e-11
+1712 2.409178e-02
+1713 2.723214e-02
+1714 8.287509e-02
+1715 1.460782e-01
+1716 4.548657e-02
+1717 1.944689e-02
+1718 5.719174e-01
+1719 5.747730e+00
+1720 7.236446e+00
+1721 4.673870e+01
+1722 1.117242e+02
+1723 1.137706e+02
+1724 1.280132e+01
+1725 4.734525e+01
+1726 1.202408e+00
+1727 7.370085e+00
+1728 4.892852e-09
+1729 4.892852e-09
+1730 2.511524e-03
+1731 1.896759e-03
+1732 1.801696e-02
+1733 7.954543e-02
+1734 5.268698e-02
+1735 1.453943e-01
+1736 4.092409e-02
+1737 9.814215e-03
+1738 1.240064e-01
+1739 8.692299e-02
+1740 1.055769e-02
+1741 2.449542e-02
+1742 1.117450e-02
+1743 1.262325e-02
+1744 1.785937e-02
+1745 4.029135e-02
+1746 1.367795e-01
+1747 1.566199e-02
+1748 3.845196e-03
+1749 6.540013e-02
+1750 7.273298e-01
+1751 7.305812e-01
+1752 1.865345e-01
+1753 2.646817e-01
+1754 3.428671e-01
+1755 2.079854e-01
+1756 5.124459e-02
+1757 1.019840e-01
+1758 9.150453e-02
+1759 6.081309e-02
+1760 3.963399e-02
+1761 6.108196e-02
+1762 7.588145e-02
+1763 2.149938e-01
+1764 6.934827e-01
+1765 8.932247e-01
+1766 1.581290e+01
+1767 2.653601e+01
+1768 6.188876e+01
+1769 1.977032e+02
+1770 5.599642e+01
+1771 5.989501e+01
+1772 5.906987e-02
+1773 7.059943e-01
+1774 4.668341e+00
+1775 1.809165e-09
+1776 1.809165e-09
+1777 1.504147e-03
+1778 6.538044e-03
+1779 1.996238e-02
+1780 6.160026e-02
+1781 9.995568e-02
+1782 7.163772e-02
+1783 1.389409e-01
+1784 2.280528e-02
+1785 3.835079e-01
+1786 2.288154e-01
+1787 1.536224e-01
+1788 6.355661e-02
+1789 4.565647e-02
+1790 4.462084e-03
+1791 5.782220e-03
+1792 1.638463e-02
+1793 6.490041e-02
+1794 2.690229e-01
+1795 3.662356e-01
+1796 3.396707e-01
+1797 1.700158e+00
+1798 1.984337e+00
+1799 2.696799e+00
+1800 4.725449e-01
+1801 7.091843e-01
+1802 5.037722e-01
+1803 2.254817e-01
+1804 1.870491e-01
+1805 9.547268e-02
+1806 2.141919e-02
+1807 1.783590e-01
+1808 6.313954e-02
+1809 5.729672e-02
+1810 7.370739e-02
+1811 2.093851e-01
+1812 2.321194e-01
+1813 5.974871e+00
+1814 9.707028e+00
+1815 4.124398e+01
+1816 1.624355e+02
+1817 1.279915e+02
+1818 1.028987e+02
+1819 4.265478e+01
+1820 5.339857e-09
+1821 4.763124e+00
+1822 8.164709e-01
+1823 4.509860e-11
+1824 1.025382e-02
+1825 2.425420e-02
+1826 7.285587e-02
+1827 1.618705e-02
+1828 4.125078e-01
+1829 2.645526e-01
+1830 4.425142e-01
+1831 4.791023e-01
+1832 9.327283e-01
+1833 1.299184e-01
+1834 9.793102e-03
+1835 9.027415e-03
+1836 1.972561e-02
+1837 5.796580e-02
+1838 4.585229e-03
+1839 6.979366e-03
+1840 1.375278e-02
+1841 3.305819e-01
+1842 2.376003e+00
+1843 4.943351e-12
+1844 5.311929e+00
+1845 4.229172e+00
+1846 4.423635e+00
+1847 1.261226e+00
+1848 1.267313e+00
+1849 5.193847e-01
+1850 2.403482e-01
+1851 6.674344e-01
+1852 7.164184e-03
+1853 2.674290e-01
+1854 4.812388e-01
+1855 3.389636e-01
+1856 2.056567e-01
+1857 1.998502e-01
+1858 7.588298e-01
+1859 1.025143e+00
+1860 3.351273e+00
+1861 3.989553e+01
+1862 1.392779e+02
+1863 1.144599e+02
+1864 1.459857e+02
+1865 3.943419e-01
+1866 2.492926e+01
+1867 9.589658e+00
+1868 6.066952e-01
+1869 4.027728e-10
+1870 4.027728e-10
+1871 1.907534e-02
+1872 6.463723e-02
+1873 2.038467e-01
+1874 4.199137e-01
+1875 1.462344e+00
+1876 2.291353e+00
+1877 1.469317e+00
+1878 3.250861e+00
+1879 5.903123e-01
+1880 7.432740e-01
+1881 3.469495e-03
+1882 4.255645e-03
+1883 1.910966e-02
+1884 4.928621e-02
+1885 2.359223e-01
+1886 3.766106e-01
+1887 2.961467e-01
+1888 8.973945e-01
+1889 6.236377e+00
+1890 1.527896e+01
+1891 2.055712e+01
+1892 7.802779e+00
+1893 1.553680e+00
+1894 3.051495e+00
+1895 1.285838e+00
+1896 3.026612e+00
+1897 9.638683e-01
+1898 8.893881e-02
+1899 9.905776e-01
+1900 4.567774e-01
+1901 4.287488e-02
+1902 2.170781e-01
+1903 1.985939e-01
+1904 5.523497e-01
+1905 7.453666e-01
+1906 2.474893e+00
+1907 1.316299e+01
+1908 2.601631e+01
+1909 1.136129e+02
+1910 1.188418e+02
+1911 1.360198e+01
+1912 1.434603e+01
+1913 6.191618e+00
+1914 8.027444e+00
+1915 2.076063e-10
+1916 2.076063e-10
+1917 2.076063e-10
+1918 2.188537e-02
+1919 9.761007e-02
+1920 4.297771e-01
+1921 5.944059e-01
+1922 4.763247e+00
+1923 7.233950e+00
+1924 5.395601e+00
+1925 7.318243e-01
+1926 2.465114e+00
+1927 1.234984e+00
+1928 4.692246e-01
+1929 1.354743e-01
+1930 7.628019e-02
+1931 1.110281e-01
+1932 3.707920e-04
+1933 2.254944e+00
+1934 6.214794e+00
+1935 7.224036e+00
+1936 8.806985e+00
+1937 3.139810e+01
+1938 2.423307e+01
+1939 8.250525e+00
+1940 1.930246e-10
+1941 7.977233e+00
+1942 8.106117e+00
+1943 3.990144e+00
+1944 4.101526e+00
+1945 4.154249e+00
+1946 7.479027e-01
+1947 3.055056e+00
+1948 7.917488e-01
+1949 2.644787e-01
+1950 6.625588e-01
+1951 1.414355e+00
+1952 1.548266e+00
+1953 2.463229e+00
+1954 1.592947e+01
+1955 2.867444e+01
+1956 4.179962e+01
+1957 3.565365e+01
+1958 2.165881e+01
+1959 5.313746e+00
+1960 2.972914e+00
+1961 3.577456e-10
+1962 3.577456e-10
+1963 3.577456e-10
+1964 3.577456e-10
+1965 1.552759e-02
+1966 2.524216e-02
+1967 2.488324e-02
+1968 1.530653e+00
+1969 7.727925e+00
+1970 5.253001e+00
+1971 8.317832e+00
+1972 1.461501e+01
+1973 3.316587e+00
+1974 1.595340e+00
+1975 3.871698e-01
+1976 6.652999e-01
+1977 3.250831e-01
+1978 4.369453e-04
+1979 9.299424e-04
+1980 1.345068e-02
+1981 6.166703e+00
+1982 9.294563e+00
+1983 8.965600e+00
+1984 3.410664e+01
+1985 4.310162e+01
+1986 2.070033e+01
+1987 9.099890e+00
+1988 1.120297e+01
+1989 2.280965e+01
+1990 6.781650e+00
+1991 4.683393e+00
+1992 1.208541e+00
+1993 1.785284e+00
+1994 2.014662e+00
+1995 2.151125e+00
+1996 1.912662e+00
+1997 1.117390e+00
+1998 2.664271e+00
+1999 1.207012e+00
+2000 4.060892e+00
+2001 6.204676e+00
+2002 9.130507e+00
+2003 1.782706e+01
+2004 3.658082e+01
+2005 2.914842e+01
+2006 1.572415e+01
+2007 7.513480e+00
+2008 2.353859e-10
+2009 2.353859e-10
+2010 2.353859e-10
+2011 2.353859e-10
+2012 2.353859e-10
+2013 8.624629e-03
+2014 8.354778e-03
+2015 3.372158e-03
+2016 4.414025e+00
+2017 9.210999e+00
+2018 5.561441e+01
+2019 5.108465e+01
+2020 1.148855e+01
+2021 3.085663e+00
+2022 3.023179e+00
+2023 3.128530e+00
+2024 6.228518e-01
+2025 3.170719e-01
+2026 1.687516e-03
+2027 6.764808e-03
+2028 3.474738e+00
+2029 8.202732e+00
+2030 2.722559e+01
+2031 8.635200e+01
+2032 1.682064e+01
+2033 4.366623e+01
+2034 8.431260e+01
+2035 1.722193e+00
+2036 4.454858e+00
+2037 3.485617e+00
+2038 5.608164e+00
+2039 2.212137e+00
+2040 1.421294e+01
+2041 4.283528e+01
+2042 4.676331e+00
+2043 5.248237e+00
+2044 5.696777e+00
+2045 1.825047e+00
+2046 1.202064e+00
+2047 4.691956e+00
+2048 5.537771e+00
+2049 4.686920e+00
+2050 1.504178e+01
+2051 4.418501e+01
+2052 5.154853e+01
+2053 2.427072e+01
+2054 2.139131e+01
+2055 5.703617e+00
+2056 3.563674e-11
+2057 3.563674e-11
+2058 3.314358e-03
+2059 1.519550e-03
+2060 1.914840e+00
+2061 7.261769e+00
+2062 2.634363e+01
+2063 2.528878e+01
+2064 2.041288e+01
+2065 2.554963e+01
+2066 7.683495e+00
+2067 8.709454e+00
+2068 1.868805e+00
+2069 1.589257e-01
+2070 2.184133e-03
+2071 5.966150e-03
+2072 1.588846e-03
+2073 3.417428e+00
+2074 1.264663e+00
+2075 2.221257e+01
+2076 2.585477e+01
+2077 6.860466e+01
+2078 4.272764e+01
+2079 3.789221e+01
+2080 7.944311e+00
+2081 6.637782e+00
+2082 1.537137e+01
+2083 1.533743e+01
+2084 2.389823e+01
+2085 3.765580e+01
+2086 6.448777e+01
+2087 3.785570e+00
+2088 4.437953e+00
+2089 1.179843e+01
+2090 8.001051e+00
+2091 4.403135e+00
+2092 4.936334e+01
+2093 2.056345e+01
+2094 5.650497e+00
+2095 8.325695e+00
+2096 5.290547e+01
+2097 3.126820e+01
+2098 1.133781e+01
+2099 7.039497e+00
+2100 2.885550e+00
+2101 1.802919e-11
+2102 1.221486e-03
+2103 6.339906e-04
+2104 3.580851e+00
+2105 9.868782e+00
+2106 1.858077e+00
+2107 8.252921e+00
+2108 3.404782e+01
+2109 4.945377e+01
+2110 6.622476e+00
+2111 3.809573e+00
+2112 4.828490e-03
+2113 5.582995e-03
+2114 8.499719e-03
+2115 1.165109e-03
+2116 1.322567e+00
+2117 2.862781e+00
+2118 6.202531e+00
+2119 9.862365e+00
+2120 8.511850e+00
+2121 8.297394e+01
+2122 8.037303e+01
+2123 1.076504e+01
+2124 1.093347e+01
+2125 1.534763e+01
+2126 2.261088e+01
+2127 2.930628e+01
+2128 6.415866e+01
+2129 2.325280e+01
+2130 5.251771e+00
+2131 7.230026e+00
+2132 1.112699e+01
+2133 7.036668e+01
+2134 2.496306e+01
+2135 2.470000e+01
+2136 3.605215e+01
+2137 2.406225e+01
+2138 1.940884e+01
+2139 1.989747e+01
+2140 2.290955e+01
+2141 1.096010e+01
+2142 2.703012e-02
+2143 2.242554e+00
+2144 9.676393e-01
+2145 4.495287e-04
+2146 1.464384e+00
+2147 3.631063e+00
+2148 1.021601e+00
+2149 4.200143e+00
+2150 5.573159e+00
+2151 8.121813e+00
+2152 1.396533e+01
+2153 2.835172e+00
+2154 7.620447e-03
+2155 1.391524e-02
+2156 1.046372e-02
+2157 1.333112e-02
+2158 2.253615e-01
+2159 2.103612e-01
+2160 3.891227e-02
+2161 4.191843e+00
+2162 1.239328e+01
+2163 2.077315e+01
+2164 1.140043e+02
+2165 2.655873e+01
+2166 2.863260e+01
+2167 1.344065e+01
+2168 1.159234e+01
+2169 1.663739e+01
+2170 6.825121e+01
+2171 3.056644e+01
+2172 4.448513e+01
+2173 7.150975e+00
+2174 1.709685e+01
+2175 3.077794e+01
+2176 5.048467e+01
+2177 3.951101e+01
+2178 1.848825e+01
+2179 8.700565e+01
+2180 1.703135e+01
+2181 5.583714e+00
+2182 6.246993e+00
+2183 5.074169e+00
+2184 4.075386e+00
+2185 2.215315e+00
+2186 5.199211e-01
+2187 2.101723e+00
+2188 3.613010e+00
+2189 1.024084e-01
+2190 4.571884e+00
+2191 1.902683e-01
+2192 1.164480e-01
+2193 2.785726e-02
+2194 1.089354e-02
+2195 3.118955e-02
+2196 1.791851e-04
+2197 3.493453e-03
+2198 1.100603e-01
+2199 5.034187e-02
+2200 1.955169e-02
+2201 2.018055e+01
+2202 5.485104e+01
+2203 5.641887e+01
+2204 2.972545e+00
+2205 1.176831e+00
+2206 5.514317e+00
+2207 2.599427e+00
+2208 9.836661e+01
+2209 7.287317e+01
+2210 8.354905e+01
+2211 1.200145e+01
+2212 1.350907e+01
+2213 2.388476e+01
+2214 3.646826e+01
+2215 6.819876e+01
+2216 7.013915e+01
+2217 3.090505e+01
+2218 3.266716e+01
+2219 2.678107e+00
+2220 4.831423e+00
+2221 1.063514e+00
+2222 1.622065e+00
+2223 1.601177e+00
+2224 8.666977e-01
+2225 1.711343e+00
+2226 6.257209e-01
+2227 3.913235e-01
+2228 1.323995e-01
+2229 9.120881e-03
+2230 1.275793e-02
+2231 1.371672e-02
+2232 1.196152e-01
+2233 2.410863e-01
+2234 7.254347e-02
+2235 3.316386e-02
+2236 2.891250e+00
+2237 1.390977e+01
+2238 1.826387e+00
+2239 9.600352e-01
+2240 1.159159e+00
+2241 3.742702e+00
+2242 2.867653e-01
+2243 6.133682e-01
+2244 6.189589e+00
+2245 1.996919e+00
+2246 5.802403e-01
+2247 1.884509e+00
+2248 4.283158e+00
+2249 3.426550e+01
+2250 3.660492e+01
+2251 1.470468e+02
+2252 5.004643e+01
+2253 1.017050e+01
+2254 1.305152e+01
+2255 4.818689e+00
+2256 1.738852e+00
+2257 7.745559e-01
+2258 6.626115e-01
+2259 5.094299e-01
+2260 5.177443e-01
+2261 1.376025e-03
+2262 5.088895e-03
+2263 5.379379e-17
+2264 5.030135e-02
+2265 2.678648e-04
+2266 4.558114e-02
+2267 3.256622e-01
+2268 7.678659e-02
+2269 8.010662e-02
+2270 1.592329e+00
+2271 3.142194e+00
+2272 2.894983e+00
+2273 1.549989e+00
+2274 8.060824e-01
+2275 1.129563e+00
+2276 1.775155e+00
+2277 1.033254e+00
+2278 1.367750e+00
+2279 7.947251e+00
+2280 1.135743e+01
+2281 1.484662e+01
+2282 1.580981e+01
+2283 2.246922e+01
+2284 5.113427e+01
+2285 2.861353e+01
+2286 9.558277e+01
+2287 1.320522e+01
+2288 1.564224e-02
+2289 2.952474e+00
+2290 1.680300e+00
+2291 3.566184e-02
+2292 2.680439e-01
+2293 1.202399e-04
+2294 3.360566e-01
+2295 3.193059e-01
+2296 6.996784e-03
+2297 1.999125e-18
+2298 1.075080e-01
+2299 3.194798e-01
+2300 2.150135e-01
+2301 9.435889e-01
+2302 6.008442e-01
+2303 2.202927e-01
+2304 8.431521e-02
+2305 3.673633e-01
+2306 3.295119e+00
+2307 1.042235e+00
+2308 7.916532e-01
+2309 8.318058e-01
+2310 6.030270e-01
+2311 8.276233e-01
+2312 2.714139e+00
+2313 8.071621e-01
+2314 6.248871e+00
+2315 2.051437e+00
+2316 1.538324e+01
+2317 3.140519e+01
+2318 3.195127e+01
+2319 1.701538e+01
+2320 5.912496e+00
+2321 4.550673e+00
+2322 2.822173e-02
+2323 1.522818e+00
+2324 6.583942e-03
+2325 3.216797e-02
+2326 7.673492e-02
+2327 1.539152e-01
+2328 1.061943e-01
+2329 9.475612e-02
+2330 5.215023e-03
+2331 2.892077e-02
+2332 1.092874e-01
+2333 2.864248e-01
+2334 9.442672e-01
+2335 1.455983e+00
+2336 1.495658e+00
+2337 2.112418e-01
+2338 1.962952e-01
+2339 5.746886e-01
+2340 1.290657e+00
+2341 1.765154e+00
+2342 9.323430e-01
+2343 5.476035e-01
+2344 7.913994e-01
+2345 4.932674e-01
+2346 1.947992e+00
+2347 3.025905e+00
+2348 1.181104e+01
+2349 8.890487e+01
+2350 3.269171e+01
+2351 1.272814e+00
+2352 7.632272e+00
+2353 1.306407e+01
+2354 1.167772e+01
+2355 2.379982e+00
+2356 2.557264e-01
+2357 1.063668e-01
+2358 1.225604e-02
+2359 3.896226e-03
+2360 8.678444e-04
+2361 4.017449e-02
+2362 1.968852e-02
+2363 7.338905e-03
+2364 1.838591e-02
+2365 3.275698e-02
+2366 6.532635e-02
+2367 3.218270e-01
+2368 2.332882e+00
+2369 1.424759e+00
+2370 1.684388e-01
+2371 2.036778e-01
+2372 9.537508e-01
+2373 5.842537e-01
+2374 2.131708e+00
+2375 4.967897e-01
+2376 1.561782e+00
+2377 7.171410e-01
+2378 1.480033e+00
+2379 6.590239e-01
+2380 1.540565e+00
+2381 9.020831e+00
+2382 2.416673e+01
+2383 3.014698e+01
+2384 2.611619e+01
+2385 1.630279e+01
+2386 1.688666e+01
+2387 1.428631e+01
+2388 8.296572e+00
+2389 6.834162e-01
+2390 8.865646e-02
+2391 7.406575e-04
+2392 2.237981e-03
+2393 4.435426e-03
+2394 4.758295e-02
+2395 4.105180e-02
+2396 7.031597e-03
+2397 5.969450e-03
+2398 3.144243e-02
+2399 3.396939e-02
+2400 1.480321e-01
+2401 1.605170e+01
+2402 4.503148e+00
+2403 1.842908e-01
+2404 9.661737e-01
+2405 1.964448e+00
+2406 2.095634e+00
+2407 4.006879e+00
+2408 3.842767e+00
+2409 3.843233e+00
+2410 2.808326e+00
+2411 1.286082e+00
+2412 1.428997e+00
+2413 9.289279e-01
+2414 5.251943e+00
+2415 2.983665e+01
+2416 6.069823e+01
+2417 4.301619e+01
+2418 4.090628e+01
+2419 2.682614e+01
+2420 1.060205e+01
+2421 3.023215e+00
+2422 5.933593e-01
+2423 1.039111e-01
+2424 1.566155e-04
+2425 3.224812e-03
+2426 9.232597e-02
+2427 9.365791e-02
+2428 2.393456e-02
+2429 7.666315e-02
+2430 1.042538e-01
+2431 1.699197e+00
+2432 2.580360e+01
+2433 2.820850e+00
+2434 1.345182e+01
+2435 1.097134e+00
+2436 4.945960e+00
+2437 4.152507e+00
+2438 8.311644e+00
+2439 5.820980e+00
+2440 1.297676e+01
+2441 6.976070e+00
+2442 7.440680e-01
+2443 1.090300e+00
+2444 3.099748e+00
+2445 4.840526e+00
+2446 1.135021e+01
+2447 2.118032e+01
+2448 3.243625e-01
+2449 2.380991e+00
+2450 6.754369e+01
+2451 1.909366e+01
+2452 3.772868e+00
+2453 4.773774e-01
+2454 5.035395e-01
+2455 1.935745e-01
+2456 8.078133e-02
+2457 2.720176e-01
+2458 3.464534e-02
+2459 2.188927e-01
+2460 2.953590e-01
+2461 4.243492e+00
+2462 2.762312e-02
+2463 5.009608e+01
+2464 1.992444e+01
+2465 2.143917e+01
+2466 1.170254e+01
+2467 4.556004e+00
+2468 7.301131e+00
+2469 2.119060e+01
+2470 2.828453e+01
+2471 2.006581e+01
+2472 4.036680e-01
+2473 8.001358e+00
+2474 3.881890e+01
+2475 4.027114e+00
+2476 2.769362e+00
+2477 2.189049e-01
+2478 4.737651e+01
+2479 7.506560e+01
+2480 7.086479e+01
+2481 1.817437e+01
+2482 3.672038e+00
+2483 4.148329e-01
+2484 4.057257e-01
+2485 4.000073e-02
+2486 7.389048e-02
+2487 6.568341e-01
+2488 1.460260e-02
+2489 5.665721e-02
+2490 2.059732e+00
+2491 1.293224e+01
+2492 1.881616e+01
+2493 2.379700e+01
+2494 2.220135e+01
+2495 3.711681e+01
+2496 1.621097e+01
+2497 8.571716e+00
+2498 1.850259e+01
+2499 8.294342e+01
+2500 4.474145e+01
+2501 2.577448e+01
+2502 5.750949e+00
+2503 5.423426e+00
+2504 1.436091e+00
+2505 3.669744e+00
+2506 5.720659e-01
+2507 1.801265e+01
+2508 1.586833e+01
+2509 2.929238e+01
+2510 1.333688e+01
+2511 4.634424e+00
+2512 1.556385e+00
+2513 6.508521e-01
+2514 2.855436e-01
+2515 5.500235e-02
+2516 1.201093e+00
+2517 9.365095e-01
+2518 6.612267e+00
+2519 2.418600e+01
+2520 2.729746e+01
+2521 5.348565e+00
+2522 1.278125e+01
+2523 2.455284e+01
+2524 1.036247e+01
+2525 6.554621e+00
+2526 4.264657e+00
+2527 8.362375e+00
+2528 1.578967e+01
+2529 2.218670e+01
+2530 4.131220e+00
+2531 2.404535e+00
+2532 4.850769e-01
+2533 1.928326e+00
+2534 4.299273e+00
+2535 7.501980e+00
+2536 1.654545e+01
+2537 1.424948e+01
+2538 6.114571e+00
+2539 6.329630e+00
+2540 2.265280e+00
+2541 5.646371e-01
+2542 3.326168e-01
+2543 2.814782e-01
+2544 9.301253e-01
+2545 9.002438e+00
+2546 5.036497e+01
+2547 7.262004e+01
+2548 1.046902e+01
+2549 1.235839e+01
+2550 9.650317e+00
+2551 7.675039e+00
+2552 3.028519e+00
+2553 4.513626e+00
+2554 6.333466e+00
+2555 1.109202e+01
+2556 1.287665e+01
+2557 6.072412e+00
+2558 4.707023e-01
+2559 3.439913e-01
+2560 1.217525e+00
+2561 2.119260e-02
+2562 4.350862e+00
+2563 3.462047e+00
+2564 4.893248e+00
+2565 2.608308e+01
+2566 8.226344e+00
+2567 2.004638e+00
+2568 1.877530e+00
+2569 1.189887e+00
+2570 3.171863e-01
+2571 2.169145e+00
+2572 1.486262e+00
+2573 1.686587e+01
+2574 1.090660e+01
+2575 2.038704e+01
+2576 1.713448e+01
+2577 1.010604e+01
+2578 9.310564e+00
+2579 5.625865e+00
+2580 3.848637e+00
+2581 3.247021e+00
+2582 8.406615e-02
+2583 4.663889e-02
+2584 3.097346e-02
+2585 4.690093e-02
+2586 8.376435e-02
+2587 3.750055e-01
+2588 2.194693e-02
+2589 1.616393e+00
+2590 3.952024e+00
+2591 2.529257e+00
+2592 1.065508e+01
+2593 1.688907e+01
+2594 6.202889e+00
+2595 2.212296e+00
+2596 2.145965e+00
+2597 7.302288e-01
+2598 2.840239e-01
+2599 6.946823e-01
+2600 2.999849e-01
+2601 3.720777e-01
+2602 5.910055e+00
+2603 1.757910e+00
+2604 2.653156e-03
+2605 3.467198e+01
+2606 1.371274e+00
+2607 5.303544e-02
+2608 6.780895e-01
+2609 3.726528e-01
+2610 1.219378e+00
+2611 1.887605e+00
+2612 1.056463e-02
+2613 1.865943e-02
+2614 3.103246e-02
+2615 2.389037e-02
+2616 8.111516e-02
+2617 1.519901e+00
+2618 3.260234e+00
+2619 7.717486e+00
+2620 6.039427e+00
+2621 5.669583e+00
+2622 3.086492e+00
+2623 4.920627e+00
+2624 2.532956e+00
+2625 1.809831e-01
+2626 1.489567e+00
+2627 5.620412e-01
+2628 1.689689e+00
+2629 1.756624e+00
+2630 3.908479e+00
+2631 2.092240e+00
+2632 9.588186e-01
+2633 1.517340e-01
+2634 8.285962e-02
+2635 2.057736e-01
+2636 4.121419e-01
+2637 7.286140e-01
+2638 5.855903e-01
+2639 3.704155e-03
+2640 3.111169e-01
+2641 4.361074e-01
+2642 2.510333e-01
+2643 1.422135e-01
+2644 6.968864e-01
+2645 3.337459e+00
+2646 6.121186e+00
+2647 6.245613e+00
+2648 2.789656e+00
+2649 7.963436e+00
+2650 5.040236e+00
+2651 2.161943e-15
+2652 1.322461e-01
+2653 1.394387e+00
+2654 6.755949e-01
+2655 1.022819e+00
+2656 1.410809e+00
+2657 1.286918e+00
+2658 2.513769e-02
+2659 3.087231e-03
+2660 6.236175e-02
+2661 9.523293e-02
+2662 1.792663e-01
+2663 2.771988e-01
+2664 2.043209e-01
+2665 4.338409e-01
+2666 7.449111e-01
+2667 1.246736e+00
+2668 5.513160e-02
+2669 3.731250e-01
+2670 4.457507e+00
+2671 7.126599e+00
+2672 1.354132e+01
+2673 5.740121e+00
+2674 2.237971e+00
+2675 5.980886e+00
+2676 1.908444e+00
+2677 6.067766e-02
+2678 4.760597e-01
+2679 3.615821e-01
+2680 4.845229e-01
+2681 5.062662e-01
+2682 4.369960e-02
+2683 1.351722e-02
+2684 1.469154e-02
+2685 4.930683e-03
+2686 1.444650e-03
+2687 3.456763e-04
+2688 1.182556e-04
+2689 2.385299e+00
+2690 1.488175e+00
+2691 2.543053e+00
+2692 1.849787e+00
+2693 3.293307e+00
+2694 1.591076e+01
+2695 2.724337e+01
+2696 2.635048e+01
+2697 2.134678e+01
+2698 7.294813e+00
+2699 4.024936e+00
+2700 7.077458e+00
+2701 8.143607e-02
+2702 1.874478e-01
+2703 2.474193e-01
+2704 2.326815e-03
+2705 8.565612e-03
+2706 7.098428e-02
+2707 4.943185e-02
+2708 2.617749e-02
+2709 2.566867e-01
+2710 7.278027e-04
+2711 2.451349e-04
+2712 3.712686e+00
+2713 6.405101e+00
+2714 6.031221e+00
+2715 5.686627e-01
+2716 6.798533e-01
+2717 1.161455e+00
+2718 2.730470e+01
+2719 8.714376e+01
+2720 1.081553e+01
+2721 3.585918e+00
+2722 6.836781e+00
+2723 6.266680e+00
+2724 6.937906e-02
+2725 9.806456e-02
+2726 1.153568e-01
+2727 3.556184e-19
+2728 1.126909e-02
+2729 3.903582e-02
+2730 1.752278e-01
+2731 1.367780e-01
+2732 8.747602e-01
+2733 3.341587e-04
+2734 5.148307e+00
+2735 9.867222e+00
+2736 1.274612e+01
+2737 1.398770e+01
+2738 1.305470e+00
+2739 4.772097e-01
+2740 5.315119e+01
+2741 7.573154e+01
+2742 7.639521e+01
+2743 5.599841e+00
+2744 6.609179e+00
+2745 2.532640e+00
+2746 2.951446e-02
+2747 4.045835e-02
+2748 1.210116e-19
+2749 1.220038e-02
+2750 4.585795e-02
+2751 1.290646e-02
+2752 8.363593e-03
+2753 1.484335e+00
+2754 4.512693e+00
+2755 1.197692e+01
+2756 3.496062e+01
+2757 4.300555e+01
+2758 5.668046e+01
+2759 5.544413e+00
+2760 3.585977e+00
+2761 3.188895e-02
+2762 5.258125e+01
+2763 4.220610e+01
+2764 1.580137e+01
+2765 4.862570e+00
+2766 5.103010e+00
+2767 1.209575e-02
+2768 2.390279e-03
+2769 6.424313e-03
+2770 1.614757e-02
+2771 2.310943e-02
+2772 1.867292e-01
+2773 2.895724e-01
+2774 7.209000e-01
+2775 8.508819e+00
+2776 1.907309e+01
+2777 8.024833e+01
+2778 3.070654e+01
+2779 6.482869e+00
+2780 4.287565e+00
+2781 5.612372e+00
+2782 1.740860e+01
+2783 2.356622e+01
+2784 2.107362e+01
+2785 3.896283e+01
+2786 1.323018e+01
+2787 2.882687e-03
+2788 3.909123e-03
+2789 1.033919e-02
+2790 3.331257e-02
+2791 9.227542e-02
+2792 8.836801e-02
+2793 4.178277e-01
+2794 5.236099e+00
+2795 1.139898e+01
+2796 2.495620e+01
+2797 1.763739e+01
+2798 6.895241e+00
+2799 1.191732e+01
+2800 2.483456e+00
+2801 4.417740e+00
+2802 8.669753e+00
+2803 9.729427e+00
+2804 5.157890e+00
+2805 3.970722e+00
+2806 2.227850e+00
+2807 4.776517e-02
+2808 8.266419e-02
+2809 2.301060e-01
+2810 1.454260e-01
+2811 7.827677e-01
+2812 2.531827e+01
+2813 4.319898e+01
+2814 1.802912e+01
+2815 1.533743e+01
+2816 3.016726e+00
+2817 1.648909e+00
+2818 1.600639e+00
+2819 3.180917e+00
+2820 3.405128e+00
+2821 2.532072e+00
+2822 2.837523e+00
+2823 4.963537e-01
+2824 8.960080e-02
+2825 4.815687e-01
+2826 1.144837e+00
+2827 4.872306e+00
+2828 8.568667e+00
+2829 8.019033e+01
+2830 3.110152e+01
+2831 1.819069e+01
+2832 7.583066e-01
+2833 2.226029e+00
+2834 6.616558e-01
+2835 7.991738e-01
+2836 1.923273e+00
+2837 6.980060e+00
+2838 3.543676e+00
+2839 2.416873e-05
+2840 3.126906e-01
+2841 2.732762e-01
+2842 5.654714e-01
+2843 1.325910e+00
+2844 3.253871e+01
+2845 4.027775e+01
+2846 1.998840e+01
+2847 3.282856e+01
+2848 5.916124e-01
+2849 5.036650e-01
+2850 7.027212e-01
+2851 1.723919e+00
+2852 2.226872e+00
+2853 2.917025e+00
+2854 9.768887e-01
+2855 4.380784e-02
+2856 9.381949e-02
+2857 1.503423e-01
+2858 7.871397e-01
+2859 5.539724e+01
+2860 3.451847e+01
+2861 2.156162e+01
+2862 6.322825e+00
+2863 1.337139e+00
+2864 2.046963e-01
+2865 5.511492e-01
+2866 5.349107e-01
+2867 5.448594e-01
+2868 4.726989e-01
+2869 8.953394e-01
+2870 5.404976e-02
+2871 1.210308e-01
+2872 4.097192e-01
+2873 3.353274e-01
+2874 1.932831e+01
+2875 7.360068e+00
+2876 3.736871e-01
+2877 3.788798e+00
+2878 3.659112e-01
+2879 3.172747e-01
+2880 1.293637e-01
+2881 1.723651e-01
+2882 2.120897e-01
+2883 2.730418e-01
+2884 1.551228e-02
+2885 2.109123e-02
+2886 9.617477e-02
+2887 3.180779e-01
+2888 6.982819e-01
+2889 1.589784e+00
+2890 5.524276e+00
+2891 4.742320e+00
+2892 6.530809e-01
+2893 2.877093e-01
+2894 1.794856e-02
+2895 1.363246e-01
+2896 7.423880e-02
+2897 4.543998e-02
+2898 1.261553e-01
+2899 1.040140e-03
+2900 1.869806e-02
+2901 1.472346e-22
+2902 1.472346e-22
+2903 9.081842e-01
+2904 1.935195e+00
+2905 8.421781e-01
+2906 1.243521e-02
+2907 2.566774e-01
+2908 5.790465e-02
+2909 1.825908e-01
+2910 3.924230e-02
+2911 2.990130e-04
+2912 1.452925e-02
+2913 2.572102e-03
+2914 8.271485e-22
+2915 2.314604e-02
+2916 8.517287e-02
+2917 3.066024e-01
+2918 7.838662e-01
+2919 3.489442e-01
+2920 2.947809e-01
+2921 1.032945e-02
+2922 2.117467e-06
+2923 4.348865e-02
+2924 7.130387e-02
+2925 2.562393e-02
+2926 8.346711e-04
+2927 7.167360e-04
+2928 3.584972e-21
+2929 7.761452e-04
+2930 7.823541e-25
+2931 7.823541e-25
+2932 7.922405e-02
+2933 1.347213e-01
+2934 2.574629e-01
+2935 2.505620e-01
+2936 4.798272e-02
+2937 7.241373e-02
+2938 1.591786e-02
+2939 2.722997e-06
+2940 2.358304e-02
+2941 1.659044e-03
+2942 1.295310e-03
+2943 7.048856e-03
+2944 4.193189e-05
+2945 1.347245e-03
+2946 1.680263e-03
+2947 6.011030e-04
+2948 4.341800e-02
+2949 3.829913e-02
+2950 3.860551e-23
+2951 8.410063e-02
+2952 7.858469e-02
+2953 2.929931e-02
+2954 2.794992e-02
+2955 2.029696e-05
+2956 8.558602e-06
+2957 6.332680e-03
+2958 2.458693e-04
+2959 2.332818e-03
+2960 4.319067e-04
+2961 4.908640e-04
+2962 2.320510e-03
+2963 5.872586e-03
+2964 1.435156e-02
+2965 1.874726e-02
+2966 2.958129e-02
+2967 2.981399e-23
+2968 4.981766e-02
+2969 4.970298e-07
+2970 2.922010e-05
+2971 7.659164e-05
+2972 4.545720e-05
+2973 5.240674e-05
+2974 8.756102e-05
+2975 3.438094e-05
+2976 5.429032e-05
+2977 1.835248e-04
+2978 1.867299e-04
+2979 5.455181e-04
+2980 4.405285e-03
+2981 7.121413e-03
+2982 1.148512e-02
+2983 2.264233e-06
+2984 2.559036e-06
+2985 1.967249e-06
+2986 6.577879e-06
+2987 1.027720e-05
+2988 8.312835e-05
+2989 3.924140e-05
+2990 7.958231e-05
+2991 4.220229e-05
+2992 1.895702e-05
+2993 5.759387e-16
+2994 6.122705e-05
+2995 3.812147e-04
+2996 1.923267e-04
+2997 7.518964e-05
+2998 4.388021e-03
+2999 1.749571e-06
+3000 4.720404e-06
+3001 6.877581e-06
+3002 5.460981e-05
+3003 9.761878e-05
+3004 6.385720e-06
+3005 3.654163e-05
+3006 1.579898e-05
+3007 2.981197e-05
+3008 7.389953e-06
+3009 8.204845e-16
+3010 2.205300e-15
+3011 1.120341e-04
+3012 3.777185e-05
+3013 3.871152e-08
+3014 6.590369e-08
+3015 8.736684e-08
+3016 3.631342e-06
+3017 9.145299e-06
+3018 1.317173e-05
+3019 2.276066e-05
+3020 4.830304e-05
+3021 2.388098e-06
+3022 6.942761e-06
+3023 5.889277e-06
+3024 1.102484e-05
+3025 3.903188e-16
+3026 1.734545e-15
+3027 4.266038e-15
+3028 2.249268e-05
+3029 9.099653e-08
+3030 1.326448e-07
+3031 2.279487e-07
+3032 1.389352e-07
+3033 3.367104e-06
+3034 4.324523e-06
+3035 4.934604e-06
+3036 1.262613e-05
+3037 1.811010e-05
+3038 9.836856e-07
+3039 2.851790e-06
+3040 5.709889e-06
+3041 4.370042e-16
+3042 1.120072e-15
+3043 2.601828e-15
+3044 1.760766e-15
+3045 2.408552e-07
+3046 5.249582e-07
+3047 3.298149e-07
+3048 1.518471e-07
+3049 6.039751e-08
+3050 1.695491e-06
+3051 1.816822e-06
+3052 4.740836e-06
+3053 6.718969e-06
+3054 3.866003e-07
+3055 1.129175e-06
+3056 2.919721e-16
+3057 7.925022e-16
+3058 2.146149e-15
+3059 5.852291e-15
+3060 6.708609e-14
+3061 7.227590e-07
+3062 3.469716e-07
+3063 9.583396e-08
+3064 2.580631e-08
+3065 6.943808e-09
+3066 6.686183e-07
+3067 3.771786e-07
+3068 1.947363e-12
+3069 1.098054e-12
+3070 6.648206e-13
+3071 6.194772e-16
+3072 1.659246e-15
+3073 4.263027e-15
+3074 1.720313e-13
+3075 1.172299e-07
+3076 3.154442e-08
+3077 8.230660e-09
+3078 2.399984e-09
+3079 7.879965e-10
+3080 7.813496e-12
+3081 4.620124e-12
+3082 2.692639e-12
+3083 1.580695e-12
+3084 9.330373e-13
+3085 2.300626e-13
+3086 4.540887e-13
+3087 3.858782e-08
+3088 1.118868e-08
+3089 2.722870e-09
+3090 7.348979e-10
+3091 7.070885e-13
+3092 1.860558e-11
+3093 1.098187e-11
+3094 6.429627e-12
+3095 3.774418e-12
+3096 2.219843e-12
+3097 9.697833e-13
+3098 6.692292e-11
+3099 1.223395e-08
+3100 3.301921e-09
+3101 8.901693e-10
+3102 2.868024e-12
+3103 1.689853e-12
+3104 4.430380e-11
+3105 2.576770e-11
+3106 1.550077e-11
+3107 9.012639e-12
+3108 5.281356e-12
+3109 2.016445e-10
+3110 3.993790e-09
+3111 1.079742e-09
+3112 1.160452e-11
+3113 6.855038e-12
+3114 4.045307e-12
+3115 1.051789e-10
+3116 6.201515e-11
+3117 1.083090e-08
+3118 6.155696e-10
+3119 1.311546e-09
+3120 4.707229e-11
+3121 2.773342e-11
+3122 1.638267e-11
+3123 1.861714e-12
+3124 1.947667e-10
+3125 1.126877e-10</code></pre>
+</div>
+</div>
+<p>Next, we will convert the data table into tibble format by using the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>acc_Hansen <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(acc_Hansen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Lastly,&nbsp;<em>bind_cols()</em>&nbsp;of dplyr will be used to join the acc_Hansen tibble data frame with the hexagons simple feature data frame. The output is called&nbsp;<code>hexagon_Hansen</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>hexagon_Hansen <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(hexagons, acc_Hansen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Notice that hexagon_Hansen is a simple feature data frame and not a typical tibble data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>hexagon_Hansen</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 3125 features and 3 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 2667.538 ymin: 21506.33 xmax: 50010.26 ymax: 50256.33
+Projected CRS: SVY21 / Singapore TM
+First 10 features:
+   fid demand    accHansen                       geometry
+1    1    100 1.648313e-14 POLYGON ((2667.538 27506.33...
+2    2    100 1.096143e-16 POLYGON ((2667.538 25006.33...
+3    3    100 3.865857e-17 POLYGON ((2667.538 24506.33...
+4    4    100 1.482856e-17 POLYGON ((2667.538 24006.33...
+5    5    100 1.051348e-17 POLYGON ((2667.538 23506.33...
+6    6    100 5.076391e-18 POLYGON ((2667.538 23006.33...
+7    7    100 1.769616e-13 POLYGON ((3100.551 28756.33...
+8    8    100 9.979647e-14 POLYGON ((3100.551 28256.33...
+9    9    100 5.671831e-14 POLYGON ((3100.551 27756.33...
+10  10    100 2.621063e-14 POLYGON ((3100.551 27256.33...</code></pre>
+</div>
+</div>
+</section>
+<section id="visualising-hansens-accessibility" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-hansens-accessibility"><strong>17.6.2&nbsp;Visualising Hansen’s accessibility</strong></h3>
+<section id="extracting-map-extend" class="level4">
+<h4 class="anchored" data-anchor-id="extracting-map-extend">17.6.2.1&nbsp;Extracting map extend</h4>
+<p>Firstly, we will extract the extend of&nbsp;<code>hexagons</code>&nbsp;simple feature data frame by by using&nbsp;<em>st_bbox()</em>&nbsp;of&nbsp;<strong>sf</strong>package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mapex <span class="ot">&lt;-</span> <span class="fu">st_bbox</span>(hexagons)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The code chunk below uses a collection of mapping fucntions of tmap package to create a high cartographic quality accessibility to eldercare centre in Singapore.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(hexagon_Hansen,</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">bbox =</span> mapex) <span class="sc">+</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">"accHansen"</span>, </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.scale =</span> <span class="fu">tm_scale_intervals</span>(</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">n =</span> <span class="dv">10</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">values =</span> <span class="st">"brewer.blues"</span>)) <span class="sc">+</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(eldercare) <span class="sc">+</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">size =</span> <span class="fl">0.3</span>,</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill =</span> <span class="st">"red"</span>,</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">col =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_title</span>(<span class="st">"Accessibility to eldercare: Hansen method"</span>) <span class="sc">+</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">frame =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type=</span><span class="st">"8star"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scalebar</span>() <span class="sc">+</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_grid</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex09_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="statistical-graphic-visualisation" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-graphic-visualisation"><strong>17.6.3&nbsp;Statistical graphic visualisation</strong></h3>
+<p>In this section, we are going to compare the distribution of Hansen’s accessibility values by URA Planning Region.</p>
+<p>Firstly, we need to add the planning region field into&nbsp;<em>haxegon_Hansen</em>&nbsp;simple feature data frame by using the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>hexagon_Hansen <span class="ot">&lt;-</span> <span class="fu">st_join</span>(hexagon_Hansen, mpsz, </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">join =</span> st_intersects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next,&nbsp;<em>ggplot()</em>&nbsp;will be used to plot the distribution by using boxplot graphical method.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>hexagon_Hansen, </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">log</span>(accHansen), </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">x=</span> REGION_N)) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">stat=</span><span class="st">"summary"</span>, </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">fun.y=</span><span class="st">"mean"</span>, </span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span><span class="st">"red"</span>, </span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">size=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex09_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="modelling-and-visualising-accessibility-using-kd2sfca-method" class="level2">
+<h2 class="anchored" data-anchor-id="modelling-and-visualising-accessibility-using-kd2sfca-method"><strong>17.7&nbsp;Modelling and Visualising Accessibility using KD2SFCA Method</strong></h2>
+<section id="computing-kd2sfcas-accessibility" class="level3">
+<h3 class="anchored" data-anchor-id="computing-kd2sfcas-accessibility"><strong>17.7.1&nbsp;Computing KD2SFCA’s accessibility</strong></h3>
+<p>In this section, you are going to repeat most of the steps you had learned in previous section to perform the analysis. However, some of the codes will be combined into one code chunk.<br>
+The code chunk below calculates Hansen’s accessibility using&nbsp;<em>ac()</em>&nbsp;of&nbsp;<strong>SpatialAcc</strong>&nbsp;and&nbsp;<em>data.frame()</em>&nbsp;is used to save the output in a data frame called&nbsp;<code>acc_KD2SFCA</code>. Notice that&nbsp;<code>KD2SFCA</code>&nbsp;is used for family argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>acc_KD2SFCA <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">ac</span>(hexagons<span class="sc">$</span>demand,</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                            eldercare<span class="sc">$</span>capacity,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                            distmat_km, </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">d0 =</span> <span class="dv">5</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">power =</span> <span class="dv">2</span>, </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">family =</span> <span class="st">"KD2SFCA"</span>))</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(acc_KD2SFCA) <span class="ot">&lt;-</span> <span class="st">"accKD2SFCA"</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>acc_KD2SFCA <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(acc_KD2SFCA)</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>hexagon_KD2SFCA <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(hexagons, acc_KD2SFCA)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="visualising-kd2sfcas-accessibility" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-kd2sfcas-accessibility"><strong>17.7.2&nbsp;Visualising KD2SFCA’s accessibility</strong></h3>
+<p>The code chunk below uses a collection of mapping fucntions of tmap package to create a high cartographic quality accessibility to eldercare centre in Singapore. Notice that&nbsp;<code>mapex</code>&nbsp;is reused for&nbsp;<em>bbox</em>argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(hexagon_KD2SFCA,</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">bbox =</span> mapex) <span class="sc">+</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">"accKD2SFCA"</span>, </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.scale =</span> <span class="fu">tm_scale_intervals</span>(</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">n =</span> <span class="dv">10</span>,</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">values =</span> <span class="st">"brewer.blues"</span>)) <span class="sc">+</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(eldercare) <span class="sc">+</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">size =</span> <span class="fl">0.3</span>,</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill =</span> <span class="st">"red"</span>,</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">col =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_title</span>(<span class="st">"Accessibility to eldercare: KD2SFCA method"</span>) <span class="sc">+</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">frame =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type=</span><span class="st">"8star"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scalebar</span>() <span class="sc">+</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_grid</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex09_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="statistical-graphic-visualisation-1" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-graphic-visualisation-1"><strong>17.7.3&nbsp;Statistical graphic visualisation</strong></h3>
+<p>Now, we are going to compare the distribution of KD2CFA accessibility values by URA Planning Region.</p>
+<p>Firstly, we need to add the planning region field into&nbsp;<em>hexagon_KD2SFCA</em>&nbsp;simple feature data frame by using the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>hexagon_KD2SFCA <span class="ot">&lt;-</span> <span class="fu">st_join</span>(hexagon_KD2SFCA, mpsz, </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">join =</span> st_intersects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, ggplot() will be used to plot the distribution by using boxplot graphical method.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>hexagon_KD2SFCA, </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> accKD2SFCA, </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">x=</span> REGION_N)) <span class="sc">+</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">stat=</span><span class="st">"summary"</span>, </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">fun.y=</span><span class="st">"mean"</span>, </span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span><span class="st">"red"</span>, </span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">size=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex09_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="modelling-and-visualising-accessibility-using-spatial-accessibility-measure-sam-method" class="level2">
+<h2 class="anchored" data-anchor-id="modelling-and-visualising-accessibility-using-spatial-accessibility-measure-sam-method"><strong>17.8&nbsp;Modelling and Visualising Accessibility using Spatial Accessibility Measure (SAM) Method</strong></h2>
+<section id="computing-sam-accessibility" class="level3">
+<h3 class="anchored" data-anchor-id="computing-sam-accessibility"><strong>17.8.1&nbsp;Computing SAM accessibility</strong></h3>
+<p>In this section, you are going to repeat most of the steps you had learned in previous section to perform the analysis. However, some of the codes will be combined into one code chunk.<br>
+The code chunk below calculates Hansen’s accessibility using&nbsp;<em>ac()</em>&nbsp;of&nbsp;<strong>SpatialAcc</strong>&nbsp;and&nbsp;<em>data.frame()</em>&nbsp;is used to save the output in a data frame called&nbsp;<code>acc_SAM</code>. Notice that&nbsp;<code>SAM</code>&nbsp;is used for family argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>acc_SAM <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">ac</span>(hexagons<span class="sc">$</span>demand,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                         eldercare<span class="sc">$</span>capacity,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                         distmat_km, </span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">d0 =</span> <span class="dv">5</span>,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">power =</span> <span class="dv">2</span>, </span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">family =</span> <span class="st">"SAM"</span>))</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(acc_SAM) <span class="ot">&lt;-</span> <span class="st">"accSAM"</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>acc_SAM <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(acc_SAM)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>hexagon_SAM <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(hexagons, acc_SAM)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="visualising-sams-accessibility" class="level3">
+<h3 class="anchored" data-anchor-id="visualising-sams-accessibility"><strong>17.8.2&nbsp;Visualising SAM’s accessibility</strong></h3>
+<p>The code chunk below uses a collection of mapping fucntions of tmap package to create a high cartographic quality accessibility to eldercare centre in Singapore. Notice that&nbsp;<code>mapex</code>&nbsp;is reused for&nbsp;<em>bbox</em>argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(hexagon_SAM,</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">bbox =</span> mapex) <span class="sc">+</span> </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">"accSAM"</span>, </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill.scale =</span> <span class="fu">tm_scale_intervals</span>(</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">n =</span> <span class="dv">10</span>,</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">values =</span> <span class="st">"brewer.blues"</span>)) <span class="sc">+</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(eldercare) <span class="sc">+</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">size =</span> <span class="fl">0.3</span>,</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">fill =</span> <span class="st">"red"</span>,</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">col =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_title</span>(<span class="st">"Accessibility to eldercare: SAM method"</span>) <span class="sc">+</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">frame =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type=</span><span class="st">"8star"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scalebar</span>() <span class="sc">+</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_grid</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex09_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="statistical-graphic-visualisation-2" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-graphic-visualisation-2"><strong>17.8.3&nbsp;Statistical graphic visualisation</strong></h3>
+<p>Now, we are going to compare the distribution of SAM accessibility values by URA Planning Region.</p>
+<p>Firstly, we need to add the planning region field into&nbsp;<em>hexagon_SAM</em>&nbsp;simple feature data frame by using the code chunk below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>hexagon_SAM <span class="ot">&lt;-</span> <span class="fu">st_join</span>(hexagon_SAM, mpsz, </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">join =</span> st_intersects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, ggplot() will be used to plot the distribution by using boxplot graphical method.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>hexagon_SAM, </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> accSAM, </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">x=</span> REGION_N)) <span class="sc">+</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">stat=</span><span class="st">"summary"</span>, </span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">fun.y=</span><span class="st">"mean"</span>, </span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span><span class="st">"red"</span>, </span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">size=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Hands-on_Ex09_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>U might need to check the rendering issue.</p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
