@@ -261,7 +261,7 @@ Notice that the field name is much more tidier now.
 
 ```{r}
 #| echo: false
-acc_Hansen
+acc_Hansen %>% slice_head(n = 10)
 ```
 
 Next, we will convert the data table into tibble format by using the code chunk below.
