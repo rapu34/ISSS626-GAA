@@ -125,8 +125,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08.html" aria-current="page"> 
-<span class="menu-text">Week9_Hands-on Exercise 8</span></a>
+    <a class="nav-link" href="../../Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09.html"> 
+<span class="menu-text">Week10_Hands-on Exercise 9</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -177,6 +177,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex08/Hands-on_Ex08.html">
  <span class="dropdown-text">Week9_Hands-on Exercise 8</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09.html">
+ <span class="dropdown-text">Week10_Hands-on Exercise 9</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -212,6 +216,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex08/In-class_Ex08.html">
  <span class="dropdown-text">In-class Exercise 8</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../In-class_Ex/In-class_Ex09/In-class_Ex09.html">
+ <span class="dropdown-text">In-class Exercise 9</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -226,6 +234,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="../../Take-home_Ex02/Take-home_Ex02.html">
  <span class="dropdown-text">Take-home Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-home_Ex03/Take-home_Ex03.html">
+ <span class="dropdown-text">Take-home Exercise 3</span></a>
   </li>  
     </ul>
   </li>
@@ -325,7 +337,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 24, 2025</p>
+      <p class="date-modified">November 8, 2025</p>
     </div>
   </div>
     
@@ -419,7 +431,12 @@ Instead, their locations are influenced by various <strong>geospatial factors</s
 <h3 class="anchored" data-anchor-id="reading-data-file-to-rds"><strong>14.4.1 Reading data file to rds</strong></h3>
 <p>Reading the input data sets. It is in simple feature data frame.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mdata <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/rawdata/mdata.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mdata <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"data/rawdata/mdata.rds"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add this sampling step (professor’s suggestion)</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>HDB_sample <span class="ot">&lt;-</span> mdata <span class="sc">%&gt;%</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">5000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data-sampling" class="level3">
@@ -427,8 +444,8 @@ Instead, their locations are influenced by various <strong>geospatial factors</s
 <p>The entire data are split into training and test data sets with 65% and 35% respectively by using <em>initial_split()</em> of <strong>rsample</strong> package. rsample is one of the package of tigymodels.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>resale_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(mdata, </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">prop =</span> <span class="fl">6.5</span><span class="sc">/</span><span class="dv">10</span>,)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>resale_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(HDB_sample, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">prop =</span> <span class="fl">6.5</span><span class="sc">/</span><span class="dv">10</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">training</span>(resale_split)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">testing</span>(resale_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -503,31 +520,31 @@ lm(formula = resale_price ~ floor_area_sqm + storey_order + remaining_lease_mths
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--205193  -39120   -1930   36545  472355 
+-182092  -37601   -1897   35193  322564 
 
 Coefficients:
                            Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)              107601.073  10601.261  10.150  &lt; 2e-16 ***
-floor_area_sqm             2780.698     90.579  30.699  &lt; 2e-16 ***
-storey_order              14299.298    339.115  42.167  &lt; 2e-16 ***
-remaining_lease_mths        344.490      4.592  75.027  &lt; 2e-16 ***
-PROX_CBD                 -16930.196    201.254 -84.124  &lt; 2e-16 ***
-PROX_ELDERLYCARE         -14441.025    994.867 -14.516  &lt; 2e-16 ***
-PROX_HAWKER              -19265.648   1273.597 -15.127  &lt; 2e-16 ***
-PROX_MRT                 -32564.272   1744.232 -18.670  &lt; 2e-16 ***
-PROX_PARK                 -5712.625   1483.885  -3.850 0.000119 ***
-PROX_MALL                -14717.388   2007.818  -7.330 2.47e-13 ***
-PROX_SUPERMARKET         -26881.938   4189.624  -6.416 1.46e-10 ***
-WITHIN_350M_KINDERGARTEN   8520.472    632.812  13.464  &lt; 2e-16 ***
-WITHIN_350M_CHILDCARE     -4510.650    354.015 -12.741  &lt; 2e-16 ***
-WITHIN_350M_BUS             813.493    222.574   3.655 0.000259 ***
-WITHIN_1KM_PRISCH         -8010.834    491.512 -16.298  &lt; 2e-16 ***
+(Intercept)              101038.516  19002.251   5.317 1.13e-07 ***
+floor_area_sqm             2809.590    163.893  17.143  &lt; 2e-16 ***
+storey_order              14801.641    597.707  24.764  &lt; 2e-16 ***
+remaining_lease_mths        345.433      8.202  42.117  &lt; 2e-16 ***
+PROX_CBD                 -16598.268    364.622 -45.522  &lt; 2e-16 ***
+PROX_ELDERLYCARE         -12384.778   1778.560  -6.963 4.01e-12 ***
+PROX_HAWKER              -18680.066   2230.026  -8.377  &lt; 2e-16 ***
+PROX_MRT                 -33032.008   3020.780 -10.935  &lt; 2e-16 ***
+PROX_PARK                 -7693.812   2625.869  -2.930 0.003413 ** 
+PROX_MALL                -16496.897   3631.890  -4.542 5.77e-06 ***
+PROX_SUPERMARKET         -26759.606   7519.195  -3.559 0.000378 ***
+WITHIN_350M_KINDERGARTEN   7778.115   1156.018   6.728 2.02e-11 ***
+WITHIN_350M_CHILDCARE     -3971.794    629.533  -6.309 3.19e-10 ***
+WITHIN_350M_BUS             760.096    402.808   1.887 0.059250 .  
+WITHIN_1KM_PRISCH         -8957.660    882.042 -10.156  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 61650 on 10320 degrees of freedom
-Multiple R-squared:  0.7373,    Adjusted R-squared:  0.737 
-F-statistic:  2069 on 14 and 10320 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 61850 on 3235 degrees of freedom
+Multiple R-squared:  0.7398,    Adjusted R-squared:  0.7387 
+F-statistic: 657.1 on 14 and 3235 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -570,25 +587,24 @@ Note
 <div class="cell-output cell-output-stdout">
 <pre><code>Take a cup of tea and have a break, it will take a few minutes.
           -----A kind suggestion from GWmodel development group
-Adaptive bandwidth: 6395 CV score: 3.60536e+13 
-Adaptive bandwidth: 3960 CV score: 3.320316e+13 
-Adaptive bandwidth: 2455 CV score: 2.928339e+13 
-Adaptive bandwidth: 1524 CV score: 2.550957e+13 
-Adaptive bandwidth: 950 CV score: 1.95632e+13 
-Adaptive bandwidth: 593 CV score: 1.58347e+13 
-Adaptive bandwidth: 375 CV score: 1.310042e+13 
-Adaptive bandwidth: 237 CV score: 1.113152e+13 
-Adaptive bandwidth: 155 CV score: 9.572037e+12 
-Adaptive bandwidth: 101 CV score: 8.457003e+12 
-Adaptive bandwidth: 71 CV score: 7.605058e+12 
-Adaptive bandwidth: 49 CV score: 6.966278e+12 
-Adaptive bandwidth: 38 CV score: 8.841916e+12 
-Adaptive bandwidth: 58 CV score: 7.275234e+12 
-Adaptive bandwidth: 45 CV score: 6.871966e+12 
-Adaptive bandwidth: 41 CV score: 6.793327e+12 
-Adaptive bandwidth: 40 CV score: 6.780974e+12 
-Adaptive bandwidth: 38 CV score: 8.841916e+12 
-Adaptive bandwidth: 40 CV score: 6.780974e+12 </code></pre>
+Adaptive bandwidth: 2016 CV score: 1.142395e+13 
+Adaptive bandwidth: 1254 CV score: 1.059772e+13 
+Adaptive bandwidth: 782 CV score: 9.445274e+12 
+Adaptive bandwidth: 491 CV score: 8.213442e+12 
+Adaptive bandwidth: 310 CV score: 6.350599e+12 
+Adaptive bandwidth: 199 CV score: 5.285557e+12 
+Adaptive bandwidth: 129 CV score: 4.418696e+12 
+Adaptive bandwidth: 87 CV score: 3.881707e+12 
+Adaptive bandwidth: 60 CV score: 3.480706e+12 
+Adaptive bandwidth: 44 CV score: 3.233649e+12 
+Adaptive bandwidth: 33 CV score: 3.096625e+12 
+Adaptive bandwidth: 27 CV score: 2.98344e+12 
+Adaptive bandwidth: 22 CV score: 2.927981e+12 
+Adaptive bandwidth: 20 CV score: 2.929842e+12 
+Adaptive bandwidth: 24 CV score: 2.941925e+12 
+Adaptive bandwidth: 21 CV score: 2.911985e+12 
+Adaptive bandwidth: 20 CV score: 2.929842e+12 
+Adaptive bandwidth: 21 CV score: 2.911985e+12 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(bw_adaptive, <span class="st">"data/model/bw_adaptive.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -649,7 +665,7 @@ Tip
 <pre><code>   ***********************************************************************
    *                       Package   GWmodel                             *
    ***********************************************************************
-   Program starts at: 2025-10-24 01:27:09.03607 
+   Program starts at: 2025-11-08 15:02:10.547309 
    Call:
    gwr.basic(formula = resale_price ~ floor_area_sqm + storey_order + 
     remaining_lease_mths + PROX_CBD + PROX_ELDERLYCARE + PROX_HAWKER + 
@@ -660,7 +676,7 @@ Tip
 
    Dependent (y) variable:  resale_price
    Independent variables:  floor_area_sqm storey_order remaining_lease_mths PROX_CBD PROX_ELDERLYCARE PROX_HAWKER PROX_MRT PROX_PARK PROX_MALL PROX_SUPERMARKET WITHIN_350M_KINDERGARTEN WITHIN_350M_CHILDCARE WITHIN_350M_BUS WITHIN_1KM_PRISCH
-   Number of data points: 10335
+   Number of data points: 3250
    ***********************************************************************
    *                    Results of Global Regression                     *
    ***********************************************************************
@@ -670,94 +686,94 @@ Tip
 
    Residuals:
     Min      1Q  Median      3Q     Max 
--205193  -39120   -1930   36545  472355 
+-182092  -37601   -1897   35193  322564 
 
    Coefficients:
                               Estimate Std. Error t value Pr(&gt;|t|)    
-   (Intercept)              107601.073  10601.261  10.150  &lt; 2e-16 ***
-   floor_area_sqm             2780.698     90.579  30.699  &lt; 2e-16 ***
-   storey_order              14299.298    339.115  42.167  &lt; 2e-16 ***
-   remaining_lease_mths        344.490      4.592  75.027  &lt; 2e-16 ***
-   PROX_CBD                 -16930.196    201.254 -84.124  &lt; 2e-16 ***
-   PROX_ELDERLYCARE         -14441.025    994.867 -14.516  &lt; 2e-16 ***
-   PROX_HAWKER              -19265.648   1273.597 -15.127  &lt; 2e-16 ***
-   PROX_MRT                 -32564.272   1744.232 -18.670  &lt; 2e-16 ***
-   PROX_PARK                 -5712.625   1483.885  -3.850 0.000119 ***
-   PROX_MALL                -14717.388   2007.818  -7.330 2.47e-13 ***
-   PROX_SUPERMARKET         -26881.938   4189.624  -6.416 1.46e-10 ***
-   WITHIN_350M_KINDERGARTEN   8520.472    632.812  13.464  &lt; 2e-16 ***
-   WITHIN_350M_CHILDCARE     -4510.650    354.015 -12.741  &lt; 2e-16 ***
-   WITHIN_350M_BUS             813.493    222.574   3.655 0.000259 ***
-   WITHIN_1KM_PRISCH         -8010.834    491.512 -16.298  &lt; 2e-16 ***
+   (Intercept)              101038.516  19002.251   5.317 1.13e-07 ***
+   floor_area_sqm             2809.590    163.893  17.143  &lt; 2e-16 ***
+   storey_order              14801.641    597.707  24.764  &lt; 2e-16 ***
+   remaining_lease_mths        345.433      8.202  42.117  &lt; 2e-16 ***
+   PROX_CBD                 -16598.268    364.622 -45.522  &lt; 2e-16 ***
+   PROX_ELDERLYCARE         -12384.778   1778.560  -6.963 4.01e-12 ***
+   PROX_HAWKER              -18680.066   2230.026  -8.377  &lt; 2e-16 ***
+   PROX_MRT                 -33032.008   3020.780 -10.935  &lt; 2e-16 ***
+   PROX_PARK                 -7693.812   2625.869  -2.930 0.003413 ** 
+   PROX_MALL                -16496.897   3631.890  -4.542 5.77e-06 ***
+   PROX_SUPERMARKET         -26759.606   7519.195  -3.559 0.000378 ***
+   WITHIN_350M_KINDERGARTEN   7778.115   1156.018   6.728 2.02e-11 ***
+   WITHIN_350M_CHILDCARE     -3971.794    629.533  -6.309 3.19e-10 ***
+   WITHIN_350M_BUS             760.096    402.808   1.887 0.059250 .  
+   WITHIN_1KM_PRISCH         -8957.660    882.042 -10.156  &lt; 2e-16 ***
 
    ---Significance stars
    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
-   Residual standard error: 61650 on 10320 degrees of freedom
-   Multiple R-squared: 0.7373
-   Adjusted R-squared: 0.737 
-   F-statistic:  2069 on 14 and 10320 DF,  p-value: &lt; 2.2e-16 
+   Residual standard error: 61850 on 3235 degrees of freedom
+   Multiple R-squared: 0.7398
+   Adjusted R-squared: 0.7387 
+   F-statistic: 657.1 on 14 and 3235 DF,  p-value: &lt; 2.2e-16 
    ***Extra Diagnostic information
-   Residual sum of squares: 3.922202e+13
-   Sigma(hat): 61610.08
-   AIC:  257320.2
-   AICc:  257320.3
-   BIC:  247249
+   Residual sum of squares: 1.237667e+13
+   Sigma(hat): 61729.66
+   AIC:  80951.48
+   AICc:  80951.65
+   BIC:  77928.24
    ***********************************************************************
    *          Results of Geographically Weighted Regression              *
    ***********************************************************************
 
    *********************Model calibration information*********************
    Kernel function: gaussian 
-   Adaptive bandwidth: 40 (number of nearest neighbours)
+   Adaptive bandwidth: 21 (number of nearest neighbours)
    Regression points: the same locations as observations are used.
    Distance metric: Euclidean distance metric is used.
 
    ****************Summary of GWR coefficient estimates:******************
                                    Min.     1st Qu.      Median     3rd Qu.
-   Intercept                -3.2594e+08 -4.7727e+05 -8.3004e+03  5.5025e+05
-   floor_area_sqm           -2.8714e+04  1.4475e+03  2.3011e+03  3.3900e+03
-   storey_order              3.3186e+03  8.5899e+03  1.0826e+04  1.3397e+04
-   remaining_lease_mths     -1.4431e+03  2.6063e+02  3.9048e+02  5.2865e+02
-   PROX_CBD                 -1.0837e+07 -5.7697e+04 -1.3787e+04  2.6552e+04
-   PROX_ELDERLYCARE         -3.2291e+07 -4.0643e+04  1.0562e+04  6.1054e+04
-   PROX_HAWKER              -2.3985e+08 -5.1365e+04  3.0026e+03  6.4287e+04
-   PROX_MRT                 -1.1660e+07 -1.0488e+05 -4.9373e+04  5.1037e+03
-   PROX_PARK                -6.5961e+06 -4.8671e+04 -8.8128e+02  5.3498e+04
-   PROX_MALL                -1.8112e+07 -7.4238e+04 -1.3982e+04  4.9779e+04
-   PROX_SUPERMARKET         -4.5761e+06 -6.3461e+04 -1.7429e+04  3.5616e+04
-   WITHIN_350M_KINDERGARTEN -4.1881e+05 -6.0040e+03  9.0209e+01  4.7127e+03
-   WITHIN_350M_CHILDCARE    -1.0273e+05 -2.2375e+03  2.6668e+02  2.6388e+03
-   WITHIN_350M_BUS          -1.1757e+05 -1.4719e+03  1.1626e+02  1.7584e+03
-   WITHIN_1KM_PRISCH        -6.6465e+05 -5.5959e+03  2.6916e+02  5.7500e+03
-                                  Max.
-   Intercept                1.6493e+08
-   floor_area_sqm           5.0907e+04
-   storey_order             2.9537e+04
-   remaining_lease_mths     1.8119e+03
-   PROX_CBD                 2.2489e+07
-   PROX_ELDERLYCARE         8.2444e+07
-   PROX_HAWKER              5.9654e+06
-   PROX_MRT                 2.0189e+08
-   PROX_PARK                1.5224e+07
-   PROX_MALL                1.0443e+07
-   PROX_SUPERMARKET         3.8330e+06
-   WITHIN_350M_KINDERGARTEN 6.6799e+05
-   WITHIN_350M_CHILDCARE    1.0802e+05
-   WITHIN_350M_BUS          3.7313e+04
-   WITHIN_1KM_PRISCH        5.0262e+05
+   Intercept                -4.1987e+07 -3.5920e+05  1.1767e+04  4.5737e+05
+   floor_area_sqm           -4.3788e+04  1.3790e+03  2.1585e+03  3.2075e+03
+   storey_order              1.0770e+03  8.1555e+03  1.0631e+04  1.4126e+04
+   remaining_lease_mths     -1.5429e+03  2.9451e+02  3.9607e+02  5.2440e+02
+   PROX_CBD                 -3.1946e+06 -4.6595e+04 -1.5678e+04  1.1900e+04
+   PROX_ELDERLYCARE         -3.6673e+05 -3.8628e+04  2.9662e+03  5.3452e+04
+   PROX_HAWKER              -9.0980e+07 -4.7024e+04 -4.1391e+03  4.5373e+04
+   PROX_MRT                 -2.5062e+06 -9.3918e+04 -5.3997e+04 -1.1682e+04
+   PROX_PARK                -5.3828e+06 -3.2648e+04  2.6626e+03  4.4559e+04
+   PROX_MALL                -7.9596e+05 -6.0151e+04 -9.7320e+03  3.8711e+04
+   PROX_SUPERMARKET         -6.3865e+05 -5.1721e+04 -1.1075e+04  2.5538e+04
+   WITHIN_350M_KINDERGARTEN -2.0031e+05 -6.8870e+03 -5.3783e+02  5.5471e+03
+   WITHIN_350M_CHILDCARE    -4.2894e+04 -2.5003e+03  1.7012e+02  3.5152e+03
+   WITHIN_350M_BUS          -2.5385e+04 -1.6214e+03  2.6642e+02  2.5255e+03
+   WITHIN_1KM_PRISCH        -6.2201e+04 -4.6258e+03  9.0594e+02  7.3302e+03
+                                Max.
+   Intercept                44861513
+   floor_area_sqm              16684
+   storey_order                21482
+   remaining_lease_mths         1672
+   PROX_CBD                  2686665
+   PROX_ELDERLYCARE         17563956
+   PROX_HAWKER               1322574
+   PROX_MRT                 74271798
+   PROX_PARK                 1944629
+   PROX_MALL                 1937855
+   PROX_SUPERMARKET           722716
+   WITHIN_350M_KINDERGARTEN    55231
+   WITHIN_350M_CHILDCARE       83941
+   WITHIN_350M_BUS             18346
+   WITHIN_1KM_PRISCH           59079
    ************************Diagnostic information*************************
-   Number of data points: 10335 
-   Effective number of parameters (2trace(S) - trace(S'S)): 1730.101 
-   Effective degrees of freedom (n-2trace(S) + trace(S'S)): 8604.899 
-   AICc (GWR book, Fotheringham, et al. 2002, p. 61, eq 2.33): 238871.8 
-   AIC (GWR book, Fotheringham, et al. 2002,GWR p. 96, eq. 4.22): 237036.9 
-   BIC (GWR book, Fotheringham, et al. 2002,GWR p. 61, eq. 2.34): 238209 
-   Residual sum of squares: 4.829177e+12 
-   R-square value:  0.9676571 
-   Adjusted R-square value:  0.9611535 
+   Number of data points: 3250 
+   Effective number of parameters (2trace(S) - trace(S'S)): 1075.802 
+   Effective degrees of freedom (n-2trace(S) + trace(S'S)): 2174.198 
+   AICc (GWR book, Fotheringham, et al. 2002, p. 61, eq 2.33): 76367.5 
+   AIC (GWR book, Fotheringham, et al. 2002,GWR p. 96, eq. 4.22): 74832.94 
+   BIC (GWR book, Fotheringham, et al. 2002,GWR p. 61, eq. 2.34): 77809.43 
+   Residual sum of squares: 1.451615e+12 
+   R-square value:  0.9694861 
+   Adjusted R-square value:  0.9543807 
 
    ***********************************************************************
-   Program stops at: 2025-10-24 01:28:07.746289 </code></pre>
+   Program stops at: 2025-11-08 15:02:16.341253 </code></pre>
 </div>
 </div>
 </section>
@@ -780,22 +796,26 @@ Tip
 <div class="cell-output cell-output-stdout">
 <pre><code>Take a cup of tea and have a break, it will take a few minutes.
           -----A kind suggestion from GWmodel development group
-Adaptive bandwidth: 3447 CV score: 1.902155e+13 
-Adaptive bandwidth: 2138 CV score: 1.752645e+13 
-Adaptive bandwidth: 1328 CV score: 1.556299e+13 
-Adaptive bandwidth: 828 CV score: 1.357498e+13 
-Adaptive bandwidth: 518 CV score: 1.030751e+13 
-Adaptive bandwidth: 327 CV score: 8.348364e+12 
-Adaptive bandwidth: 208 CV score: 6.860544e+12 
-Adaptive bandwidth: 135 CV score: 5.969504e+12 
-Adaptive bandwidth: 89 CV score: 5.242221e+12 
-Adaptive bandwidth: 62 CV score: 4.742767e+12 
-Adaptive bandwidth: 43 CV score: 4.357839e+12 
-Adaptive bandwidth: 34 CV score: 4.125848e+12 
-Adaptive bandwidth: 25 CV score: 4.056699e+12 
-Adaptive bandwidth: 23 CV score: 4.236349e+13 
-Adaptive bandwidth: 30 CV score: 4.074906e+12 
-Adaptive bandwidth: 25 CV score: 4.056699e+12 </code></pre>
+Adaptive bandwidth: 1089 CV score: 6.235935e+12 
+Adaptive bandwidth: 681 CV score: 5.776573e+12 
+Adaptive bandwidth: 428 CV score: 5.113217e+12 
+Adaptive bandwidth: 272 CV score: 4.43155e+12 
+Adaptive bandwidth: 175 CV score: 3.629074e+12 
+Adaptive bandwidth: 116 CV score: 3.026875e+12 
+Adaptive bandwidth: 78 CV score: 2.608746e+12 
+Adaptive bandwidth: 56 CV score: 2.375647e+12 
+Adaptive bandwidth: 41 CV score: 2.222235e+12 
+Adaptive bandwidth: 33 CV score: 2.124631e+12 
+Adaptive bandwidth: 26 CV score: 2.026362e+12 
+Adaptive bandwidth: 24 CV score: 2.024739e+12 
+Adaptive bandwidth: 20 CV score: 2.059703e+12 
+Adaptive bandwidth: 23 CV score: 2.02452e+12 
+Adaptive bandwidth: 26 CV score: 2.026362e+12 
+Adaptive bandwidth: 24 CV score: 2.024739e+12 
+Adaptive bandwidth: 25 CV score: 2.025714e+12 
+Adaptive bandwidth: 24 CV score: 2.024739e+12 
+Adaptive bandwidth: 24 CV score: 2.024739e+12 
+Adaptive bandwidth: 23 CV score: 2.02452e+12 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(gwr_bw_test_adaptive, </span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>          <span class="st">"data/model/gwr_bw_test_adaptive.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -863,14 +883,14 @@ Call:
 
 Type:                             Regression 
 Number of trees:                  500 
-Sample size:                      10335 
+Sample size:                      3250 
 Number of independent variables:  14 
 Mtry:                             3 
 Target node size:                 5 
 Variable importance mode:         none 
 Splitrule:                        variance 
-OOB prediction error (MSE):       731404460 
-R squared (OOB):                  0.9493789 </code></pre>
+OOB prediction error (MSE):       1223999445 
+R squared (OOB):                  0.9164055 </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -907,51 +927,51 @@ Call:
 
 Type:                             Regression 
 Number of trees:                  500 
-Sample size:                      10335 
+Sample size:                      3250 
 Number of independent variables:  14 
 Mtry:                             4 
 Target node size:                 5 
 Variable importance mode:         impurity 
 Splitrule:                        variance 
-OOB prediction error (MSE):       697593819 
-R squared (OOB):                  0.9517189 </code></pre>
+OOB prediction error (MSE):       1147355450 
+R squared (OOB):                  0.92164 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          floor_area_sqm             storey_order     remaining_lease_mths 
-            7.413197e+12             1.538950e+13             2.890637e+13 
+            2.186553e+12             5.331003e+12             9.337059e+12 
                 PROX_CBD         PROX_ELDERLYCARE              PROX_HAWKER 
-            5.310066e+13             7.285092e+12             5.568548e+12 
+            1.580758e+13             2.021315e+12             1.847205e+12 
                 PROX_MRT                PROX_PARK                PROX_MALL 
-            7.369745e+12             4.894344e+12             4.223286e+12 
+            2.282277e+12             1.775156e+12             1.369772e+12 
         PROX_SUPERMARKET WITHIN_350M_KINDERGARTEN    WITHIN_350M_CHILDCARE 
-            2.793853e+12             1.018586e+12             1.710374e+12 
+            9.366588e+11             3.091917e+11             7.233134e+11 
          WITHIN_350M_BUS        WITHIN_1KM_PRISCH 
-            1.589501e+12             6.794634e+12 </code></pre>
+            6.467410e+11             2.483997e+12 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
--207638.9  -13044.4     517.7     668.7   15329.3  380000.0 </code></pre>
+-353112.0  -15881.3     502.6    -670.7   14820.3  261750.0 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
--80918.36  -3710.39     80.88     60.19   4119.23  67858.13 </code></pre>
+-46571.21  -2969.43    -19.83     -3.49   2875.61  56147.81 </code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                               Min          Max        Mean         StD
-floor_area_sqm                   0 244740042006 10095828392 21812835540
-storey_order             185976628 195162288767 10691049214 16507251138
-remaining_lease_mths     364347875 420068216877 18525480676 40200134557
-PROX_CBD                         0 261367685029  7551870678 20050530584
-PROX_ELDERLYCARE                 0 260937815286  6797406011 17221278502
-PROX_HAWKER                      0 232903486867  6917875149 17526152433
-PROX_MRT                         0 192977091714  6219493848 14339970325
-PROX_PARK                        0 270208600970  5678244629 13059236132
-PROX_MALL                        0 290212372886  6903172498 18141558541
-PROX_SUPERMARKET                 0 283979765533  6391052599 16785880266
-WITHIN_350M_KINDERGARTEN         0 124340534149  1694367905  7648420853
-WITHIN_350M_CHILDCARE            0 194759670980  3113750592 10738676578
-WITHIN_350M_BUS                  0 132614671785  3014600716  8056548827
-WITHIN_1KM_PRISCH                0 132884456893  1116898699  5401808933</code></pre>
+floor_area_sqm                   0 421764989496 14354515928 28181340962
+storey_order             139279114 197233578393 13098456843 23117758561
+remaining_lease_mths     456064490 442077556412 35497413071 63031604118
+PROX_CBD                 280130477 222922652797 11838027684 21203016822
+PROX_ELDERLYCARE         225421822 173571659570 10769352789 18604229017
+PROX_HAWKER              270432903 239026298961 10567560256 17858170841
+PROX_MRT                 334535778 163033109765 11206748213 19273649164
+PROX_PARK                305929161 193544013312 11261583284 19632295104
+PROX_MALL                294445446 300266724093 11496997689 22394230127
+PROX_SUPERMARKET         230405739 201279953693  9384527656 17423716452
+WITHIN_350M_KINDERGARTEN         0 146115839116  3384981060 11597568091
+WITHIN_350M_CHILDCARE     62090519 347700457389  6650354025 19555348247
+WITHIN_350M_BUS           63556897 166464721555  5769660302 12260242423
+WITHIN_1KM_PRISCH                0  99359110195  3120224286  7773308076</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(gwRF_adaptive, <span class="st">"data/model/gwRF_adaptive.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1025,7 +1045,7 @@ Tip
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rmse</span>(test_data_p<span class="sc">$</span>resale_price, </span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>     test_data_p<span class="sc">$</span>GRF_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 28160.87</code></pre>
+<pre><code>[1] 36647.2</code></pre>
 </div>
 </div>
 </section>

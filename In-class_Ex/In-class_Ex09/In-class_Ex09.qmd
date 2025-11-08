@@ -1,0 +1,95 @@
+---
+title: "In-class Exercise 9"
+author: "Jeounghyun Kim"
+date: "Nov 9, 2025"
+date-modified: "last-modified" 
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: false
+---
+
+```{r}
+# --- 0) Load required packages ---
+pacman::p_load(sf, tmap, dplyr, purrr, SpatialAcc, knitr)
+```
+
+```{r}
+# --- 0) Load packages ---
+pacman::p_load(sf, tmap, dplyr, purrr, SpatialAcc)
+
+tmap_mode("plot")   # Ensure tmap renders static maps
+
+# --- 1) Import geospatial datasets ---
+mpsz      <- st_read(dsn = "data/geospatial", layer = "MP14_SUBZONE_NO_SEA_PL")
+hexagons  <- st_read(dsn = "data/geospatial", layer = "hexagons")
+eldercare <- st_read(dsn = "data/geospatial", layer = "ELDERCARE")
+
+# --- 2) Transform CRS to EPSG:3414 (SVY21) ---
+mpsz      <- st_transform(mpsz, 3414)
+hexagons  <- st_transform(hexagons, 3414)
+eldercare <- st_transform(eldercare, 3414)
+
+# --- 3) Add demand and capacity columns ---
+hexagons <- hexagons %>%
+  select(fid) %>%
+  mutate(demand = 100)
+
+eldercare <- eldercare %>%
+  select(fid, ADDRESSPOS) %>%
+  mutate(capacity = 100)
+
+# --- 4) Import OD Matrix (aspatial) and convert to distance matrix in km ---
+ODMatrix <- readr::read_csv("data/aspatial/OD_Matrix.csv")
+
+distmat_wide <- ODMatrix %>%
+  select(origin_id, destination_id, total_cost) %>%
+  arrange(origin_id, destination_id) %>%
+  tidyr::pivot_wider(
+    names_from  = destination_id,
+    values_from = total_cost,
+    names_sort  = TRUE
+  )
+
+distmat_mat <- distmat_wide %>%
+  tibble::column_to_rownames("origin_id") %>%
+  as.matrix()
+
+distmat_km <- distmat_mat / 1000  # Convert from metres to km
+
+# --- 5) Compute Hansen accessibility for 5 power values ---
+powers <- c(0.5, 1, 1.5, 2, 2.5)
+
+acc_list <- lapply(powers, function(p) {
+  out <- data.frame(SpatialAcc::ac(
+    hexagons$demand,
+    eldercare$capacity,
+    distmat_km,
+    power  = p,
+    family = "Hansen"
+  ))
+  colnames(out) <- paste0("accHansen_", p)
+  out
+})
+
+hex_all <- dplyr::bind_cols(hexagons, acc_list)
+
+# 공통 구간(권장)
+vars <- paste0("accHansen_", powers)
+breaks_all <- quantile(unlist(hex_all[, vars]),
+                       probs = seq(0, 1, length.out = 11),
+                       na.rm = TRUE)
+
+make_map <- function(var, title) {
+  tm_shape(hex_all, bbox = sf::st_bbox(hex_all)) +
+    tm_polygons(fill = var,
+      fill.scale = tm_scale_intervals(style="fixed", breaks=breaks_all, values="brewer.blues")) +
+    tm_shape(eldercare) + tm_dots(size=0.3, fill="red", col="black") +
+    tm_title(title) + tm_layout(frame=TRUE) + tm_compass(type="8star", size=2) +
+    tm_scalebar() + tm_grid(alpha=0.2)
+}
+
+maps <- mapply(make_map, vars, paste0("Hansen (power = ", powers, ")"), SIMPLIFY=FALSE)
+tmap_arrange(plotlist = maps, ncol = 5)
+```

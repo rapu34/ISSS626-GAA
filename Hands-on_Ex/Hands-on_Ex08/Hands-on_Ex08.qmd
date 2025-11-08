@@ -107,6 +107,11 @@ Reading the input data sets. It is in simple feature data frame.
 ```{r}
 mdata <- read_rds("data/rawdata/mdata.rds")
 
+# Add this sampling step (professor’s suggestion)
+set.seed(1234)
+HDB_sample <- mdata %>%
+  sample_n(5000)
+
 ```
 
 ### **14.4.2 Data Sampling**
@@ -115,8 +120,8 @@ The entire data are split into training and test data sets with 65% and 35% resp
 
 ```{r}
 set.seed(1234)
-resale_split <- initial_split(mdata, 
-                              prop = 6.5/10,)
+resale_split <- initial_split(HDB_sample, 
+                              prop = 6.5/10)
 train_data <- training(resale_split)
 test_data <- testing(resale_split)
 ```
