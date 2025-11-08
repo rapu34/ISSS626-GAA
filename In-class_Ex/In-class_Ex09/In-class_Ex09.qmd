@@ -55,13 +55,16 @@ acc_list <- lapply(powers, function(p) {
   as_tibble(out)
 })
 
-maps <- purrr::imap(acc_list, function(acc_df, i) {
-  hex_tmp <- bind_cols(hexagons, acc_df)
-  tm_shape(hex_tmp, bbox = mapex) +
+hex_list <- lapply(acc_list, function(a) bind_cols(hexagons, a))
+all_vals <- unlist(lapply(hex_list, function(h) h$accHansen))
+brks <- quantile(all_vals, probs = seq(0, 1, length.out = 11), na.rm = TRUE)
+
+maps <- purrr::imap(hex_list, function(hx, i) {
+  tm_shape(hx, bbox = mapex) +
     tm_polygons(fill = "accHansen",
                 fill.scale = tm_scale_intervals(
-                  style = "quantile",
-                  n = 10,
+                  style  = "fixed",
+                  breaks = brks,
                   values = "brewer.blues")) +
     tm_shape(eldercare) +
     tm_dots(size = 0.3, fill = "red", col = "black") +
