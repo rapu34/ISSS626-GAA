@@ -16,9 +16,6 @@ pacman::p_load(sf, tmap, dplyr, purrr, SpatialAcc, knitr)
 ```
 
 ```{r}
-# --- 0) Load packages ---
-pacman::p_load(sf, tmap, dplyr, purrr, SpatialAcc)
-
 tmap_mode("plot")   # Ensure tmap renders static maps
 
 # --- 1) Import geospatial datasets ---
@@ -75,7 +72,6 @@ acc_list <- lapply(powers, function(p) {
 
 hex_all <- dplyr::bind_cols(hexagons, acc_list)
 
-# 공통 구간(권장)
 vars <- paste0("accHansen_", powers)
 breaks_all <- quantile(unlist(hex_all[, vars]),
                        probs = seq(0, 1, length.out = 11),

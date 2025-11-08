@@ -310,13 +310,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(sf, tmap, dplyr, purrr, SpatialAcc, knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 0) Load packages ---</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(sf, tmap, dplyr, purrr, SpatialAcc)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)   <span class="co"># Ensure tmap renders static maps</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 1) Import geospatial datasets ---</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>mpsz      <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"data/geospatial"</span>, <span class="at">layer =</span> <span class="st">"MP14_SUBZONE_NO_SEA_PL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)   <span class="co"># Ensure tmap renders static maps</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># --- 1) Import geospatial datasets ---</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>mpsz      <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"data/geospatial"</span>, <span class="at">layer =</span> <span class="st">"MP14_SUBZONE_NO_SEA_PL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `MP14_SUBZONE_NO_SEA_PL' from data source 
   `/Users/jay/Desktop/rapu34/ISSS626-GAA/In-class_Ex/In-class_Ex09/data/geospatial' 
@@ -398,23 +395,22 @@ Projected CRS: SVY21 / Singapore TM</code></pre>
 <span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>hex_all <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_cols</span>(hexagons, acc_list)</span>
 <span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="co"># 공통 구간(권장)</span></span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"accHansen_"</span>, powers)</span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>breaks_all <span class="ot">&lt;-</span> <span class="fu">quantile</span>(<span class="fu">unlist</span>(hex_all[, vars]),</span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>                       <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">11</span>),</span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>                       <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>make_map <span class="ot">&lt;-</span> <span class="cf">function</span>(var, title) {</span>
-<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hex_all, <span class="at">bbox =</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>(hex_all)) <span class="sc">+</span></span>
-<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_polygons</span>(<span class="at">fill =</span> var,</span>
-<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill.scale =</span> <span class="fu">tm_scale_intervals</span>(<span class="at">style=</span><span class="st">"fixed"</span>, <span class="at">breaks=</span>breaks_all, <span class="at">values=</span><span class="st">"brewer.blues"</span>)) <span class="sc">+</span></span>
-<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_shape</span>(eldercare) <span class="sc">+</span> <span class="fu">tm_dots</span>(<span class="at">size=</span><span class="fl">0.3</span>, <span class="at">fill=</span><span class="st">"red"</span>, <span class="at">col=</span><span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_title</span>(title) <span class="sc">+</span> <span class="fu">tm_layout</span>(<span class="at">frame=</span><span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">tm_compass</span>(<span class="at">type=</span><span class="st">"8star"</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_scalebar</span>() <span class="sc">+</span> <span class="fu">tm_grid</span>(<span class="at">alpha=</span><span class="fl">0.2</span>)</span>
-<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a>maps <span class="ot">&lt;-</span> <span class="fu">mapply</span>(make_map, vars, <span class="fu">paste0</span>(<span class="st">"Hansen (power = "</span>, powers, <span class="st">")"</span>), <span class="at">SIMPLIFY=</span><span class="cn">FALSE</span>)</span>
-<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(<span class="at">plotlist =</span> maps, <span class="at">ncol =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"accHansen_"</span>, powers)</span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>breaks_all <span class="ot">&lt;-</span> <span class="fu">quantile</span>(<span class="fu">unlist</span>(hex_all[, vars]),</span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>                       <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">11</span>),</span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>                       <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>make_map <span class="ot">&lt;-</span> <span class="cf">function</span>(var, title) {</span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hex_all, <span class="at">bbox =</span> sf<span class="sc">::</span><span class="fu">st_bbox</span>(hex_all)) <span class="sc">+</span></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_polygons</span>(<span class="at">fill =</span> var,</span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill.scale =</span> <span class="fu">tm_scale_intervals</span>(<span class="at">style=</span><span class="st">"fixed"</span>, <span class="at">breaks=</span>breaks_all, <span class="at">values=</span><span class="st">"brewer.blues"</span>)) <span class="sc">+</span></span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_shape</span>(eldercare) <span class="sc">+</span> <span class="fu">tm_dots</span>(<span class="at">size=</span><span class="fl">0.3</span>, <span class="at">fill=</span><span class="st">"red"</span>, <span class="at">col=</span><span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_title</span>(title) <span class="sc">+</span> <span class="fu">tm_layout</span>(<span class="at">frame=</span><span class="cn">TRUE</span>) <span class="sc">+</span> <span class="fu">tm_compass</span>(<span class="at">type=</span><span class="st">"8star"</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_scalebar</span>() <span class="sc">+</span> <span class="fu">tm_grid</span>(<span class="at">alpha=</span><span class="fl">0.2</span>)</span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a>maps <span class="ot">&lt;-</span> <span class="fu">mapply</span>(make_map, vars, <span class="fu">paste0</span>(<span class="st">"Hansen (power = "</span>, powers, <span class="st">")"</span>), <span class="at">SIMPLIFY=</span><span class="cn">FALSE</span>)</span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(<span class="at">plotlist =</span> maps, <span class="at">ncol =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
