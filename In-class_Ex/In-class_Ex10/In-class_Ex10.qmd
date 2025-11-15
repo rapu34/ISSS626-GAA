@@ -1,0 +1,50 @@
+---
+title: "In-class Exercise 10"
+author: "Jeounghyun Kim"
+date-modified: "last-modified" 
+execute:
+  echo: true
+  eval: true
+  warning: false
+  freeze: false
+---
+
+## **18.2 Getting Started**
+
+```{r}
+pacman::p_load(sf, tidyverse, MCI, tmap, ggstatsplot)
+```
+
+## **18.3 Importing Data**
+
+```{r}
+stores <- st_read(
+  dsn = "data/geospatial",
+  layer = "STORES_TC")
+```
+
+```{r}
+town <- st_read(
+  dsn = "data/geospatial",
+  layer = "TOWN_TC")
+```
+
+```{r}
+village <- st_read(
+  dsn = "data/geospatial",
+  layer = "VILLAGE_TC")
+```
+
+::: callout-note
+The output print above shown that the three data sets are in **TWD97 / TM2 zone 121 (i.e epsg: 3826)**projected coordinates systems.
+:::
+
+```{r}
+tmap_mode("view")
+tm_shape(town) +
+  tm_polygons() +
+tm_shape(village) +
+  tm_polygons() + 
+tm_shape(stores) +
+  tm_dots()
+```
