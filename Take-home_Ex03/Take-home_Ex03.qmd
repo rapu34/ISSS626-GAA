@@ -13,6 +13,8 @@ execute:
 
 # 1. Overview
 
+![](images/hdb-flat.jpg)
+
 ## 1.1 Setting the Scene
 
 Housing is an essential component of household wealth worldwide. Purchasing a home has always represented a major investment for most individuals. The price of housing is influenced by a wide range of factors. Some are macro-level, such as the overall state of the economy or the inflation rate, while others are property-specific. These can be further categorized into structural and locational factors.
