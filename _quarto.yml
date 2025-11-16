@@ -5,8 +5,6 @@ website:
   title: "ISSS626 Coursework"
   navbar:
     left:
-    - text: "Week10_Hands-on Exercise 9"
-      href: Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09.html
     
     - text: "Hands-on Exercise"
       menu:
