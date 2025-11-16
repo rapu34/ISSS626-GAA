@@ -809,7 +809,7 @@
     "href": "Take-home_Ex03/Take-home_Ex03.html",
     "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
     "section": "",
-    "text": "Housing is an essential component of household wealth worldwide. Purchasing a home has always represented a major investment for most individuals. The price of housing is influenced by a wide range of factors. Some are macro-level, such as the overall state of the economy or the inflation rate, while others are property-specific. These can be further categorized into structural and locational factors.\n\n\n\nOption 1 – Explanatory Modelling: Calibrate an explanatory model to identify and evaluate the factors influencing HDB resale prices during the period 1 January 2025 to 30 September 2025."
+    "text": "Housing is an essential component of household wealth worldwide. Purchasing a home has always represented a major investment for most individuals. The price of housing is influenced by a wide range of factors. Some are macro-level, such as the overall state of the economy or the inflation rate, while others are property-specific. These can be further categorized into structural and locational factors.\n\n\n\nThe objective of this study is to develop an explanatory model that identifies and evaluates how structural attributes and locational amenities shaped HDB resale prices between 1 January and 30 September 2025. By allowing these relationships to vary across space, the analysis aims to provide a more nuanced understanding of Singapore’s resale housing market and the spatial drivers behind price differences across neighbourhoods."
   },
   {
     "objectID": "Take-home_Ex03/Take-home_Ex03.html#setting-the-scene",
@@ -823,7 +823,7 @@
     "href": "Take-home_Ex03/Take-home_Ex03.html#objectives",
     "title": "Take-home Exercise 3: Modelling HDB Resale Prices with Geographically Weighted Methods",
     "section": "",
-    "text": "Option 1 – Explanatory Modelling: Calibrate an explanatory model to identify and evaluate the factors influencing HDB resale prices during the period 1 January 2025 to 30 September 2025."
+    "text": "The objective of this study is to develop an explanatory model that identifies and evaluates how structural attributes and locational amenities shaped HDB resale prices between 1 January and 30 September 2025. By allowing these relationships to vary across space, the analysis aims to provide a more nuanced understanding of Singapore’s resale housing market and the spatial drivers behind price differences across neighbourhoods."
   },
   {
     "objectID": "Take-home_Ex03/Take-home_Ex03.html#the-packages",

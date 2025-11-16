@@ -21,7 +21,7 @@ Housing is an essential component of household wealth worldwide. Purchasing a ho
 
 ## 1.2 Objectives
 
-**Option 1 – Explanatory Modelling**: Calibrate an explanatory model to identify and evaluate the factors influencing HDB resale prices during the period **1 January 2025 to 30 September 2025**.
+The objective of this study is to develop an explanatory model that identifies and evaluates how structural attributes and locational amenities shaped HDB resale prices between **1 January and 30 September 2025**. By allowing these relationships to vary across space, the analysis aims to provide a more nuanced understanding of Singapore’s resale housing market and the spatial drivers behind price differences across neighbourhoods.
 
 # 2. Getting Started
 
