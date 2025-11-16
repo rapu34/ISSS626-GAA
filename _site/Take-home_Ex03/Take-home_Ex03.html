@@ -124,10 +124,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../Hands-on_Ex/Hands-on_Ex09/Hands-on_Ex09.html"> 
-<span class="menu-text">Week10_Hands-on Exercise 9</span></a>
-  </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Hands-on Exercise</span>
@@ -326,13 +322,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#constructing-the-adaptive-bandwidth-gwr-model" id="toc-constructing-the-adaptive-bandwidth-gwr-model" class="nav-link" data-scroll-target="#constructing-the-adaptive-bandwidth-gwr-model">5.2.2 Constructing the Adaptive Bandwidth GWR Model</a></li>
   <li><a href="#model-diagnostics-and-coefficient-patterns" id="toc-model-diagnostics-and-coefficient-patterns" class="nav-link" data-scroll-target="#model-diagnostics-and-coefficient-patterns">5.2.3 Model Diagnostics and Coefficient Patterns</a></li>
   </ul></li>
-  <li><a href="#coefficient-sign-patterns" id="toc-coefficient-sign-patterns" class="nav-link" data-scroll-target="#coefficient-sign-patterns"><strong>Coefficient Sign Patterns</strong></a>
-  <ul class="collapse">
-  <li><a href="#consistent-effects" id="toc-consistent-effects" class="nav-link" data-scroll-target="#consistent-effects"><strong>Consistent Effects</strong></a></li>
-  <li><a href="#strong-tendencies" id="toc-strong-tendencies" class="nav-link" data-scroll-target="#strong-tendencies"><strong>Strong tendencies</strong></a></li>
-  <li><a href="#mixed-or-near-balanced-effects" id="toc-mixed-or-near-balanced-effects" class="nav-link" data-scroll-target="#mixed-or-near-balanced-effects"><strong>Mixed or Near-Balanced Effects</strong></a></li>
-  </ul></li>
-  <li><a href="#key-findings" id="toc-key-findings" class="nav-link" data-scroll-target="#key-findings"><strong>Key Findings</strong></a></li>
   <li><a href="#visualising-gwr-output" id="toc-visualising-gwr-output" class="nav-link" data-scroll-target="#visualising-gwr-output">5.3 Visualising GWR Output</a>
   <ul class="collapse">
   <li><a href="#converting-sdf-into-sf-data.frame" id="toc-converting-sdf-into-sf-data.frame" class="nav-link" data-scroll-target="#converting-sdf-into-sf-data.frame">5.3.1 Converting SDF into sf data.frame</a></li>
@@ -1930,29 +1919,21 @@ A smaller bandwidth would produce highly localised models, while a much larger b
 <li><p>WITHIN_1KM_PRIMARY: –1,035,200 to 478,490</p></li>
 </ul>
 <p>These wide ranges highlight strong geographical differences in how accessibility and amenities influence price.</p>
-</section>
-</section>
-<section id="coefficient-sign-patterns" class="level2">
-<h2 class="anchored" data-anchor-id="coefficient-sign-patterns"><strong>Coefficient Sign Patterns</strong></h2>
+<p><strong>Coefficient Sign Patterns</strong></p>
 <p>The coefficient sign analysis provides clearer insights into spatial patterns:</p>
-<section id="consistent-effects" class="level3">
-<h3 class="anchored" data-anchor-id="consistent-effects"><strong>Consistent Effects</strong></h3>
+<p><strong>Consistent Effects</strong></p>
 <ul>
 <li><strong>AREA_SQM, FLOOR_LEVEL</strong>&nbsp;→ 100% positive<br>
 → Larger size and higher floor level universally increase prices.</li>
 </ul>
-</section>
-<section id="strong-tendencies" class="level3">
-<h3 class="anchored" data-anchor-id="strong-tendencies"><strong>Strong tendencies</strong></h3>
+<p><strong>Strong tendencies</strong></p>
 <ul>
 <li><p><strong>PROX_MRT</strong>&nbsp;→ 87.6% negative<br>
 → Closer MRT access increases price in most locations.</p></li>
 <li><p><strong>AGE</strong>&nbsp;→ 83.3% negative<br>
 → Older flats reduce price almost everywhere, with some local reversals.</p></li>
 </ul>
-</section>
-<section id="mixed-or-near-balanced-effects" class="level3">
-<h3 class="anchored" data-anchor-id="mixed-or-near-balanced-effects"><strong>Mixed or Near-Balanced Effects</strong></h3>
+<p><strong>Mixed or Near-Balanced Effects</strong></p>
 <ul>
 <li><p><strong>PROX_CBD:</strong>&nbsp;61.2% negative / 38.8% positive</p></li>
 <li><p><strong>PROX_PARKS:</strong>&nbsp;60.6% negative / 39.4% positive</p></li>
@@ -1960,10 +1941,7 @@ A smaller bandwidth would produce highly localised models, while a much larger b
 <li><p><strong>WITHIN_1KM_PRIMARY:</strong>&nbsp;~51% negative / ~49% positive</p></li>
 </ul>
 <p>These variables show&nbsp;<strong>context-dependent</strong>&nbsp;effects, meaning the same amenity can raise or lower prices depending on the surrounding neighbourhood.</p>
-</section>
-</section>
-<section id="key-findings" class="level2">
-<h2 class="anchored" data-anchor-id="key-findings"><strong>Key Findings</strong></h2>
+<p><strong>Key Findings</strong></p>
 <ol type="1">
 <li><p><strong>GWR clearly outperforms OLS</strong>, confirming strong spatial heterogeneity in price determinants.</p></li>
 <li><p><strong>Structural attributes</strong>&nbsp;(size, floor level) have uniform effects across Singapore.</p></li>
@@ -1989,6 +1967,7 @@ Tip
 </ul>
 </div>
 </div>
+</section>
 </section>
 <section id="visualising-gwr-output" class="level2">
 <h2 class="anchored" data-anchor-id="visualising-gwr-output">5.3 Visualising GWR Output</h2>
@@ -2213,8 +2192,7 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 <section id="visualising-coefficient-estimates" class="level3">
 <h3 class="anchored" data-anchor-id="visualising-coefficient-estimates">5.3.3 Visualising Coefficient Estimates</h3>
 <p>We visualize the spatial distribution of coefficients for key variables of interest. For each variable, we create maps showing: 1. <strong>Coefficient values</strong>: The magnitude and direction of the relationship 2. <strong>Standard Errors (SE)</strong>: Reliability of the estimates 3. <strong>t-values (TV)</strong>: Statistical significance</p>
-<section id="visualising-area_sqm-coefficients" class="level4">
-<h4 class="anchored" data-anchor-id="visualising-area_sqm-coefficients">Visualising AREA_SQM Coefficients</h4>
+<p><strong>Visualising AREA_SQM Coefficients</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb239"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb239-1"><a href="#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AREA_SQM Coefficient</span></span>
 <span id="cb239-2"><a href="#cb239-2" aria-hidden="true" tabindex="-1"></a>AREA_SQM_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
@@ -2281,9 +2259,7 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 </div>
 </div>
 </div>
-</section>
-<section id="visualising-prox_mrt-coefficients" class="level4">
-<h4 class="anchored" data-anchor-id="visualising-prox_mrt-coefficients">Visualising PROX_MRT Coefficients</h4>
+<p><strong>Visualising PROX_MRT Coefficients</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb242"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb242-1"><a href="#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_MRT Coefficient</span></span>
 <span id="cb242-2"><a href="#cb242-2" aria-hidden="true" tabindex="-1"></a>PROX_MRT_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
@@ -2350,9 +2326,7 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 </div>
 </div>
 </div>
-</section>
-<section id="visualising-prox_cbd-coefficients" class="level4">
-<h4 class="anchored" data-anchor-id="visualising-prox_cbd-coefficients">Visualising PROX_CBD Coefficients</h4>
+<p><strong>Visualising PROX_CBD Coefficients</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb245"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb245-1"><a href="#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_CBD Coefficient</span></span>
 <span id="cb245-2"><a href="#cb245-2" aria-hidden="true" tabindex="-1"></a>PROX_CBD_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
@@ -2419,9 +2393,7 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 </div>
 </div>
 </div>
-</section>
-<section id="visualising-prox_parks-coefficients" class="level4">
-<h4 class="anchored" data-anchor-id="visualising-prox_parks-coefficients">Visualising PROX_PARKS Coefficients</h4>
+<p><strong>Visualising PROX_PARKS Coefficients</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb248"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb248-1"><a href="#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_PARKS Coefficient</span></span>
 <span id="cb248-2"><a href="#cb248-2" aria-hidden="true" tabindex="-1"></a>PROX_PARKS_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
@@ -2488,9 +2460,7 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 </div>
 </div>
 </div>
-</section>
-<section id="visualising-floor_level-coefficients" class="level4">
-<h4 class="anchored" data-anchor-id="visualising-floor_level-coefficients">Visualising FLOOR_LEVEL Coefficients</h4>
+<p><strong>Visualising FLOOR_LEVEL Coefficients</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb251"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb251-1"><a href="#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FLOOR_LEVEL Coefficient</span></span>
 <span id="cb251-2"><a href="#cb251-2" aria-hidden="true" tabindex="-1"></a>FLOOR_LEVEL_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
@@ -2557,9 +2527,7 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 </div>
 </div>
 </div>
-</section>
-<section id="visualising-within_1km_primary-coefficients" class="level4">
-<h4 class="anchored" data-anchor-id="visualising-within_1km_primary-coefficients">Visualising WITHIN_1KM_PRIMARY Coefficients</h4>
+<p><strong>Visualising WITHIN_1KM_PRIMARY Coefficients</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb254"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb254-1"><a href="#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WITHIN_1KM_PRIMARY Coefficient</span></span>
 <span id="cb254-2"><a href="#cb254-2" aria-hidden="true" tabindex="-1"></a>WITHIN_1KM_PRIMARY_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
@@ -2635,7 +2603,6 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 <li><p><strong>PROX_PARKS:</strong>&nbsp;Typically negative (closer = higher price), though the effect varies in dense urban areas, suggesting green-space benefits are context-dependent.</p></li>
 <li><p><strong>WITHIN_1KM_PRIMARY:</strong>&nbsp;Highly mixed, with positive and negative effects occurring in similar proportions. School density influences prices differently by neighbourhood, reflecting traffic, congestion, and demand from families.</p></li>
 </ul>
-</section>
 </section>
 <section id="integrated-visualization-key-variable-coefficients" class="level3">
 <h3 class="anchored" data-anchor-id="integrated-visualization-key-variable-coefficients">5.3.4 Integrated Visualization: Key Variable Coefficients</h3>

@@ -1097,16 +1097,16 @@ Key coefficient ranges:
 
 These wide ranges highlight strong geographical differences in how accessibility and amenities influence price.
 
-## **Coefficient Sign Patterns**
+**Coefficient Sign Patterns**
 
 The coefficient sign analysis provides clearer insights into spatial patterns:
 
-### **Consistent Effects**
+**Consistent Effects**
 
 -   **AREA_SQM, FLOOR_LEVEL** → 100% positive\
     → Larger size and higher floor level universally increase prices.
 
-### **Strong tendencies**
+**Strong tendencies**
 
 -   **PROX_MRT** → 87.6% negative\
     → Closer MRT access increases price in most locations.
@@ -1114,7 +1114,7 @@ The coefficient sign analysis provides clearer insights into spatial patterns:
 -   **AGE** → 83.3% negative\
     → Older flats reduce price almost everywhere, with some local reversals.
 
-### **Mixed or Near-Balanced Effects**
+**Mixed or Near-Balanced Effects**
 
 -   **PROX_CBD:** 61.2% negative / 38.8% positive
 
@@ -1126,7 +1126,7 @@ The coefficient sign analysis provides clearer insights into spatial patterns:
 
 These variables show **context-dependent** effects, meaning the same amenity can raise or lower prices depending on the surrounding neighbourhood.
 
-## **Key Findings**
+**Key Findings**
 
 1.  **GWR clearly outperforms OLS**, confirming strong spatial heterogeneity in price determinants.
 
@@ -1223,7 +1223,7 @@ The Local R² map shows that the GWR model achieves an excellent fit across most
 
 We visualize the spatial distribution of coefficients for key variables of interest. For each variable, we create maps showing: 1. **Coefficient values**: The magnitude and direction of the relationship 2. **Standard Errors (SE)**: Reliability of the estimates 3. **t-values (TV)**: Statistical significance
 
-#### Visualising AREA_SQM Coefficients
+**Visualising AREA_SQM Coefficients**
 
 ```{r}
 # AREA_SQM Coefficient
@@ -1273,7 +1273,7 @@ AREA_SQM_SE
 AREA_SQM_TV
 ```
 
-#### Visualising PROX_MRT Coefficients
+**Visualising PROX_MRT Coefficients**
 
 ```{r}
 # PROX_MRT Coefficient
@@ -1323,7 +1323,7 @@ PROX_MRT_SE
 PROX_MRT_TV
 ```
 
-#### Visualising PROX_CBD Coefficients
+**Visualising PROX_CBD Coefficients**
 
 ```{r}
 # PROX_CBD Coefficient
@@ -1373,7 +1373,7 @@ PROX_CBD_SE
 PROX_CBD_TV
 ```
 
-#### Visualising PROX_PARKS Coefficients
+**Visualising PROX_PARKS Coefficients**
 
 ```{r}
 # PROX_PARKS Coefficient
@@ -1423,7 +1423,7 @@ PROX_PARKS_SE
 PROX_PARKS_TV
 ```
 
-#### Visualising FLOOR_LEVEL Coefficients
+**Visualising FLOOR_LEVEL Coefficients**
 
 ```{r}
 # FLOOR_LEVEL Coefficient
@@ -1473,7 +1473,7 @@ FLOOR_LEVEL_SE
 FLOOR_LEVEL_TV
 ```
 
-#### Visualising WITHIN_1KM_PRIMARY Coefficients
+**Visualising WITHIN_1KM_PRIMARY Coefficients**
 
 ```{r}
 # WITHIN_1KM_PRIMARY Coefficient
