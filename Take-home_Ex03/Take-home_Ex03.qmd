@@ -27,11 +27,35 @@ Housing is an essential component of household wealth worldwide. Purchasing a ho
 
 ## 2.1 The Packages
 
+This exercise relies on a set of R packages for data wrangling, spatial processing, modelling and visualisation:
+
+-   **sf**: Provides functions for handling vector geospatial data using the Simple Features standard (points, lines, polygons).
+-   **tidyverse**: A collection of packages (e.g., `dplyr`, `readr`, `ggplot2`) for data import, cleaning, transformation and plotting.
+-   **tmap**: Creates publication-quality static maps and interactive web maps for exploratory and presentation purposes.
+-   **GWmodel**: Implements Geographically Weighted Regression (GWR) and related geographically weighted methods.
+-   **httr / jsonlite / rvest**: Support API calls and web-scraping tasks used for geocoding and parsing external data (e.g., OneMap, KML).
+-   **corrplot / ggpubr**: Provide tools for correlation matrix visualisation and compact multipanel plots.
+-   **lubridate**: Simplifies working with dates and times when filtering by study period.
+
 ```{r}
 pacman::p_load(httr, tidyverse, sf, tmap, jsonlite, 
                GWmodel, olsrr, corrplot, ggpubr,
                performance, RColorBrewer, lubridate, rvest)
 ```
+
+## 2.2 Data Sources
+
+Several datasets are used to construct the structural and locational variables for the explanatory GWR model:
+
+| Dataset | Description | Format | Source |
+|-----------------|-----------------------|-----------------|-----------------|
+| HDB Resale Flat Prices (2017–2025) | Monthly resale transactions including flat type, floor area, lease information and resale price | CSV | Data.gov.sg (`Resale Flat Prices based on Registration Date from Jan 2017 onwards`) |
+| MP14_SUBZONE_NO_SEA_PL | Singapore planning subzone boundaries used as a base map | ESRI Shapefile | Data.gov.sg / SLA |
+| ELDERCARE | Locations of eldercare facilities | ESRI Shapefile | Data.gov.sg |
+| BusStop | Bus stop locations across Singapore | ESRI Shapefile | Data.gov.sg |
+| LTAMRTStationExitKML | MRT station exit locations used to derive station centroids | KML | LTA DataMall / Data.gov.sg |
+| NParksParksandNatureReserves | Parks and nature reserves used to compute park proximity | GeoJSON | NParks / Data.gov.sg |
+| Generalinformationofschools | School information (including primary school addresses) used to derive primary school density indicators | CSV | Data.gov.sg |
 
 # 3. Geospatial Data Wrangling
 
@@ -100,21 +124,17 @@ cat("Unique flat types:", unique(hdb_data$flat_type), "\n")
 
 **Observations:**
 
-The filtered dataset contains **18,184 transaction records** for the explanatory modelling period (January to September 2025). Validation checks confirm data quality and filtering accuracy:
+The filtered dataset contains 18,184 transaction records for the explanatory modelling period (January to September 2025). Validation checks confirm that the filtering process was applied correctly and the resulting dataset is reliable for further analysis.
 
--   **Temporal coverage**: All 9 months (2025-01 to 2025-09) are represented, with monthly transaction counts ranging from 1,733 (March) to 2,301 (July), reflecting typical HDB resale market activity patterns.
+**Temporal coverage:** All nine months (2025-01 to 2025-09) are represented, with monthly transaction counts ranging from 1,733 (March) to 2,301 (July), reflecting typical resale market activity patterns.
 
--   **Data quality**: All critical variables (block, street_name, resale_price) have been validated with zero missing values, ensuring data integrity for geocoding and subsequent analysis.
+**Data quality:** Key variables such as block, street_name, and resale_price contain zero missing values, ensuring clean input for geocoding and subsequent spatial modelling.
 
--   **Flat type distribution**: The dataset contains only the three specified flat types (3 ROOM: 4,898; 4 ROOM: 8,679; 5 ROOM: 4,607), with 4-room flats representing the largest segment (47.7%), consistent with Singapore's HDB housing stock composition.
+**Flat type distribution:** Only the selected flat types are present (3 ROOM: 4,898; 4 ROOM: 8,679; 5 ROOM: 4,607). The dominance of 4-room units (approximately 48%) aligns with national housing composition trends.
 
--   **Resale prices** range from SGD 285,000 to SGD 1,658,888 (median: SGD 620,000), showing substantial variation in HDB property values across Singapore. This wide range suggests diverse market segments and locations.
+**Price and structural characteristics:** Resale prices range from SGD 285,000 to SGD 1.66 million (median: SGD 620,000). Floor areas range from 52 to 174 sqm (median: 93 sqm), reflecting variation across housing types.
 
--   **Floor area** ranges from 52 to 174.3 square meters (median: 93 sqm), with variation expected across different flat types and developments.
-
--   **Lease commencement dates** span from 1966 to 2021, indicating a mix of older and newer HDB developments, which will be captured by the AGE variable in the model.
-
-This filtered dataset provides a robust foundation for geospatial analysis and GWR model calibration, with sufficient sample size (18,184 observations) and representative coverage of different flat types, price ranges, and temporal periods.
+**Lease characteristics:** Lease commencement dates span from 1966 to 2021, capturing both older and newer HDB developments. This diversity supports robust modelling of structural and locational effects.
 
 ## 3.3 Geocoding HDB Addresses
 
@@ -219,15 +239,13 @@ if (file.exists("data/rds/hdb_geocoded.rds")) {
 
 **Observations:**
 
-The geocoding process was completed successfully with **100% success rate** (18,184 out of 18,184 records), indicating excellent data quality and address completeness in the HDB resale dataset. This high success rate is exceptional and ensures that all transaction records can be accurately located for spatial analysis.
+The geocoding process achieved a 100% success rate (18,184 of 18,184 records), indicating excellent data quality and address completeness in the HDB resale dataset. All records were successfully assigned valid coordinates, allowing the full dataset to be used without any removals.
 
--   **Coordinate validation**: All geocoded coordinates fall within Singapore's geographic bounds (LATITUDE: 1.27° to 1.46° N; LONGITUDE: 103.69° to 103.99° E), confirming that the geocoding process correctly identified Singapore locations and did not produce erroneous coordinates outside the study area.
+All latitude and longitude values fall within Singapore’s expected geographic bounds (LAT 1.27°–1.46°, LONG 103.69°–103.99°). This confirms that the geocoding matched addresses accurately and produced no outliers outside the study area.
 
--   **Data completeness**: With zero failed geocoding attempts, no records need to be removed due to missing coordinates, maximizing the sample size for subsequent GWR model calibration.
+The coordinate ranges also show comprehensive spatial coverage across Singapore, from northern to southern regions and from western to eastern areas. This wide and balanced distribution ensures that geographically weighted regression can effectively capture local spatial variations.
 
--   **Spatial coverage**: The coordinate ranges indicate comprehensive spatial coverage across Singapore, from northern (1.46°N) to southern (1.27°N) regions, and from western (103.69°E) to eastern (103.99°E) areas, ensuring representative geographic distribution for geographically weighted regression analysis.
-
-This successful geocoding outcome provides a robust foundation for calculating location-based variables (proximity to amenities, CBD, MRT stations, etc.) and performing spatial analysis in subsequent steps.
+Overall, the successful geocoding outcome provides a strong and reliable foundation for constructing location-based variables (e.g., proximity to MRT stations, parks, supermarkets, CBD) and supports the spatial analysis required in subsequent modelling steps.
 
 ## 3.4 Converting to Spatial Data
 
@@ -278,17 +296,13 @@ cat("Expected Singapore bounds (SVY21): X ~20,000-50,000m, Y ~28,000-48,000m\n")
 
 **Observations:**
 
-The conversion to spatial data was successful with all validation checks passed:
+The conversion to spatial data was successfully completed, with all 18,184 records transformed into valid point geometries. The dataset was correctly projected to the SVY21 coordinate system (EPSG:3414), which uses meters as units and is essential for accurate distance-based calculations.
 
--   **Coordinate Reference System**: The data is correctly projected to SVY21 (EPSG:3414), Singapore's official projected coordinate system. This system uses meters as units, which is essential for accurate distance calculations in subsequent proximity variable computations.
+All geometries passed validation checks, with zero invalid points. This confirms that the transformation from latitude/longitude to spatial coordinates was performed accurately and without errors.
 
--   **Geometry validation**: All 18,184 features are valid point geometries, ensuring data integrity for spatial operations. No invalid geometries were detected, indicating successful conversion from latitude/longitude coordinates to spatial points.
+The bounding box values fall within Singapore’s expected SVY21 ranges (X: \~20,000–50,000m, Y: \~28,000–48,000m), reflecting appropriate spatial coverage across the island. These coordinate ranges also confirm that all features lie within Singapore’s geographic extent.
 
--   **Spatial coverage**: The bounding box confirms comprehensive coverage of Singapore's geographic extent in the SVY21 coordinate system, with coordinates in meters suitable for distance-based calculations.
-
--   **Data completeness**: With 100% geocoding success rate and successful spatial conversion, all 18,184 transaction records are ready for location-based variable calculations and GWR model calibration.
-
-The use of SVY21 is critical for this analysis because it allows accurate distance calculations in meters, which is essential for computing proximity variables (e.g., distance to bus stops, parks, MRT stations) in subsequent analysis. This projected coordinate system minimizes distortion for Singapore's geographic extent and provides precise measurements for spatial analysis.
+With complete and valid spatial features, the dataset is fully prepared for location-based variable creation and geographically weighted regression. The use of SVY21 ensures precise measurement of distances to amenities such as MRT stations, parks, and bus stops, supporting robust spatial analysis in the following steps.
 
 ## 3.5 Creating Structural Variables
 
@@ -357,11 +371,6 @@ summary(select(hdb_sf, AREA_SQM, FLOOR_LEVEL, REMAINING_LEASE_MONTHS, AGE, resal
 ```
 
 ```{r}
-# Check total number of records
-cat("Total number of HDB records:", nrow(hdb_sf), "\n")
-```
-
-```{r}
 # Validate structural variables creation
 cat("=== Structural Variables Validation ===\n")
 cat("Total records:", nrow(hdb_sf), "\n")
@@ -385,27 +394,37 @@ cat("Zero or negative AREA_SQM:", sum(hdb_sf$AREA_SQM <= 0, na.rm = TRUE), "(sho
 
 **Observations:**
 
-The structural variables were successfully created with **100% data completeness** (zero missing values) and **excellent data quality** (no negative or zero values). Validation confirms the following:
+The structural variables were successfully created with 100% completeness and no invalid values, providing a clean basis for modelling.
 
--   **AREA_SQM**: Floor area ranges from 52 to 174.3 square meters (median: 93 sqm), with variation expected across different flat types. The range is consistent with HDB flat sizes, from compact 3-room units to spacious 5-room units. All values are positive, indicating successful data extraction.
+-   **AREA_SQM:** Ranges from 52 to 174.3 sqm (median: 93 sqm), covering typical sizes from smaller 3-room to larger 5-room units.
 
--   **FLOOR_LEVEL**: Floor levels range from 2 to 50 (median: 8), representing the full spectrum of HDB developments from low-rise to high-rise blocks. The distribution shows that mid-to-high floor levels (median: 8, 3rd quartile: 11) are common, which aligns with typical HDB building heights and buyer preferences for units above ground level.
+-   **FLOOR_LEVEL:** Ranges from 2 to 50 (median: 8), reflecting a mix of low- to high-rise blocks with many units at mid-to-high floors.
 
--   **REMAINING_LEASE_MONTHS**: Remaining lease ranges from 481 to 1,147 months (approximately 40 to 95 years), with a median of 869 months (72 years). This range is consistent with HDB's 99-year lease system, and the distribution reflects the mix of older and newer developments in the dataset. All values are positive, confirming successful parsing of the text-based remaining lease field.
+-   **REMAINING_LEASE_MONTHS:** Ranges from 481 to 1,147 months (\~40–95 years, median: 869 months ≈ 72 years), consistent with the 99-year lease system and the mix of older and newer estates.
 
--   **AGE**: Flat age ranges from 4 to 59 years (median: 27 years), calculated from lease commencement dates (1966-2021). This wide range captures the evolution of HDB developments over time, from early estates to recent completions. The median age of 27 years suggests a balanced mix of older and newer properties, which is important for capturing age-related price effects.
+-   **AGE:** Ranges from 4 to 59 years (median: 27 years), indicating a balanced spread between mature and newer developments.
 
--   **Data quality**: All validation checks passed with zero missing values, zero negative values, and zero invalid entries, ensuring data integrity for subsequent GWR model calibration.
-
-These structural variables will serve as important predictors in the hedonic pricing model, capturing the intrinsic physical characteristics that buyers consider when purchasing HDB resale flats, independent of location effects.
+All validation checks (missing values, negative values, and impossible areas or lease lengths) returned zero issues, confirming strong data quality. These structural variables provide robust measures of intrinsic property characteristics to be used as predictors in the subsequent hedonic pricing and GWR models.
 
 ## 3.6 Creating Location Variables (Using Available Data)
 
-Location variables capture the neighborhood context and accessibility of HDB flats, which significantly influence property values. These variables measure proximity to amenities, services, and key locations that affect quality of life and convenience.
+Location variables capture the neighbourhood context and accessibility of HDB flats, which are key determinants of resale prices. Using the geospatial datasets currently available, the following location-based indicators are created:
 
-In this initial analysis, we create location variables using the geospatial data currently available: 1. **PROX_ELDERLYCARE**: Distance to the nearest eldercare facility 2. **PROX_CBD**: Distance to the Central Business District (Marina Bay area) 3. **PROX_MRT**: Distance to the nearest MRT station 4. **PROX_PARKS**: Distance to the nearest park or nature reserve 5. **PROX_BUS_STOP**: Distance to the nearest bus stop 6. **WITHIN_350M_BUS**: Number of bus stops within 350 meters 7. **WITHIN_1KM_PRIMARY**: Number of primary schools within 1 kilometer
+1.  **PROX_ELDERLYCARE** — Distance to the nearest eldercare facility
 
-Additional location variables (e.g., proximity to parks, schools, shopping malls) will be added once the corresponding geospatial datasets are obtained.
+2.  **PROX_CBD** — Distance to the Central Business District (Marina Bay)
+
+3.  **PROX_MRT** — Distance to the nearest MRT station
+
+4.  **PROX_PARKS** — Distance to the nearest park or nature reserve
+
+5.  **PROX_BUS_STOP** — Distance to the nearest bus stop
+
+6.  **WITHIN_350M_BUS** — Number of bus stops within 350 metres
+
+7.  **WITHIN_1KM_PRIMARY** — Number of primary schools within 1 kilometre
+
+These variables reflect accessibility and neighbourhood quality, which are known to influence housing values. Additional variables (e.g., proximity to shopping malls, hawker centres, childcare centres) will be incorporated once their corresponding geospatial datasets are collected and processed.
 
 ### 3.6.1 Importing Geospatial Reference Data
 
@@ -511,6 +530,9 @@ cat("Primary schools:", nrow(primary_schools), "schools\n")
 cat("\nAll reference data successfully imported and transformed to SVY21 (EPSG:3414)\n")
 ```
 
+**Interpretation (Reference Data)**\
+All reference layers (subzones, eldercare facilities, bus stops, MRT stations, parks, and primary schools) are successfully imported and transformed to **SVY21 (EPSG:3414)**. This ensures that all subsequent distance calculations are carried out in a consistent projected coordinate system using meters, which is essential for accurate proximity-based variables.
+
 ### 3.6.2 Calculate Proximity to Elderly Care
 
 ```{r}
@@ -521,6 +543,8 @@ distances_eldercare <- st_distance(hdb_sf, eldercare[nearest_eldercare, ], by_el
 hdb_sf <- hdb_sf %>%
   mutate(PROX_ELDERLYCARE = as.numeric(distances_eldercare))
 ```
+
+**PROX_ELDERLYCARE**: 0–4,781 m (median ≈ 614 m), indicating that most flats have reasonable access to eldercare facilities, with some located immediately adjacent to such services.
 
 ### 3.6.3 Calculate Proximity to CBD
 
@@ -535,9 +559,11 @@ hdb_sf <- hdb_sf %>%
   mutate(PROX_CBD = as.numeric(st_distance(geometry, cbd)))
 ```
 
+**PROX_CBD**: 644–20,228 m (median ≈ 13,478 m), reflecting Singapore’s compact geography and varying accessibility to the central business district. Flats closer to the CBD are expected to command higher prices.
+
 ### 3.6.4 Calculate Proximity to MRT Stations
 
-MRT (Mass Rapid Transit) stations are a key indicator of premium public transportation accessibility in Singapore. We calculate the distance to the nearest MRT station, which is expected to have a significant positive impact on property values.
+MRT (Mass Rapid Transit) stations are a key indicator of public transport accessibility in Singapore. I compute the distance to the nearest MRT station as a measure of accessibility, which is strongly associated with resale prices. Flats located closer to MRT stations generally command higher prices.
 
 ```{r}
 # Calculate distance to nearest MRT station
@@ -548,9 +574,11 @@ hdb_sf <- hdb_sf %>%
   mutate(PROX_MRT = as.numeric(distances_mrt))
 ```
 
+**PROX_MRT**: 34–3,574 m (median ≈ 571 m), suggesting that the majority of flats are within walkable distance to an MRT station, which is likely to have a strong influence on resale prices.
+
 ### 3.6.5 Calculate Proximity to Parks
 
-Parks and nature reserves contribute to quality of life and property values by providing recreational spaces and green amenities. We calculate the distance to the nearest park, which is expected to have a positive impact on property values.
+Parks and nature reserves enhance the quality of life by providing recreational spaces and green amenities. I calculate the distance to the nearest park, as proximity to green spaces is generally associated with higher property values.
 
 ```{r}
 # Calculate distance to nearest park
@@ -561,9 +589,11 @@ hdb_sf <- hdb_sf %>%
   mutate(PROX_PARKS = as.numeric(distances_park))
 ```
 
+**PROX_PARKS**: 6–1,954 m (median ≈ 478 m), showing generally good access to parks and nature reserves, which contributes to residential amenity and quality of life.
+
 ### 3.6.6 Calculate Number of Primary Schools within 1km
 
-Primary schools are an important factor for families with young children. We calculate the number of primary schools within 1 kilometer of each HDB flat, which reflects the accessibility to educational facilities.
+Primary schools are an important consideration for families with young children. I calculate the number of primary schools within 1 kilometer of each HDB flat to capture accessibility to educational facilities.
 
 ```{r}
 # Count primary schools within 1km buffer
@@ -573,9 +603,15 @@ hdb_sf <- hdb_sf %>%
   mutate(WITHIN_1KM_PRIMARY = map_int(within_1km_primary, length))
 ```
 
+**WITHIN_1KM_PRIMARY**: 0–9 schools (median = 3), reflecting variation in educational accessibility. Areas with more primary schools within 1 km are likely to be more attractive to families.
+
 ### 3.6.7 Calculate Proximity to Bus Stops
 
-Bus stops are a critical component of public transportation accessibility in Singapore. We calculate two variables: 1. **PROX_BUS_STOP**: Distance to the nearest bus stop 2. **WITHIN_350M_BUS**: Number of bus stops within 350 meters
+Bus stops are a critical component of public transportation accessibility in Singapore. I create two variables:
+
+1.  **PROX_BUS_STOP** — distance to the nearest bus stop
+
+2.  **WITHIN_350M_BUS** — number of bus stops within 350 meters
 
 ```{r}
 # Calculate distance to nearest bus stop
@@ -591,6 +627,10 @@ hdb_sf <- hdb_sf %>%
     WITHIN_350M_BUS = map_int(within_350m_bus, length)
   )
 ```
+
+**PROX_BUS_STOP**: 16–377 m (median ≈ 108 m), confirming very good coverage of bus services, with most flats within a short walking distance to the nearest bus stop.
+
+**WITHIN_350M_BUS**: 0–19 stops (median = 8), capturing differences in local bus-network density across neighbourhoods. Higher counts reflect stronger public transport connectivity.
 
 ```{r}
 # Summary of location variables created so far
@@ -627,31 +667,17 @@ cat("Negative distance values:", sum(hdb_sf$PROX_CBD < 0 | hdb_sf$PROX_ELDERLYCA
 cat("Negative count values:", sum(hdb_sf$WITHIN_350M_BUS < 0 | hdb_sf$WITHIN_1KM_PRIMARY < 0, na.rm = TRUE), "(should be 0)\n")
 ```
 
-**Observations:**
+**Interpretation**
 
-All location variables were successfully created with **100% data completeness** (zero missing values) and **excellent data quality** (no negative values). Validation confirms the following spatial patterns:
-
--   **PROX_CBD**: Distance to CBD ranges from 644 to 20,228 meters (approximately 0.6 to 20 km), with a median of 13,478 meters. This range reflects Singapore's compact geography, with most flats located within reasonable distance of the central business district. The distribution shows that flats closer to the CBD (lower distance values) are expected to command premium prices due to better accessibility to employment centers and amenities.
-
--   **PROX_ELDERLYCARE**: Distance to eldercare facilities ranges from 0 to 4,781 meters (median: 614 meters), indicating that most HDB flats have reasonable access to eldercare services. Some flats are located very close to eldercare facilities (minimum: 0 meters), which may be particularly relevant for multi-generational households or aging-in-place considerations.
-
--   **PROX_MRT**: Distance to the nearest MRT station ranges from 34 to 3,574 meters (median: 571 meters), demonstrating that most HDB flats have good access to MRT stations. The minimum distance of 34 meters indicates some flats are located very close to MRT stations, which is expected to have a significant positive impact on property values due to premium public transportation access.
-
--   **PROX_PARKS**: Distance to the nearest park or nature reserve ranges from 6 to 1,954 meters (median: 478 meters), showing that most HDB flats have good access to green spaces. The minimum distance of 6 meters indicates excellent park accessibility for some properties, which contributes to quality of life and may positively influence property values.
-
--   **PROX_BUS_STOP**: Distance to the nearest bus stop ranges from 16 to 377 meters (median: 108 meters), confirming that Singapore's HDB flats are well-served by bus stops. The short distances reflect Singapore's comprehensive public transport network, with most flats within walking distance of bus stops. The median distance of 108 meters indicates that most HDB flats are within a 2-minute walk of a bus stop, demonstrating excellent public transport accessibility.
-
--   **WITHIN_350M_BUS**: The number of bus stops within 350 meters ranges from 0 to 19 (median: 8), indicating varying levels of public transport density across different neighborhoods. Higher counts suggest better connectivity and accessibility, which may positively influence property values. The median of 8 bus stops within 350 meters demonstrates good public transport coverage.
-
--   **WITHIN_1KM_PRIMARY**: The number of primary schools within 1 kilometer ranges from 0 to 9 (median: 3), reflecting varying educational accessibility across Singapore. Areas with more primary schools within walking distance may be more attractive to families with young children, potentially influencing property values. The median of 3 schools suggests reasonable educational accessibility for most HDB flats.
-
-These location variables provide a comprehensive foundation for understanding spatial variation in HDB resale prices. The combination of proximity measures (distance to amenities) and count measures (density of facilities) captures both accessibility and neighborhood quality, which are essential for geographically weighted regression analysis.
+All location variables were successfully created with **100% completeness**, and no negative or invalid values were detected. The resulting ranges are realistic within Singapore’s urban context, confirming that these indicators are reliable inputs for the subsequent hedonic and Geographically Weighted Regression (GWR) modelling.
 
 ## 3.7 Data Validation
 
-Before proceeding to model calibration, it is crucial to validate the spatial data to ensure data quality and prevent potential issues in geographically weighted regression (GWR) analysis. One important validation step is checking for overlapping points, which can occur when multiple transactions occur at the same address (e.g., different units in the same block).
+Before calibrating the geographically weighted regression (GWR) model, it is essential to validate the spatial characteristics of the data. A key requirement of GWR is that **each observation must have a unique spatial coordinate**. However, HDB resale transactions often share identical coordinates because multiple units within the same block are geocoded to a single building point.
 
-GWR models require unique spatial locations for each observation. If multiple observations share the same coordinates, the model may produce unreliable results. We address this by applying spatial jitter, which adds a small random displacement to overlapping points while maintaining their approximate location.
+Duplicate coordinates can destabilize GWR calibration, causing numerical issues and unreliable parameter estimates. Therefore, overlapping points must be detected and corrected.
+
+### **3.7.1 Detecting Overlapping Points**
 
 ```{r}
 # Check for overlapping points (important for GWR)
@@ -660,6 +686,10 @@ overlapping_points <- hdb_sf %>%
 
 sum(overlapping_points$overlap)
 ```
+
+### **3.7.2 Applying Spatial Jitter**
+
+A small random displacement (jitter) is applied to retain the spatial pattern while ensuring unique coordinates for each observation.
 
 ```{r}
 # Apply spatial jitter if needed (small random displacement)
@@ -676,17 +706,24 @@ if (sum(overlapping_points$overlap) > 0) {
 }
 ```
 
-**Observations:**
+**Interpretation**
 
-The validation process identified **15,910 overlapping points** in the original dataset, which is expected for HDB resale transactions as multiple units in the same block share identical coordinates. This is a common issue in point data where multiple observations occur at the same location (e.g., different units in the same HDB block).
+-   **Overlapping points detection:**\
+    The validation identified **15,910 overlapping observations**, which is expected because many resale transactions occur within the same block and therefore share identical coordinates.
 
--   **Spatial jitter application**: A 1-meter random displacement was applied to all points to ensure unique spatial locations for GWR model calibration. This small displacement (1 meter) maintains the approximate location while ensuring each observation has a unique coordinate, which is essential for GWR model stability.
+-   **Jitter application:**\
+    A **1-meter spatial jitter** was applied to all HDB points.\
+    This minimal displacement preserves the true spatial distribution while ensuring each observation receives a unique coordinate required for GWR calibration.
 
--   **Post-jittering validation**: After applying spatial jitter, **all overlapping points were successfully resolved** (0 overlapping points remaining), confirming that each observation now has a unique spatial location. This validation step is critical because GWR models require unique spatial locations for each observation to produce reliable results.
+-   **Post-jitter validation:**\
+    After jittering, **all overlapping points were successfully resolved (0 remaining)**, confirming that the dataset now meets the unique-location requirement for GWR.
 
--   **Data quality preservation**: The spatial jitter maintains the representative spatial distribution of the original data while resolving the technical requirement for unique coordinates. The 1-meter displacement is negligible compared to the scale of analysis (Singapore-wide, where distances are measured in kilometers) and does not significantly affect distance calculations for proximity variables.
+-   **Effect on data quality:**\
+    The 1-meter adjustment is negligible relative to Singapore’s urban scale (distances typically range from hundreds of meters to several kilometers).\
+    Therefore, jittering does **not materially affect** any previously computed proximity variables (e.g., PROX_MRT, PROX_CBD, PROX_PARKS).
 
--   **GWR model readiness**: With all overlapping points resolved (0 remaining), the dataset is now fully prepared for GWR model calibration. Each of the 18,184 observations has a unique spatial location, ensuring stable and reliable local regression calculations across Singapore.
+-   **GWR readiness:**\
+    With all spatial duplicates resolved, the dataset of **18,184 unique points** is now fully suitable for reliable GWR calibration.
 
 ## 3.8 Save Processed Data
 
@@ -721,19 +758,17 @@ ggplot(data = hdb_sf, aes(x = resale_price)) +
 
 **Observations:**
 
-The histogram reveals a **right-skewed (positively skewed) unimodal distribution** of HDB resale prices, which is typical for property price data. Key characteristics of the distribution include:
+The resale price distribution is **right-skewed (positively skewed)**, which is typical for housing market data.
 
--   **Peak (Mode)**: The highest frequency (over 2,000 transactions) occurs around **600,000 SGD**, indicating that this price point represents the most common transaction value in the 2025 dataset.
+-   **Most common price range:** The majority of transactions fall between **500,000 and 750,000 SGD**, representing typical 4-room and 5-room units.
 
--   **Price concentration**: The bulk of transactions (highest frequencies) are concentrated between **500,000 SGD and 750,000 SGD**, reflecting the mid-range segment of the HDB resale market. This concentration aligns with typical 4-room and 5-room flat prices in Singapore.
+-   **Mode:** The peak occurs around **600,000 SGD**, indicating this is the most frequent transaction price in 2025.
 
--   **Price range**: Prices span from approximately **285,000 SGD to 1,658,888 SGD**, showing substantial variation across different flat types, locations, and property characteristics.
+-   **Range:** Prices span from **\~285,000 to \~1,658,888 SGD**, showing substantial variation across flat types and locations.
 
--   **Right tail**: The distribution gradually tapers off beyond 750,000 SGD, with very few transactions above 1,250,000 SGD. This right tail represents premium properties, likely larger flats (5-room) or units in prime locations with superior amenities.
+-   **Right tail:** A small number of high-value transactions (\>1.25M SGD) form a long tail, representing premium units or flats in highly desirable locations.
 
--   **Market structure**: The right-skewed pattern indicates that most HDB resale transactions occur at relatively lower to mid-range price points, with a diminishing number of transactions as prices increase. This distribution is consistent with Singapore's public housing market structure, where affordability is a key consideration.
-
--   **Model implications**: The right-skewed distribution suggests that a **log transformation** may be beneficial for model calibration to normalize the distribution, reduce the influence of extreme high-value transactions, and improve model fit for geographically weighted regression analysis.
+-   **Model implication:** The positive skew suggests that applying a **log transformation** to resale prices may help stabilize variance and improve GWR model performance.
 
 ## 4.2 Spatial Distribution of HDB Transactions
 
@@ -754,29 +789,28 @@ tm_shape(mpsz) +
 
 **Observations:**
 
-The spatial distribution map reveals **distinct geographic patterns** in HDB resale prices across Singapore, with clear evidence of spatial clustering:
+The spatial distribution of resale prices shows **clear geographic patterns** across Singapore:
 
--   **High-price clusters (dark red)**: Premium-priced transactions (775,000 to 1,658,888 SGD) are concentrated in several key areas:
+-   **High-price clusters (dark red):** Concentrated near the **Central Business District (CBD)**, **southern coastal regions**, and parts of the **eastern coast**. These areas likely benefit from superior accessibility and amenities.
 
-    -   **Southern coastal regions** near the Central Business District (CBD), reflecting proximity to employment centers and premium amenities
-    -   **Eastern coastal areas**, likely representing mature estates with established infrastructure and good connectivity
-    -   **Northern regions** in select areas, possibly newer developments or estates with superior amenities
-    -   **Central and western regions** in specific neighborhoods, indicating localized premium markets
+-   **Mid-range prices (orange):** Spread across most residential towns, reflecting the core of Singapore’s HDB resale market.
 
--   **Mid-range prices (orange to red-orange)**: Transactions in the 580,000 to 775,000 SGD range are widely distributed across Singapore, representing the majority of the HDB resale market. These are visible throughout most residential areas, indicating balanced price levels across different regions.
+-   **Lower-price transactions (yellow):** More common in towns **farther from the city centre** or in **older estates**, indicating lower accessibility or aging stock.
 
--   **Lower-price transactions (light yellow to orange)**: Lower-priced transactions (285,000 to 580,000 SGD) are relatively less common and appear scattered, primarily in:
+Additionally:
 
-    -   **Outlying areas** away from the city center
-    -   **Specific neighborhoods** that may have older developments or less developed infrastructure
+-   **Transaction density varies** across the island, with established towns showing higher activity.
 
--   **Transaction density**: The map shows varying transaction densities across Singapore, with some areas (particularly coastal regions and established towns) showing high transaction activity, while other areas (especially non-residential zones in the west and northwest) show sparse or no transactions.
+-   The pattern displays strong **spatial heterogeneity**, meaning that price levels differ systematically by location.
 
--   **Spatial heterogeneity**: The clear spatial clustering of high and low prices demonstrates that **location significantly influences HDB resale prices**. This spatial heterogeneity strongly supports the use of geographically weighted regression (GWR) methods, which can capture location-specific relationships between explanatory variables and resale prices that may vary across different neighborhoods and regions of Singapore.
+### **Model Implication**
+
+The presence of **distinct spatial clusters** indicates that the relationship between explanatory variables and resale prices **is not constant across space**.\
+This justifies the use of **Geographically Weighted Regression (GWR)**, which accounts for spatially varying relationships.
 
 ## 4.3 Correlation Analysis
 
-Correlation analysis helps identify relationships between explanatory variables and the dependent variable (resale price). It also reveals potential multicollinearity issues, where highly correlated independent variables may cause problems in regression models.
+Correlation analysis helps identify key explanatory variables associated with resale prices and highlights potential multicollinearity issues that may influence model calibration.
 
 ```{r}
 # Select numeric variables for correlation
@@ -796,45 +830,51 @@ corrplot(numeric_vars,
 
 **Observations:**
 
-The correlation matrix reveals several important relationships between explanatory variables and resale prices, as well as potential multicollinearity issues:
+#### **Strong correlations with resale price**
 
-**Strong correlations with resale_price:**
+-   **AREA_SQM:** Very strong positive correlation → larger flats have higher resale prices; strongest structural predictor.
 
--   **AREA_SQM**: Shows a **very strong positive correlation** (likely \> 0.8, dark blue), indicating that larger flat areas are strongly associated with higher resale prices. This is the strongest predictor among structural variables, which is expected as floor area is a primary determinant of property value.
+-   **AGE:** Strong negative correlation → older flats tend to be significantly cheaper, reflecting both depreciation and reduced lease tenure.
 
--   **AGE**: Exhibits a **very strong negative correlation** (likely \< -0.8, dark red), suggesting that older flats tend to have significantly lower resale prices. This reflects both the physical depreciation of older buildings and their shorter remaining lease periods.
+#### **Moderate correlations**
 
-**Moderate correlations with resale_price:**
+-   **REMAINING_LEASE_MONTHS:** Moderately positive → flats with longer remaining leases command higher prices.
 
--   **REMAINING_LEASE_MONTHS**: Has a **moderate positive correlation** (likely around 0.4-0.6, blue), indicating that flats with longer remaining leases command higher prices. This reflects the value of lease tenure security in Singapore's leasehold system.
+-   **FLOOR_LEVEL:** Moderately positive → higher-floor units are more valuable, likely due to better views and less noise.
 
--   **FLOOR_LEVEL**: Shows a **moderate positive correlation** (likely around 0.4-0.6, blue), indicating that higher floor levels are associated with higher prices. This likely reflects buyer preferences for better views, less noise, and improved ventilation at higher floors.
+-   **PROX_CBD:** Moderately negative → flats closer to the CBD are generally more expensive.
 
--   **PROX_CBD**: Displays a **moderate negative correlation** (likely around -0.2 to -0.4, reddish), indicating that closer proximity to the Central Business District (lower distance values) is associated with higher resale prices. This reflects the premium value of accessibility to employment centers and urban amenities.
+#### **Weak correlations**
 
-**Weak correlations with resale_price:**
+-   **PROX_ELDERLYCARE, PROX_MRT, PROX_PARKS, PROX_BUS_STOP:** Weak negative associations, suggesting minor price premiums for closer proximity.
 
--   **PROX_ELDERLYCARE**, **PROX_MRT**, **PROX_PARKS**, **PROX_BUS_STOP**: All show **weak negative correlations** (light reddish, likely around -0.2 to 0), suggesting that closer proximity to these amenities is associated with slightly higher prices, though the relationships are relatively modest in the linear correlation analysis.
+-   **WITHIN_350M_BUS, WITHIN_1KM_PRIMARY:** Weak positive associations, reflecting slight price advantages in areas with denser transport or school accessibility.
 
--   **WITHIN_350M_BUS** and **WITHIN_1KM_PRIMARY**: Show **weak positive correlations** (light bluish, likely around 0 to 0.2), suggesting that higher densities of bus stops and primary schools within proximity are associated with slightly higher property values, though the relationships are relatively modest.
+#### **Multicollinearity considerations**
 
-**Multicollinearity concerns:**
+-   **AGE ↔ REMAINING_LEASE_MONTHS:** Very strong negative correlation (expected; older flats have shorter remaining leases).\
+    → Both retained because they capture distinct effects (physical depreciation vs. tenure security).
 
--   **AGE and REMAINING_LEASE_MONTHS**: There is a **very strong negative correlation** (likely \< -0.8, dark red) between these two variables, which is expected as older flats naturally have fewer remaining lease months. This indicates significant multicollinearity. However, both variables may provide complementary information: AGE captures building condition and physical depreciation, while REMAINING_LEASE_MONTHS captures legal tenure security. Both may be retained in the GWR model, as geographically weighted methods can handle multicollinearity better than global OLS models, and the local nature of GWR may reveal spatial variations in how these variables influence prices.
+-   **PROX_BUS_STOP ↔ WITHIN_350M_BUS:** Strong negative correlation (closer proximity often implies more nearby stops).\
+    → One measures proximity; the other measures density—GWR can reveal where each matters more.
 
--   **PROX_BUS_STOP and WITHIN_350M_BUS**: There is a **very strong negative correlation** (likely \< -0.8, dark red) between proximity to the nearest bus stop and the count of bus stops within 350 meters. This is expected, as shorter distances to the nearest bus stop often correlate with more bus stops available within a close radius. Both variables capture different aspects of public transport accessibility (proximity vs. density), and the GWR model can help determine which aspect is more influential in different spatial contexts.
+### **Model implications**
 
-**Model implications:**
+-   AREA_SQM and AGE are primary predictors and will strongly influence model calibration.
 
-These correlation patterns provide initial insights into the factors influencing HDB resale prices and guide variable selection for GWR model calibration. The strong correlations with AREA_SQM and AGE suggest these will be key predictors, while the moderate correlations with REMAINING_LEASE_MONTHS, FLOOR_LEVEL, and PROX_CBD indicate their importance. The weak correlations with location variables suggest that their effects may be more nuanced and spatially varying, which GWR is well-suited to capture. The multicollinearity between AGE and REMAINING_LEASE_MONTHS, and between PROX_BUS_STOP and WITHIN_350M_BUS, will be monitored during model calibration, but GWR's local regression approach may help mitigate concerns by allowing these relationships to vary spatially.
+-   REMAINING_LEASE_MONTHS, FLOOR_LEVEL, and PROX_CBD also show meaningful relationships.
+
+-   Weak correlations for most location variables suggest that their effects may be spatially heterogeneous—an effect GWR is well-suited to capture.
+
+-   Although some multicollinearity exists, GWR’s local regression structure typically handles it better than global OLS models.
 
 # 5. Building Geographically Weighted Regression Models
 
-Following the approach outlined in Hands-on Exercise 7, we will build GWR models to capture spatial heterogeneity in HDB resale price determinants. As per the exercise instructions, we skip the OLS baseline model (Section 13.8) and proceed directly to GWR model calibration (Section 13.9).
+This section calibrates Geographically Weighted Regression (GWR) models to capture spatial heterogeneity in the determinants of HDB resale prices. The focus is on an adaptive-bandwidth GWR specification, which is suitable for point data and irregularly distributed observations.
 
 ## 5.1 Preparing Data for GWR
 
-Before calibrating the GWR model, we need to ensure the data is properly formatted and convert it to the appropriate spatial format required by GWmodel.
+Before model calibration, the sf object is converted into a SpatialPointsDataFrame, which is the required spatial format for the **GWmodel** package.
 
 ```{r}
 # Convert sf to SpatialPointsDataFrame for GWmodel
@@ -843,11 +883,9 @@ hdb_sp <- as_Spatial(hdb_sf)
 
 ## 5.2 Building Adaptive Bandwidth GWR Model
 
-Adaptive bandwidth is preferred for point data as it adjusts the number of neighbors based on local data density, making it more suitable for irregularly distributed observations.
-
 ### 5.2.1 Computing the Adaptive Bandwidth
 
-We use the `bw.gwr()` function with the AIC approach to determine the optimal number of nearest neighbors for the adaptive bandwidth.
+Adaptive bandwidth is preferred for point data because it automatically adjusts the number of neighbours according to local data density.
 
 ```{r}
 #| eval: false
@@ -879,11 +917,12 @@ if (file.exists("data/rds/bw_adaptive.rds")) {
 bw.adaptive
 ```
 
-The bandwidth value represents the number of nearest neighbors to include in each local regression. A smaller value indicates more localized models, while a larger value approaches global regression.
+In this analysis, the optimal **adaptive bandwidth** is 81 nearest neighbours.\
+A smaller bandwidth would produce highly localised models, while a much larger bandwidth would approximate a global regression.
 
 ### 5.2.2 Constructing the Adaptive Bandwidth GWR Model
 
-Once the optimal bandwidth is determined, we calibrate the GWR model using `gwr.basic()`.
+Once the optimal bandwidth is available, the GWR model is calibrated using `gwr.basic()`. As with the bandwidth, the calibrated model is saved and reloaded in subsequent runs to avoid repeating the time-consuming computation.
 
 ```{r}
 # Load GWR model if file exists, otherwise calibrate it
@@ -911,6 +950,16 @@ if (file.exists("data/rds/gwr_adaptive.rds")) {
 # Display model summary
 gwr.adaptive
 ```
+
+The `gwr.basic()` output includes both:
+
+-   an embedded **global OLS regression** (used here as a baseline), and
+
+-   the **local GWR results** with spatially varying coefficients and diagnostics.
+
+### 5.2.3 Model Diagnostics and Coefficient Patterns
+
+To assess spatial heterogeneity, I examined the distribution and sign of the GWR coefficients across 18,184 locations. The coefficients were extracted from the GWR output and summarised to compute the proportion of positive and negative effects for each predictor.
 
 ```{r}
 # Analyze coefficient distributions to understand spatial patterns
@@ -1004,36 +1053,90 @@ cat("  Negative (older = lower price):", coef_sign_analysis$AGE_negative,
     "locations (", 100 - coef_sign_analysis$AGE_pct_positive, "%)\n")
 ```
 
-**Key Outputs:**
+**GWR Model Performance**
 
-**Model Performance:** - **AICc (GWR)**: 435,720.9 (vs. OLS: 462,527.6) - **Significant improvement** (lower is better) - **R² (GWR)**: 0.9635 (96.35%) - **Excellent model fit** (vs. OLS: 81.77%) - **Adjusted R² (GWR)**: 0.9602 (96.02%) - **Very high explanatory power** - **Effective number of parameters**: 1,506.28 (indicating substantial spatial variation) - **Adaptive bandwidth**: 81 nearest neighbours (optimal for this dataset)
+The adaptive-bandwidth GWR model shows a substantial improvement over the embedded global OLS model:
 
-**Global Regression (OLS) Baseline:** - **R²**: 0.8177 (81.77%) - Good but lower than GWR - **Significant variables**: AREA_SQM, FLOOR_LEVEL, AGE, PROX_CBD, PROX_ELDERLYCARE, PROX_MRT, PROX_PARKS, PROX_BUS_STOP, WITHIN_350M_BUS, WITHIN_1KM_PRIMARY - **Non-significant**: REMAINING_LEASE_MONTHS (p=0.747) - likely due to multicollinearity with AGE
+-   **R²:** 0.9635 (vs. OLS: 0.8177)
 
-**GWR Coefficient Ranges** (showing spatial variation): - **AREA_SQM**: 3,409 to 13,858 (median: 5,518) - **Consistently positive** across all locations (100% positive) - **FLOOR_LEVEL**: 1,362 to 8,325 (median: 4,580) - **Consistently positive** across all locations (100% positive) - **AGE**: -106,540 to 32,068 (median: -8,916) - **83.3% negative** (older = lower price), 16.7% positive (showing spatial variation) - **PROX_CBD**: -3,836 to 1,879 (median: -12) - **61.2% negative** (closer = higher price), 38.8% positive - **Mixed effects** with slight tendency toward negative - **PROX_MRT**: -2,439 to 2,156 (median: -70) - **87.6% negative** (closer = higher price), 12.4% positive - **Strong tendency toward negative** with spatial variation - **PROX_PARKS**: -563 to 985 (median: -13) - **60.6% negative** (closer = higher price), 39.4% positive - **Mixed effects** with slight tendency toward negative - **PROX_BUS_STOP**: -620 to 459 (median: -9) - **53.9% negative** (closer = higher price), 46.1% positive - **Nearly balanced**, mixed effects - **WITHIN_350M_BUS**: -16,315 to 19,844 (median: 341) - **55.8% positive** (more = higher price), 44.2% negative - **Mixed effects** with slight tendency toward positive - **WITHIN_1KM_PRIMARY**: -1,035,200 to 478,490 (median: -211) - **51.1% negative** (more = lower price), 48.9% positive - **Highly mixed effects** with extreme spatial variation (nearly balanced split)
+-   **Adjusted R²:** 0.9602
 
-**Key Findings:**
+-   **AICc:** 435,720.9 (vs. OLS: 462,527.6)
 
-1.  **GWR significantly outperforms OLS** (AICc improvement of \~26,807, R² improvement of \~14.6%)
+-   **Effective number of parameters:** 1,506.28
 
-2.  **Strong spatial heterogeneity** - coefficients vary substantially across Singapore, with many variables showing mixed effects (both positive and negative coefficients)
+This confirms that allowing coefficient variation across space provides a much better model fit compared to a global specification.
 
-3.  **Structural factors** (AREA_SQM, FLOOR_LEVEL) show **consistent positive effects** across all locations (100% positive), indicating universal importance
+**Coefficient Magnitudes and Spatial Variation**
 
-4.  **AGE shows strong negative tendency** (83.3% negative) but with notable spatial variation (16.7% positive in some areas)
+GWR reveals strong spatial variation in several predictors:
 
-5.  **Location factors show high spatial variation:**
+-   **Structural attributes (AREA_SQM, FLOOR_LEVEL)**\
+    → *100% positive across all locations*\
+    → consistent and stable determinants of resale price
 
-    -   **PROX_MRT**: Strong tendency (87.6% negative) - MRT proximity generally increases prices
-    -   **PROX_CBD, PROX_PARKS**: Slight tendency (60-61% negative) - Mixed effects
-    -   **PROX_BUS_STOP**: Nearly balanced (53.9% negative vs 46.1% positive)
-    -   **WITHIN_1KM_PRIMARY**: **Highly mixed** (51.1% negative vs 48.9% positive) - Nearly balanced split, indicating context-dependent effects where school density can either increase or decrease prices depending on location
+-   **Flat age (AGE)**\
+    → 83.3% negative, 16.7% positive\
+    → older flats generally command lower prices, but local exceptions exist
 
-6.  **The coefficient sign analysis reveals that "most" is only accurate for:**
+-   **Locational attributes**\
+    → show substantial spatial heterogeneity\
+    → direction and magnitude vary by neighbourhood context
 
-    -   AGE (83.3% negative)
-    -   PROX_MRT (87.6% negative)
-    -   Other location variables show mixed or nearly balanced effects, requiring careful interpretation
+Key coefficient ranges:
+
+-   AREA_SQM: 3,409 to 13,858
+
+-   FLOOR_LEVEL: 1,362 to 8,325
+
+-   PROX_MRT: –2,439 to 2,156
+
+-   PROX_CBD: –3,836 to 1,879
+
+-   WITHIN_1KM_PRIMARY: –1,035,200 to 478,490
+
+These wide ranges highlight strong geographical differences in how accessibility and amenities influence price.
+
+## **Coefficient Sign Patterns**
+
+The coefficient sign analysis provides clearer insights into spatial patterns:
+
+### **Consistent Effects**
+
+-   **AREA_SQM, FLOOR_LEVEL** → 100% positive\
+    → Larger size and higher floor level universally increase prices.
+
+### **Strong tendencies**
+
+-   **PROX_MRT** → 87.6% negative\
+    → Closer MRT access increases price in most locations.
+
+-   **AGE** → 83.3% negative\
+    → Older flats reduce price almost everywhere, with some local reversals.
+
+### **Mixed or Near-Balanced Effects**
+
+-   **PROX_CBD:** 61.2% negative / 38.8% positive
+
+-   **PROX_PARKS:** 60.6% negative / 39.4% positive
+
+-   **PROX_BUS_STOP:** \~54% negative / \~46% positive
+
+-   **WITHIN_1KM_PRIMARY:** \~51% negative / \~49% positive
+
+These variables show **context-dependent** effects, meaning the same amenity can raise or lower prices depending on the surrounding neighbourhood.
+
+## **Key Findings**
+
+1.  **GWR clearly outperforms OLS**, confirming strong spatial heterogeneity in price determinants.
+
+2.  **Structural attributes** (size, floor level) have uniform effects across Singapore.
+
+3.  **AGE and MRT proximity** show strong, consistent directional patterns but still exhibit spatial variation in magnitude.
+
+4.  **Most locational factors exhibit mixed effects**, suggesting that local context (e.g., neighbourhood desirability, development intensity) significantly alters how amenities relate to price.
+
+5.  The results demonstrate that a global model cannot fully capture the complex spatial variation present in HDB resale price dynamics.
 
 ::: callout-tip
 **Saving and Loading Model Results**
@@ -1046,7 +1149,12 @@ GWR model calibration is computationally intensive and time-consuming (may take 
 
 ## 5.3 Visualising GWR Output
 
-GWR results are stored in a SpatialPointsDataFrame (SDF) containing: - **Local R²**: Local model fit at each location - **Coefficients**: Variable coefficients at each location - **Standard Errors (SE)**: Reliability of coefficient estimates - **t-values (TV)**: Statistical significance of coefficients - **Predicted values**: Fitted values from GWR - **Residuals**: Difference between observed and predicted values
+GWR results are stored in a SpatialPointsDataFrame (SDF) that contains the following information at each transaction point: - **Local R²**: goodness-of-fit of the local model\
+- **Coefficients**: locally calibrated coefficients for each predictor\
+- **Standard errors (SE)**: uncertainty of the local coefficients\
+- **t-values (TV)**: local statistical significance of each predictor\
+- **Predicted values (yhat)**: fitted resale prices from GWR\
+- **Residuals**: differences between observed and predicted prices
 
 Before visualizing, we load the saved GWR model if it exists:
 
@@ -1075,6 +1183,18 @@ hdb_sf.gwr <- st_as_sf(gwr.adaptive$SDF) %>%
 glimpse(hdb_sf.gwr)
 ```
 
+The resulting `hdb_sf.gwr` object has 18,184 rows and 43 columns. It contains:
+
+-   **Local coefficients** (e.g., `AREA_SQM`, `FLOOR_LEVEL`, `AGE`, `PROX_MRT`, `WITHIN_1KM_PRIMARY`)
+
+-   **Standard errors** (e.g., `AREA_SQM_SE`, `AGE_SE`) and **t-values** (e.g., `AREA_SQM_TV`, `PROX_MRT_TV`)
+
+-   **Outcome-related fields** such as `y` (observed price), `yhat` (GWR-fitted price), `residual`, and `Local_R2`
+
+-   A **geometry** column storing point locations in SVY21 (EPSG:3414)
+
+This enriched sf object forms the basis for the thematic maps of local R², coefficients, and residuals in Sections 5.3.2 and 5.3.3.
+
 ### 5.3.2 Visualising Local R²
 
 Local R² measures the local model fit at each location, ranging from 0 to 1. Higher values indicate better local model performance.
@@ -1094,6 +1214,10 @@ tm_shape(mpsz) +
   tm_layout(title = "Local R² of GWR Model",
             title.position = c("center", "top"))
 ```
+
+**Observations:**
+
+The Local R² map shows that the GWR model achieves an excellent fit across most of Singapore, with values commonly above 0.90 and reaching up to 0.99 in several areas. Higher Local R² values are observed around the southern coastal region near the CBD and parts of the east and north, indicating that the selected structural and locational variables explain local price variation well in these neighbourhoods. In contrast, a few fringe locations exhibit slightly lower values (around 0.84–0.90), suggesting the presence of additional local factors not captured in the model. Overall, the Local R² distribution confirms that the GWR model effectively captures spatial variation in HDB resale prices.
 
 ### 5.3.3 Visualising Coefficient Estimates
 
@@ -1365,17 +1489,17 @@ tmap_arrange(WITHIN_1KM_PRIMARY_coef, WITHIN_1KM_PRIMARY_SE, WITHIN_1KM_PRIMARY_
 
 **Observations:**
 
--   **AREA_SQM**: The coefficient for floor area is positive across all locations, with larger values observed in the central and eastern parts of Singapore. This indicates that larger flats command higher prices everywhere, but the price premium per additional square metre is stronger in more central, accessible locations.
+-   **AREA_SQM:** Positive everywhere, with stronger premiums in central/eastern areas, indicating a higher marginal value of space in more accessible locations.
 
--   **FLOOR_LEVEL**: The floor-level coefficient is consistently positive island-wide, and the t-values are very high, showing a statistically strong high-floor premium throughout the HDB market. The premium is particularly pronounced in the central and eastern regions, where higher floors are likely valued for better views, privacy, and reduced noise.
+-   **FLOOR_LEVEL:** Consistently positive with strong statistical significance. The high-floor premium is most pronounced in central/eastern regions due to better views and reduced noise.
 
--   **PROX_MRT**: In most locations, the coefficient for distance to MRT is negative and highly significant, meaning that flats closer to MRT stations tend to have higher resale prices. The effect is strongest along major MRT corridors and around the city centre, confirming that MRT accessibility is a key locational advantage.
+-   **PROX_MRT:** Mostly negative and highly significant, showing that MRT accessibility strongly increases prices—especially along major corridors and near the city centre.
 
--   **PROX_CBD**: Distance to the CBD shows an overall negative tendency (closer = higher price), but with some areas—especially in the north and west or near regional centres—where the effect is weak or even positive. This suggests that while CBD accessibility matters for many neighbourhoods, local employment and service centres can partially substitute for CBD proximity in others.
+-   **PROX_CBD:** Generally negative (closer = higher price), but the effect weakens or reverses in the north and west, where regional centres substitute for CBD access.
 
--   **PROX_PARKS**: In several areas, being closer to parks and nature reserves is associated with higher prices (negative coefficients), reflecting the value of green-space accessibility. However, in some dense urban or mixed-use areas the effect is weak or even positive, indicating that park proximity is a context-dependent amenity rather than a uniform price premium.
+-   **PROX_PARKS:** Typically negative (closer = higher price), though the effect varies in dense urban areas, suggesting green-space benefits are context-dependent.
 
--   **WITHIN_1KM_PRIMARY**: The coefficient for the number of primary schools within 1 km is highly mixed, with positive and negative values occurring in almost equal proportions and with very large magnitudes in some locations. This implies that school density can either increase prices (in family- and school-oriented neighbourhoods) or decrease them (in already congested areas with traffic and noise), and should therefore be interpreted as a strongly location-specific factor rather than a uniform benefit.
+-   **WITHIN_1KM_PRIMARY:** Highly mixed, with positive and negative effects occurring in similar proportions. School density influences prices differently by neighbourhood, reflecting traffic, congestion, and demand from families.
 
 ### 5.3.4 Integrated Visualization: Key Variable Coefficients
 
@@ -1472,7 +1596,11 @@ tmap_arrange(AREA_SQM_map, FLOOR_LEVEL_map,
 
 **Observations:**
 
-The integrated coefficient maps highlight clear differences between structural and locational factors in shaping HDB resale prices. **Structural factors** (AREA_SQM and FLOOR_LEVEL) show consistently positive coefficients across Singapore, with stronger effects in central and eastern regions, indicating that larger floor area and higher floors are universally valued but command higher premiums in more central, accessible locations. In contrast, **locational factors** (PROX_CBD, PROX_MRT, PROX_PARKS, WITHIN_1KM_PRIMARY) exhibit much stronger spatial variation: accessibility-related variables, especially PROX_MRT and PROX_CBD, are predominantly negative but vary in strength across different corridors, while park proximity and primary school density display mixed positive and negative effects. Together, these patterns confirm that structural characteristics drive prices in a broadly similar way island-wide, whereas the influence of location is highly context-dependent and varies substantially across neighbourhoods, reinforcing the need for geographically weighted methods to capture spatial heterogeneity.
+The integrated coefficient maps reveal a clear contrast between structural and locational factors in explaining HDB resale prices. Structural variables such as AREA_SQM and FLOOR_LEVEL show consistently positive effects across Singapore, with stronger premiums in central and eastern regions. This indicates that larger flats and higher floors are universally valued, but their marginal benefits increase in more accessible locations.
+
+In contrast, locational variables display substantial spatial variation. Accessibility measures—especially PROX_MRT and PROX_CBD—are predominantly negative, meaning closer proximity tends to increase prices, but the strength of this effect varies across MRT corridors and subregions. Amenities such as parks and primary schools show mixed positive and negative effects, reflecting their context-dependent influence.
+
+Overall, these patterns highlight that structural attributes exert a stable influence island-wide, whereas locational characteristics are highly neighbourhood-specific, underscoring the importance of GWR for capturing spatial heterogeneity in housing markets.
 
 ### 5.3.5 Visualising Coefficient Distributions
 
@@ -1539,3 +1667,7 @@ From a structural perspective, **floor area (AREA_SQM) and floor level (FLOOR_LE
 Locational factors display **much stronger spatial heterogeneity**, highlighting the value of a geographically weighted approach. **MRT accessibility (PROX_MRT)** generally increases prices, with stronger and more significant effects along major MRT corridors and around the city centre, while **CBD proximity (PROX_CBD)** also tends to raise prices but with weaker and more mixed patterns, especially in towns anchored by strong regional centres. **Park proximity (PROX_PARKS)** and **primary school density (WITHIN_1KM_PRIMARY)** exhibit highly mixed effects: in some family- and amenity-oriented neighbourhoods, being near parks or having more schools within 1 km is associated with higher prices, whereas in already congested or noisy environments these features can be associated with lower prices. These mixed patterns suggest that such amenities act as context-dependent factors whose impact is shaped by broader neighbourhood characteristics.
 
 Overall, the GWR results show that **structural attributes provide a stable “base value” for HDB resale prices**, while **locational attributes modulate this base value in different ways across Singapore**, creating local price regimes. For practitioners and policymakers, this implies that interventions aimed at enhancing accessibility (e.g., MRT expansion) or neighbourhood amenities (parks, schools) will not have uniform price impacts; their effectiveness depends on local context and existing urban structure. For future work, additional variables capturing internal flat quality, micro-level views, and detailed neighbourhood socio-economic profiles could further refine the model, but the current analysis already provides a robust, spatially explicit explanation of the key drivers of HDB resale prices during the 2025 study period.
+
+### References
+
+-   Kam, T. S. (2024). *R for Geospatial Data Science and Analytics*. [https://r4gdsa.netlify.app](https://r4gdsa.netlify.app/)
