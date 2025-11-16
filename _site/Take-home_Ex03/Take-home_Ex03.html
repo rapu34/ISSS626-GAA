@@ -426,10 +426,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Several datasets are used to construct the structural and locational variables for the explanatory GWR model:</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 22%">
-<col style="width: 31%">
-<col style="width: 22%">
-<col style="width: 22%">
+<col style="width: 23%">
+<col style="width: 29%">
+<col style="width: 23%">
+<col style="width: 23%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -2253,13 +2253,31 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 <span id="cb239-34"><a href="#cb239-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
 <span id="cb239-35"><a href="#cb239-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
 <span id="cb239-36"><a href="#cb239-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb239-37"><a href="#cb239-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange maps side by side</span></span>
-<span id="cb239-38"><a href="#cb239-38" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(AREA_SQM_coef, AREA_SQM_SE, AREA_SQM_TV,</span>
-<span id="cb239-39"><a href="#cb239-39" aria-hidden="true" tabindex="-1"></a>             <span class="at">asp =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">sync =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb239-37"><a href="#cb239-37" aria-hidden="true" tabindex="-1"></a><span class="co">#  maps</span></span>
+<span id="cb239-38"><a href="#cb239-38" aria-hidden="true" tabindex="-1"></a><span class="co"># AREA_SQM Coefficient</span></span>
+<span id="cb239-39"><a href="#cb239-39" aria-hidden="true" tabindex="-1"></a>AREA_SQM_coef</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb240"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb240-1"><a href="#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AREA_SQM Standard Error</span></span>
+<span id="cb240-2"><a href="#cb240-2" aria-hidden="true" tabindex="-1"></a>AREA_SQM_SE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-41-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb241"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb241-1"><a href="#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AREA_SQM t-value</span></span>
+<span id="cb241-2"><a href="#cb241-2" aria-hidden="true" tabindex="-1"></a>AREA_SQM_TV</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-41-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2268,49 +2286,67 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 <section id="visualising-prox_mrt-coefficients" class="level4">
 <h4 class="anchored" data-anchor-id="visualising-prox_mrt-coefficients">Visualising PROX_MRT Coefficients</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb240"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb240-1"><a href="#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_MRT Coefficient</span></span>
-<span id="cb240-2"><a href="#cb240-2" aria-hidden="true" tabindex="-1"></a>PROX_MRT_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb240-3"><a href="#cb240-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb240-4"><a href="#cb240-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb240-5"><a href="#cb240-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_MRT"</span>,</span>
-<span id="cb240-6"><a href="#cb240-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb240-7"><a href="#cb240-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb240-8"><a href="#cb240-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
-<span id="cb240-9"><a href="#cb240-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_MRT Coefficient"</span>,</span>
-<span id="cb240-10"><a href="#cb240-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb240-11"><a href="#cb240-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb240-12"><a href="#cb240-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb240-13"><a href="#cb240-13" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_MRT Standard Error</span></span>
-<span id="cb240-14"><a href="#cb240-14" aria-hidden="true" tabindex="-1"></a>PROX_MRT_SE <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb240-15"><a href="#cb240-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb240-16"><a href="#cb240-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb240-17"><a href="#cb240-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_MRT_SE"</span>,</span>
-<span id="cb240-18"><a href="#cb240-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb240-19"><a href="#cb240-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb240-20"><a href="#cb240-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"YlOrRd"</span>,</span>
-<span id="cb240-21"><a href="#cb240-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_MRT SE"</span>,</span>
-<span id="cb240-22"><a href="#cb240-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb240-23"><a href="#cb240-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb240-24"><a href="#cb240-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb240-25"><a href="#cb240-25" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_MRT t-value</span></span>
-<span id="cb240-26"><a href="#cb240-26" aria-hidden="true" tabindex="-1"></a>PROX_MRT_TV <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb240-27"><a href="#cb240-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb240-28"><a href="#cb240-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb240-29"><a href="#cb240-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_MRT_TV"</span>,</span>
-<span id="cb240-30"><a href="#cb240-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb240-31"><a href="#cb240-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb240-32"><a href="#cb240-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlGn"</span>,</span>
-<span id="cb240-33"><a href="#cb240-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_MRT t-value"</span>,</span>
-<span id="cb240-34"><a href="#cb240-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb240-35"><a href="#cb240-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb240-36"><a href="#cb240-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb240-37"><a href="#cb240-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange maps side by side</span></span>
-<span id="cb240-38"><a href="#cb240-38" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(PROX_MRT_coef, PROX_MRT_SE, PROX_MRT_TV,</span>
-<span id="cb240-39"><a href="#cb240-39" aria-hidden="true" tabindex="-1"></a>             <span class="at">asp =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">sync =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb242"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb242-1"><a href="#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_MRT Coefficient</span></span>
+<span id="cb242-2"><a href="#cb242-2" aria-hidden="true" tabindex="-1"></a>PROX_MRT_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb242-3"><a href="#cb242-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb242-4"><a href="#cb242-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb242-5"><a href="#cb242-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_MRT"</span>,</span>
+<span id="cb242-6"><a href="#cb242-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb242-7"><a href="#cb242-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb242-8"><a href="#cb242-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
+<span id="cb242-9"><a href="#cb242-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_MRT Coefficient"</span>,</span>
+<span id="cb242-10"><a href="#cb242-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb242-11"><a href="#cb242-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb242-12"><a href="#cb242-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb242-13"><a href="#cb242-13" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_MRT Standard Error</span></span>
+<span id="cb242-14"><a href="#cb242-14" aria-hidden="true" tabindex="-1"></a>PROX_MRT_SE <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb242-15"><a href="#cb242-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb242-16"><a href="#cb242-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb242-17"><a href="#cb242-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_MRT_SE"</span>,</span>
+<span id="cb242-18"><a href="#cb242-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb242-19"><a href="#cb242-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb242-20"><a href="#cb242-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"YlOrRd"</span>,</span>
+<span id="cb242-21"><a href="#cb242-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_MRT SE"</span>,</span>
+<span id="cb242-22"><a href="#cb242-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb242-23"><a href="#cb242-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb242-24"><a href="#cb242-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb242-25"><a href="#cb242-25" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_MRT t-value</span></span>
+<span id="cb242-26"><a href="#cb242-26" aria-hidden="true" tabindex="-1"></a>PROX_MRT_TV <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb242-27"><a href="#cb242-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb242-28"><a href="#cb242-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb242-29"><a href="#cb242-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_MRT_TV"</span>,</span>
+<span id="cb242-30"><a href="#cb242-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb242-31"><a href="#cb242-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb242-32"><a href="#cb242-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlGn"</span>,</span>
+<span id="cb242-33"><a href="#cb242-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_MRT t-value"</span>,</span>
+<span id="cb242-34"><a href="#cb242-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb242-35"><a href="#cb242-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb242-36"><a href="#cb242-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb242-37"><a href="#cb242-37" aria-hidden="true" tabindex="-1"></a><span class="co"># maps</span></span>
+<span id="cb242-38"><a href="#cb242-38" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_MRT Coefficient</span></span>
+<span id="cb242-39"><a href="#cb242-39" aria-hidden="true" tabindex="-1"></a>PROX_MRT_coef</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb243"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb243-1"><a href="#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_MRT Standard Error</span></span>
+<span id="cb243-2"><a href="#cb243-2" aria-hidden="true" tabindex="-1"></a>PROX_MRT_SE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-42-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb244"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb244-1"><a href="#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_MRT t-value</span></span>
+<span id="cb244-2"><a href="#cb244-2" aria-hidden="true" tabindex="-1"></a>PROX_MRT_TV</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-42-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2319,49 +2355,67 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 <section id="visualising-prox_cbd-coefficients" class="level4">
 <h4 class="anchored" data-anchor-id="visualising-prox_cbd-coefficients">Visualising PROX_CBD Coefficients</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb241"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb241-1"><a href="#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_CBD Coefficient</span></span>
-<span id="cb241-2"><a href="#cb241-2" aria-hidden="true" tabindex="-1"></a>PROX_CBD_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb241-3"><a href="#cb241-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb241-4"><a href="#cb241-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb241-5"><a href="#cb241-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_CBD"</span>,</span>
-<span id="cb241-6"><a href="#cb241-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb241-7"><a href="#cb241-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb241-8"><a href="#cb241-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
-<span id="cb241-9"><a href="#cb241-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_CBD Coefficient"</span>,</span>
-<span id="cb241-10"><a href="#cb241-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb241-11"><a href="#cb241-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb241-12"><a href="#cb241-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb241-13"><a href="#cb241-13" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_CBD Standard Error</span></span>
-<span id="cb241-14"><a href="#cb241-14" aria-hidden="true" tabindex="-1"></a>PROX_CBD_SE <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb241-15"><a href="#cb241-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb241-16"><a href="#cb241-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb241-17"><a href="#cb241-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_CBD_SE"</span>,</span>
-<span id="cb241-18"><a href="#cb241-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb241-19"><a href="#cb241-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb241-20"><a href="#cb241-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"YlOrRd"</span>,</span>
-<span id="cb241-21"><a href="#cb241-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_CBD SE"</span>,</span>
-<span id="cb241-22"><a href="#cb241-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb241-23"><a href="#cb241-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb241-24"><a href="#cb241-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb241-25"><a href="#cb241-25" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_CBD t-value</span></span>
-<span id="cb241-26"><a href="#cb241-26" aria-hidden="true" tabindex="-1"></a>PROX_CBD_TV <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb241-27"><a href="#cb241-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb241-28"><a href="#cb241-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb241-29"><a href="#cb241-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_CBD_TV"</span>,</span>
-<span id="cb241-30"><a href="#cb241-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb241-31"><a href="#cb241-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb241-32"><a href="#cb241-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlGn"</span>,</span>
-<span id="cb241-33"><a href="#cb241-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_CBD t-value"</span>,</span>
-<span id="cb241-34"><a href="#cb241-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb241-35"><a href="#cb241-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb241-36"><a href="#cb241-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb241-37"><a href="#cb241-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange maps side by side</span></span>
-<span id="cb241-38"><a href="#cb241-38" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(PROX_CBD_coef, PROX_CBD_SE, PROX_CBD_TV,</span>
-<span id="cb241-39"><a href="#cb241-39" aria-hidden="true" tabindex="-1"></a>             <span class="at">asp =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">sync =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb245"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb245-1"><a href="#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_CBD Coefficient</span></span>
+<span id="cb245-2"><a href="#cb245-2" aria-hidden="true" tabindex="-1"></a>PROX_CBD_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb245-3"><a href="#cb245-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb245-4"><a href="#cb245-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb245-5"><a href="#cb245-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_CBD"</span>,</span>
+<span id="cb245-6"><a href="#cb245-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb245-7"><a href="#cb245-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb245-8"><a href="#cb245-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
+<span id="cb245-9"><a href="#cb245-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_CBD Coefficient"</span>,</span>
+<span id="cb245-10"><a href="#cb245-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb245-11"><a href="#cb245-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb245-12"><a href="#cb245-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-13"><a href="#cb245-13" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_CBD Standard Error</span></span>
+<span id="cb245-14"><a href="#cb245-14" aria-hidden="true" tabindex="-1"></a>PROX_CBD_SE <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb245-15"><a href="#cb245-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb245-16"><a href="#cb245-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb245-17"><a href="#cb245-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_CBD_SE"</span>,</span>
+<span id="cb245-18"><a href="#cb245-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb245-19"><a href="#cb245-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb245-20"><a href="#cb245-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"YlOrRd"</span>,</span>
+<span id="cb245-21"><a href="#cb245-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_CBD SE"</span>,</span>
+<span id="cb245-22"><a href="#cb245-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb245-23"><a href="#cb245-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb245-24"><a href="#cb245-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-25"><a href="#cb245-25" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_CBD t-value</span></span>
+<span id="cb245-26"><a href="#cb245-26" aria-hidden="true" tabindex="-1"></a>PROX_CBD_TV <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb245-27"><a href="#cb245-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb245-28"><a href="#cb245-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb245-29"><a href="#cb245-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_CBD_TV"</span>,</span>
+<span id="cb245-30"><a href="#cb245-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb245-31"><a href="#cb245-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb245-32"><a href="#cb245-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlGn"</span>,</span>
+<span id="cb245-33"><a href="#cb245-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_CBD t-value"</span>,</span>
+<span id="cb245-34"><a href="#cb245-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb245-35"><a href="#cb245-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb245-36"><a href="#cb245-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb245-37"><a href="#cb245-37" aria-hidden="true" tabindex="-1"></a><span class="co"># maps</span></span>
+<span id="cb245-38"><a href="#cb245-38" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_CBD Coefficient</span></span>
+<span id="cb245-39"><a href="#cb245-39" aria-hidden="true" tabindex="-1"></a>PROX_CBD_coef</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb246"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb246-1"><a href="#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_CBD Standard Error</span></span>
+<span id="cb246-2"><a href="#cb246-2" aria-hidden="true" tabindex="-1"></a>PROX_CBD_SE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-43-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb247"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb247-1"><a href="#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_CBD t-value</span></span>
+<span id="cb247-2"><a href="#cb247-2" aria-hidden="true" tabindex="-1"></a>PROX_CBD_TV</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-43-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2370,49 +2424,67 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 <section id="visualising-prox_parks-coefficients" class="level4">
 <h4 class="anchored" data-anchor-id="visualising-prox_parks-coefficients">Visualising PROX_PARKS Coefficients</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb242"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb242-1"><a href="#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_PARKS Coefficient</span></span>
-<span id="cb242-2"><a href="#cb242-2" aria-hidden="true" tabindex="-1"></a>PROX_PARKS_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb242-3"><a href="#cb242-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb242-4"><a href="#cb242-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb242-5"><a href="#cb242-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_PARKS"</span>,</span>
-<span id="cb242-6"><a href="#cb242-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb242-7"><a href="#cb242-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb242-8"><a href="#cb242-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
-<span id="cb242-9"><a href="#cb242-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_PARKS Coefficient"</span>,</span>
-<span id="cb242-10"><a href="#cb242-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb242-11"><a href="#cb242-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb242-12"><a href="#cb242-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb242-13"><a href="#cb242-13" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_PARKS Standard Error</span></span>
-<span id="cb242-14"><a href="#cb242-14" aria-hidden="true" tabindex="-1"></a>PROX_PARKS_SE <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb242-15"><a href="#cb242-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb242-16"><a href="#cb242-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb242-17"><a href="#cb242-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_PARKS_SE"</span>,</span>
-<span id="cb242-18"><a href="#cb242-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb242-19"><a href="#cb242-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb242-20"><a href="#cb242-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"YlOrRd"</span>,</span>
-<span id="cb242-21"><a href="#cb242-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_PARKS SE"</span>,</span>
-<span id="cb242-22"><a href="#cb242-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb242-23"><a href="#cb242-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb242-24"><a href="#cb242-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb242-25"><a href="#cb242-25" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_PARKS t-value</span></span>
-<span id="cb242-26"><a href="#cb242-26" aria-hidden="true" tabindex="-1"></a>PROX_PARKS_TV <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb242-27"><a href="#cb242-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb242-28"><a href="#cb242-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb242-29"><a href="#cb242-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_PARKS_TV"</span>,</span>
-<span id="cb242-30"><a href="#cb242-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb242-31"><a href="#cb242-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb242-32"><a href="#cb242-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlGn"</span>,</span>
-<span id="cb242-33"><a href="#cb242-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_PARKS t-value"</span>,</span>
-<span id="cb242-34"><a href="#cb242-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb242-35"><a href="#cb242-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb242-36"><a href="#cb242-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb242-37"><a href="#cb242-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange maps side by side</span></span>
-<span id="cb242-38"><a href="#cb242-38" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(PROX_PARKS_coef, PROX_PARKS_SE, PROX_PARKS_TV,</span>
-<span id="cb242-39"><a href="#cb242-39" aria-hidden="true" tabindex="-1"></a>             <span class="at">asp =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">sync =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb248"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb248-1"><a href="#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_PARKS Coefficient</span></span>
+<span id="cb248-2"><a href="#cb248-2" aria-hidden="true" tabindex="-1"></a>PROX_PARKS_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb248-3"><a href="#cb248-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb248-4"><a href="#cb248-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb248-5"><a href="#cb248-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_PARKS"</span>,</span>
+<span id="cb248-6"><a href="#cb248-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb248-7"><a href="#cb248-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb248-8"><a href="#cb248-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
+<span id="cb248-9"><a href="#cb248-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_PARKS Coefficient"</span>,</span>
+<span id="cb248-10"><a href="#cb248-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb248-11"><a href="#cb248-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb248-12"><a href="#cb248-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb248-13"><a href="#cb248-13" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_PARKS Standard Error</span></span>
+<span id="cb248-14"><a href="#cb248-14" aria-hidden="true" tabindex="-1"></a>PROX_PARKS_SE <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb248-15"><a href="#cb248-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb248-16"><a href="#cb248-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb248-17"><a href="#cb248-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_PARKS_SE"</span>,</span>
+<span id="cb248-18"><a href="#cb248-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb248-19"><a href="#cb248-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb248-20"><a href="#cb248-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"YlOrRd"</span>,</span>
+<span id="cb248-21"><a href="#cb248-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_PARKS SE"</span>,</span>
+<span id="cb248-22"><a href="#cb248-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb248-23"><a href="#cb248-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb248-24"><a href="#cb248-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb248-25"><a href="#cb248-25" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_PARKS t-value</span></span>
+<span id="cb248-26"><a href="#cb248-26" aria-hidden="true" tabindex="-1"></a>PROX_PARKS_TV <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb248-27"><a href="#cb248-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb248-28"><a href="#cb248-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb248-29"><a href="#cb248-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_PARKS_TV"</span>,</span>
+<span id="cb248-30"><a href="#cb248-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb248-31"><a href="#cb248-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb248-32"><a href="#cb248-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlGn"</span>,</span>
+<span id="cb248-33"><a href="#cb248-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_PARKS t-value"</span>,</span>
+<span id="cb248-34"><a href="#cb248-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb248-35"><a href="#cb248-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb248-36"><a href="#cb248-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb248-37"><a href="#cb248-37" aria-hidden="true" tabindex="-1"></a><span class="co"># maps</span></span>
+<span id="cb248-38"><a href="#cb248-38" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_PARKS Coefficient</span></span>
+<span id="cb248-39"><a href="#cb248-39" aria-hidden="true" tabindex="-1"></a>PROX_PARKS_coef</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-44-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb249"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb249-1"><a href="#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_PARKS Standard Error</span></span>
+<span id="cb249-2"><a href="#cb249-2" aria-hidden="true" tabindex="-1"></a>PROX_PARKS_SE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-44-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb250"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb250-1"><a href="#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PROX_PARKS t-value</span></span>
+<span id="cb250-2"><a href="#cb250-2" aria-hidden="true" tabindex="-1"></a>PROX_PARKS_TV</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-44-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2421,49 +2493,67 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 <section id="visualising-floor_level-coefficients" class="level4">
 <h4 class="anchored" data-anchor-id="visualising-floor_level-coefficients">Visualising FLOOR_LEVEL Coefficients</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb243"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb243-1"><a href="#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FLOOR_LEVEL Coefficient</span></span>
-<span id="cb243-2"><a href="#cb243-2" aria-hidden="true" tabindex="-1"></a>FLOOR_LEVEL_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb243-3"><a href="#cb243-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb243-4"><a href="#cb243-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb243-5"><a href="#cb243-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"FLOOR_LEVEL"</span>,</span>
-<span id="cb243-6"><a href="#cb243-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb243-7"><a href="#cb243-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb243-8"><a href="#cb243-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
-<span id="cb243-9"><a href="#cb243-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"FLOOR_LEVEL Coefficient"</span>,</span>
-<span id="cb243-10"><a href="#cb243-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb243-11"><a href="#cb243-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb243-12"><a href="#cb243-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb243-13"><a href="#cb243-13" aria-hidden="true" tabindex="-1"></a><span class="co"># FLOOR_LEVEL Standard Error</span></span>
-<span id="cb243-14"><a href="#cb243-14" aria-hidden="true" tabindex="-1"></a>FLOOR_LEVEL_SE <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb243-15"><a href="#cb243-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb243-16"><a href="#cb243-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb243-17"><a href="#cb243-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"FLOOR_LEVEL_SE"</span>,</span>
-<span id="cb243-18"><a href="#cb243-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb243-19"><a href="#cb243-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb243-20"><a href="#cb243-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"YlOrRd"</span>,</span>
-<span id="cb243-21"><a href="#cb243-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"FLOOR_LEVEL SE"</span>,</span>
-<span id="cb243-22"><a href="#cb243-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb243-23"><a href="#cb243-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb243-24"><a href="#cb243-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb243-25"><a href="#cb243-25" aria-hidden="true" tabindex="-1"></a><span class="co"># FLOOR_LEVEL t-value</span></span>
-<span id="cb243-26"><a href="#cb243-26" aria-hidden="true" tabindex="-1"></a>FLOOR_LEVEL_TV <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb243-27"><a href="#cb243-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb243-28"><a href="#cb243-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb243-29"><a href="#cb243-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"FLOOR_LEVEL_TV"</span>,</span>
-<span id="cb243-30"><a href="#cb243-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb243-31"><a href="#cb243-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb243-32"><a href="#cb243-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlGn"</span>,</span>
-<span id="cb243-33"><a href="#cb243-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"FLOOR_LEVEL t-value"</span>,</span>
-<span id="cb243-34"><a href="#cb243-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb243-35"><a href="#cb243-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb243-36"><a href="#cb243-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb243-37"><a href="#cb243-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange maps side by side</span></span>
-<span id="cb243-38"><a href="#cb243-38" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(FLOOR_LEVEL_coef, FLOOR_LEVEL_SE, FLOOR_LEVEL_TV,</span>
-<span id="cb243-39"><a href="#cb243-39" aria-hidden="true" tabindex="-1"></a>             <span class="at">asp =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">sync =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb251"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb251-1"><a href="#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FLOOR_LEVEL Coefficient</span></span>
+<span id="cb251-2"><a href="#cb251-2" aria-hidden="true" tabindex="-1"></a>FLOOR_LEVEL_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb251-3"><a href="#cb251-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb251-4"><a href="#cb251-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb251-5"><a href="#cb251-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"FLOOR_LEVEL"</span>,</span>
+<span id="cb251-6"><a href="#cb251-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb251-7"><a href="#cb251-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb251-8"><a href="#cb251-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
+<span id="cb251-9"><a href="#cb251-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"FLOOR_LEVEL Coefficient"</span>,</span>
+<span id="cb251-10"><a href="#cb251-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb251-11"><a href="#cb251-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb251-12"><a href="#cb251-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb251-13"><a href="#cb251-13" aria-hidden="true" tabindex="-1"></a><span class="co"># FLOOR_LEVEL Standard Error</span></span>
+<span id="cb251-14"><a href="#cb251-14" aria-hidden="true" tabindex="-1"></a>FLOOR_LEVEL_SE <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb251-15"><a href="#cb251-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb251-16"><a href="#cb251-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb251-17"><a href="#cb251-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"FLOOR_LEVEL_SE"</span>,</span>
+<span id="cb251-18"><a href="#cb251-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb251-19"><a href="#cb251-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb251-20"><a href="#cb251-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"YlOrRd"</span>,</span>
+<span id="cb251-21"><a href="#cb251-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"FLOOR_LEVEL SE"</span>,</span>
+<span id="cb251-22"><a href="#cb251-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb251-23"><a href="#cb251-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb251-24"><a href="#cb251-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb251-25"><a href="#cb251-25" aria-hidden="true" tabindex="-1"></a><span class="co"># FLOOR_LEVEL t-value</span></span>
+<span id="cb251-26"><a href="#cb251-26" aria-hidden="true" tabindex="-1"></a>FLOOR_LEVEL_TV <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb251-27"><a href="#cb251-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb251-28"><a href="#cb251-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb251-29"><a href="#cb251-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"FLOOR_LEVEL_TV"</span>,</span>
+<span id="cb251-30"><a href="#cb251-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb251-31"><a href="#cb251-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb251-32"><a href="#cb251-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlGn"</span>,</span>
+<span id="cb251-33"><a href="#cb251-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"FLOOR_LEVEL t-value"</span>,</span>
+<span id="cb251-34"><a href="#cb251-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb251-35"><a href="#cb251-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb251-36"><a href="#cb251-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb251-37"><a href="#cb251-37" aria-hidden="true" tabindex="-1"></a><span class="co">#maps</span></span>
+<span id="cb251-38"><a href="#cb251-38" aria-hidden="true" tabindex="-1"></a><span class="co"># FLOOR_LEVEL Coefficient</span></span>
+<span id="cb251-39"><a href="#cb251-39" aria-hidden="true" tabindex="-1"></a>FLOOR_LEVEL_coef</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-45-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb252"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb252-1"><a href="#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FLOOR_LEVEL Standard Error</span></span>
+<span id="cb252-2"><a href="#cb252-2" aria-hidden="true" tabindex="-1"></a>FLOOR_LEVEL_SE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-45-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb253"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb253-1"><a href="#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FLOOR_LEVEL t-value</span></span>
+<span id="cb253-2"><a href="#cb253-2" aria-hidden="true" tabindex="-1"></a>FLOOR_LEVEL_TV</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-45-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2472,49 +2562,67 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 <section id="visualising-within_1km_primary-coefficients" class="level4">
 <h4 class="anchored" data-anchor-id="visualising-within_1km_primary-coefficients">Visualising WITHIN_1KM_PRIMARY Coefficients</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb244"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb244-1"><a href="#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WITHIN_1KM_PRIMARY Coefficient</span></span>
-<span id="cb244-2"><a href="#cb244-2" aria-hidden="true" tabindex="-1"></a>WITHIN_1KM_PRIMARY_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb244-3"><a href="#cb244-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb244-4"><a href="#cb244-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb244-5"><a href="#cb244-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"WITHIN_1KM_PRIMARY"</span>,</span>
-<span id="cb244-6"><a href="#cb244-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb244-7"><a href="#cb244-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb244-8"><a href="#cb244-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
-<span id="cb244-9"><a href="#cb244-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"WITHIN_1KM_PRIMARY Coefficient"</span>,</span>
-<span id="cb244-10"><a href="#cb244-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb244-11"><a href="#cb244-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb244-12"><a href="#cb244-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb244-13"><a href="#cb244-13" aria-hidden="true" tabindex="-1"></a><span class="co"># WITHIN_1KM_PRIMARY Standard Error</span></span>
-<span id="cb244-14"><a href="#cb244-14" aria-hidden="true" tabindex="-1"></a>WITHIN_1KM_PRIMARY_SE <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb244-15"><a href="#cb244-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb244-16"><a href="#cb244-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb244-17"><a href="#cb244-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"WITHIN_1KM_PRIMARY_SE"</span>,</span>
-<span id="cb244-18"><a href="#cb244-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb244-19"><a href="#cb244-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb244-20"><a href="#cb244-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"YlOrRd"</span>,</span>
-<span id="cb244-21"><a href="#cb244-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"WITHIN_1KM_PRIMARY SE"</span>,</span>
-<span id="cb244-22"><a href="#cb244-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb244-23"><a href="#cb244-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb244-24"><a href="#cb244-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb244-25"><a href="#cb244-25" aria-hidden="true" tabindex="-1"></a><span class="co"># WITHIN_1KM_PRIMARY t-value</span></span>
-<span id="cb244-26"><a href="#cb244-26" aria-hidden="true" tabindex="-1"></a>WITHIN_1KM_PRIMARY_TV <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb244-27"><a href="#cb244-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb244-28"><a href="#cb244-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb244-29"><a href="#cb244-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"WITHIN_1KM_PRIMARY_TV"</span>,</span>
-<span id="cb244-30"><a href="#cb244-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
-<span id="cb244-31"><a href="#cb244-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb244-32"><a href="#cb244-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlGn"</span>,</span>
-<span id="cb244-33"><a href="#cb244-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"WITHIN_1KM_PRIMARY t-value"</span>,</span>
-<span id="cb244-34"><a href="#cb244-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb244-35"><a href="#cb244-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
-<span id="cb244-36"><a href="#cb244-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb244-37"><a href="#cb244-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange maps side by side</span></span>
-<span id="cb244-38"><a href="#cb244-38" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(WITHIN_1KM_PRIMARY_coef, WITHIN_1KM_PRIMARY_SE, WITHIN_1KM_PRIMARY_TV,</span>
-<span id="cb244-39"><a href="#cb244-39" aria-hidden="true" tabindex="-1"></a>             <span class="at">asp =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">sync =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb254"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb254-1"><a href="#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WITHIN_1KM_PRIMARY Coefficient</span></span>
+<span id="cb254-2"><a href="#cb254-2" aria-hidden="true" tabindex="-1"></a>WITHIN_1KM_PRIMARY_coef <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb254-3"><a href="#cb254-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb254-4"><a href="#cb254-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb254-5"><a href="#cb254-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"WITHIN_1KM_PRIMARY"</span>,</span>
+<span id="cb254-6"><a href="#cb254-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb254-7"><a href="#cb254-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb254-8"><a href="#cb254-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
+<span id="cb254-9"><a href="#cb254-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"WITHIN_1KM_PRIMARY Coefficient"</span>,</span>
+<span id="cb254-10"><a href="#cb254-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb254-11"><a href="#cb254-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb254-12"><a href="#cb254-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-13"><a href="#cb254-13" aria-hidden="true" tabindex="-1"></a><span class="co"># WITHIN_1KM_PRIMARY Standard Error</span></span>
+<span id="cb254-14"><a href="#cb254-14" aria-hidden="true" tabindex="-1"></a>WITHIN_1KM_PRIMARY_SE <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb254-15"><a href="#cb254-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb254-16"><a href="#cb254-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb254-17"><a href="#cb254-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"WITHIN_1KM_PRIMARY_SE"</span>,</span>
+<span id="cb254-18"><a href="#cb254-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb254-19"><a href="#cb254-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb254-20"><a href="#cb254-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"YlOrRd"</span>,</span>
+<span id="cb254-21"><a href="#cb254-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"WITHIN_1KM_PRIMARY SE"</span>,</span>
+<span id="cb254-22"><a href="#cb254-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb254-23"><a href="#cb254-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb254-24"><a href="#cb254-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-25"><a href="#cb254-25" aria-hidden="true" tabindex="-1"></a><span class="co"># WITHIN_1KM_PRIMARY t-value</span></span>
+<span id="cb254-26"><a href="#cb254-26" aria-hidden="true" tabindex="-1"></a>WITHIN_1KM_PRIMARY_TV <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb254-27"><a href="#cb254-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb254-28"><a href="#cb254-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb254-29"><a href="#cb254-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"WITHIN_1KM_PRIMARY_TV"</span>,</span>
+<span id="cb254-30"><a href="#cb254-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.1</span>,</span>
+<span id="cb254-31"><a href="#cb254-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb254-32"><a href="#cb254-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlGn"</span>,</span>
+<span id="cb254-33"><a href="#cb254-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"WITHIN_1KM_PRIMARY t-value"</span>,</span>
+<span id="cb254-34"><a href="#cb254-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb254-35"><a href="#cb254-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.5</span>)</span>
+<span id="cb254-36"><a href="#cb254-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb254-37"><a href="#cb254-37" aria-hidden="true" tabindex="-1"></a><span class="co"># maps</span></span>
+<span id="cb254-38"><a href="#cb254-38" aria-hidden="true" tabindex="-1"></a><span class="co"># WITHIN_1KM_PRIMARY Coefficient</span></span>
+<span id="cb254-39"><a href="#cb254-39" aria-hidden="true" tabindex="-1"></a>WITHIN_1KM_PRIMARY_coef</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb255"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb255-1"><a href="#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WITHIN_1KM_PRIMARY Standard Error</span></span>
+<span id="cb255-2"><a href="#cb255-2" aria-hidden="true" tabindex="-1"></a>WITHIN_1KM_PRIMARY_SE</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-46-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb256"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb256-1"><a href="#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WITHIN_1KM_PRIMARY t-value</span></span>
+<span id="cb256-2"><a href="#cb256-2" aria-hidden="true" tabindex="-1"></a>WITHIN_1KM_PRIMARY_TV</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-home_Ex03_files/figure-html/unnamed-chunk-46-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -2534,92 +2642,92 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 <h3 class="anchored" data-anchor-id="integrated-visualization-key-variable-coefficients">5.3.4 Integrated Visualization: Key Variable Coefficients</h3>
 <p>To provide a comprehensive geospatial overview of how different factors influence HDB resale prices across Singapore, we create an integrated map showing coefficient values for key variables. This visualization helps identify spatial patterns and relationships between structural and locational factors.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb245"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb245-1"><a href="#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create coefficient maps for key variables</span></span>
-<span id="cb245-2"><a href="#cb245-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Structural factors</span></span>
-<span id="cb245-3"><a href="#cb245-3" aria-hidden="true" tabindex="-1"></a>AREA_SQM_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb245-4"><a href="#cb245-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb245-5"><a href="#cb245-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb245-6"><a href="#cb245-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"AREA_SQM"</span>,</span>
-<span id="cb245-7"><a href="#cb245-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.08</span>,</span>
-<span id="cb245-8"><a href="#cb245-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb245-9"><a href="#cb245-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
-<span id="cb245-10"><a href="#cb245-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"AREA_SQM</span><span class="sc">\n</span><span class="st">Coefficient"</span>,</span>
-<span id="cb245-11"><a href="#cb245-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb245-12"><a href="#cb245-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb245-13"><a href="#cb245-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">title =</span> <span class="st">"Structural Factor: Area"</span>,</span>
-<span id="cb245-14"><a href="#cb245-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.size =</span> <span class="fl">0.8</span>)</span>
-<span id="cb245-15"><a href="#cb245-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-16"><a href="#cb245-16" aria-hidden="true" tabindex="-1"></a>FLOOR_LEVEL_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb245-17"><a href="#cb245-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb245-18"><a href="#cb245-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb245-19"><a href="#cb245-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"FLOOR_LEVEL"</span>,</span>
-<span id="cb245-20"><a href="#cb245-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.08</span>,</span>
-<span id="cb245-21"><a href="#cb245-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb245-22"><a href="#cb245-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
-<span id="cb245-23"><a href="#cb245-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"FLOOR_LEVEL</span><span class="sc">\n</span><span class="st">Coefficient"</span>,</span>
-<span id="cb245-24"><a href="#cb245-24" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb245-25"><a href="#cb245-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb245-26"><a href="#cb245-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">title =</span> <span class="st">"Structural Factor: Floor Level"</span>,</span>
-<span id="cb245-27"><a href="#cb245-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.size =</span> <span class="fl">0.8</span>)</span>
-<span id="cb245-28"><a href="#cb245-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-29"><a href="#cb245-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Location factors</span></span>
-<span id="cb245-30"><a href="#cb245-30" aria-hidden="true" tabindex="-1"></a>PROX_CBD_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb245-31"><a href="#cb245-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb245-32"><a href="#cb245-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb245-33"><a href="#cb245-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_CBD"</span>,</span>
-<span id="cb245-34"><a href="#cb245-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.08</span>,</span>
-<span id="cb245-35"><a href="#cb245-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb245-36"><a href="#cb245-36" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
-<span id="cb245-37"><a href="#cb245-37" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_CBD</span><span class="sc">\n</span><span class="st">Coefficient"</span>,</span>
-<span id="cb245-38"><a href="#cb245-38" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb245-39"><a href="#cb245-39" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb245-40"><a href="#cb245-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">title =</span> <span class="st">"Location Factor: CBD Proximity"</span>,</span>
-<span id="cb245-41"><a href="#cb245-41" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.size =</span> <span class="fl">0.8</span>)</span>
-<span id="cb245-42"><a href="#cb245-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-43"><a href="#cb245-43" aria-hidden="true" tabindex="-1"></a>PROX_MRT_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb245-44"><a href="#cb245-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb245-45"><a href="#cb245-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb245-46"><a href="#cb245-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_MRT"</span>,</span>
-<span id="cb245-47"><a href="#cb245-47" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.08</span>,</span>
-<span id="cb245-48"><a href="#cb245-48" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb245-49"><a href="#cb245-49" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
-<span id="cb245-50"><a href="#cb245-50" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_MRT</span><span class="sc">\n</span><span class="st">Coefficient"</span>,</span>
-<span id="cb245-51"><a href="#cb245-51" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb245-52"><a href="#cb245-52" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb245-53"><a href="#cb245-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">title =</span> <span class="st">"Location Factor: MRT Proximity"</span>,</span>
-<span id="cb245-54"><a href="#cb245-54" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.size =</span> <span class="fl">0.8</span>)</span>
-<span id="cb245-55"><a href="#cb245-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-56"><a href="#cb245-56" aria-hidden="true" tabindex="-1"></a>PROX_PARKS_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb245-57"><a href="#cb245-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb245-58"><a href="#cb245-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb245-59"><a href="#cb245-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_PARKS"</span>,</span>
-<span id="cb245-60"><a href="#cb245-60" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.08</span>,</span>
-<span id="cb245-61"><a href="#cb245-61" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb245-62"><a href="#cb245-62" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
-<span id="cb245-63"><a href="#cb245-63" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_PARKS</span><span class="sc">\n</span><span class="st">Coefficient"</span>,</span>
-<span id="cb245-64"><a href="#cb245-64" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb245-65"><a href="#cb245-65" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb245-66"><a href="#cb245-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">title =</span> <span class="st">"Location Factor: Parks Proximity"</span>,</span>
-<span id="cb245-67"><a href="#cb245-67" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.size =</span> <span class="fl">0.8</span>)</span>
-<span id="cb245-68"><a href="#cb245-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-69"><a href="#cb245-69" aria-hidden="true" tabindex="-1"></a>WITHIN_1KM_PRIMARY_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
-<span id="cb245-70"><a href="#cb245-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb245-71"><a href="#cb245-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
-<span id="cb245-72"><a href="#cb245-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"WITHIN_1KM_PRIMARY"</span>,</span>
-<span id="cb245-73"><a href="#cb245-73" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.08</span>,</span>
-<span id="cb245-74"><a href="#cb245-74" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
-<span id="cb245-75"><a href="#cb245-75" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
-<span id="cb245-76"><a href="#cb245-76" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"WITHIN_1KM_PRIMARY</span><span class="sc">\n</span><span class="st">Coefficient"</span>,</span>
-<span id="cb245-77"><a href="#cb245-77" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb245-78"><a href="#cb245-78" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb245-79"><a href="#cb245-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">title =</span> <span class="st">"Location Factor: Primary Schools"</span>,</span>
-<span id="cb245-80"><a href="#cb245-80" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.size =</span> <span class="fl">0.8</span>)</span>
-<span id="cb245-81"><a href="#cb245-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb245-82"><a href="#cb245-82" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange all maps in a comprehensive layout</span></span>
-<span id="cb245-83"><a href="#cb245-83" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(AREA_SQM_map, FLOOR_LEVEL_map,</span>
-<span id="cb245-84"><a href="#cb245-84" aria-hidden="true" tabindex="-1"></a>             PROX_CBD_map, PROX_MRT_map,</span>
-<span id="cb245-85"><a href="#cb245-85" aria-hidden="true" tabindex="-1"></a>             PROX_PARKS_map, WITHIN_1KM_PRIMARY_map,</span>
-<span id="cb245-86"><a href="#cb245-86" aria-hidden="true" tabindex="-1"></a>             <span class="at">asp =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">sync =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb257"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb257-1"><a href="#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create coefficient maps for key variables</span></span>
+<span id="cb257-2"><a href="#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Structural factors</span></span>
+<span id="cb257-3"><a href="#cb257-3" aria-hidden="true" tabindex="-1"></a>AREA_SQM_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb257-4"><a href="#cb257-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb257-5"><a href="#cb257-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb257-6"><a href="#cb257-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"AREA_SQM"</span>,</span>
+<span id="cb257-7"><a href="#cb257-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.08</span>,</span>
+<span id="cb257-8"><a href="#cb257-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb257-9"><a href="#cb257-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
+<span id="cb257-10"><a href="#cb257-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"AREA_SQM</span><span class="sc">\n</span><span class="st">Coefficient"</span>,</span>
+<span id="cb257-11"><a href="#cb257-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb257-12"><a href="#cb257-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb257-13"><a href="#cb257-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">title =</span> <span class="st">"Structural Factor: Area"</span>,</span>
+<span id="cb257-14"><a href="#cb257-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.size =</span> <span class="fl">0.8</span>)</span>
+<span id="cb257-15"><a href="#cb257-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-16"><a href="#cb257-16" aria-hidden="true" tabindex="-1"></a>FLOOR_LEVEL_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb257-17"><a href="#cb257-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb257-18"><a href="#cb257-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb257-19"><a href="#cb257-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"FLOOR_LEVEL"</span>,</span>
+<span id="cb257-20"><a href="#cb257-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.08</span>,</span>
+<span id="cb257-21"><a href="#cb257-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb257-22"><a href="#cb257-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
+<span id="cb257-23"><a href="#cb257-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"FLOOR_LEVEL</span><span class="sc">\n</span><span class="st">Coefficient"</span>,</span>
+<span id="cb257-24"><a href="#cb257-24" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb257-25"><a href="#cb257-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb257-26"><a href="#cb257-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">title =</span> <span class="st">"Structural Factor: Floor Level"</span>,</span>
+<span id="cb257-27"><a href="#cb257-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.size =</span> <span class="fl">0.8</span>)</span>
+<span id="cb257-28"><a href="#cb257-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-29"><a href="#cb257-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Location factors</span></span>
+<span id="cb257-30"><a href="#cb257-30" aria-hidden="true" tabindex="-1"></a>PROX_CBD_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb257-31"><a href="#cb257-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb257-32"><a href="#cb257-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb257-33"><a href="#cb257-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_CBD"</span>,</span>
+<span id="cb257-34"><a href="#cb257-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.08</span>,</span>
+<span id="cb257-35"><a href="#cb257-35" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb257-36"><a href="#cb257-36" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
+<span id="cb257-37"><a href="#cb257-37" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_CBD</span><span class="sc">\n</span><span class="st">Coefficient"</span>,</span>
+<span id="cb257-38"><a href="#cb257-38" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb257-39"><a href="#cb257-39" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb257-40"><a href="#cb257-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">title =</span> <span class="st">"Location Factor: CBD Proximity"</span>,</span>
+<span id="cb257-41"><a href="#cb257-41" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.size =</span> <span class="fl">0.8</span>)</span>
+<span id="cb257-42"><a href="#cb257-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-43"><a href="#cb257-43" aria-hidden="true" tabindex="-1"></a>PROX_MRT_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb257-44"><a href="#cb257-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb257-45"><a href="#cb257-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb257-46"><a href="#cb257-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_MRT"</span>,</span>
+<span id="cb257-47"><a href="#cb257-47" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.08</span>,</span>
+<span id="cb257-48"><a href="#cb257-48" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb257-49"><a href="#cb257-49" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
+<span id="cb257-50"><a href="#cb257-50" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_MRT</span><span class="sc">\n</span><span class="st">Coefficient"</span>,</span>
+<span id="cb257-51"><a href="#cb257-51" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb257-52"><a href="#cb257-52" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb257-53"><a href="#cb257-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">title =</span> <span class="st">"Location Factor: MRT Proximity"</span>,</span>
+<span id="cb257-54"><a href="#cb257-54" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.size =</span> <span class="fl">0.8</span>)</span>
+<span id="cb257-55"><a href="#cb257-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-56"><a href="#cb257-56" aria-hidden="true" tabindex="-1"></a>PROX_PARKS_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb257-57"><a href="#cb257-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb257-58"><a href="#cb257-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb257-59"><a href="#cb257-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"PROX_PARKS"</span>,</span>
+<span id="cb257-60"><a href="#cb257-60" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.08</span>,</span>
+<span id="cb257-61"><a href="#cb257-61" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb257-62"><a href="#cb257-62" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
+<span id="cb257-63"><a href="#cb257-63" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"PROX_PARKS</span><span class="sc">\n</span><span class="st">Coefficient"</span>,</span>
+<span id="cb257-64"><a href="#cb257-64" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb257-65"><a href="#cb257-65" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb257-66"><a href="#cb257-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">title =</span> <span class="st">"Location Factor: Parks Proximity"</span>,</span>
+<span id="cb257-67"><a href="#cb257-67" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.size =</span> <span class="fl">0.8</span>)</span>
+<span id="cb257-68"><a href="#cb257-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-69"><a href="#cb257-69" aria-hidden="true" tabindex="-1"></a>WITHIN_1KM_PRIMARY_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(mpsz) <span class="sc">+</span></span>
+<span id="cb257-70"><a href="#cb257-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb257-71"><a href="#cb257-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(hdb_sf.gwr) <span class="sc">+</span></span>
+<span id="cb257-72"><a href="#cb257-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">col =</span> <span class="st">"WITHIN_1KM_PRIMARY"</span>,</span>
+<span id="cb257-73"><a href="#cb257-73" aria-hidden="true" tabindex="-1"></a>          <span class="at">size =</span> <span class="fl">0.08</span>,</span>
+<span id="cb257-74"><a href="#cb257-74" aria-hidden="true" tabindex="-1"></a>          <span class="at">style =</span> <span class="st">"quantile"</span>,</span>
+<span id="cb257-75"><a href="#cb257-75" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">"RdYlBu"</span>,</span>
+<span id="cb257-76"><a href="#cb257-76" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"WITHIN_1KM_PRIMARY</span><span class="sc">\n</span><span class="st">Coefficient"</span>,</span>
+<span id="cb257-77"><a href="#cb257-77" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb257-78"><a href="#cb257-78" aria-hidden="true" tabindex="-1"></a>          <span class="at">border.lwd =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb257-79"><a href="#cb257-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">title =</span> <span class="st">"Location Factor: Primary Schools"</span>,</span>
+<span id="cb257-80"><a href="#cb257-80" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.size =</span> <span class="fl">0.8</span>)</span>
+<span id="cb257-81"><a href="#cb257-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb257-82"><a href="#cb257-82" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange all maps in a comprehensive layout</span></span>
+<span id="cb257-83"><a href="#cb257-83" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_arrange</span>(AREA_SQM_map, FLOOR_LEVEL_map,</span>
+<span id="cb257-84"><a href="#cb257-84" aria-hidden="true" tabindex="-1"></a>             PROX_CBD_map, PROX_MRT_map,</span>
+<span id="cb257-85"><a href="#cb257-85" aria-hidden="true" tabindex="-1"></a>             PROX_PARKS_map, WITHIN_1KM_PRIMARY_map,</span>
+<span id="cb257-86"><a href="#cb257-86" aria-hidden="true" tabindex="-1"></a>             <span class="at">asp =</span> <span class="dv">1</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">sync =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2637,34 +2745,34 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 <h3 class="anchored" data-anchor-id="visualising-coefficient-distributions">5.3.5 Visualising Coefficient Distributions</h3>
 <p>To understand the distribution of coefficients across all locations, we create histograms and boxplots for key variables.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb246"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb246-1"><a href="#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract coefficient data</span></span>
-<span id="cb246-2"><a href="#cb246-2" aria-hidden="true" tabindex="-1"></a>coef_data <span class="ot">&lt;-</span> hdb_sf.gwr <span class="sc">%&gt;%</span></span>
-<span id="cb246-3"><a href="#cb246-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb246-4"><a href="#cb246-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(AREA_SQM, PROX_MRT, PROX_CBD, PROX_PARKS, </span>
-<span id="cb246-5"><a href="#cb246-5" aria-hidden="true" tabindex="-1"></a>         FLOOR_LEVEL, WITHIN_1KM_PRIMARY)</span>
-<span id="cb246-6"><a href="#cb246-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb246-7"><a href="#cb246-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create histograms for coefficient distributions</span></span>
-<span id="cb246-8"><a href="#cb246-8" aria-hidden="true" tabindex="-1"></a>AREA_SQM_hist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(coef_data, <span class="fu">aes</span>(<span class="at">x =</span> AREA_SQM)) <span class="sc">+</span></span>
-<span id="cb246-9"><a href="#cb246-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
-<span id="cb246-10"><a href="#cb246-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of AREA_SQM Coefficients"</span>,</span>
-<span id="cb246-11"><a href="#cb246-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Coefficient Value"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
-<span id="cb246-12"><a href="#cb246-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb246-13"><a href="#cb246-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb246-14"><a href="#cb246-14" aria-hidden="true" tabindex="-1"></a>PROX_MRT_hist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(coef_data, <span class="fu">aes</span>(<span class="at">x =</span> PROX_MRT)) <span class="sc">+</span></span>
-<span id="cb246-15"><a href="#cb246-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
-<span id="cb246-16"><a href="#cb246-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of PROX_MRT Coefficients"</span>,</span>
-<span id="cb246-17"><a href="#cb246-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Coefficient Value"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
-<span id="cb246-18"><a href="#cb246-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb246-19"><a href="#cb246-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb246-20"><a href="#cb246-20" aria-hidden="true" tabindex="-1"></a>PROX_CBD_hist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(coef_data, <span class="fu">aes</span>(<span class="at">x =</span> PROX_CBD)) <span class="sc">+</span></span>
-<span id="cb246-21"><a href="#cb246-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
-<span id="cb246-22"><a href="#cb246-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of PROX_CBD Coefficients"</span>,</span>
-<span id="cb246-23"><a href="#cb246-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Coefficient Value"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
-<span id="cb246-24"><a href="#cb246-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb246-25"><a href="#cb246-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb246-26"><a href="#cb246-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange histograms</span></span>
-<span id="cb246-27"><a href="#cb246-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(AREA_SQM_hist, PROX_MRT_hist, PROX_CBD_hist,</span>
-<span id="cb246-28"><a href="#cb246-28" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb258"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb258-1"><a href="#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract coefficient data</span></span>
+<span id="cb258-2"><a href="#cb258-2" aria-hidden="true" tabindex="-1"></a>coef_data <span class="ot">&lt;-</span> hdb_sf.gwr <span class="sc">%&gt;%</span></span>
+<span id="cb258-3"><a href="#cb258-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb258-4"><a href="#cb258-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(AREA_SQM, PROX_MRT, PROX_CBD, PROX_PARKS, </span>
+<span id="cb258-5"><a href="#cb258-5" aria-hidden="true" tabindex="-1"></a>         FLOOR_LEVEL, WITHIN_1KM_PRIMARY)</span>
+<span id="cb258-6"><a href="#cb258-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb258-7"><a href="#cb258-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create histograms for coefficient distributions</span></span>
+<span id="cb258-8"><a href="#cb258-8" aria-hidden="true" tabindex="-1"></a>AREA_SQM_hist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(coef_data, <span class="fu">aes</span>(<span class="at">x =</span> AREA_SQM)) <span class="sc">+</span></span>
+<span id="cb258-9"><a href="#cb258-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb258-10"><a href="#cb258-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of AREA_SQM Coefficients"</span>,</span>
+<span id="cb258-11"><a href="#cb258-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Coefficient Value"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb258-12"><a href="#cb258-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb258-13"><a href="#cb258-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb258-14"><a href="#cb258-14" aria-hidden="true" tabindex="-1"></a>PROX_MRT_hist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(coef_data, <span class="fu">aes</span>(<span class="at">x =</span> PROX_MRT)) <span class="sc">+</span></span>
+<span id="cb258-15"><a href="#cb258-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb258-16"><a href="#cb258-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of PROX_MRT Coefficients"</span>,</span>
+<span id="cb258-17"><a href="#cb258-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Coefficient Value"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb258-18"><a href="#cb258-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb258-19"><a href="#cb258-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb258-20"><a href="#cb258-20" aria-hidden="true" tabindex="-1"></a>PROX_CBD_hist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(coef_data, <span class="fu">aes</span>(<span class="at">x =</span> PROX_CBD)) <span class="sc">+</span></span>
+<span id="cb258-21"><a href="#cb258-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>) <span class="sc">+</span></span>
+<span id="cb258-22"><a href="#cb258-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of PROX_CBD Coefficients"</span>,</span>
+<span id="cb258-23"><a href="#cb258-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Coefficient Value"</span>, <span class="at">y =</span> <span class="st">"Frequency"</span>) <span class="sc">+</span></span>
+<span id="cb258-24"><a href="#cb258-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb258-25"><a href="#cb258-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb258-26"><a href="#cb258-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrange histograms</span></span>
+<span id="cb258-27"><a href="#cb258-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggarrange</span>(AREA_SQM_hist, PROX_MRT_hist, PROX_CBD_hist,</span>
+<span id="cb258-28"><a href="#cb258-28" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -2674,18 +2782,18 @@ $ geometry                  &lt;POINT [m]&gt; POINT (29282.9 38517.64), POINT (2
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb247"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb247-1"><a href="#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create boxplots for coefficient distributions</span></span>
-<span id="cb247-2"><a href="#cb247-2" aria-hidden="true" tabindex="-1"></a>coef_long <span class="ot">&lt;-</span> coef_data <span class="sc">%&gt;%</span></span>
-<span id="cb247-3"><a href="#cb247-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(),</span>
-<span id="cb247-4"><a href="#cb247-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Variable"</span>,</span>
-<span id="cb247-5"><a href="#cb247-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Coefficient"</span>)</span>
-<span id="cb247-6"><a href="#cb247-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb247-7"><a href="#cb247-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(coef_long, <span class="fu">aes</span>(<span class="at">x =</span> Variable, <span class="at">y =</span> Coefficient)) <span class="sc">+</span></span>
-<span id="cb247-8"><a href="#cb247-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb247-9"><a href="#cb247-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of GWR Coefficients by Variable"</span>,</span>
-<span id="cb247-10"><a href="#cb247-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Variable"</span>, <span class="at">y =</span> <span class="st">"Coefficient Value"</span>) <span class="sc">+</span></span>
-<span id="cb247-11"><a href="#cb247-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb247-12"><a href="#cb247-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb259"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb259-1"><a href="#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create boxplots for coefficient distributions</span></span>
+<span id="cb259-2"><a href="#cb259-2" aria-hidden="true" tabindex="-1"></a>coef_long <span class="ot">&lt;-</span> coef_data <span class="sc">%&gt;%</span></span>
+<span id="cb259-3"><a href="#cb259-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(),</span>
+<span id="cb259-4"><a href="#cb259-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Variable"</span>,</span>
+<span id="cb259-5"><a href="#cb259-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Coefficient"</span>)</span>
+<span id="cb259-6"><a href="#cb259-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb259-7"><a href="#cb259-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(coef_long, <span class="fu">aes</span>(<span class="at">x =</span> Variable, <span class="at">y =</span> Coefficient)) <span class="sc">+</span></span>
+<span id="cb259-8"><a href="#cb259-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb259-9"><a href="#cb259-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of GWR Coefficients by Variable"</span>,</span>
+<span id="cb259-10"><a href="#cb259-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Variable"</span>, <span class="at">y =</span> <span class="st">"Coefficient Value"</span>) <span class="sc">+</span></span>
+<span id="cb259-11"><a href="#cb259-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb259-12"><a href="#cb259-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

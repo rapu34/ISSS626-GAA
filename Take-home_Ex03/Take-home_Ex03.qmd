@@ -48,7 +48,7 @@ pacman::p_load(httr, tidyverse, sf, tmap, jsonlite,
 Several datasets are used to construct the structural and locational variables for the explanatory GWR model:
 
 | Dataset | Description | Format | Source |
-|-----------------|-----------------------|-----------------|-----------------|
+|-----------------|---------------------|-----------------|-----------------|
 | HDB Resale Flat Prices (2017–2025) | Monthly resale transactions including flat type, floor area, lease information and resale price | CSV | Data.gov.sg (`Resale Flat Prices based on Registration Date from Jan 2017 onwards`) |
 | MP14_SUBZONE_NO_SEA_PL | Singapore planning subzone boundaries used as a base map | ESRI Shapefile | Data.gov.sg / SLA |
 | ELDERCARE | Locations of eldercare facilities | ESRI Shapefile | Data.gov.sg |
@@ -1262,9 +1262,15 @@ AREA_SQM_TV <- tm_shape(mpsz) +
           border.col = "gray60",
           border.lwd = 0.5)
 
-# Arrange maps side by side
-tmap_arrange(AREA_SQM_coef, AREA_SQM_SE, AREA_SQM_TV,
-             asp = 1, ncol = 3, sync = TRUE)
+#  maps
+# AREA_SQM Coefficient
+AREA_SQM_coef
+
+# AREA_SQM Standard Error
+AREA_SQM_SE
+
+# AREA_SQM t-value
+AREA_SQM_TV
 ```
 
 #### Visualising PROX_MRT Coefficients
@@ -1306,9 +1312,15 @@ PROX_MRT_TV <- tm_shape(mpsz) +
           border.col = "gray60",
           border.lwd = 0.5)
 
-# Arrange maps side by side
-tmap_arrange(PROX_MRT_coef, PROX_MRT_SE, PROX_MRT_TV,
-             asp = 1, ncol = 3, sync = TRUE)
+# maps
+# PROX_MRT Coefficient
+PROX_MRT_coef
+
+# PROX_MRT Standard Error
+PROX_MRT_SE
+
+# PROX_MRT t-value
+PROX_MRT_TV
 ```
 
 #### Visualising PROX_CBD Coefficients
@@ -1350,9 +1362,15 @@ PROX_CBD_TV <- tm_shape(mpsz) +
           border.col = "gray60",
           border.lwd = 0.5)
 
-# Arrange maps side by side
-tmap_arrange(PROX_CBD_coef, PROX_CBD_SE, PROX_CBD_TV,
-             asp = 1, ncol = 3, sync = TRUE)
+# maps
+# PROX_CBD Coefficient
+PROX_CBD_coef
+
+# PROX_CBD Standard Error
+PROX_CBD_SE
+
+# PROX_CBD t-value
+PROX_CBD_TV
 ```
 
 #### Visualising PROX_PARKS Coefficients
@@ -1394,9 +1412,15 @@ PROX_PARKS_TV <- tm_shape(mpsz) +
           border.col = "gray60",
           border.lwd = 0.5)
 
-# Arrange maps side by side
-tmap_arrange(PROX_PARKS_coef, PROX_PARKS_SE, PROX_PARKS_TV,
-             asp = 1, ncol = 3, sync = TRUE)
+# maps
+# PROX_PARKS Coefficient
+PROX_PARKS_coef
+
+# PROX_PARKS Standard Error
+PROX_PARKS_SE
+
+# PROX_PARKS t-value
+PROX_PARKS_TV
 ```
 
 #### Visualising FLOOR_LEVEL Coefficients
@@ -1438,9 +1462,15 @@ FLOOR_LEVEL_TV <- tm_shape(mpsz) +
           border.col = "gray60",
           border.lwd = 0.5)
 
-# Arrange maps side by side
-tmap_arrange(FLOOR_LEVEL_coef, FLOOR_LEVEL_SE, FLOOR_LEVEL_TV,
-             asp = 1, ncol = 3, sync = TRUE)
+#maps
+# FLOOR_LEVEL Coefficient
+FLOOR_LEVEL_coef
+
+# FLOOR_LEVEL Standard Error
+FLOOR_LEVEL_SE
+
+# FLOOR_LEVEL t-value
+FLOOR_LEVEL_TV
 ```
 
 #### Visualising WITHIN_1KM_PRIMARY Coefficients
@@ -1482,9 +1512,15 @@ WITHIN_1KM_PRIMARY_TV <- tm_shape(mpsz) +
           border.col = "gray60",
           border.lwd = 0.5)
 
-# Arrange maps side by side
-tmap_arrange(WITHIN_1KM_PRIMARY_coef, WITHIN_1KM_PRIMARY_SE, WITHIN_1KM_PRIMARY_TV,
-             asp = 1, ncol = 3, sync = TRUE)
+# maps
+# WITHIN_1KM_PRIMARY Coefficient
+WITHIN_1KM_PRIMARY_coef
+
+# WITHIN_1KM_PRIMARY Standard Error
+WITHIN_1KM_PRIMARY_SE
+
+# WITHIN_1KM_PRIMARY t-value
+WITHIN_1KM_PRIMARY_TV
 ```
 
 **Observations:**
